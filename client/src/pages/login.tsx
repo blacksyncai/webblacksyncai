@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Eyebrow } from "@/components/ui/section";
 import { usePageMeta } from "@/hooks/use-page-meta";
+import { APP_LOGIN_URL } from "@/lib/register";
 
 export default function LoginPage() {
   usePageMeta({
@@ -9,6 +11,10 @@ export default function LoginPage() {
     description: "Log in to your BlackSync account to manage your AI sales agent.",
     path: "/login",
   });
+
+  useEffect(() => {
+    window.location.href = APP_LOGIN_URL;
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-login">
@@ -20,9 +26,15 @@ export default function LoginPage() {
             Log in to BlackSync
           </h1>
           <p className="text-muted-foreground mb-6 text-lg">
-            Pick up where your AI agent left off.
+            Taking you to your login page…
           </p>
-          <p className="text-sm text-muted-foreground">Login page coming soon.</p>
+          <a
+            href={APP_LOGIN_URL}
+            className="text-sm text-primary underline underline-offset-4"
+            data-testid="link-login-redirect"
+          >
+            Click here if you're not redirected
+          </a>
         </div>
       </div>
       <Footer />
