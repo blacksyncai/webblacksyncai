@@ -22,7 +22,8 @@ import { ArrowRight, Loader2, Sparkles, ShieldCheck, Check } from "lucide-react"
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { goToRegister, BOOK_CALL_URL } from "@/lib/register";
+import { goToRegister } from "@/lib/register";
+import { BookCallDialog } from "@/components/book-call-dialog";
 
 const INDUSTRY_OPTIONS = [
   "Real Estate",
@@ -170,15 +171,15 @@ export function StartTrialDialog({
             <span className="text-[11px] text-muted-foreground">or</span>
             <span className="h-px flex-1 bg-border" />
           </div>
-          <a
-            href={BOOK_CALL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block text-center text-sm font-medium text-primary hover:underline"
-            data-testid="link-trial-book-call"
-          >
-            Prefer to talk first? Book a free 15-min call →
-          </a>
+          <BookCallDialog>
+            <button
+              type="button"
+              className="block w-full text-center text-sm font-medium text-primary hover:underline"
+              data-testid="link-trial-book-call"
+            >
+              Prefer to talk first? Book a free 15-min call →
+            </button>
+          </BookCallDialog>
         </form>
       </DialogContent>
     </Dialog>
