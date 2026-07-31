@@ -40,7 +40,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { StartTrialDialog } from "@/components/start-trial-dialog";
-import { BOOK_CALL_URL } from "@/lib/register";
+import { BOOK_CALL_URL, APP_LOGIN_URL } from "@/lib/register";
 
 type MegaColumn = {
   heading: string;
@@ -314,7 +314,7 @@ export function Navbar() {
             </Button>
 
             <a
-              href="https://ai.blacksync.network/"
+              href={APP_LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex"
@@ -566,7 +566,7 @@ export function Navbar() {
               ))}
 
               <a
-                href="https://ai.blacksync.network/"
+                href={APP_LOGIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
