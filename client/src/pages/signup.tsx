@@ -1,8 +1,15 @@
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Eyebrow } from "@/components/ui/section";
+import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function SignupPage() {
+  usePageMeta({
+    title: "Sign Up",
+    description: "Create your BlackSync account and get your AI sales agent calling leads in minutes.",
+    path: "/signup",
+  });
+
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-signup">
       <Navbar />

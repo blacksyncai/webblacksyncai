@@ -34,6 +34,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { User, Users } from "lucide-react";
+import { usePageMeta } from "@/hooks/use-page-meta";
 
 type Industry = {
   slug: string;
@@ -250,6 +251,12 @@ export default function IndustryPage() {
   const [, params] = useRoute<{ slug: string }>("/industry/:slug");
   const slug = params?.slug ?? "real-estate";
   const industry = INDUSTRIES[slug] ?? INDUSTRIES["real-estate"];
+
+  usePageMeta({
+    title: `${industry.name} AI Sales Agent`,
+    description: industry.subhead,
+    path: `/industry/${industry.slug}`,
+  });
 
   const [email, setEmail] = useState("");
   const [qualifyOpen, setQualifyOpen] = useState(false);
