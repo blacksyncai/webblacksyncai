@@ -39,3 +39,11 @@ jobs:
           echo "### Domain: https://blacksync.ai" >> "$GITHUB_STEP_SUMMARY"
 
 # trigger: 20260619T065344Z
+
+# trigger deploy: 20260622T163442Z
+
+# trigger deploy: 20260622T171638Z
+
+# trigger deploy: 20260626T153600Z
+
+# trigger deploy: 20260626T155131Z

@@ -6,6 +6,9 @@ export const REGISTER_URL = "https://ai.blacksync.network/register";
 // Free 15-minute discovery call booking (Cal.com).
 export const BOOK_CALL_URL = "https://cal.com/hello-blacksync.ai/15min";
 
+// The BlackSync app's login page.
+export const APP_LOGIN_URL = "https://ai.blacksync.ai/login?from=%2F";
+
 type LeadLike = {
   email?: string;
   name?: string;

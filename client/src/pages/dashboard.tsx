@@ -1,6 +1,9 @@
 import { Navbar } from "@/components/navbar";
+import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function DashboardPage() {
+  usePageMeta({ title: "Dashboard", path: "/dashboard", noindex: true });
+
   return (
     <div className="min-h-screen bg-background" data-testid="page-dashboard">
       <Navbar />

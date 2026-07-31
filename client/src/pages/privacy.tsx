@@ -1,7 +1,14 @@
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function PrivacyPage() {
+  usePageMeta({
+    title: "Privacy Policy",
+    description: "BlackSync.ai privacy policy.",
+    path: "/privacy",
+  });
+
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-privacy">
       <Navbar />

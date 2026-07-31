@@ -1,7 +1,14 @@
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function TermsPage() {
+  usePageMeta({
+    title: "Terms of Service",
+    description: "BlackSync.ai terms of service.",
+    path: "/terms",
+  });
+
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-terms">
       <Navbar />
