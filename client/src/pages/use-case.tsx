@@ -106,6 +106,7 @@ export const USE_CASES: Record<string, UseCase> = {
     related: [
       { label: "Expired Listing AI", href: "/expired-listing-ai" },
       { label: "FSBO AI", href: "/fsbo-ai" },
+      { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
     ],
   },
@@ -166,6 +167,7 @@ export const USE_CASES: Record<string, UseCase> = {
     related: [
       { label: "FSBO AI", href: "/fsbo-ai" },
       { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
+      { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
     ],
   },
@@ -226,6 +228,7 @@ export const USE_CASES: Record<string, UseCase> = {
     related: [
       { label: "Expired Listing AI", href: "/expired-listing-ai" },
       { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
+      { label: "AI Lead Generation Software", href: "/ai-lead-generation" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
     ],
   },
@@ -285,7 +288,190 @@ export const USE_CASES: Record<string, UseCase> = {
     ],
     related: [
       { label: "Insurance AI", href: "/insurance-ai" },
+      { label: "AI Lead Generation Software", href: "/ai-lead-generation" },
       { label: "Mortgage industry page", href: "/industry/mortgage" },
+    ],
+  },
+
+  "ai-lead-generation": {
+    slug: "ai-lead-generation",
+    metaTitle: "AI Lead Generation & Qualification Software",
+    metaDescription:
+      "BlackSync's AI agent calls, texts, and qualifies the leads your ads, forms, and CRM already bring in — within seconds, before they go cold.",
+    eyebrow: "AI Lead Generation",
+    headline: "AI Lead Generation That Actually Calls, Texts, and Qualifies",
+    subhead:
+      "BlackSync doesn't just capture the leads your ads, web forms, and CRM already bring in — it puts an AI agent on the phone with every one of them in seconds, qualifies them, and books the appointment. No dialer, no ISA team, no leads going cold overnight.",
+    painPoints: [
+      "Leads sit for hours (or days) before anyone calls, and by then they've talked to a competitor",
+      "Hiring and training a calling team is slow, expensive, and turnover never stops",
+      "Reps burn hours on unqualified leads instead of ones ready to buy",
+      "Leads from ads, forms, and your CRM live in different places and nothing follows up consistently",
+    ],
+    helps: [
+      {
+        title: "Connect Every Lead Source",
+        description:
+          "Import from your CRM, ad platforms, or any web form via API, CSV, or webhook — leads land in one pipeline instead of scattered inboxes.",
+      },
+      {
+        title: "AI Calls, Texts, and Qualifies",
+        description:
+          "The agent reaches out within seconds, holds a natural conversation, handles objections, and scores each lead on budget, timeline, and intent.",
+      },
+      {
+        title: "Only Qualified Leads Reach Your Team",
+        description:
+          "Appointments land directly on your calendar. Everything syncs back to your CRM automatically, so nothing needs re-entering.",
+      },
+    ],
+    integrations: ["Follow Up Boss", "Salesforce", "HubSpot", "kvCORE", "Zapier", "Calendly"],
+    testimonial: {
+      quote:
+        "We replaced two ISAs with one AI agent. Cost dropped 80%, qualified appointments tripled, and it never misses a follow-up.",
+      name: "David L.",
+      role: "Broker, Mortgage — Denver CO",
+    },
+    faqs: [
+      {
+        q: "Does BlackSync find new leads for me, or work the ones I already have?",
+        a: "It works the leads you already bring in — from ads, web forms, your CRM, or inbound calls — by calling, texting, and qualifying them the moment they arrive. It doesn't prospect for brand-new contacts on its own.",
+      },
+      {
+        q: "How fast does it contact a new lead?",
+        a: "Within seconds of the lead hitting your pipeline — speed-to-lead is the core of what it does.",
+      },
+      {
+        q: "Does it work with my existing lead sources?",
+        a: "Yes — connect via CRM sync, API, webhook, or CSV import, whatever your current sources already use.",
+      },
+    ],
+    related: [
+      { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
+      { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
+      { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
+      { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },
+      { label: "Insurance AI", href: "/insurance-ai" },
+    ],
+  },
+
+  "ai-appointment-setter": {
+    slug: "ai-appointment-setter",
+    metaTitle: "AI Appointment Setter",
+    metaDescription:
+      "BlackSync's AI appointment setter calls and texts every lead, qualifies them in conversation, and books the meeting directly on your calendar.",
+    eyebrow: "AI Appointment Setter",
+    headline: "The AI Appointment Setter That Never Misses a Lead",
+    subhead:
+      "BlackSync's AI agent calls, texts, and books appointments directly into your calendar — doing the job of an appointment setter without the hiring, training, or turnover.",
+    painPoints: [
+      "A single missed callback can be the difference between booking the meeting and losing the lead",
+      "Appointment setters need weeks of training before they sound natural on the phone",
+      "Turnover means retraining a new hire every few months",
+      "Leads that come in nights and weekends usually wait until Monday for a callback",
+    ],
+    helps: [
+      {
+        title: "Books Straight to Your Calendar",
+        description:
+          "Syncs with Google Calendar, Outlook, and Calendly. Appointments land automatically with confirmations sent to both sides.",
+      },
+      {
+        title: "Handles Objections Naturally",
+        description:
+          "The agent holds a real conversation — answering questions and working through hesitation — instead of reading a fixed script.",
+      },
+      {
+        title: "Calls the Moment a Lead Comes In",
+        description:
+          "No waiting for business hours. The agent reaches out as soon as the lead hits your pipeline, day or night.",
+      },
+    ],
+    integrations: ["Calendly", "Follow Up Boss", "HubSpot", "Salesforce", "Zapier"],
+    testimonial: {
+      quote:
+        "Our calendar went from empty Tuesdays to fully booked. BlackSync called 400 leads our team had given up on and booked 23 showings.",
+      name: "Jessica M.",
+      role: "Team Lead, Real Estate — Tampa FL",
+    },
+    faqs: [
+      {
+        q: "What does an AI appointment setter actually do?",
+        a: "It calls and texts your leads, holds a qualifying conversation, and books the ones ready to talk directly onto your calendar.",
+      },
+      {
+        q: "Can it handle objections, or does it just read a script?",
+        a: "It's built to hold a natural back-and-forth conversation and work through objections, not read a fixed script.",
+      },
+      {
+        q: "Does it work outside business hours?",
+        a: "Yes — it calls leads as soon as they come in, regardless of time of day.",
+      },
+    ],
+    related: [
+      { label: "AI Lead Generation Software", href: "/ai-lead-generation" },
+      { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
+      { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
+    ],
+  },
+
+  "ai-lead-qualification-software": {
+    slug: "ai-lead-qualification-software",
+    metaTitle: "AI Lead Qualification Software",
+    metaDescription:
+      "BlackSync's AI agent calls and texts every new lead, scores it on budget, timeline, and intent, and only routes the ones worth your team's time.",
+    eyebrow: "AI Lead Qualification",
+    headline: "Qualify Every Lead Before It Reaches Your Team",
+    subhead:
+      "BlackSync's AI agent calls and texts every new lead, asks the right questions, scores it based on budget, timeline, and intent, and only routes the ones actually worth your team's time.",
+    painPoints: [
+      "Reps spend hours on leads that were never going to close",
+      "Manually screening every inbound lead doesn't scale past a handful a day",
+      "Good leads get buried under a pile of unqualified ones",
+      "Qualification criteria live in someone's head instead of a consistent process",
+    ],
+    helps: [
+      {
+        title: "Scores Every Lead in Real Time",
+        description:
+          "The agent tracks conversation signals — budget, timeline, motivation, and intent — and updates the score as the conversation happens.",
+      },
+      {
+        title: "You Set the Criteria",
+        description:
+          "Describe what a qualified lead looks like in plain English, and the AI configures its qualifying questions and flow around it — no technical setup.",
+      },
+      {
+        title: "Routes Automatically",
+        description:
+          "Qualified leads sync straight to your CRM and land on the right rep's calendar — no manual handoff.",
+      },
+    ],
+    integrations: ["Follow Up Boss", "Salesforce", "HubSpot", "kvCORE", "Zapier"],
+    testimonial: {
+      quote:
+        "Set it up Monday morning. Had 6 qualified policy reviews booked by Friday. The voice is honestly indistinguishable from a real rep.",
+      name: "Priya S.",
+      role: "Agency Owner, Insurance — Dallas TX",
+    },
+    faqs: [
+      {
+        q: "What signals does the AI use to score a lead?",
+        a: "Conversation signals like budget, timeline, motivation level, and intent — tracked and updated in real time as the call happens.",
+      },
+      {
+        q: "Can I set my own qualification criteria?",
+        a: "Yes — describe what you're looking for in plain English and the AI configures its qualifying questions and flow around it.",
+      },
+      {
+        q: "Does it route qualified leads to my CRM automatically?",
+        a: "Yes, qualified leads sync to your CRM and land on the right rep's calendar without manual handoff.",
+      },
+    ],
+    related: [
+      { label: "AI Lead Generation Software", href: "/ai-lead-generation" },
+      { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
+      { label: "Insurance AI", href: "/insurance-ai" },
     ],
   },
 
@@ -344,6 +530,7 @@ export const USE_CASES: Record<string, UseCase> = {
     ],
     related: [
       { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },
+      { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
       { label: "Insurance industry page", href: "/industry/insurance" },
     ],
   },

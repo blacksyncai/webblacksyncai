@@ -36,6 +36,9 @@ function Router() {
       <Route path="/fsbo-ai" component={() => <UseCasePage slug="fsbo-ai" />} />
       <Route path="/mortgage-ai-caller" component={() => <UseCasePage slug="mortgage-ai-caller" />} />
       <Route path="/insurance-ai" component={() => <UseCasePage slug="insurance-ai" />} />
+      <Route path="/ai-lead-generation" component={() => <UseCasePage slug="ai-lead-generation" />} />
+      <Route path="/ai-appointment-setter" component={() => <UseCasePage slug="ai-appointment-setter" />} />
+      <Route path="/ai-lead-qualification-software" component={() => <UseCasePage slug="ai-lead-qualification-software" />} />
       <Route component={NotFound} />
     </Switch>
     </WouterRouter>

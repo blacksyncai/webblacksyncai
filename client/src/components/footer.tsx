@@ -9,6 +9,9 @@ const footerLinks = {
     { label: "API Docs", href: "#" },
   ],
   Solutions: [
+    { label: "AI Lead Generation", href: "/ai-lead-generation" },
+    { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
+    { label: "AI Lead Qualification", href: "/ai-lead-qualification-software" },
     { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
     { label: "Expired Listing AI", href: "/expired-listing-ai" },
     { label: "FSBO AI", href: "/fsbo-ai" },
