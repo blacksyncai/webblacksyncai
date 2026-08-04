@@ -28,9 +28,8 @@ const footerLinks = {
   Legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
-    { label: "Security", href: "#" },
-    { label: "DPA", href: "#" },
-    { label: "Cookie Settings", href: "#" },
+    { label: "Security", href: "/security" },
+    { label: "Request a DPA", href: "/#enterprise" },
   ],
 };
 

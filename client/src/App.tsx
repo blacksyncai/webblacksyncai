@@ -12,6 +12,7 @@ import LoginPage from "@/pages/login";
 import DashboardPage from "@/pages/dashboard";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
+import SecurityPage from "@/pages/security";
 import IndustryPage from "@/pages/industry";
 import UseCasePage from "@/pages/use-case";
 
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/dashboard" component={DashboardPage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
+      <Route path="/security" component={SecurityPage} />
       <Route path="/industry/:slug" component={IndustryPage} />
       <Route path="/real-estate-ai-caller" component={() => <UseCasePage slug="real-estate-ai-caller" />} />
       <Route path="/expired-listing-ai" component={() => <UseCasePage slug="expired-listing-ai" />} />
