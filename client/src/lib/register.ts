@@ -1,7 +1,7 @@
 // The BlackSync app registration / free-access page. After we capture a lead
 // on the marketing site (which fires the GHL webhook = inbound lead), we send
 // the visitor here to finish getting access — prefilled where possible.
-export const REGISTER_URL = "https://ai.blacksync.network/register";
+export const REGISTER_URL = "https://ai.blacksync.ai/register";
 
 // Free 15-minute discovery call booking (Cal.com).
 export const BOOK_CALL_URL = "https://cal.com/hello-blacksync.ai/15min";
