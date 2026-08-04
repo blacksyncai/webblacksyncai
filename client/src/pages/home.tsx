@@ -14,9 +14,11 @@ import { EnterpriseSection } from "@/components/enterprise-section";
 import { FinalCtaSection } from "@/components/final-cta-section";
 import { Footer } from "@/components/footer";
 import { usePageMeta } from "@/hooks/use-page-meta";
+import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 
 export default function Home() {
   usePageMeta({ path: "/" });
+  useScrollToHash();
 
   return (
     <div className="min-h-screen bg-background" data-testid="page-home">

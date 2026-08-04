@@ -335,7 +335,7 @@ export const USE_CASES: Record<string, UseCase> = {
     faqs: [
       {
         q: "Does BlackSync find new leads for me, or work the ones I already have?",
-        a: "It works the leads you already bring in — from ads, web forms, your CRM, or inbound calls — by calling, texting, and qualifying them the moment they arrive. It doesn't prospect for brand-new contacts on its own.",
+        a: "Our native platform works the leads you already bring in — from ads, web forms, your CRM, or inbound calls — by calling, texting, and qualifying them the moment they arrive. Prospecting for brand-new contacts isn't part of the core platform, but we do offer lead generation as an add-on — ask your rep for details.",
       },
       {
         q: "How fast does it contact a new lead?",
