@@ -13,6 +13,7 @@ import DashboardPage from "@/pages/dashboard";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
 import IndustryPage from "@/pages/industry";
+import UseCasePage from "@/pages/use-case";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -30,6 +31,14 @@ function Router() {
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
       <Route path="/industry/:slug" component={IndustryPage} />
+      <Route path="/real-estate-ai-caller" component={() => <UseCasePage slug="real-estate-ai-caller" />} />
+      <Route path="/expired-listing-ai" component={() => <UseCasePage slug="expired-listing-ai" />} />
+      <Route path="/fsbo-ai" component={() => <UseCasePage slug="fsbo-ai" />} />
+      <Route path="/mortgage-ai-caller" component={() => <UseCasePage slug="mortgage-ai-caller" />} />
+      <Route path="/insurance-ai" component={() => <UseCasePage slug="insurance-ai" />} />
+      <Route path="/ai-lead-generation" component={() => <UseCasePage slug="ai-lead-generation" />} />
+      <Route path="/ai-appointment-setter" component={() => <UseCasePage slug="ai-appointment-setter" />} />
+      <Route path="/ai-lead-qualification-software" component={() => <UseCasePage slug="ai-lead-qualification-software" />} />
       <Route component={NotFound} />
     </Switch>
     </WouterRouter>

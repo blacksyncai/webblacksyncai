@@ -8,6 +8,16 @@ const footerLinks = {
     { label: "Changelog", href: "#" },
     { label: "API Docs", href: "#" },
   ],
+  Solutions: [
+    { label: "AI Lead Generation", href: "/ai-lead-generation" },
+    { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
+    { label: "AI Lead Qualification", href: "/ai-lead-qualification-software" },
+    { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
+    { label: "Expired Listing AI", href: "/expired-listing-ai" },
+    { label: "FSBO AI", href: "/fsbo-ai" },
+    { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },
+    { label: "Insurance AI", href: "/insurance-ai" },
+  ],
   Company: [
     { label: "About", href: "#" },
     { label: "Blog", href: "#" },
@@ -35,7 +45,7 @@ export function Footer() {
   return (
     <footer data-testid="footer" className="border-t border-border/50 bg-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
             <a href="#" className="flex items-center gap-2.5 mb-4" data-testid="link-footer-home">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary via-orange-500 to-amber-500 flex items-center justify-center shadow-sm ring-1 ring-black/5">
