@@ -4,7 +4,7 @@
 export const REGISTER_URL = "https://ai.blacksync.ai/register";
 
 // Free 15-minute discovery call booking (Cal.com).
-export const BOOK_CALL_URL = "https://cal.com/hello-blacksync.ai/15min";
+export const BOOK_CALL_URL = "https://cal.com/hamza-basal-v1hqkl/15min";
 
 // The BlackSync app's login page.
 export const APP_LOGIN_URL = "https://ai.blacksync.ai/login?from=%2F";
