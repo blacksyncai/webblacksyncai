@@ -60,6 +60,8 @@ export async function apiRequest(
 
     // 2) Web3Forms — emails every submission to admin@blacksync.network.
     // FormData (multipart) is a "simple" request: no CORS preflight, most reliable.
+    // Never blocks the visitor on failure, but DOES log failures loudly so a
+    // silently-broken key/domain doesn't go unnoticed (open DevTools > Console).
     try {
       const fd = new FormData();
       fd.append("access_key", WEB3FORMS_ACCESS_KEY);
@@ -68,9 +70,16 @@ export async function apiRequest(
       Object.entries(lead).forEach(([k, v]) => {
         if (v !== undefined && v !== null && v !== "") fd.append(k, String(v));
       });
-      await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
-    } catch {
-      /* email send is best-effort; never block the user */
+      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
+      const body = await res.json().catch(() => null);
+      if (!res.ok || body?.success === false) {
+        console.error(
+          "Web3Forms lead submission was rejected — check the access key/domain in the Web3Forms dashboard.",
+          { status: res.status, body },
+        );
+      }
+    } catch (err) {
+      console.error("Web3Forms lead submission failed to send (network error).", err);
     }
 
     return new Response(null, { status: 200 });
