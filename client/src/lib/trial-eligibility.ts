@@ -6,7 +6,7 @@ export const INDUSTRY_OPTIONS = [
   "Healthcare",
   "Home Services",
   "Auto & P&C",
-  "Looking for something to just pick up my missed calls",
+  "Capture Missed Calls",
   "Other",
 ];
 
@@ -15,7 +15,7 @@ export const INDUSTRY_OPTIONS = [
 const TRIAL_ELIGIBLE_INDUSTRIES = new Set([
   "Home Services",
   "Auto & P&C",
-  "Looking for something to just pick up my missed calls",
+  "Capture Missed Calls",
 ]);
 
 export function isTrialEligible(industry: string): boolean {
