@@ -8,7 +8,7 @@ const comparisonData = [
   { feature: "Handles 1,000+ calls per day", blacksync: true, others: false },
   { feature: "No salary, commissions, or benefits", blacksync: true, others: false },
   { feature: "Scales up or down instantly", blacksync: true, others: false },
-  { feature: "Detects emotion and mirrors tone", blacksync: true, others: false },
+  { feature: "Detects emotion and mirrors tone", blacksync: true, others: true },
   { feature: "Speaks 40+ languages", blacksync: true, others: false },
   { feature: "Powered by GPT-5, Claude & Gemini", blacksync: true, others: false },
 ];
@@ -63,9 +63,15 @@ export function WhySection() {
                     </span>
                   </span>
                   <span className="flex justify-center">
-                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-muted text-muted-foreground/40">
-                      <X className="w-4 h-4" strokeWidth={2.5} />
-                    </span>
+                    {row.others ? (
+                      <span className="flex items-center justify-center w-7 h-7 rounded-full bg-green-500/10 text-green-600 dark:text-green-500">
+                        <Check className="w-4 h-4" strokeWidth={3} />
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center w-7 h-7 rounded-full bg-muted text-muted-foreground/40">
+                        <X className="w-4 h-4" strokeWidth={2.5} />
+                      </span>
+                    )}
                   </span>
                 </div>
               ))}
