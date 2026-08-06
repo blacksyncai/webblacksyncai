@@ -17,6 +17,9 @@ import IndustryPage from "@/pages/industry";
 import UseCasePage from "@/pages/use-case";
 import CareersPage from "@/pages/careers";
 import AffiliatesPage from "@/pages/affiliates";
+import EnterprisePage from "@/pages/enterprise";
+import BookDemoPage from "@/pages/book-demo";
+import ContactPage from "@/pages/contact";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -36,6 +39,9 @@ function Router() {
       <Route path="/security" component={SecurityPage} />
       <Route path="/careers" component={CareersPage} />
       <Route path="/affiliates" component={AffiliatesPage} />
+      <Route path="/enterprise" component={EnterprisePage} />
+      <Route path="/book-demo" component={BookDemoPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route path="/industry/:slug" component={IndustryPage} />
       <Route path="/real-estate-ai-caller" component={() => <UseCasePage slug="real-estate-ai-caller" />} />
       <Route path="/expired-listing-ai" component={() => <UseCasePage slug="expired-listing-ai" />} />
