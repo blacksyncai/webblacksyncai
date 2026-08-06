@@ -18,23 +18,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowRight, Loader2, Sparkles, ShieldCheck, Check } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles, ShieldCheck, Check, PhoneCall } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
 import { goToRegister } from "@/lib/register";
 import { BookCallDialog } from "@/components/book-call-dialog";
-
-const INDUSTRY_OPTIONS = [
-  "Real Estate",
-  "Insurance",
-  "Mortgage & Lending",
-  "Property Management",
-  "Healthcare",
-  "Home Services",
-  "Auto & P&C",
-  "Other",
-];
+import { INDUSTRY_OPTIONS, isTrialEligible, TRIAL_INELIGIBLE_MESSAGE } from "@/lib/trial-eligibility";
 
 const PERKS = [
   "AI voice agent set up for your industry",
@@ -56,6 +46,7 @@ export function StartTrialDialog({
   const [company, setCompany] = useState("");
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
+  const blocked = industry !== "" && !isTrialEligible(industry);
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -81,12 +72,13 @@ export function StartTrialDialog({
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email || !email.includes("@")) {
-      toast({ title: "Enter a valid email", description: "We need it to create your access.", variant: "destructive" });
-      return;
-    }
     if (!industry) {
       toast({ title: "Pick your industry", description: "So we tune your agent.", variant: "destructive" });
+      return;
+    }
+    if (blocked) return;
+    if (!email || !email.includes("@")) {
+      toast({ title: "Enter a valid email", description: "We need it to create your access.", variant: "destructive" });
       return;
     }
     if (isBot()) {
@@ -138,48 +130,64 @@ export function StartTrialDialog({
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="trial-email">Work email</Label>
-            <Input id="trial-email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} data-testid="input-trial-email" />
-          </div>
-
-          <div className="space-y-1.5">
-            <Label htmlFor="trial-company">Company / team <span className="text-muted-foreground font-normal">(optional)</span></Label>
-            <Input id="trial-company" placeholder="Acme Realty" value={company} onChange={(e) => setCompany(e.target.value)} data-testid="input-trial-company" />
-          </div>
-
-          <Button type="submit" size="lg" className="w-full" disabled={mutation.isPending} data-testid="button-trial-submit">
-            {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-            Start Free Trial
-            {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
-          </Button>
-
-          <ul className="space-y-1.5 pt-1">
-            {PERKS.map((p) => (
-              <li key={p} className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Check className="w-3.5 h-3.5 text-primary shrink-0" /> {p}
-              </li>
-            ))}
-          </ul>
-
-          <p className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground pt-1">
-            <ShieldCheck className="w-3.5 h-3.5" /> Next: create your login to get instant access — your details carry over.
-          </p>
-
-          <div className="flex items-center gap-3 pt-1">
-            <span className="h-px flex-1 bg-border" />
-            <span className="text-[11px] text-muted-foreground">or</span>
-            <span className="h-px flex-1 bg-border" />
-          </div>
-          <BookCallDialog>
-            <button
-              type="button"
-              className="block w-full text-center text-sm font-medium text-primary hover:underline"
-              data-testid="link-trial-book-call"
+          {blocked ? (
+            <div
+              className="rounded-xl border border-primary/20 bg-primary/5 p-5 text-center space-y-4"
+              data-testid="panel-trial-blocked"
             >
-              Prefer to talk first? Book a free 15-min call →
-            </button>
-          </BookCallDialog>
+              <p className="text-sm text-foreground leading-relaxed">{TRIAL_INELIGIBLE_MESSAGE}</p>
+              <BookCallDialog>
+                <Button type="button" className="w-full" data-testid="button-trial-blocked-book-call">
+                  <PhoneCall className="w-4 h-4 mr-2" /> Book a Call
+                </Button>
+              </BookCallDialog>
+            </div>
+          ) : (
+            <>
+              <div className="space-y-1.5">
+                <Label htmlFor="trial-email">Work email</Label>
+                <Input id="trial-email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} data-testid="input-trial-email" />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="trial-company">Company / team <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                <Input id="trial-company" placeholder="Acme Realty" value={company} onChange={(e) => setCompany(e.target.value)} data-testid="input-trial-company" />
+              </div>
+
+              <Button type="submit" size="lg" className="w-full" disabled={mutation.isPending} data-testid="button-trial-submit">
+                {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                Start Free Trial
+                {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
+              </Button>
+
+              <ul className="space-y-1.5 pt-1">
+                {PERKS.map((p) => (
+                  <li key={p} className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Check className="w-3.5 h-3.5 text-primary shrink-0" /> {p}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground pt-1">
+                <ShieldCheck className="w-3.5 h-3.5" /> Next: create your login to get instant access — your details carry over.
+              </p>
+
+              <div className="flex items-center gap-3 pt-1">
+                <span className="h-px flex-1 bg-border" />
+                <span className="text-[11px] text-muted-foreground">or</span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              <BookCallDialog>
+                <button
+                  type="button"
+                  className="block w-full text-center text-sm font-medium text-primary hover:underline"
+                  data-testid="link-trial-book-call"
+                >
+                  Prefer to talk first? Book a free 15-min call →
+                </button>
+              </BookCallDialog>
+            </>
+          )}
         </form>
       </DialogContent>
     </Dialog>
