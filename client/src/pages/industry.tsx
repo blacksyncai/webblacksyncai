@@ -19,6 +19,7 @@ import {
   Calendar,
   Clock,
   TrendingUp,
+  Flower2,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -45,7 +46,7 @@ type Industry = {
   painPoints: string[];
   outcomes: { label: string; value: string; icon: any }[];
   integrations: string[];
-  testimonial: { quote: string; name: string; role: string };
+  testimonial?: { quote: string; name: string; role: string };
 };
 
 const INDUSTRIES: Record<string, Industry> = {
@@ -244,6 +245,31 @@ const INDUSTRIES: Record<string, Industry> = {
       name: "Marcus K.",
       role: "Portfolio Manager, Atlanta GA",
     },
+  },
+  "funeral-homes": {
+    slug: "funeral-homes",
+    name: "Funeral Homes",
+    icon: Flower2,
+    headline: "Your dedicated 24/7 funeral home assistant.",
+    subhead:
+      "Replace expensive answering services with an AI receptionist trained specifically for your funeral home's procedures, staff, and preferences. BlackSync answers every call with professionalism and empathy, schedules arrangements, performs warm transfers when needed, captures every caller's information, documents every conversation, and integrates directly with your existing systems — so no family is ever sent to voicemail and every call is handled as if your staff answered it themselves.",
+    painPoints: [
+      "Generic answering services don't know your procedures, staff, or preferences — families can tell",
+      "Missed calls mean a grieving family gets voicemail instead of a person",
+      "Expensive 24/7 human answering services that still can't schedule arrangements or warm-transfer the right call",
+      "Every call needs to be documented and routed to the right staff member — most services don't do this well",
+    ],
+    outcomes: [
+      { label: "Average response time", value: "11s", icon: Clock },
+      { label: "Coverage", value: "24/7", icon: Phone },
+      { label: "Calls sent to voicemail", value: "0", icon: TrendingUp },
+    ],
+    integrations: [
+      "Your funeral home management software",
+      "Calendar & scheduling tools",
+      "CRM / case management systems",
+      "Text & email",
+    ],
   },
 };
 
@@ -552,19 +578,21 @@ export default function IndustryPage() {
       </section>
 
       {/* Testimonial */}
-      <section className="py-16 md:py-24 bg-muted">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Reveal>
-            <p className="font-display text-2xl md:text-3xl font-medium leading-snug mb-8 text-foreground text-balance">
-              "{industry.testimonial.quote}"
-            </p>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p className="text-sm font-semibold">{industry.testimonial.name}</p>
-            <p className="text-sm font-mono uppercase tracking-wide text-muted-foreground">{industry.testimonial.role}</p>
-          </Reveal>
-        </div>
-      </section>
+      {industry.testimonial && (
+        <section className="py-16 md:py-24 bg-muted">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Reveal>
+              <p className="font-display text-2xl md:text-3xl font-medium leading-snug mb-8 text-foreground text-balance">
+                "{industry.testimonial.quote}"
+              </p>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <p className="text-sm font-semibold">{industry.testimonial.name}</p>
+              <p className="text-sm font-mono uppercase tracking-wide text-muted-foreground">{industry.testimonial.role}</p>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-16 md:py-24">

@@ -37,6 +37,7 @@ import {
   FileText,
   Clock,
   Search,
+  Flower2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { StartTrialDialog } from "@/components/start-trial-dialog";
@@ -107,7 +108,7 @@ const industries: IndustryDetail[] = [
     description:
       "Connect Zillow, Facebook, and your CRM — Follow Up Boss, Sierra, kvCORE — and let your AI agent call every new lead within seconds. Qualify buyers and sellers, book showings, and never miss a hot lead again.",
     stat: "11 second average response time",
-    link: "#industries",
+    link: "/industry/real-estate",
     linkLabel: "See Real Estate use case",
   },
   {
@@ -118,7 +119,7 @@ const industries: IndustryDetail[] = [
     description:
       "Capture leads from LendingTree, Zillow Home Loans, and your own landing pages. Your AI agent pre-qualifies borrowers, collects income and credit details, and books them directly with your loan officers.",
     stat: "3x more pre-qualified appointments",
-    link: "#industries",
+    link: "/industry/mortgage",
     linkLabel: "See Mortgage use case",
   },
   {
@@ -129,7 +130,7 @@ const industries: IndustryDetail[] = [
     description:
       "Automate leasing inquiries, schedule property tours, and follow up with prospective tenants. Your AI agent handles high call volumes during peak season without adding headcount.",
     stat: "85% fewer missed leasing calls",
-    link: "#industries",
+    link: "/industry/property-management",
     linkLabel: "See Property Management use case",
   },
   {
@@ -140,7 +141,7 @@ const industries: IndustryDetail[] = [
     description:
       "Call internet leads within seconds, qualify coverage needs, and book policy review appointments. Your AI agent handles objections naturally and routes hot prospects to your licensed agents.",
     stat: "47% increase in quote requests",
-    link: "#industries",
+    link: "/industry/insurance",
     linkLabel: "See Insurance use case",
   },
   {
@@ -151,7 +152,7 @@ const industries: IndustryDetail[] = [
     description:
       "Never miss a service call again. Your AI agent answers inquiries 24/7, qualifies job scope, provides estimates, and books appointments directly into your dispatch calendar.",
     stat: "62% more booked service calls",
-    link: "#industries",
+    link: "/industry/home-services",
     linkLabel: "See Home Services use case",
   },
   {
@@ -162,7 +163,7 @@ const industries: IndustryDetail[] = [
     description:
       "HIPAA-ready AI agents handle patient appointment scheduling, follow-ups, and recall campaigns. Reduce no-shows with automated reminders and confirmations across 40+ languages.",
     stat: "38% reduction in no-shows",
-    link: "#industries",
+    link: "/industry/healthcare",
     linkLabel: "See Healthcare use case",
   },
   {
@@ -173,8 +174,19 @@ const industries: IndustryDetail[] = [
     description:
       "Respond to auto and property & casualty leads instantly. Your AI agent qualifies coverage needs, gathers vehicle or property details, and books consultations with your agents.",
     stat: "2x faster lead response time",
-    link: "#industries",
+    link: "/industry/auto-pc",
     linkLabel: "See Auto & P&C use case",
+  },
+  {
+    icon: Flower2,
+    label: "Funeral Homes",
+    href: "#industries",
+    title: "Your Dedicated 24/7 Funeral Home Assistant",
+    description:
+      "Replace expensive answering services with an AI receptionist trained specifically for your funeral home's procedures, staff, and preferences. Schedules arrangements, performs warm transfers, and documents every call.",
+    stat: "11 second average response time",
+    link: "/industry/funeral-homes",
+    linkLabel: "See Funeral Homes use case",
   },
 ];
 
