@@ -187,7 +187,7 @@ const resourceItems = [
 ];
 
 const simpleLinks = [
-  { label: "Pricing", href: "#pricing" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Why Us", href: "#why" },
 ];
 
