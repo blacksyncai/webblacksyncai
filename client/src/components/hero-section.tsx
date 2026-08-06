@@ -28,17 +28,8 @@ import { Link } from "wouter";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
 import { goToRegister } from "@/lib/register";
 import { BookCallDialog } from "@/components/book-call-dialog";
-
-const INDUSTRY_OPTIONS = [
-  "Real Estate",
-  "Insurance",
-  "Mortgage & Lending",
-  "Property Management",
-  "Healthcare",
-  "Home Services",
-  "Auto & P&C",
-  "Other",
-];
+import { INDUSTRY_OPTIONS, isTrialEligible, TRIAL_INELIGIBLE_MESSAGE } from "@/lib/trial-eligibility";
+import { PhoneCall } from "lucide-react";
 
 const TEAM_SIZE_OPTIONS = ["Just me", "2-5", "6-15", "16-50", "50+"];
 
@@ -78,6 +69,7 @@ export function HeroSection() {
   const [form, setForm] = useState<HeroLead>(EMPTY_LEAD);
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
+  const blocked = form.industry !== "" && !isTrialEligible(form.industry);
 
   function update<K extends keyof HeroLead>(key: K, value: HeroLead[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -126,6 +118,7 @@ export function HeroSection() {
       toast({ title: "Pick your industry", description: "This helps us tailor your plan.", variant: "destructive" });
       return;
     }
+    if (blocked) return;
     if (isBot()) {
       toast({ title: "You're in!", description: "We'll be in touch with your custom plan shortly." });
       setForm(EMPTY_LEAD);
@@ -405,40 +398,56 @@ export function HeroSection() {
               </Select>
             </div>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="hero-company">Company / team name (optional)</Label>
-              <Input
-                id="hero-company"
-                placeholder="Acme Realty Group"
-                value={form.company}
-                onChange={(e) => update("company", e.target.value)}
-                data-testid="input-dialog-company"
-              />
-            </div>
+            {blocked ? (
+              <div
+                className="rounded-xl border border-primary/20 bg-primary/5 p-5 text-center space-y-4"
+                data-testid="panel-hero-trial-blocked"
+              >
+                <p className="text-sm text-foreground leading-relaxed">{TRIAL_INELIGIBLE_MESSAGE}</p>
+                <BookCallDialog>
+                  <Button type="button" className="w-full" data-testid="button-hero-blocked-book-call">
+                    <PhoneCall className="w-4 h-4 mr-2" /> Book a Call
+                  </Button>
+                </BookCallDialog>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-1.5">
+                  <Label htmlFor="hero-company">Company / team name (optional)</Label>
+                  <Input
+                    id="hero-company"
+                    placeholder="Acme Realty Group"
+                    value={form.company}
+                    onChange={(e) => update("company", e.target.value)}
+                    data-testid="input-dialog-company"
+                  />
+                </div>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="hero-usecase">What do you want to automate? (optional)</Label>
-              <Textarea
-                id="hero-usecase"
-                rows={2}
-                placeholder="e.g. follow up calls, appointment setting..."
-                value={form.useCase}
-                onChange={(e) => update("useCase", e.target.value)}
-                data-testid="textarea-dialog-use-case"
-              />
-            </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="hero-usecase">What do you want to automate? (optional)</Label>
+                  <Textarea
+                    id="hero-usecase"
+                    rows={2}
+                    placeholder="e.g. follow up calls, appointment setting..."
+                    value={form.useCase}
+                    onChange={(e) => update("useCase", e.target.value)}
+                    data-testid="textarea-dialog-use-case"
+                  />
+                </div>
 
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full"
-              disabled={mutation.isPending}
-              data-testid="button-dialog-submit"
-            >
-              {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-              Get My Custom Plan
-              {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-2" />}
-            </Button>
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={mutation.isPending}
+                  data-testid="button-dialog-submit"
+                >
+                  {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                  Get My Custom Plan
+                  {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-2" />}
+                </Button>
+              </>
+            )}
           </form>
         </DialogContent>
       </Dialog>
