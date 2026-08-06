@@ -147,6 +147,56 @@ const ROLES: Role[] = [
     ],
   },
   {
+    slug: "developer",
+    title: "Developer",
+    meta: "Full-time · Remote · Junior–mid level",
+    tagline: "Good fundamentals and a willingness to learn matter more than a resume.",
+    about:
+      "This is a friendlier entry point into the team than our Software Engineer role — great if you're earlier in your career, self-taught, or coming from a bootcamp. You'll work on smaller, well-scoped tasks alongside more senior engineers, get real code review, and grow into bigger ownership over time. We care more about how you think and how you take feedback than your years on a resume.",
+    responsibilities: [
+      "Build and fix smaller, well-scoped features across the frontend and backend",
+      "Pair with and learn from senior engineers on the team",
+      "Squash bugs and chip away at tech debt",
+      "Ask questions — we'd rather you ask than guess",
+    ],
+    requirements: [
+      "Solid fundamentals in JavaScript/TypeScript — bootcamp, self-taught, or degree, we don't care which",
+      "Some exposure to React or a similar framework",
+      "Coachable and open to feedback",
+      "A portfolio or side projects are a nice-to-have, not a requirement",
+    ],
+    fields: [
+      { id: "name", label: "Full name", type: "text", placeholder: "Jane Doe" },
+      { id: "email", label: "Email", type: "email", placeholder: "you@email.com" },
+      { id: "phone", label: "Phone", type: "tel", placeholder: "(555) 123-4567", optional: true },
+      {
+        id: "portfolio",
+        label: "GitHub, portfolio, or side projects",
+        type: "text",
+        placeholder: "github.com/... (optional, but happy to see what you've built)",
+        optional: true,
+      },
+      {
+        id: "yearsExperience",
+        label: "Experience level",
+        type: "select",
+        options: ["Learning to code / bootcamp grad", "Less than 1 year", "1–2 years", "2–4 years"],
+      },
+      {
+        id: "background",
+        label: "How did you learn to code?",
+        type: "text",
+        placeholder: "Bootcamp, self-taught, degree, all of the above…",
+      },
+      {
+        id: "why",
+        label: "Why this role?",
+        type: "textarea",
+        placeholder: "Tell us a bit about yourself — no need to be formal.",
+      },
+    ],
+  },
+  {
     slug: "marketing",
     title: "Marketing / Social Media",
     meta: "Full-time · Remote",
