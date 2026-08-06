@@ -3,7 +3,7 @@ import { Shield, Globe, Lock, FileCheck } from "lucide-react";
 const footerLinks = {
   Product: [
     { label: "How it Works", href: "#how-it-works" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Pricing", href: "/pricing" },
     { label: "Integrations", href: "#integrations" },
     { label: "Changelog", href: "#" },
     { label: "API Docs", href: "#" },
