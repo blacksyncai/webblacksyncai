@@ -786,7 +786,7 @@ export default function UseCasePage({ slug }: { slug: string }) {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
-              <Link href="/#enterprise">
+              <Link href="/enterprise">
                 <Button size="lg" data-testid="button-use-case-talk">
                   Talk to Sales <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>

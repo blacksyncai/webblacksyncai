@@ -4,6 +4,7 @@ const footerLinks = {
   Product: [
     { label: "How it Works", href: "#how-it-works" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Book a Demo", href: "/book-demo" },
     { label: "Integrations", href: "#integrations" },
     { label: "Changelog", href: "#" },
     { label: "API Docs", href: "#" },
@@ -17,19 +18,22 @@ const footerLinks = {
     { label: "FSBO AI", href: "/fsbo-ai" },
     { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },
     { label: "Insurance AI", href: "/insurance-ai" },
+    { label: "Home Services AI", href: "/industry/home-services" },
+    { label: "Funeral Home AI", href: "/industry/funeral-homes" },
   ],
   Company: [
     { label: "About", href: "#" },
     { label: "Blog", href: "#" },
     { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/#enterprise" },
+    { label: "Enterprise", href: "/enterprise" },
+    { label: "Contact", href: "/contact" },
     { label: "Affiliates", href: "/affiliates" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
     { label: "Security", href: "/security" },
-    { label: "Request a DPA", href: "/#enterprise" },
+    { label: "Request a DPA", href: "/enterprise" },
   ],
 };
 

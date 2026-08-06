@@ -609,7 +609,7 @@ export default function IndustryPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/#enterprise">
+              <Link href="/enterprise">
                 <Button size="lg" data-testid="button-industry-talk">
                   Talk to Sales <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
