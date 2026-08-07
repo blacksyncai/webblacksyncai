@@ -77,7 +77,7 @@ export default function PrivacyPage() {
         email includes an unsubscribe link). California residents have rights under the CCPA;
         residents of the EU/EEA and UK have rights under the GDPR/UK GDPR. To exercise any of
         these rights, contact us at{" "}
-        <a href="mailto:hello@blacksync.ai">hello@blacksync.ai</a>.
+        <a href="mailto:sales@blacksync.ai">sales@blacksync.ai</a>.
       </p>
 
       <h2>7. Data Security</h2>
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
       <h2>11. Contact Us</h2>
       <p>
         Questions about this policy or your data? Email us at{" "}
-        <a href="mailto:hello@blacksync.ai">hello@blacksync.ai</a>.
+        <a href="mailto:sales@blacksync.ai">sales@blacksync.ai</a>.
       </p>
     </LegalPage>
   );

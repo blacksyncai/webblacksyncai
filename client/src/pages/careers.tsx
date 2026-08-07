@@ -351,9 +351,9 @@ export default function CareersPage() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <a href="mailto:hello@blacksync.ai">
+            <a href="mailto:sales@blacksync.ai">
               <Button size="lg" variant="outline" data-testid="button-careers-contact">
-                Email hello@blacksync.ai
+                Email sales@blacksync.ai
               </Button>
             </a>
           </Reveal>

@@ -90,8 +90,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <a href="mailto:hello@blacksync.ai" className="text-sm text-primary hover:underline">
-                    hello@blacksync.ai
+                  <a href="mailto:sales@blacksync.ai" className="text-sm text-primary hover:underline">
+                    sales@blacksync.ai
                   </a>
                 </div>
               </div>

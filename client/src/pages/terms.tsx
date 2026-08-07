@@ -120,7 +120,7 @@ export default function TermsPage() {
       <h2>13. Contact Us</h2>
       <p>
         Questions about these Terms? Email us at{" "}
-        <a href="mailto:hello@blacksync.ai">hello@blacksync.ai</a>.
+        <a href="mailto:sales@blacksync.ai">sales@blacksync.ai</a>.
       </p>
     </LegalPage>
   );
