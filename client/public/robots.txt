@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blacksync.ai/sitemap.xml
+Sitemap: https://www.blacksync.ai/sitemap.xml

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_NAME = "BlackSync.ai";
-const SITE_URL = "https://blacksync.ai";
+const SITE_URL = "https://www.blacksync.ai";
 const DEFAULT_TITLE = `${SITE_NAME} - Your AI Outbound Sales Colleague | Real Estate, Insurance, Mortgage`;
 const DEFAULT_DESCRIPTION =
   "BlackSync is the AI ISA and SDR that calls your leads, books appointments, and fills your calendar. Built for real estate agents, insurance brokers, and mortgage lenders.";
