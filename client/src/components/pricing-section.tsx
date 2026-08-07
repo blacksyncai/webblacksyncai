@@ -9,7 +9,7 @@ const plans = [
     name: "Solo Agent",
     price: "$98",
     originalPrice: "$125",
-    discountNote: "Save $27/mo · Limited launch pricing",
+    discountNote: "Save $27/mo · Founding rate",
     period: "/mo",
     tag: "Self-Serve",
     features: [
@@ -30,7 +30,7 @@ const plans = [
     name: "Team",
     price: "$296",
     originalPrice: "$399",
-    discountNote: "Save $103/mo · Limited launch pricing",
+    discountNote: "Save $103/mo · Founding rate",
     period: "/mo",
     tag: "Most Popular",
     features: [
