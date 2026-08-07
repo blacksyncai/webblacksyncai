@@ -47,7 +47,7 @@ export default function PrivacyPage() {
       <p>We don't sell your personal information. We share it only with:</p>
       <ul>
         <li><strong>Service providers</strong> who help us run the business and product, such as
-        our CRM, form/email delivery, payment processing (Stripe), and scheduling (Cal.com)
+        our CRM, form/email delivery, payment processing (Square), and scheduling (Cal.com)
         providers, and the telephony/SMS infrastructure that powers AI calling and texting</li>
         <li><strong>Legal and safety reasons</strong>, if required by law or necessary to protect
         our rights, users, or the public</li>
