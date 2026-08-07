@@ -47,6 +47,13 @@ type Industry = {
   outcomes: { label: string; value: string; icon: any }[];
   integrations: string[];
   testimonial?: { quote: string; name: string; role: string };
+  // Optional per-industry overrides for the shared template below.
+  metaTitle?: string;
+  ctaLabel?: string;
+  heroSubtext?: string;
+  painPointsHeading?: string;
+  painPointsIntro?: string;
+  comparisonPoints?: string[];
 };
 
 const INDUSTRIES: Record<string, Industry> = {
@@ -252,7 +259,13 @@ const INDUSTRIES: Record<string, Industry> = {
     icon: Flower2,
     headline: "Your dedicated 24/7 funeral home assistant.",
     subhead:
-      "Replace expensive answering services with an AI receptionist trained specifically for your funeral home's procedures, staff, and preferences. BlackSync answers every call with professionalism and empathy, schedules arrangements, performs warm transfers when needed, captures every caller's information, documents every conversation, and integrates directly with your existing systems — so no family is ever sent to voicemail and every call is handled as if your staff answered it themselves.",
+      "Replace expensive answering services with an AI receptionist trained exclusively for your funeral home. Answers every call with professionalism and empathy, books arrangements, warm-transfers urgent calls, and documents every conversation automatically.",
+    metaTitle: "24/7 AI Receptionist for Funeral Homes",
+    ctaLabel: "Hear My AI Assistant",
+    heroSubtext: "Built for funeral homes · Answers 100% of calls · Cancel anytime",
+    painPointsHeading: "Never let another family reach voicemail.",
+    painPointsIntro:
+      "This isn't a shared answering service juggling six other businesses. Your AI assistant is trained exclusively on your funeral home's procedures, staff, and preferences.",
     painPoints: [
       "Generic answering services don't know your procedures, staff, or preferences — families can tell",
       "Missed calls mean a grieving family gets voicemail instead of a person",
@@ -260,16 +273,19 @@ const INDUSTRIES: Record<string, Industry> = {
       "Every call needs to be documented and routed to the right staff member — most services don't do this well",
     ],
     outcomes: [
-      { label: "Average response time", value: "11s", icon: Clock },
-      { label: "Coverage", value: "24/7", icon: Phone },
+      { label: "Call answer rate", value: "100%", icon: Phone },
+      { label: "Coverage", value: "24/7", icon: Clock },
       { label: "Calls sent to voicemail", value: "0", icon: TrendingUp },
     ],
-    integrations: [
-      "Your funeral home management software",
-      "Calendar & scheduling tools",
-      "CRM / case management systems",
-      "Text & email",
+    comparisonPoints: [
+      "Answers every call",
+      "Books arrangements",
+      "Warm-transfers urgent calls",
+      "Integrates with your CRM",
+      "Every call recorded & documented",
+      "Built specifically for funeral homes",
     ],
+    integrations: ["Passare", "FrontRunner", "FuneralTech", "Google Calendar", "Outlook", "Salesforce", "HubSpot"],
   },
 };
 
@@ -279,7 +295,7 @@ export default function IndustryPage() {
   const industry = INDUSTRIES[slug] ?? INDUSTRIES["real-estate"];
 
   usePageMeta({
-    title: `${industry.name} AI Sales Agent`,
+    title: industry.metaTitle ?? `${industry.name} AI Sales Agent`,
     description: industry.subhead,
     path: `/industry/${industry.slug}`,
   });
@@ -474,11 +490,11 @@ export default function IndustryPage() {
                 data-testid="input-industry-email"
               />
               <Button size="lg" type="submit" disabled={mutation.isPending} data-testid="button-industry-cta">
-                Get My Plan <ArrowRight className="w-4 h-4 ml-2" />
+                {industry.ctaLabel ?? "Get My Plan"} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </form>
             <p className="text-xs text-muted-foreground font-mono uppercase tracking-wide">
-              Built for {industry.name} teams · 11s response time · Cancel anytime
+              {industry.heroSubtext ?? `Built for ${industry.name} teams · 11s response time · Cancel anytime`}
             </p>
           </motion.div>
         </div>
@@ -519,14 +535,20 @@ export default function IndustryPage() {
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-5 font-display text-3xl md:text-4xl font-semibold tracking-tight leading-[1.1] mb-4 text-balance">
-                  Stop losing leads to{" "}
-                  <span className="text-accent-grad">slow follow-up.</span>
+                  {industry.painPointsHeading ? (
+                    industry.painPointsHeading
+                  ) : (
+                    <>
+                      Stop losing leads to{" "}
+                      <span className="text-accent-grad">slow follow-up.</span>
+                    </>
+                  )}
                 </h2>
               </Reveal>
               <Reveal delay={0.1}>
                 <p className="text-muted-foreground leading-relaxed text-pretty">
-                  Every {industry.name.toLowerCase()} team we work with comes to us
-                  with the same problems. BlackSync solves them on day one.
+                  {industry.painPointsIntro ??
+                    `Every ${industry.name.toLowerCase()} team we work with comes to us with the same problems. BlackSync solves them on day one.`}
                 </p>
               </Reveal>
             </div>
@@ -544,6 +566,36 @@ export default function IndustryPage() {
           </div>
         </div>
       </section>
+
+      {/* Comparison vs. incumbent solution */}
+      {industry.comparisonPoints && (
+        <section className="py-16 md:py-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Reveal>
+              <Eyebrow>Replaces traditional answering services</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-5 font-display text-3xl md:text-4xl font-semibold tracking-tight mb-10 text-balance">
+                Everything a live answering service does{" "}
+                <span className="text-accent-grad">— and more.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="grid sm:grid-cols-2 gap-3 text-left">
+                {industry.comparisonPoints.map((p) => (
+                  <div
+                    key={p}
+                    className="flex items-center gap-2.5 p-4 rounded-xl bg-card border shadow-sm"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-sm font-medium">{p}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Integrations */}
       <section className="py-16 md:py-24">
