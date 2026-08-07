@@ -23,7 +23,7 @@ const plans = [
       "Email support",
     ],
     popular: false,
-    checkoutUrl: "https://buy.stripe.com/fZudR2g325kJgRh3i0eUU0v",
+    checkoutUrl: "https://square.link/u/JzEAvDnq",
     cta: "Get Started",
   },
   {
@@ -44,7 +44,7 @@ const plans = [
       "Priority support",
     ],
     popular: true,
-    checkoutUrl: "https://buy.stripe.com/8x200c2ccaF3dF5g4MeUU0w",
+    checkoutUrl: "https://square.link/u/idJmGOmO",
     cta: "Get Started",
   },
   {
