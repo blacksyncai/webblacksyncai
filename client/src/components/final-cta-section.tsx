@@ -119,7 +119,7 @@ export function FinalCtaSection() {
             </form>
 
             <p className="mt-4 text-xs text-background/60" data-testid="text-final-cta-subtext">
-              No setup fees · Phone number from $3.50/mo · Cancel anytime
+              Phone number from $3.50/mo · Cancel anytime
             </p>
           </div>
         </motion.div>
