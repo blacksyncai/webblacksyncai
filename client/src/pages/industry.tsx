@@ -54,6 +54,9 @@ type Industry = {
   painPointsHeading?: string;
   painPointsIntro?: string;
   comparisonPoints?: string[];
+  empathyHeading?: string;
+  empathySubtext?: string;
+  workflows?: { title: string; description: string }[];
 };
 
 const INDUSTRIES: Record<string, Industry> = {
@@ -284,6 +287,39 @@ const INDUSTRIES: Record<string, Industry> = {
       "Integrates with your CRM",
       "Every call recorded & documented",
       "Built specifically for funeral homes",
+    ],
+    empathyHeading: "Built for Conversations That Require Empathy",
+    empathySubtext:
+      "Funeral service isn't a typical customer-service environment — and your AI shouldn't sound like it is.",
+    workflows: [
+      {
+        title: "First-Call Intake",
+        description:
+          "Gathers family and decedent details with a calm, unhurried tone — never rushing a grieving caller through a script.",
+      },
+      {
+        title: "At-Need vs. Pre-Need Routing",
+        description:
+          "Recognizes the difference between an urgent death call and a pre-planning inquiry, and handles each appropriately.",
+      },
+      {
+        title: "Arrangement Scheduling",
+        description: "Books arrangement conferences and viewings directly into your staff's calendar.",
+      },
+      {
+        title: "Warm Transfer to On-Call Staff",
+        description:
+          "Immediately connects time-sensitive calls to a live team member instead of leaving them on hold.",
+      },
+      {
+        title: "After-Hours Coverage",
+        description:
+          "Answers every call, day or night, so no family reaches voicemail during their hardest moment.",
+      },
+      {
+        title: "Full Conversation Documentation",
+        description: "Every call is transcribed and logged so your staff has full context before calling back.",
+      },
     ],
     integrations: ["Passare", "FrontRunner", "FuneralTech", "Google Calendar", "Outlook", "Salesforce", "HubSpot"],
   },
@@ -524,6 +560,40 @@ export default function IndustryPage() {
           </div>
         </div>
       </section>
+
+      {/* Empathy-first workflows */}
+      {industry.workflows && (
+        <section className="py-16 md:py-24">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <Reveal>
+                <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight mb-4 text-balance">
+                  {industry.empathyHeading}
+                </h2>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <p className="text-muted-foreground leading-relaxed text-pretty">{industry.empathySubtext}</p>
+              </Reveal>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {industry.workflows.map((w, i) => (
+                <motion.div
+                  key={w.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  className="p-6 rounded-2xl border bg-card shadow-sm hover:shadow-md transition-shadow"
+                  data-testid={`workflow-${i}`}
+                >
+                  <h3 className="font-display text-base font-semibold tracking-tight mb-2">{w.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{w.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Pain points */}
       <section className="py-16 md:py-24 bg-muted">
