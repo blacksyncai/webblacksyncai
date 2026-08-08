@@ -195,7 +195,7 @@ const simpleLinks = [
 ];
 
 type DropdownKey = "Product" | "Industries" | "Resources";
-const dropdownKeys: DropdownKey[] = ["Product", "Industries", "Resources"];
+const dropdownKeys: DropdownKey[] = ["Industries", "Product", "Resources"];
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -495,6 +495,26 @@ export function Navbar() {
             <div className="px-4 py-4 max-h-[80vh] overflow-y-auto">
               <div className="mb-5">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
+                  Industries
+                </p>
+                <div className="space-y-0.5">
+                  {industries.map((industry) => (
+                    <a
+                      key={industry.label}
+                      href={industry.link}
+                      onClick={() => setMobileOpen(false)}
+                      data-testid={`link-mobile-${industry.label.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                    >
+                      <industry.icon className="w-3.5 h-3.5 shrink-0" />
+                      <span>{industry.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
                   Product
                 </p>
                 <div className="grid grid-cols-2 gap-4">
@@ -514,26 +534,6 @@ export function Navbar() {
                         </a>
                       ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mb-5">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
-                  Industries
-                </p>
-                <div className="space-y-0.5">
-                  {industries.map((industry) => (
-                    <a
-                      key={industry.label}
-                      href={industry.link}
-                      onClick={() => setMobileOpen(false)}
-                      data-testid={`link-mobile-${industry.label.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
-                    >
-                      <industry.icon className="w-3.5 h-3.5 shrink-0" />
-                      <span>{industry.label}</span>
-                    </a>
                   ))}
                 </div>
               </div>
