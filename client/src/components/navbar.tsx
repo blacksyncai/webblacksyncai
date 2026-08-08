@@ -91,7 +91,6 @@ const productColumns: MegaColumn[] = [
 type IndustryDetail = {
   icon: React.ElementType;
   label: string;
-  href: string;
   title: string;
   description: string;
   stat: string;
@@ -103,7 +102,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Home,
     label: "Real Estate",
-    href: "#industries",
     title: "Built for Real Estate Teams",
     description:
       "Connect Zillow, Facebook, and your CRM — Follow Up Boss, Sierra, kvCORE — and let your AI agent call every new lead within seconds. Qualify buyers and sellers, book showings, and never miss a hot lead again.",
@@ -114,7 +112,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Landmark,
     label: "Mortgage & Lending",
-    href: "#industries",
     title: "Built for Mortgage & Lending Teams",
     description:
       "Capture leads from LendingTree, Zillow Home Loans, and your own landing pages. Your AI agent pre-qualifies borrowers, collects income and credit details, and books them directly with your loan officers.",
@@ -125,7 +122,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Building2,
     label: "Property Management",
-    href: "#industries",
     title: "Built for Property Management",
     description:
       "Automate leasing inquiries, schedule property tours, and follow up with prospective tenants. Your AI agent handles high call volumes during peak season without adding headcount.",
@@ -136,7 +132,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Shield,
     label: "Insurance",
-    href: "#industries",
     title: "Built for Insurance Agencies",
     description:
       "Call internet leads within seconds, qualify coverage needs, and book policy review appointments. Your AI agent handles objections naturally and routes hot prospects to your licensed agents.",
@@ -147,7 +142,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Wrench,
     label: "Home Services",
-    href: "#industries",
     title: "Built for Home Services",
     description:
       "Never miss a service call again. Your AI agent answers inquiries 24/7, qualifies job scope, provides estimates, and books appointments directly into your dispatch calendar.",
@@ -158,7 +152,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Stethoscope,
     label: "Healthcare",
-    href: "#industries",
     title: "Built for Healthcare Practices",
     description:
       "HIPAA-ready AI agents handle patient appointment scheduling, follow-ups, and recall campaigns. Reduce no-shows with automated reminders and confirmations across 40+ languages.",
@@ -169,7 +162,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Car,
     label: "Auto & P&C",
-    href: "#industries",
     title: "Built for Auto & P&C",
     description:
       "Respond to auto and property & casualty leads instantly. Your AI agent qualifies coverage needs, gathers vehicle or property details, and books consultations with your agents.",
@@ -180,7 +172,6 @@ const industries: IndustryDetail[] = [
   {
     icon: Flower2,
     label: "Funeral Homes",
-    href: "#industries",
     title: "Your Dedicated 24/7 Funeral Home Assistant",
     description:
       "Replace expensive answering services with an AI receptionist trained specifically for your funeral home's procedures, staff, and preferences. Schedules arrangements, performs warm transfers, and documents every call.",
@@ -411,12 +402,11 @@ export function Navbar() {
                     </p>
                     <div className="space-y-0.5">
                       {industries.map((industry, idx) => (
-                        <button
+                        <a
                           key={industry.label}
+                          href={industry.link}
                           onMouseEnter={() => setActiveIndustry(idx)}
-                          onClick={() => {
-                            setActiveIndustry(idx);
-                          }}
+                          onClick={close}
                           className={`flex items-center gap-2.5 px-2 py-2 rounded-md text-sm w-full text-left transition-colors ${
                             activeIndustry === idx
                               ? "bg-accent text-accent-foreground"
@@ -426,7 +416,7 @@ export function Navbar() {
                         >
                           <industry.icon className="w-4 h-4 shrink-0" />
                           <span>{industry.label}</span>
-                        </button>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -536,7 +526,7 @@ export function Navbar() {
                   {industries.map((industry) => (
                     <a
                       key={industry.label}
-                      href={industry.href}
+                      href={industry.link}
                       onClick={() => setMobileOpen(false)}
                       data-testid={`link-mobile-${industry.label.toLowerCase().replace(/\s+/g, "-")}`}
                       className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
