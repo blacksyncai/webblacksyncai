@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import {
@@ -189,10 +189,9 @@ const resourceItems = [
   { icon: HelpCircle, label: "Help Center", href: "#" },
 ];
 
-const simpleLinks = [
-  { label: "Pricing", href: "/pricing" },
-  { label: "Why Us", href: "#why" },
-];
+const pricingLink = { label: "Pricing", href: "/pricing" };
+
+const simpleLinks = [{ label: "Why Us", href: "#why" }];
 
 type DropdownKey = "Product" | "Industries" | "Resources";
 const dropdownKeys: DropdownKey[] = ["Industries", "Product", "Resources"];
@@ -270,28 +269,38 @@ export function Navbar() {
 
           <div className="hidden lg:flex items-center gap-0.5">
             {dropdownKeys.map((label) => (
-              <div
-                key={label}
-                onMouseEnter={() => handleMenuEnter(label)}
-                onMouseLeave={handleMenuLeave}
-              >
-                <button
-                  className={`flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
-                    openMenu === label ? "text-foreground" : "text-muted-foreground"
-                  }`}
-                  data-testid={`link-nav-${label.toLowerCase()}`}
-                  onClick={() =>
-                    setOpenMenu(openMenu === label ? null : label)
-                  }
+              <Fragment key={label}>
+                <div
+                  onMouseEnter={() => handleMenuEnter(label)}
+                  onMouseLeave={handleMenuLeave}
                 >
-                  {label}
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      openMenu === label ? "rotate-180" : ""
+                  <button
+                    className={`flex items-center gap-1 px-3 py-2 text-sm rounded-md transition-colors ${
+                      openMenu === label ? "text-foreground" : "text-muted-foreground"
                     }`}
-                  />
-                </button>
-              </div>
+                    data-testid={`link-nav-${label.toLowerCase()}`}
+                    onClick={() =>
+                      setOpenMenu(openMenu === label ? null : label)
+                    }
+                  >
+                    {label}
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        openMenu === label ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
+                {label === "Industries" && (
+                  <a
+                    href={pricingLink.href}
+                    data-testid="link-nav-pricing"
+                    className="px-3 py-2 text-sm text-muted-foreground rounded-md hover-elevate"
+                  >
+                    {pricingLink.label}
+                  </a>
+                )}
+              </Fragment>
             ))}
 
             {simpleLinks.map((link) => (
@@ -512,6 +521,15 @@ export function Navbar() {
                   ))}
                 </div>
               </div>
+
+              <a
+                href={pricingLink.href}
+                onClick={() => setMobileOpen(false)}
+                data-testid="link-mobile-pricing"
+                className="block px-2 py-2 mb-5 text-sm font-semibold rounded-md hover-elevate"
+              >
+                {pricingLink.label}
+              </a>
 
               <div className="mb-5">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
