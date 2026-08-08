@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Zap, CreditCard, Puzzle } from "lucide-react";
+import { Check, Zap, CreditCard, Puzzle, ShieldCheck } from "lucide-react";
 import { SectionHeading, Reveal } from "@/components/ui/section";
+
+const creditFairness = [
+  "No answer? 0 credits.",
+  "Busy line? 0 credits.",
+  "Voicemail? 0 credits.",
+  "Quick hang-up? We don't count it as a full conversation.",
+];
 
 const plans = [
   {
@@ -239,6 +246,43 @@ export function PricingSection() {
               </Card>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-12 max-w-3xl mx-auto">
+          <Reveal>
+            <div
+              className="relative overflow-hidden rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/[0.07] via-card to-card p-6 md:p-9 shadow-md"
+              data-testid="card-credit-fairness"
+            >
+              <div className="pointer-events-none absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+              <div className="relative">
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <ShieldCheck className="w-5 h-5 text-primary" />
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-center">
+                    Only Pay for Real Conversations
+                  </h3>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                  {creditFairness.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-2.5 p-3.5 rounded-xl bg-background/70 border border-border/60"
+                      data-testid={`text-credit-fairness-${item.slice(0, 8).toLowerCase().replace(/\s/g, "-")}`}
+                    >
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-500/10 text-green-600 dark:text-green-500 shrink-0 mt-0.5">
+                        <Check className="w-3 h-3" strokeWidth={3} />
+                      </span>
+                      <span className="text-sm font-medium text-foreground/90">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm md:text-base text-muted-foreground text-center max-w-xl mx-auto text-pretty">
+                  Run thousands of outbound calls with confidence — you only pay for real conversations, not
+                  unanswered dials.
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
 
         <div className="mt-24 max-w-5xl mx-auto">
