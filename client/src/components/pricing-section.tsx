@@ -277,8 +277,8 @@ export function PricingSection() {
                   ))}
                 </div>
                 <p className="text-sm md:text-base text-muted-foreground text-center max-w-xl mx-auto text-pretty">
-                  Run thousands of outbound calls with confidence — you only pay for real conversations, not
-                  unanswered dials.
+                  Scale to thousands of outbound calls with confidence — you only pay for real conversations,
+                  not unanswered calls, voicemails, or quick hang-ups.
                 </p>
               </div>
             </div>
