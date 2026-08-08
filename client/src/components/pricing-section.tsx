@@ -23,7 +23,7 @@ const plans = [
       "1 AI voice agent",
       "AI agent builder",
       "Calendar booking",
-      "500 outbound calls/mo",
+      "Up to 500 outbound calls/mo",
       "Unlimited SMS & email",
       "Call recordings + transcripts",
       "Zapier/webhook",
@@ -82,7 +82,7 @@ const credits = [
   {
     amount: "500 Credits",
     price: "$197",
-    detail: "~500 minutes",
+    detail: "",
     highlight: false,
   },
   {
@@ -326,9 +326,11 @@ export function PricingSection() {
                     >
                       {credit.price}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      {credit.detail}
-                    </p>
+                    {credit.detail && (
+                      <p className="text-sm text-muted-foreground">
+                        {credit.detail}
+                      </p>
+                    )}
                   </CardContent>
                 </Card>
               </Reveal>
