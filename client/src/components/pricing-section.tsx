@@ -30,7 +30,7 @@ const plans = [
       "Email support",
     ],
     popular: false,
-    checkoutUrl: "https://square.link/u/JzEAvDnq",
+    checkoutUrl: "https://square.link/u/TecMxSsi",
     cta: "Get Started",
   },
   {
@@ -51,7 +51,7 @@ const plans = [
       "Priority support",
     ],
     popular: true,
-    checkoutUrl: "https://square.link/u/idJmGOmO",
+    checkoutUrl: "https://square.link/u/hrnETFKH",
     cta: "Get Started",
   },
   {
