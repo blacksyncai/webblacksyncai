@@ -7,23 +7,24 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { goToRegister } from "@/lib/register";
+import { StartTrialDialog } from "@/components/start-trial-dialog";
 
 export function FinalCtaSection() {
   const [email, setEmail] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
-  const mutation = useMutation({
+  // Safety net: record the email the moment it's entered, so an abandoned
+  // qualification step doesn't lose the lead. The dialog sends the full,
+  // qualified lead on completion (same email → CRM enriches the contact).
+  const capture = useMutation({
     mutationFn: async (emailValue: string) => {
-      await apiRequest("POST", "/api/leads", { name: emailValue.split("@")[0], email: emailValue });
-    },
-    onSuccess: (_d, emailValue) => {
-      toast({ title: "You're in!", description: "Taking you to set up your access…" });
-      goToRegister({ email: emailValue });
-    },
-    onError: () => {
-      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
+      await apiRequest("POST", "/api/leads", {
+        name: emailValue.split("@")[0],
+        email: emailValue,
+        useCase: "Get Access — email captured",
+      });
     },
   });
 
@@ -39,7 +40,10 @@ export function FinalCtaSection() {
       setEmail("");
       return;
     }
-    mutation.mutate(email);
+    capture.mutate(email);
+    // Qualify by industry before routing anywhere — ineligible industries get
+    // the Free Pilot / book-a-call path instead of self-serve access.
+    setDialogOpen(true);
   }
 
   return (
@@ -108,15 +112,21 @@ export function FinalCtaSection() {
               <Button
                 size="lg"
                 type="submit"
-                disabled={mutation.isPending}
+                disabled={capture.isPending}
                 className="w-full sm:w-auto bg-background text-foreground hover:bg-background/90"
                 data-testid="button-final-cta"
               >
-                {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                {capture.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                 Get Access
-                {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
+                {!capture.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
               </Button>
             </form>
+
+            <StartTrialDialog
+              open={dialogOpen}
+              onOpenChange={setDialogOpen}
+              initialEmail={email}
+            />
 
             <p className="mt-4 text-xs text-background/60" data-testid="text-final-cta-subtext">
               Phone number from $3.50/mo · Cancel anytime
