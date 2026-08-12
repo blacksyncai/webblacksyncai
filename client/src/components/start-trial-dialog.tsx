@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import {
   Dialog,
@@ -35,11 +35,27 @@ const PERKS = [
 export function StartTrialDialog({
   children,
   onOpen,
+  initialEmail,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
 }: {
-  children: React.ReactNode;
+  /** Trigger element. Omit when driving the dialog with `open`/`onOpenChange`. */
+  children?: React.ReactNode;
   onOpen?: () => void;
+  /** Seeds the email field each time the dialog opens (e.g. from the final CTA card). */
+  initialEmail?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : uncontrolledOpen;
+
+  function setOpen(v: boolean) {
+    if (!isControlled) setUncontrolledOpen(v);
+    controlledOnOpenChange?.(v);
+  }
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [industry, setIndustry] = useState("");
@@ -47,6 +63,10 @@ export function StartTrialDialog({
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
   const blocked = industry !== "" && !isTrialEligible(industry);
+
+  useEffect(() => {
+    if (open && initialEmail) setEmail(initialEmail);
+  }, [open, initialEmail]);
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -90,7 +110,7 @@ export function StartTrialDialog({
 
   return (
     <Dialog open={open} onOpenChange={(v) => { if (!mutation.isPending) { setOpen(v); if (v) onOpen?.(); } }}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      {children && <DialogTrigger asChild>{children}</DialogTrigger>}
       <DialogContent className="sm:max-w-md p-0 overflow-hidden gap-0" data-testid="dialog-start-trial">
         {/* Accent header */}
         <div className="relative px-6 pt-6 pb-5 bg-gradient-to-br from-primary/12 via-orange-500/8 to-transparent">
