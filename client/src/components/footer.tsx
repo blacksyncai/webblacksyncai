@@ -20,6 +20,7 @@ const footerLinks = {
     { label: "Insurance AI", href: "/insurance-ai" },
     { label: "Home Services AI", href: "/industry/home-services" },
     { label: "Funeral Home AI", href: "/industry/funeral-homes" },
+    { label: "Law Firm Intake AI", href: "/industry/law-firms" },
   ],
   Company: [
     { label: "About", href: "#" },

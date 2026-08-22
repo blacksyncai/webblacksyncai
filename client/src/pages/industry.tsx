@@ -20,6 +20,8 @@ import {
   Clock,
   TrendingUp,
   Flower2,
+  Scale,
+  ShieldCheck,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -57,6 +59,8 @@ type Industry = {
   empathyHeading?: string;
   empathySubtext?: string;
   workflows?: { title: string; description: string }[];
+  /** Prominent regulatory/scope callout (e.g. "intake only — never legal advice"). */
+  complianceNote?: { heading: string; body: string; points: string[] };
 };
 
 const INDUSTRIES: Record<string, Industry> = {
@@ -322,6 +326,88 @@ const INDUSTRIES: Record<string, Industry> = {
       },
     ],
     integrations: ["Passare", "FrontRunner", "FuneralTech", "Google Calendar", "Outlook", "Salesforce", "HubSpot"],
+  },
+  "law-firms": {
+    slug: "law-firms",
+    name: "Law Firms",
+    icon: Scale,
+    headline: "Every potential client intake — captured, qualified, and logged.",
+    subhead:
+      "An AI intake assistant trained on your firm's practice areas and screening criteria. Answers every call, runs your intake questionnaire, flags conflicts and statute-of-limitations risk for your team, and books consultations. It gathers information — it never gives legal advice.",
+    metaTitle: "AI Client Intake & Missed Call Answering for Law Firms",
+    ctaLabel: "Hear My Intake Assistant",
+    heroSubtext: "Intake only — never legal advice · Answers 100% of calls · Cancel anytime",
+    painPointsHeading: "The case you lose is the call you didn't answer.",
+    painPointsIntro:
+      "Legal intake is a race. Potential clients call three firms and retain whoever picks up first. Your AI assistant is trained exclusively on your firm's practice areas and screening criteria — and it stays strictly inside intake.",
+    painPoints: [
+      "Potential new clients call the next firm on the list when they reach voicemail — most never call back",
+      "Calls come in after hours, on weekends, and mid-hearing, when no one is at the desk to take them",
+      "Paralegals and attorneys lose billable hours screening callers who were never a fit for your practice areas",
+      "Intake details get scribbled on notepads and lost — no conflict check, no consistent record, no follow-up",
+      "Signed-up leads go cold because nobody followed up between the first call and the consultation",
+    ],
+    outcomes: [
+      { label: "Call answer rate", value: "100%", icon: Phone },
+      { label: "Coverage", value: "24/7", icon: Clock },
+      { label: "Calls sent to voicemail", value: "0", icon: TrendingUp },
+    ],
+    empathyHeading: "Built for Intake — Never for Advice",
+    empathySubtext:
+      "Your assistant collects facts, screens against your criteria, and routes to your team. Legal judgment stays with your attorneys, where it belongs.",
+    workflows: [
+      {
+        title: "Structured Client Intake",
+        description:
+          "Runs your firm's intake questionnaire the same way every time — incident details, dates, parties, injuries, and contact information, captured in a consistent record.",
+      },
+      {
+        title: "Practice-Area Screening",
+        description:
+          "Qualifies callers against the case types you actually take, so your team stops spending billable hours on matters you'd decline anyway.",
+      },
+      {
+        title: "Missed & After-Hours Call Capture",
+        description:
+          "Answers nights, weekends, holidays, and every call that comes in while you're in court — so the potential client never reaches the next firm on their list.",
+      },
+      {
+        title: "Conflict-Check Information Gathering",
+        description:
+          "Collects opposing party and related-party names up front and passes them to your team to run against your conflicts system before anyone commits.",
+      },
+      {
+        title: "Automated Follow-Up",
+        description:
+          "Calls and texts back leads who didn't book, confirms upcoming consultations, and chases missing intake details — so signed leads don't go cold.",
+      },
+      {
+        title: "Escalation, Not Advice",
+        description:
+          "Time-sensitive matters and existing-client calls are warm-transferred to your team. The assistant never answers legal questions or estimates case value.",
+      },
+    ],
+    complianceNote: {
+      heading: "Your assistant does not practice law.",
+      body: "BlackSync is an intake and scheduling tool. It is explicitly instructed never to give legal advice, and every conversation is transcribed and logged so your team has a full record of exactly what was said.",
+      points: [
+        "Never gives legal advice, opinions, or case evaluations",
+        "Never quotes fees, settlement values, or likelihood of success",
+        "Never forms an attorney-client relationship",
+        "Escalates legal questions to your attorneys",
+        "Every call transcribed and logged for your records",
+        "You control the intake script and screening criteria",
+      ],
+    },
+    comparisonPoints: [
+      "Answers every call, 24/7",
+      "Runs your full intake questionnaire",
+      "Screens by practice area",
+      "Books consultations into your calendar",
+      "Follows up by call and text",
+      "Every call transcribed into your case management system",
+    ],
+    integrations: ["Clio", "MyCase", "Filevine", "Smokeball", "Lawmatics", "Google Calendar", "Outlook", "HubSpot"],
   },
 };
 
@@ -591,6 +677,41 @@ export default function IndustryPage() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Scope / compliance callout */}
+      {industry.complianceNote && (
+        <section className="pb-16 md:pb-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <div
+                className="rounded-2xl border border-primary/25 bg-primary/[0.04] p-6 md:p-9"
+                data-testid="card-compliance-note"
+              >
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <ShieldCheck className="w-5 h-5 text-primary shrink-0" />
+                  <h2 className="font-display text-xl md:text-2xl font-semibold tracking-tight text-center text-balance">
+                    {industry.complianceNote.heading}
+                  </h2>
+                </div>
+                <p className="text-sm md:text-base text-muted-foreground text-center max-w-xl mx-auto mb-7 leading-relaxed text-pretty">
+                  {industry.complianceNote.body}
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {industry.complianceNote.points.map((p) => (
+                    <div
+                      key={p}
+                      className="flex items-start gap-2.5 p-3.5 rounded-xl bg-background/70 border border-border/60"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm font-medium text-foreground/90">{p}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
       )}
