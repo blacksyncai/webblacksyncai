@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "vite build",
+  "buildCommand": "vite build && tsx scripts/prerender-meta.ts",
   "outputDirectory": "dist/public",
   "framework": null,
   "rewrites": [

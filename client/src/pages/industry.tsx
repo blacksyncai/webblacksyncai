@@ -416,11 +416,7 @@ export default function IndustryPage() {
   const slug = params?.slug ?? "real-estate";
   const industry = INDUSTRIES[slug] ?? INDUSTRIES["real-estate"];
 
-  usePageMeta({
-    title: industry.metaTitle ?? `${industry.name} AI Sales Agent`,
-    description: industry.subhead,
-    path: `/industry/${industry.slug}`,
-  });
+  usePageMeta({ path: `/industry/${industry.slug}` });
 
   const [email, setEmail] = useState("");
   const [qualifyOpen, setQualifyOpen] = useState(false);

@@ -40,12 +40,7 @@ const faqs = [
 ];
 
 export default function PricingPage() {
-  usePageMeta({
-    title: "Pricing",
-    description:
-      "Simple, transparent pricing for BlackSync's AI outbound sales agent. Plans for solo agents up to full brokerages and agencies.",
-    path: "/pricing",
-  });
+  usePageMeta({ path: "/pricing" });
 
   useJsonLd("pricing-faq-schema", {
     "@context": "https://schema.org",

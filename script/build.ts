@@ -38,6 +38,11 @@ async function buildAll() {
   console.log("building client...");
   await viteBuild();
 
+  // Bake per-route SEO metadata into static HTML. Vercel runs this via its own
+  // buildCommand in vercel.json; this keeps `npm run build` equivalent locally.
+  console.log("prerendering route metadata...");
+  await import("../scripts/prerender-meta");
+
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
   const allDeps = [

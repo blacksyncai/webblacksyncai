@@ -4,12 +4,7 @@ import { EnterpriseSection } from "@/components/enterprise-section";
 import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function EnterprisePage() {
-  usePageMeta({
-    title: "Enterprise",
-    description:
-      "BlackSync for brokerages, agencies, and teams that need unlimited capacity, white-glove onboarding, and enterprise-grade infrastructure.",
-    path: "/enterprise",
-  });
+  usePageMeta({ path: "/enterprise" });
 
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-enterprise">

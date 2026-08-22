@@ -6,14 +6,7 @@ import { usePageMeta } from "@/hooks/use-page-meta";
 import { APP_LOGIN_URL } from "@/lib/register";
 
 export default function LoginPage() {
-  usePageMeta({
-    title: "Log In",
-    description: "Log in to your BlackSync account to manage your AI sales agent.",
-    path: "/login",
-    // Redirects straight to the app — no content to index, and submitting it
-    // to Google produces "Redirect error" reports in Search Console.
-    noindex: true,
-  });
+  usePageMeta({ path: "/login" });
 
   useEffect(() => {
     window.location.href = APP_LOGIN_URL;

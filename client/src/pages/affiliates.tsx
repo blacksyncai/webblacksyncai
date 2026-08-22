@@ -48,12 +48,7 @@ const FAQS = [
 ];
 
 export default function AffiliatesPage() {
-  usePageMeta({
-    title: "Affiliates",
-    description:
-      "Refer companies to BlackSync and earn a one-time referral bonus plus recurring commission after your 4th referral.",
-    path: "/affiliates",
-  });
+  usePageMeta({ path: "/affiliates" });
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

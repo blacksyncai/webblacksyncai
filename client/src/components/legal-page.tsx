@@ -15,7 +15,9 @@ export function LegalPage({
   lastUpdated: string;
   children: React.ReactNode;
 }) {
-  usePageMeta({ title, description, path });
+  // `title` is the visible <h1>; SEO meta comes from the shared ROUTE_META
+  // table so it stays in sync with the prerendered static HTML.
+  usePageMeta({ path });
 
   return (
     <div

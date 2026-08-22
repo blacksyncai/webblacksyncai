@@ -249,12 +249,7 @@ const ROLES: Role[] = [
 ];
 
 export default function CareersPage() {
-  usePageMeta({
-    title: "Careers",
-    description:
-      "Join BlackSync. We're hiring for Sales (SDR/Account Executive), Software Engineering, and Marketing/Social Media roles.",
-    path: "/careers",
-  });
+  usePageMeta({ path: "/careers" });
 
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-careers">
