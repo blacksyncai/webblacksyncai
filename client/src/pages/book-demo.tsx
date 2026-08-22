@@ -52,12 +52,7 @@ const EXPECTATIONS = [
 ];
 
 export default function BookDemoPage() {
-  usePageMeta({
-    title: "Book a Demo",
-    description:
-      "Book a free 15-minute demo call and see BlackSync's AI agent handle a real call scenario for your industry.",
-    path: "/book-demo",
-  });
+  usePageMeta({ path: "/book-demo" });
 
   const [phone, setPhone] = useState("");
   const [industry, setIndustry] = useState("");

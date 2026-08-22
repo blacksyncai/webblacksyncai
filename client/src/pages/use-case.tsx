@@ -542,11 +542,7 @@ export default function UseCasePage({ slug }: { slug: string }) {
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
-  usePageMeta({
-    title: useCase.metaTitle,
-    description: useCase.metaDescription,
-    path: `/${useCase.slug}`,
-  });
+  usePageMeta({ path: `/${useCase.slug}` });
 
   useJsonLd("faq-schema", {
     "@context": "https://schema.org",

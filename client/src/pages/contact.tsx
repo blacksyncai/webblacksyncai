@@ -16,11 +16,7 @@ import { BookCallDialog } from "@/components/book-call-dialog";
 import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function ContactPage() {
-  usePageMeta({
-    title: "Contact",
-    description: "Get in touch with the BlackSync team — questions, support, or just want to talk before booking a call.",
-    path: "/contact",
-  });
+  usePageMeta({ path: "/contact" });
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
