@@ -38,6 +38,7 @@ import {
   Clock,
   Search,
   Flower2,
+  Scale,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { StartTrialDialog } from "@/components/start-trial-dialog";
@@ -178,6 +179,16 @@ const industries: IndustryDetail[] = [
     stat: "11 second average response time",
     link: "/industry/funeral-homes",
     linkLabel: "See Funeral Homes use case",
+  },
+  {
+    icon: Scale,
+    label: "Law Firms",
+    title: "Built for Law Firm Intake",
+    description:
+      "An AI intake assistant trained on your practice areas and screening criteria. Answers every call, runs your intake questionnaire, books consultations, and follows up — while never giving legal advice.",
+    stat: "Intake only — never legal advice",
+    link: "/industry/law-firms",
+    linkLabel: "See Law Firms use case",
   },
 ];
 
