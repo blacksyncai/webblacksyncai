@@ -8,6 +8,8 @@ export default function SignupPage() {
     title: "Sign Up",
     description: "Create your BlackSync account and get your AI sales agent calling leads in minutes.",
     path: "/signup",
+    // Account-flow page, not marketing content — keep it out of the index.
+    noindex: true,
   });
 
   return (
