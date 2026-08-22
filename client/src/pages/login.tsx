@@ -10,6 +10,9 @@ export default function LoginPage() {
     title: "Log In",
     description: "Log in to your BlackSync account to manage your AI sales agent.",
     path: "/login",
+    // Redirects straight to the app — no content to index, and submitting it
+    // to Google produces "Redirect error" reports in Search Console.
+    noindex: true,
   });
 
   useEffect(() => {
