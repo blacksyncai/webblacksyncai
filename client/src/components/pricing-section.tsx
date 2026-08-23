@@ -30,7 +30,7 @@ const plans = [
       "Email support",
     ],
     popular: false,
-    checkoutUrl: "https://square.link/u/TecMxSsi",
+    checkoutUrl: "https://subscriptions.helcim.com/subscribe/fcep4c7osijwujjlbky8dm0y3afep",
     cta: "Get Started",
   },
   {
@@ -51,7 +51,7 @@ const plans = [
       "Priority support",
     ],
     popular: true,
-    checkoutUrl: "https://square.link/u/hrnETFKH",
+    checkoutUrl: "https://subscriptions.helcim.com/subscribe/fnlrxhne7f8mg9x1xi4kau80c7hv3",
     cta: "Get Started",
   },
   {
