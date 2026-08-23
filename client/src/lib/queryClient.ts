@@ -70,7 +70,13 @@ export async function apiRequest(
       Object.entries(lead).forEach(([k, v]) => {
         if (v !== undefined && v !== null && v !== "") fd.append(k, String(v));
       });
-      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
+      // Time-boxed: the visitor's next step (e.g. the booking scheduler) waits on
+      // this promise, so a slow or unreachable Web3Forms must not hang the UI.
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: fd,
+        signal: AbortSignal.timeout(8000),
+      });
       const body = await res.json().catch(() => null);
       if (!res.ok || body?.success === false) {
         console.error(

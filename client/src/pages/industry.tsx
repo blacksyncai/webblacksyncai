@@ -28,7 +28,8 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { goToRegister, BOOK_CALL_URL } from "@/lib/register";
+import { goToRegister } from "@/lib/register";
+import { CalendlyEmbed } from "@/components/calendly-embed";
 import {
   Dialog,
   DialogContent,
@@ -420,6 +421,8 @@ export default function IndustryPage() {
 
   const [email, setEmail] = useState("");
   const [qualifyOpen, setQualifyOpen] = useState(false);
+  // Non-null once they've picked, which swaps the dialog to the inline scheduler.
+  const [qualifyChoice, setQualifyChoice] = useState<"solo" | "team" | null>(null);
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
@@ -440,9 +443,9 @@ export default function IndustryPage() {
   }, [slug]);
 
   // Both choices book a free 15-min discovery call. Never Stripe.
-  function handleQualify(_choice: "solo" | "team") {
-    setQualifyOpen(false);
-    window.open(BOOK_CALL_URL, "_blank", "noopener");
+  // Shows the scheduler inline rather than sending them off-site.
+  function handleQualify(choice: "solo" | "team") {
+    setQualifyChoice(choice);
   }
 
   const mutation = useMutation({
@@ -490,8 +493,33 @@ export default function IndustryPage() {
     <div className="min-h-screen bg-background flex flex-col" data-testid={`page-industry-${slug}`}>
       <Navbar />
 
-      <Dialog open={qualifyOpen} onOpenChange={setQualifyOpen}>
-        <DialogContent className="sm:max-w-md" data-testid="dialog-qualify">
+      <Dialog
+        open={qualifyOpen}
+        onOpenChange={(v) => {
+          setQualifyOpen(v);
+          if (!v) setQualifyChoice(null);
+        }}
+      >
+        <DialogContent
+          className={qualifyChoice ? "sm:max-w-3xl p-0 overflow-hidden" : "sm:max-w-md"}
+          data-testid="dialog-qualify"
+        >
+          {qualifyChoice ? (
+            <>
+              <DialogHeader className="px-6 pt-6 pb-3">
+                <DialogTitle className="font-display text-2xl font-semibold tracking-tight">
+                  Pick a time that works
+                </DialogTitle>
+                <DialogDescription className="text-base">
+                  Free 15-minute call + live demo, tailored to {industry.name.toLowerCase()}.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="px-2 pb-2 sm:px-4 sm:pb-4">
+                <CalendlyEmbed height={640} />
+              </div>
+            </>
+          ) : (
+            <>
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-semibold tracking-tight">Get a free discovery call + demo</DialogTitle>
             <DialogDescription className="text-base">
@@ -541,6 +569,8 @@ export default function IndustryPage() {
           >
             Skip for now
           </button>
+            </>
+          )}
         </DialogContent>
       </Dialog>
 

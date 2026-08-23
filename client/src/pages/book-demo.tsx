@@ -18,7 +18,7 @@ import { ArrowRight, Loader2, CalendarCheck, PhoneCall, ListChecks } from "lucid
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { BOOK_CALL_URL } from "@/lib/register";
+import { CalendlyEmbed } from "@/components/calendly-embed";
 import { usePageMeta } from "@/hooks/use-page-meta";
 
 const INDUSTRY_OPTIONS = [
@@ -54,14 +54,16 @@ const EXPECTATIONS = [
 export default function BookDemoPage() {
   usePageMeta({ path: "/book-demo" });
 
+  const [booking, setBooking] = useState(false);
   const [phone, setPhone] = useState("");
   const [industry, setIndustry] = useState("");
   const [message, setMessage] = useState("");
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
+  // Swap the form card for the scheduler in place — no new tab, no leaving the page.
   function goToBooking() {
-    window.open(BOOK_CALL_URL, "_blank", "noopener");
+    setBooking(true);
   }
 
   const mutation = useMutation({
@@ -74,13 +76,7 @@ export default function BookDemoPage() {
         useCase: "Book a demo",
       });
     },
-    onSuccess: goToBooking,
-    onError: () =>
-      toast({
-        title: "Something went wrong",
-        description: "Please try again.",
-        variant: "destructive",
-      }),
+    // Nothing gates on the result: the visitor is already at the scheduler.
   });
 
   function submit(e: React.FormEvent) {
@@ -93,11 +89,12 @@ export default function BookDemoPage() {
       });
       return;
     }
-    if (isBot()) {
-      goToBooking();
-      return;
+    if (!isBot()) {
+      // Fire the lead in the background; don't make them wait on a third-party
+      // form API before they can pick a time.
+      mutation.mutate();
     }
-    mutation.mutate();
+    goToBooking();
   }
 
   return (
@@ -137,15 +134,20 @@ export default function BookDemoPage() {
       </section>
 
       <section className="py-12 md:py-20">
-        <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`${booking ? "max-w-3xl" : "max-w-md"} mx-auto px-4 sm:px-6 lg:px-8 transition-[max-width] duration-300`}>
           <Reveal>
             <div className="rounded-2xl border bg-card shadow-sm p-6 md:p-8">
               <h2 className="font-display text-2xl font-semibold tracking-tight mb-1 text-center">
-                Book your demo
+                {booking ? "Pick a time that works" : "Book your demo"}
               </h2>
               <p className="text-sm text-muted-foreground text-center mb-6">
-                Just a couple details so we can tailor the call to you.
+                {booking
+                  ? "Got your details — choose a slot below and you're all set."
+                  : "Just a couple details so we can tailor the call to you."}
               </p>
+              {booking ? (
+                <CalendlyEmbed height={660} prefill={{ customAnswers: { a1: phone.trim() } }} />
+              ) : (
               <form onSubmit={submit} className="space-y-4" data-testid="form-book-demo">
                 <HoneypotInput inputRef={hpRef} />
 
@@ -205,6 +207,7 @@ export default function BookDemoPage() {
                   {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
                 </Button>
               </form>
+              )}
             </div>
           </Reveal>
         </div>
