@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Zap, CreditCard, Puzzle, ShieldCheck } from "lucide-react";
 import { SectionHeading, Reveal } from "@/components/ui/section";
+import { useState } from "react";
+import { CheckoutDialog, type CheckoutPlan } from "@/components/checkout-dialog";
 
 const creditFairness = [
   "No answer? 0 credits.",
@@ -14,6 +16,7 @@ const creditFairness = [
 const plans = [
   {
     name: "Solo Agent",
+    planKey: "solo" as const,
     price: "$98",
     originalPrice: "$125",
     discountNote: "Save $27/mo · Founding rate",
@@ -35,6 +38,7 @@ const plans = [
   },
   {
     name: "Team",
+    planKey: "team" as const,
     price: "$296",
     originalPrice: "$399",
     discountNote: "Save $103/mo · Founding rate",
@@ -124,8 +128,20 @@ const addons = [
 ];
 
 export function PricingSection() {
+  const [checkoutPlan, setCheckoutPlan] = useState<CheckoutPlan | null>(null);
+
   function handlePlanClick(plan: (typeof plans)[0]) {
-    if (plan.checkoutUrl) {
+    if (plan.checkoutUrl && "planKey" in plan && plan.planKey) {
+      // Opens on-site checkout; falls back to the hosted Helcim page if the
+      // custom flow isn't configured or reachable.
+      setCheckoutPlan({
+        key: plan.planKey,
+        name: plan.name,
+        price: plan.price,
+        period: plan.period,
+        hostedUrl: plan.checkoutUrl,
+      });
+    } else if (plan.checkoutUrl) {
       window.location.href = plan.checkoutUrl;
     } else {
       document
@@ -386,6 +402,14 @@ export function PricingSection() {
           * Prices are in USD
         </p>
       </div>
+
+      <CheckoutDialog
+        plan={checkoutPlan}
+        open={checkoutPlan !== null}
+        onOpenChange={(v) => {
+          if (!v) setCheckoutPlan(null);
+        }}
+      />
     </section>
   );
 }
