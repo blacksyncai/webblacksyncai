@@ -23,7 +23,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { BOOK_CALL_URL } from "@/lib/register";
+import { CalendlyEmbed } from "@/components/calendly-embed";
 
 const INDUSTRY_OPTIONS = [
   "Real Estate",
@@ -44,15 +44,16 @@ export function BookCallDialog({
   onOpen?: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [booking, setBooking] = useState(false);
   const [phone, setPhone] = useState("");
   const [industry, setIndustry] = useState("");
   const [message, setMessage] = useState("");
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
+  // Swap the dialog to the scheduler instead of sending them off-site.
   function goToBooking() {
-    setOpen(false);
-    window.open(BOOK_CALL_URL, "_blank", "noopener");
+    setBooking(true);
   }
 
   const mutation = useMutation({
@@ -65,13 +66,7 @@ export function BookCallDialog({
         useCase: "Book a call",
       });
     },
-    onSuccess: goToBooking,
-    onError: () =>
-      toast({
-        title: "Something went wrong",
-        description: "Please try again.",
-        variant: "destructive",
-      }),
+    // Nothing gates on the result: the visitor is already at the scheduler.
   });
 
   function submit(e: React.FormEvent) {
@@ -84,11 +79,12 @@ export function BookCallDialog({
       });
       return;
     }
-    if (isBot()) {
-      goToBooking();
-      return;
+    if (!isBot()) {
+      // Fire the lead in the background; don't make them wait on a third-party
+      // form API before they can pick a time.
+      mutation.mutate();
     }
-    mutation.mutate();
+    goToBooking();
   }
 
   return (
@@ -98,10 +94,36 @@ export function BookCallDialog({
         if (mutation.isPending) return;
         setOpen(v);
         if (v) onOpen?.();
+        // Reset back to the form once the dialog closes.
+        if (!v) setBooking(false);
       }}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md" data-testid="dialog-book-call">
+      <DialogContent
+        className={booking ? "sm:max-w-3xl p-0 overflow-hidden" : "sm:max-w-md"}
+        data-testid="dialog-book-call"
+      >
+        {booking ? (
+          <>
+            <DialogHeader className="px-6 pt-6 pb-3">
+              <DialogTitle className="font-display text-2xl font-semibold tracking-tight">
+                Pick a time that works
+              </DialogTitle>
+              <DialogDescription>
+                Got your details — choose a slot below and you're all set.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="px-2 pb-2 sm:px-4 sm:pb-4">
+              <CalendlyEmbed
+                height={640}
+                prefill={{
+                  customAnswers: { a1: phone.trim() },
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <>
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-semibold tracking-tight">
             Book a free 15-min call
@@ -170,6 +192,8 @@ export function BookCallDialog({
             {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
           </Button>
         </form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
