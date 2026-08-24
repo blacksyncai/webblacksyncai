@@ -179,8 +179,8 @@ const INDUSTRIES: Record<string, Industry> = {
     testimonial: {
       quote:
         "We doubled bookings without adding a single dispatcher. BlackSync just works — nights, weekends, holidays.",
-      name: "Marcus K.",
-      role: "Operations Lead, Atlanta GA",
+      name: "Danny R.",
+      role: "Operations Lead, Charlotte NC",
     },
   },
   healthcare: {
@@ -205,8 +205,8 @@ const INDUSTRIES: Record<string, Industry> = {
     testimonial: {
       quote:
         "Our front desk got their day back. BlackSync handles recalls, confirmations, and new patient intake.",
-      name: "Sarah T.",
-      role: "Practice Manager, Austin TX",
+      name: "Alicia N.",
+      role: "Practice Manager, Columbus OH",
     },
   },
   "auto-pc": {
@@ -231,8 +231,8 @@ const INDUSTRIES: Record<string, Industry> = {
     testimonial: {
       quote:
         "We bind more policies per producer now because BlackSync filters every lead before it hits their desk.",
-      name: "James R.",
-      role: "Agency Principal, Phoenix AZ",
+      name: "Rob M.",
+      role: "Agency Principal, Boise ID",
     },
   },
   "property-management": {
@@ -257,8 +257,8 @@ const INDUSTRIES: Record<string, Industry> = {
     testimonial: {
       quote:
         "Maintenance triage alone paid for BlackSync three times over. Vacancies fill faster too.",
-      name: "Marcus K.",
-      role: "Portfolio Manager, Atlanta GA",
+      name: "Tanya W.",
+      role: "Portfolio Manager, Kansas City MO",
     },
   },
   "funeral-homes": {
