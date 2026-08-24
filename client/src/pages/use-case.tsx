@@ -147,8 +147,8 @@ export const USE_CASES: Record<string, UseCase> = {
     testimonial: {
       quote:
         "We replaced two ISAs with BlackSync. It works FSBOs and Expireds all morning, hits speed-to-lead the second a Zillow inquiry comes in, and books showings straight onto our calendars. 8 appointments our first week.",
-      name: "Marcus K.",
-      role: "Broker/Owner, Atlanta GA",
+      name: "Gina P.",
+      role: "Broker/Owner, Sacramento CA",
     },
     faqs: [
       {
@@ -208,8 +208,8 @@ export const USE_CASES: Record<string, UseCase> = {
     testimonial: {
       quote:
         "We replaced two ISAs with BlackSync. It works FSBOs and Expireds all morning, hits speed-to-lead the second a Zillow inquiry comes in, and books showings straight onto our calendars. 8 appointments our first week.",
-      name: "Marcus K.",
-      role: "Broker/Owner, Atlanta GA",
+      name: "Kevin D.",
+      role: "Broker/Owner, Nashville TN",
     },
     faqs: [
       {
