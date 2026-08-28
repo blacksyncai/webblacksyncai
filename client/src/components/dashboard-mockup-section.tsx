@@ -167,9 +167,9 @@ export function DashboardMockupSection() {
             </span>
           </div>
 
-          <div className="flex h-[440px]">
+          <div className="flex h-[360px] sm:h-[440px]">
             {/* Sidebar */}
-            <aside className="w-[180px] shrink-0 border-r border-white/5 bg-[#0a0a0e] flex flex-col">
+            <aside className="hidden sm:flex w-[150px] md:w-[180px] shrink-0 border-r border-white/5 bg-[#0a0a0e] flex-col">
               <div className="px-4 py-4 flex items-center gap-2 border-b border-white/5">
                 <div className="w-6 h-6 rounded-md bg-gradient-to-br from-primary via-orange-500 to-amber-500 flex items-center justify-center">
                   <span className="text-[10px] font-bold text-white">B</span>
@@ -213,8 +213,8 @@ export function DashboardMockupSection() {
             {/* Main */}
             <div className="flex-1 flex flex-col min-w-0">
               {/* Topbar */}
-              <header className="flex items-center justify-between px-5 py-3 border-b border-white/5">
-                <div className="flex items-center gap-2 flex-1 max-w-xs">
+              <header className="flex items-center justify-end sm:justify-between px-3 sm:px-5 py-3 border-b border-white/5">
+                <div className="hidden sm:flex items-center gap-2 flex-1 max-w-xs">
                   <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-white/5 border border-white/5 flex-1">
                     <Search className="w-3 h-3 text-zinc-500" />
                     <span className="text-[10px] text-zinc-500">Search leads…</span>
@@ -232,7 +232,7 @@ export function DashboardMockupSection() {
               </header>
 
               {/* Stat strip */}
-              <div className="grid grid-cols-4 gap-2 px-5 py-3 border-b border-white/5">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 px-3 sm:px-5 py-3 border-b border-white/5">
                 {[
                   { icon: PhoneOutgoing, label: "Calls Today", value: "1,247", change: "+18%" },
                   { icon: CheckCircle2, label: "Qualified", value: "286", change: "+12%" },
@@ -254,18 +254,18 @@ export function DashboardMockupSection() {
 
               {/* Table */}
               <div className="flex-1 overflow-hidden">
-                <div className="grid grid-cols-[1.4fr_1.3fr_0.9fr_1fr_1.1fr_0.4fr] gap-2 px-5 py-2 text-[9px] uppercase tracking-wider text-zinc-500 font-semibold border-b border-white/5">
+                <div className="grid grid-cols-[1.6fr_0.9fr_0.4fr] sm:grid-cols-[1.4fr_1.3fr_0.9fr_0.4fr] lg:grid-cols-[1.4fr_1.3fr_0.9fr_1fr_1.1fr_0.4fr] gap-2 px-3 sm:px-5 py-2 text-[9px] uppercase tracking-wider text-zinc-500 font-semibold border-b border-white/5">
                   <span>Lead</span>
-                  <span>Phone</span>
+                  <span className="hidden sm:block">Phone</span>
                   <span>Status</span>
-                  <span>Industry</span>
-                  <span>Agent</span>
+                  <span className="hidden lg:block">Industry</span>
+                  <span className="hidden lg:block">Agent</span>
                   <span></span>
                 </div>
                 {leads.map((lead, i) => (
                   <div
                     key={lead.name}
-                    className={`grid grid-cols-[1.4fr_1.3fr_0.9fr_1fr_1.1fr_0.4fr] gap-2 px-5 py-2 items-center text-[10px] border-b border-white/[0.04] ${
+                    className={`grid grid-cols-[1.6fr_0.9fr_0.4fr] sm:grid-cols-[1.4fr_1.3fr_0.9fr_0.4fr] lg:grid-cols-[1.4fr_1.3fr_0.9fr_1fr_1.1fr_0.4fr] gap-2 px-3 sm:px-5 py-2 items-center text-[10px] border-b border-white/[0.04] ${
                       i % 2 === 1 ? "bg-white/[0.015]" : ""
                     }`}
                   >
@@ -275,14 +275,14 @@ export function DashboardMockupSection() {
                       </div>
                       <span className="font-medium text-zinc-100 truncate">{lead.name}</span>
                     </div>
-                    <span className="text-zinc-400 truncate">{lead.phone}</span>
+                    <span className="hidden sm:block text-zinc-400 truncate">{lead.phone}</span>
                     <span>
                       <span className={`inline-flex items-center px-1.5 py-0.5 rounded-md border text-[9px] font-semibold ${lead.statusColor}`}>
                         {lead.status}
                       </span>
                     </span>
-                    <span className="text-zinc-400 truncate">{lead.industry}</span>
-                    <span className="text-zinc-400 truncate">{lead.agent}</span>
+                    <span className="hidden lg:block text-zinc-400 truncate">{lead.industry}</span>
+                    <span className="hidden lg:block text-zinc-400 truncate">{lead.agent}</span>
                     <MoreHorizontal className="w-3 h-3 text-zinc-600 justify-self-end" />
                   </div>
                 ))}
