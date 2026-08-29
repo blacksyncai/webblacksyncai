@@ -1,4 +1,4 @@
-import { Home, Shield, Landmark, Building2, HeartPulse, Car } from "lucide-react";
+import { Home, Shield, Landmark, Building2, Car, Wrench, Stethoscope, Flower2, Scale } from "lucide-react";
 import { SectionHeading, Reveal } from "@/components/ui/section";
 
 const industries = [
@@ -29,9 +29,12 @@ const industries = [
 ];
 
 const moreIndustries = [
-  { icon: Building2, name: "Commercial RE" },
-  { icon: HeartPulse, name: "Health Insurance" },
-  { icon: Car, name: "Auto & P&C" },
+  { icon: Wrench, name: "Home Services", href: "/industry/home-services" },
+  { icon: Flower2, name: "Funeral Homes", href: "/industry/funeral-homes" },
+  { icon: Scale, name: "Law Firms", href: "/industry/law-firms" },
+  { icon: Stethoscope, name: "Healthcare", href: "/industry/healthcare" },
+  { icon: Building2, name: "Property Management", href: "/industry/property-management" },
+  { icon: Car, name: "Auto & P&C", href: "/industry/auto-pc" },
 ];
 
 export function ProductsSection() {
@@ -82,14 +85,15 @@ export function ProductsSection() {
               Also:
             </span>
             {moreIndustries.map((item) => (
-              <div
+              <a
                 key={item.name}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-full border border-card-border bg-card text-sm text-foreground/80 shadow-sm hover:shadow-md transition-shadow"
+                href={item.href}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-full border border-card-border bg-card text-sm text-foreground/80 shadow-sm hover:shadow-md hover:border-primary/40 hover:text-foreground transition-all"
                 data-testid={`badge-industry-${item.name.toLowerCase().replace(/\s/g, "-")}`}
               >
                 <item.icon className="w-4 h-4 text-primary" />
                 {item.name}
-              </div>
+              </a>
             ))}
           </div>
         </Reveal>
