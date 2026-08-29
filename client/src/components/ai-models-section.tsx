@@ -6,21 +6,21 @@ import { Link } from "wouter";
 import { Eyebrow, Reveal } from "@/components/ui/section";
 
 const models = [
-  { name: "GPT-5", provider: "OpenAI", short: "GPT-5", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5.1", provider: "OpenAI", short: "GPT-5.1", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5.2", provider: "OpenAI", short: "GPT-5.2", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5 Mini", provider: "OpenAI", short: "5-Mini", color: "bg-emerald-500", premium: false },
-  { name: "GPT-5 Nano", provider: "OpenAI", short: "5-Nano", color: "bg-emerald-500", premium: false },
-  { name: "GPT-4.1", provider: "OpenAI", short: "GPT-4.1", color: "bg-emerald-500", premium: true },
-  { name: "GPT-4.1 Mini", provider: "OpenAI", short: "4.1-Mini", color: "bg-emerald-500", premium: false },
-  { name: "GPT-4.1 Nano", provider: "OpenAI", short: "4.1-Nano", color: "bg-emerald-500", premium: false },
+  // OpenAI — GPT-5.6 shipped Jul 2026 in three tiers (Sol / Terra / Luna).
+  { name: "GPT-5.6 Sol", provider: "OpenAI", short: "5.6 Sol", color: "bg-emerald-500", premium: true },
+  { name: "GPT-5.6 Terra", provider: "OpenAI", short: "5.6 Terra", color: "bg-emerald-500", premium: true },
+  { name: "GPT-5.6 Luna", provider: "OpenAI", short: "5.6 Luna", color: "bg-emerald-500", premium: false },
+  // Kept deliberately: the realtime voice model, which is what powers calling.
   { name: "GPT-4o Realtime", provider: "OpenAI", short: "4o-RT", color: "bg-emerald-500", premium: true },
-  { name: "GPT-4o Mini Realtime", provider: "OpenAI", short: "4o-Mini", color: "bg-emerald-500", premium: false },
-  { name: "Claude 4.5 Sonnet", provider: "Anthropic", short: "Sonnet 4.5", color: "bg-orange-500", premium: true },
-  { name: "Claude 4.5 Haiku", provider: "Anthropic", short: "Haiku 4.5", color: "bg-orange-500", premium: false },
-  { name: "Gemini 3.0 Flash", provider: "Google", short: "Gemini 3.0", color: "bg-blue-500", premium: false },
-  { name: "Gemini 2.5 Flash", provider: "Google", short: "Gemini 2.5", color: "bg-blue-500", premium: false },
-  { name: "Gemini 2.5 Flash Lite", provider: "Google", short: "2.5 Lite", color: "bg-blue-500", premium: false },
+
+  { name: "Claude Opus 5", provider: "Anthropic", short: "Opus 5", color: "bg-orange-500", premium: true },
+  { name: "Claude Sonnet 5", provider: "Anthropic", short: "Sonnet 5", color: "bg-orange-500", premium: true },
+  { name: "Claude Haiku 4.5", provider: "Anthropic", short: "Haiku 4.5", color: "bg-orange-500", premium: false },
+
+  { name: "Gemini 3.1 Pro", provider: "Google", short: "Gemini 3.1", color: "bg-blue-500", premium: true },
+  { name: "Gemini 3.6 Flash", provider: "Google", short: "3.6 Flash", color: "bg-blue-500", premium: false },
+
+  { name: "Grok 4.6", provider: "xAI", short: "Grok 4.6", color: "bg-violet-500", premium: true },
 ];
 
 export function AIModelsSection() {
@@ -57,8 +57,8 @@ export function AIModelsSection() {
                 className="mt-4 text-muted-foreground text-base md:text-lg leading-relaxed text-pretty max-w-lg"
                 data-testid="text-ai-models-subhead"
               >
-                Choose your model. Every plan includes access to GPT-5, Claude,
-                Gemini, and more — you pick what runs your agent.
+                Choose your model. Every plan includes access to GPT-5.6, Claude Opus,
+                Gemini, and Grok — you pick what runs your agent.
               </p>
 
               <div className="flex flex-wrap gap-3 mt-7">
@@ -88,7 +88,7 @@ export function AIModelsSection() {
             </div>
 
             {/* RIGHT */}
-            <div className="relative grid grid-cols-3 sm:grid-cols-5 gap-2.5">
+            <div className="relative grid grid-cols-2 sm:grid-cols-5 gap-2.5">
               {models.map((model, idx) => (
                 <motion.div
                   key={model.name}
