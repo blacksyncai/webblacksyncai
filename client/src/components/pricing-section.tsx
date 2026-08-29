@@ -131,17 +131,11 @@ export function PricingSection() {
   const [checkoutPlan, setCheckoutPlan] = useState<CheckoutPlan | null>(null);
 
   function handlePlanClick(plan: (typeof plans)[0]) {
-    if (plan.checkoutUrl && "planKey" in plan && plan.planKey) {
-      // Opens on-site checkout; falls back to the hosted Helcim page if the
-      // custom flow isn't configured or reachable.
-      setCheckoutPlan({
-        key: plan.planKey,
-        name: plan.name,
-        price: plan.price,
-        period: plan.period,
-        hostedUrl: plan.checkoutUrl,
-      });
-    } else if (plan.checkoutUrl) {
+    // On-site checkout is parked until /api/helcim/* actually runs on Vercel
+    // (it currently 405s). Until then the dialog would just add an email step
+    // in front of the same hosted page, so go straight there. Re-enable by
+    // restoring the setCheckoutPlan branch -- CheckoutDialog is still wired up.
+    if (plan.checkoutUrl) {
       window.location.href = plan.checkoutUrl;
     } else {
       document
