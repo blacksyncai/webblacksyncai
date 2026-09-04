@@ -305,10 +305,13 @@ export function EnterpriseSection() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="google">Google</SelectItem>
+                              <SelectItem value="ai-assistant">
+                                AI assistant (ChatGPT, Claude, Gemini)
+                              </SelectItem>
+                              <SelectItem value="google">Google search</SelectItem>
+                              <SelectItem value="referral">Referral — friend or colleague</SelectItem>
+                              <SelectItem value="outbound">A BlackSync rep reached out</SelectItem>
                               <SelectItem value="linkedin">LinkedIn</SelectItem>
-                              <SelectItem value="referral">Referral</SelectItem>
-                              <SelectItem value="social-media">Social Media</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
