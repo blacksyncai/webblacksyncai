@@ -309,7 +309,7 @@ export function EnterpriseSection() {
                                 AI assistant (ChatGPT, Claude, Gemini)
                               </SelectItem>
                               <SelectItem value="google">Google search</SelectItem>
-                              <SelectItem value="referral">Referral — friend or colleague</SelectItem>
+                              <SelectItem value="referral">Referral</SelectItem>
                               <SelectItem value="outbound">A BlackSync rep reached out</SelectItem>
                               <SelectItem value="linkedin">LinkedIn</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
