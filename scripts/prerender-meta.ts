@@ -108,10 +108,11 @@ function renderRoute(shell: string, path: string): string {
  * pages, so every route was an island nothing pointed at.
  *
  * This writes the real navigation into #root as SPA fallback content. React's
- * createRoot() replaces the whole subtree on mount, so a visitor never sees it;
- * a non-rendering crawler gets an ordinary set of links to every indexable page.
- * Same HTML is served to everyone -- this is standard SPA fallback markup, not
- * crawler-specific content.
+ * createRoot() replaces the whole subtree on mount, and the markup is visually
+ * clipped until then, so a visitor never sees it; a non-rendering crawler gets
+ * an ordinary set of links to every indexable page. Same HTML is served to
+ * everyone -- this is standard SPA fallback markup, not crawler-specific
+ * content.
  */
 function crawlableNav(currentPath: string): string {
   const links = INDEXABLE_ROUTES.filter((p) => p !== currentPath)
@@ -122,8 +123,17 @@ function crawlableNav(currentPath: string): string {
     })
     .join("\n");
 
+  // Clipped rather than visible: on a slow connection (mobile especially) the
+  // JS bundle takes long enough to boot that an unstyled list of 26 links
+  // flashed on screen before React replaced it. The standard visually-hidden
+  // clip is inline so it applies before the stylesheet loads -- the links stay
+  // in the DOM and crawlable, they just never paint.
+  const clip =
+    "position:absolute;width:1px;height:1px;padding:0;margin:-1px;" +
+    "overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0";
+
   return [
-    '      <nav aria-label="Site">',
+    `      <nav aria-label="Site" style="${clip}">`,
     "        <ul>",
     links,
     "        </ul>",
