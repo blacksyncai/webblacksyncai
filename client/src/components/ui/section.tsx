@@ -47,12 +47,15 @@ export function SectionHeading({
   lead,
   className,
   align = "center",
+  as: Title = "h2",
 }: {
   eyebrow?: React.ReactNode;
   title: React.ReactNode;
   lead?: React.ReactNode;
   className?: string;
   align?: "center" | "left";
+  /** Use "h1" when this heading is the page's primary heading. */
+  as?: "h1" | "h2";
 }) {
   return (
     <div
@@ -68,9 +71,9 @@ export function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={0.05}>
-        <h2 className="mt-5 font-display text-3xl sm:text-4xl md:text-[2.85rem] font-semibold tracking-tight leading-[1.08] text-balance">
+        <Title className="mt-5 font-display text-3xl sm:text-4xl md:text-[2.85rem] font-semibold tracking-tight leading-[1.08] text-balance">
           {title}
-        </h2>
+        </Title>
       </Reveal>
       {lead && (
         <Reveal delay={0.1}>

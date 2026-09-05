@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Zap, CreditCard, Puzzle, ShieldCheck } from "lucide-react";
+import { Check, Zap, CreditCard, Puzzle, ShieldCheck, ArrowRight } from "lucide-react";
 import { SectionHeading, Reveal } from "@/components/ui/section";
+import { Link } from "wouter";
 import { useState } from "react";
 import { CheckoutDialog, type CheckoutPlan } from "@/components/checkout-dialog";
 
@@ -127,8 +128,23 @@ const addons = [
   },
 ];
 
-export function PricingSection() {
+type PricingSectionProps = {
+  /**
+   * "full" is the real pricing page: plans, the credit-fairness callout, credit
+   * packs and add-ons. "summary" is the homepage teaser -- same plan cards, but
+   * the supporting detail is left to /pricing.
+   *
+   * Why: /pricing used to be a strict subset of the homepage (every component on
+   * /pricing also rendered on /), which is the textbook setup for Google
+   * consolidating the two and dropping /pricing as a duplicate. Keeping the
+   * detail on one URL only gives /pricing something of its own to rank for.
+   */
+  variant?: "full" | "summary";
+};
+
+export function PricingSection({ variant = "full" }: PricingSectionProps) {
   const [checkoutPlan, setCheckoutPlan] = useState<CheckoutPlan | null>(null);
+  const isSummary = variant === "summary";
 
   function handlePlanClick(plan: (typeof plans)[0]) {
     // On-site checkout is parked until /api/helcim/* actually runs on Vercel
@@ -152,15 +168,28 @@ export function PricingSection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div data-testid="badge-pricing">
-          <SectionHeading
-            eyebrow="Pricing"
-            title={
-              <>
-                Less Than a <span className="text-accent-grad">Part-Time ISA</span>
-              </>
-            }
-            lead="No hidden fees. Cancel anytime. Phone number from $3.50/mo."
-          />
+          {isSummary ? (
+            <SectionHeading
+              eyebrow="Plans"
+              title={
+                <>
+                  Less Than a <span className="text-accent-grad">Part-Time ISA</span>
+                </>
+              }
+              lead="No hidden fees. Cancel anytime. Phone number from $3.50/mo."
+            />
+          ) : (
+            <SectionHeading
+              as="h1"
+              eyebrow="Pricing"
+              title={
+                <>
+                  AI Calling <span className="text-accent-grad">Plans &amp; Pricing</span>
+                </>
+              }
+              lead="Plans, call credits, and done-for-you builds — priced for less than a part-time ISA. No hidden fees, cancel anytime, phone number from $3.50/mo."
+            />
+          )}
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16 items-stretch">
@@ -258,6 +287,30 @@ export function PricingSection() {
           ))}
         </div>
 
+        {isSummary && (
+          <div className="mt-12 text-center">
+            <Reveal>
+              <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto text-pretty">
+                You only pay for real conversations — no answer, busy lines, and voicemails
+                cost 0 credits.
+              </p>
+              <Link href="/pricing">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="mt-6"
+                  data-testid="button-see-full-pricing"
+                >
+                  See full pricing, credits &amp; FAQ
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </Reveal>
+          </div>
+        )}
+
+        {!isSummary && (
+          <>
         <div className="mt-12 max-w-3xl mx-auto">
           <Reveal>
             <div
@@ -395,6 +448,8 @@ export function PricingSection() {
         <p className="text-xs text-muted-foreground text-center mt-12">
           * Prices are in USD
         </p>
+          </>
+        )}
       </div>
 
       <CheckoutDialog

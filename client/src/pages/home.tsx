@@ -33,7 +33,7 @@ export default function Home() {
       <HowItWorksSection />
       <SocialProofSection />
       <WhySection />
-      <PricingSection />
+      <PricingSection variant="summary" />
       <EnterpriseSection />
       <FinalCtaSection />
       <Footer />

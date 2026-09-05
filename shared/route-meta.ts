@@ -34,9 +34,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
 
   // Core marketing pages
   "/pricing": {
-    title: "Pricing",
+    title: "Pricing - AI Calling Plans from $98/mo",
     description:
-      "Simple, transparent pricing for BlackSync's AI outbound sales agent. Plans for solo agents up to full brokerages and agencies.",
+      "BlackSync AI calling plans: Solo Agent $98/mo, Team $296/mo, and custom Enterprise. Call credits from $197, add-on builds, and answers to the questions we get asked most. No hidden fees, cancel anytime.",
   },
   "/book-demo": {
     title: "Book a Demo",
