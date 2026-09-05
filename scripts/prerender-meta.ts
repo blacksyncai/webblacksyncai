@@ -23,6 +23,7 @@ import { fileURLToPath } from "url";
 import {
   ROUTE_META,
   INDEXABLE_ROUTES,
+  SITE_NAME,
   SITE_URL,
   DEFAULT_DESCRIPTION,
   fullTitle,
@@ -89,7 +90,45 @@ function renderRoute(shell: string, path: string): string {
     /<meta\s+property="og:url"[^>]*>/i,
     `<meta property="og:url" content="${escapeAttr(url)}" />`,
   );
+
+  html = html.replace(
+    '<div id="root"></div>',
+    `<div id="root">\n${crawlableNav(path)}\n    </div>`,
+  );
+
   return html;
+}
+
+/**
+ * Crawlable link fallback.
+ *
+ * The navbar and footer are rendered by React, so a crawler that doesn't run JS
+ * sees a page with zero <a> tags -- verified against production: 0 links on /,
+ * /pricing and /industry/law-firms. Link-following is how Google discovers
+ * pages, so every route was an island nothing pointed at.
+ *
+ * This writes the real navigation into #root as SPA fallback content. React's
+ * createRoot() replaces the whole subtree on mount, so a visitor never sees it;
+ * a non-rendering crawler gets an ordinary set of links to every indexable page.
+ * Same HTML is served to everyone -- this is standard SPA fallback markup, not
+ * crawler-specific content.
+ */
+function crawlableNav(currentPath: string): string {
+  const links = INDEXABLE_ROUTES.filter((p) => p !== currentPath)
+    .map((p) => {
+      const meta = ROUTE_META[p] ?? {};
+      const label = p === "/" ? `${SITE_NAME} home` : meta.title ?? p;
+      return `        <li><a href="${escapeAttr(p)}">${escapeText(label)}</a></li>`;
+    })
+    .join("\n");
+
+  return [
+    '      <nav aria-label="Site">',
+    "        <ul>",
+    links,
+    "        </ul>",
+    "      </nav>",
+  ].join("\n");
 }
 
 function main() {
