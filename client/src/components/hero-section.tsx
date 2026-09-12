@@ -184,7 +184,7 @@ export function HeroSection() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 animate-ping" />
                 <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-primary" />
               </span>
-              AI Outbound · 40+ Languages · GPT-5 · Claude · Gemini
+              Custom AI Agents · 40+ Languages · GPT-5 · Claude · Gemini
             </span>
           </motion.div>
 
@@ -195,21 +195,30 @@ export function HeroSection() {
             className="mt-6 font-display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] mb-5 text-balance"
             data-testid="text-hero-headline"
           >
-            Hundreds of outbound calls.
+            AI agents built around
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent-grad">Zero extra hires.</span>
+            <span className="text-accent-grad">your business.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-9 leading-relaxed text-pretty"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-5 leading-relaxed text-pretty"
             data-testid="text-hero-subheadline"
           >
-            Hundreds of personalized calls in minutes, not days. Your AI voice
-            agents reach every new lead, qualify them, and book the appointment —
-            so your team spends its time with people ready to talk.
+            Your workflows. Your tools. Your data. Built from scratch to work
+            like part of your team.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base md:text-lg font-medium text-foreground/80 max-w-2xl mx-auto mb-9 text-pretty"
+            data-testid="text-hero-supporting"
+          >
+            Hundreds of personalized calls in minutes, not days.
           </motion.p>
 
           <motion.div
@@ -231,7 +240,7 @@ export function HeroSection() {
                 data-testid="input-hero-email"
               />
               <Button size="lg" type="submit" className="w-full sm:w-auto" data-testid="button-hero-cta">
-                Get Started
+                Build My Agent
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </form>

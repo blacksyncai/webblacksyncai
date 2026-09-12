@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/hero-section";
+import { CustomBuildSection } from "@/components/custom-build-section";
 import { DashboardMockupSection } from "@/components/dashboard-mockup-section";
 import { TrustStrip } from "@/components/trust-strip";
 import { ProductsSection } from "@/components/products-section";
@@ -24,6 +25,7 @@ export default function Home() {
     <div className="min-h-screen bg-background" data-testid="page-home">
       <Navbar />
       <HeroSection />
+      <CustomBuildSection />
       <DashboardMockupSection />
       <ClippedVideoTab />
       <TrustStrip />
