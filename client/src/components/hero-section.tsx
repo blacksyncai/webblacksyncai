@@ -184,7 +184,7 @@ export function HeroSection() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 animate-ping" />
                 <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-primary" />
               </span>
-              Custom AI Agents · 40+ Languages · GPT-5 · Claude · Gemini
+              Custom AI Voice Agents · 40+ Languages · GPT-5 · Claude · Gemini
             </span>
           </motion.div>
 
@@ -195,7 +195,7 @@ export function HeroSection() {
             className="mt-6 font-display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] mb-5 text-balance"
             data-testid="text-hero-headline"
           >
-            AI agents built around
+            AI voice agents built around
             <br className="hidden sm:block" />{" "}
             <span className="text-accent-grad">your business.</span>
           </motion.h1>
@@ -204,7 +204,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-5 leading-relaxed text-pretty"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-2 md:mb-3 leading-relaxed text-pretty"
             data-testid="text-hero-subheadline"
           >
             Your workflows. Your tools. Your data. Built from scratch to work
@@ -215,10 +215,11 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base md:text-lg font-medium text-foreground/80 max-w-2xl mx-auto mb-9 text-pretty"
+            className="text-lg md:text-xl font-semibold text-foreground max-w-2xl mx-auto mb-9 text-pretty"
             data-testid="text-hero-supporting"
           >
-            Hundreds of personalized calls in minutes, not days.
+            Hundreds of personalized calls{" "}
+            <span className="text-accent-grad">in minutes, not days.</span>
           </motion.p>
 
           <motion.div
