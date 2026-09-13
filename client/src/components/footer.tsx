@@ -21,6 +21,7 @@ const footerLinks = {
     { label: "Home Services AI", href: "/industry/home-services" },
     { label: "Funeral Home AI", href: "/industry/funeral-homes" },
     { label: "Law Firm Intake AI", href: "/industry/law-firms" },
+    { label: "Ylopo Alternative", href: "/compare/ylopo-alternative" },
   ],
   Company: [
     { label: "About", href: "#" },

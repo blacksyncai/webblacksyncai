@@ -20,6 +20,7 @@ import AffiliatesPage from "@/pages/affiliates";
 import EnterprisePage from "@/pages/enterprise";
 import BookDemoPage from "@/pages/book-demo";
 import ContactPage from "@/pages/contact";
+import ComparePage from "@/pages/compare";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -42,6 +43,7 @@ function Router() {
       <Route path="/enterprise" component={EnterprisePage} />
       <Route path="/book-demo" component={BookDemoPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/compare/ylopo-alternative" component={ComparePage} />
       <Route path="/industry/:slug" component={IndustryPage} />
       <Route path="/real-estate-ai-caller" component={() => <UseCasePage slug="real-estate-ai-caller" />} />
       <Route path="/expired-listing-ai" component={() => <UseCasePage slug="expired-listing-ai" />} />
