@@ -197,6 +197,7 @@ const resourceItems = [
   { icon: FileText, label: "Documentation / API Docs", href: "#" },
   { icon: Clock, label: "Changelog", href: "#" },
   { icon: BarChart, label: "Case Studies", href: "#" },
+  { icon: Scale, label: "Compare BlackSync and Ylopo", href: "/compare/ylopo-alternative" },
   { icon: HelpCircle, label: "Help Center", href: "#" },
 ];
 

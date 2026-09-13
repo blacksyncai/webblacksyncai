@@ -108,6 +108,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "FSBO AI", href: "/fsbo-ai" },
       { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Ylopo alternative", href: "/compare/ylopo-alternative" },
     ],
   },
 
@@ -169,6 +170,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
       { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Compare BlackSync and Ylopo", href: "/compare/ylopo-alternative" },
     ],
   },
 

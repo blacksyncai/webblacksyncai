@@ -890,6 +890,29 @@ export default function IndustryPage() {
               </Link>
             </div>
           </Reveal>
+
+          {slug === "real-estate" && (
+            <Reveal delay={0.15}>
+              <p className="mt-8 text-sm text-muted-foreground">
+                Comparing platforms? Read how BlackSync works as a{" "}
+                <Link
+                  href="/compare/ylopo-alternative"
+                  className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                  data-testid="link-industry-ylopo-alternative"
+                >
+                  customizable real estate AI ISA
+                </Link>{" "}
+                and a{" "}
+                <Link
+                  href="/compare/ylopo-alternative"
+                  className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                >
+                  Ylopo alternative
+                </Link>
+                .
+              </p>
+            </Reveal>
+          )}
         </div>
       </section>
 

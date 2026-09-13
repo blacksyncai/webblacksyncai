@@ -38,6 +38,13 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "BlackSync AI calling plans: Solo Agent $98/mo, Team $296/mo, and custom Enterprise. Call credits from $197, add-on builds, and answers to the questions we get asked most. No hidden fees, cancel anytime.",
   },
+  // Competitor comparisons
+  "/compare/ylopo-alternative": {
+    title: "Ylopo Alternative for Real Estate Teams",
+    description:
+      "Looking for a more customizable alternative to Ylopo? See how BlackSync AI gives real estate teams custom AI agents, high-volume calling, CRM context, flexible workflows, and pay-for-real-conversations pricing.",
+  },
+
   "/book-demo": {
     title: "Book a Demo",
     description:
