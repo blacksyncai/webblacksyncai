@@ -141,6 +141,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "BlackSync is the AI cold caller built for real estate teams — calls FSBOs, Expireds, and new leads within seconds, qualifies them, and books the appointment on your calendar.",
   },
+  "/ai-cold-caller": {
+    title: "AI Cold Caller for Batch Calling Real Estate Leads",
+    description:
+      "BlackSync is an AI cold caller built for batch calling — load a list of hundreds or thousands of real estate leads and it works the whole thing, qualifies who's worth a callback, and books the appointment.",
+  },
   "/expired-listing-ai": {
     title: "AI Cold Caller for Expired Listings",
     description:
