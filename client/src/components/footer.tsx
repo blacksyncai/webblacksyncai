@@ -15,6 +15,7 @@ const footerLinks = {
     { label: "AI Lead Qualification", href: "/ai-lead-qualification-software" },
     { label: "Real Estate AI Solutions", href: "/real-estate-ai-caller" },
     { label: "AI Cold Caller", href: "/ai-cold-caller" },
+    { label: "Real Estate Lead Generation", href: "/real-estate-lead-generation" },
     { label: "Expired Listing AI", href: "/expired-listing-ai" },
     { label: "FSBO AI", href: "/fsbo-ai" },
     { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },

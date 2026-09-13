@@ -909,7 +909,15 @@ export default function IndustryPage() {
                 >
                   Ylopo alternative
                 </Link>
-                .
+                . Not getting enough new opportunities in the first place? Build a{" "}
+                <Link
+                  href="/real-estate-lead-generation"
+                  className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                  data-testid="link-industry-lead-generation"
+                >
+                  real estate lead generation
+                </Link>{" "}
+                plan around your market.
               </p>
             </Reveal>
           )}

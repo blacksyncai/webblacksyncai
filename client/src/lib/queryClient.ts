@@ -17,7 +17,7 @@ const LEADS_WEBHOOK_URL =
   (import.meta.env.VITE_LEADS_WEBHOOK_URL as string | undefined) ||
   DEFAULT_LEADS_WEBHOOK_URL;
 
-const LEAD_ENDPOINTS = ["/api/leads", "/api/enterprise-leads"];
+const LEAD_ENDPOINTS = ["/api/leads", "/api/enterprise-leads", "/api/real-estate-lead-gen"];
 
 // Web3Forms public access key → emails every submission to admin@blacksync.network.
 const WEB3FORMS_ACCESS_KEY = "7bd3edd1-dcf9-4041-9fff-14161cf49bbf";
@@ -33,7 +33,11 @@ function normalizeLead(url: string, data: any) {
   }
   d.fullName = d.name ?? [d.firstName, d.lastName].filter(Boolean).join(" ");
   d.source = "blacksync.ai";
-  d.formType = url.includes("enterprise") ? "enterprise" : "lead";
+  d.formType = url.includes("enterprise")
+    ? "enterprise"
+    : url.includes("real-estate-lead-gen")
+      ? "real-estate-lead-gen"
+      : "lead";
   d.submittedAt = new Date().toISOString();
   return d;
 }
