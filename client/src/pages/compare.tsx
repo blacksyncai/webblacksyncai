@@ -797,10 +797,20 @@ export default function ComparePage() {
                     well as working it.
                   </p>
                   <p>
-                    BlackSync does not do your advertising or generate leads for
-                    you. It is more focused on becoming a highly customizable AI
-                    calling and sales automation layer on top of the lead flow
-                    you already have.
+                    BlackSync does not bundle advertising or lead generation
+                    into the platform. It is more focused on becoming a highly
+                    customizable AI calling and sales automation layer on top
+                    of the lead flow you already have.
+                  </p>
+                  <p>
+                    If you want custom marketing or lead-generation work built
+                    around your business, that is available as a separately
+                    scoped, organic engagement, not something baked into an
+                    all-in-one platform.
+                  </p>
+                  <p>
+                    BlackSync also texts your leads. SMS follow-up runs
+                    alongside the voice agent, not as a separate product.
                   </p>
                   <p className="text-foreground font-medium">
                     If you need the whole ecosystem, Ylopo is the stronger
