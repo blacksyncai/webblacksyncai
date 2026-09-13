@@ -11,6 +11,7 @@ import {
   STEP_ORDER,
   QUESTION_STEPS,
   questionNumber,
+  buildRecapChips,
   OBJECTIVE_OPTIONS,
   SELLER_LEAD_TYPE_OPTIONS,
   BUYER_LEAD_TYPE_OPTIONS,
@@ -139,6 +140,7 @@ export function LeadGenAssessment() {
   }
 
   const answers = session.answers;
+  const recapChips = step === "results" ? [] : buildRecapChips(answers);
 
   return (
     <div id="assessment" className="scroll-mt-24" data-testid="lead-funnel-assessment">
@@ -162,25 +164,55 @@ export function LeadGenAssessment() {
 
         {step !== "results" && (
           <div className="mb-8">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 animate-ping" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-primary">
+                Building your plan live
+              </span>
+            </div>
+
             <div className="flex items-center justify-between mb-2.5">
               <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                {qNum ? `Question ${qNum} of ${QUESTION_STEPS.length}` : "Building your lead generation plan"}
+                {qNum ? `Question ${qNum} of ${QUESTION_STEPS.length}` : "Almost there"}
               </span>
               {qNum && <span className="font-mono text-[10px] text-muted-foreground">{progressPct}%</span>}
             </div>
             <div
-              className="h-1.5 w-full overflow-hidden rounded-full bg-muted"
+              className="h-2 w-full overflow-hidden rounded-full bg-muted"
               role="progressbar"
               aria-valuenow={progressPct}
               aria-valuemin={0}
               aria-valuemax={100}
               aria-label="Assessment progress"
             >
-              <div
-                className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
-                style={{ width: `${progressPct}%` }}
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-primary to-orange-400"
+                animate={{ width: `${progressPct}%` }}
+                transition={{ duration: reducedMotion ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
+
+            {recapChips.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-1.5" aria-label="Your plan so far">
+                <AnimatePresence initial={false}>
+                  {recapChips.map((chip) => (
+                    <motion.span
+                      key={chip}
+                      initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="inline-flex items-center rounded-full border border-primary/25 bg-primary/[0.06] px-2.5 py-1 text-xs font-medium text-foreground/80"
+                      data-testid={`recap-chip-${chip}`}
+                    >
+                      {chip}
+                    </motion.span>
+                  ))}
+                </AnimatePresence>
+              </div>
+            )}
           </div>
         )}
 
@@ -258,7 +290,7 @@ type StepProps = {
 
 function QuestionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display text-xl md:text-2xl font-semibold tracking-tight mb-6 text-balance">
+    <h2 className="font-display text-2xl sm:text-3xl md:text-[2.15rem] font-semibold tracking-tight leading-[1.12] mb-7 text-balance">
       {children}
     </h2>
   );

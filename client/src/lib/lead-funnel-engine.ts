@@ -452,3 +452,28 @@ export function labelFor(options: Option[], value: string | undefined): string |
 export function objectiveLabel(objective: Objective | undefined): string | undefined {
   return labelFor(OBJECTIVE_OPTIONS, objective);
 }
+
+/**
+ * Short, live-updating recap of what's been answered so far -- rendered as
+ * chips during the assessment so it reads as a plan assembling in real time
+ * rather than a form being filled in. Only ever reflects answers actually
+ * given; nothing here is inferred.
+ */
+export function buildRecapChips(answers: Answers): string[] {
+  const chips: string[] = [];
+  const obj = objectiveLabel(answers.objective);
+  if (obj) chips.push(obj);
+  if (answers.marketCity) {
+    chips.push(answers.marketState ? `${answers.marketCity}, ${answers.marketState}` : answers.marketCity);
+  }
+  if (answers.currentTransactions && answers.targetTransactions) {
+    chips.push(`${answers.currentTransactions} → ${answers.targetTransactions}/qtr`);
+  }
+  const budget = labelFor(BUDGET_OPTIONS, answers.availableBudget);
+  if (budget) chips.push(`${budget}/mo`);
+  if (answers.timeline) {
+    const t = labelFor(TIMELINE_OPTIONS, answers.timeline);
+    if (t) chips.push(t);
+  }
+  return chips;
+}
