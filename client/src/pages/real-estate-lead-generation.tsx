@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -156,7 +156,7 @@ export default function RealEstateLeadGenerationPage() {
       <Navbar />
 
       {/* Hero */}
-      <header className="relative pt-28 pb-14 md:pt-36 md:pb-16 hero-gradient">
+      <header className="relative pt-28 pb-10 md:pt-36 md:pb-12 hero-gradient">
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <nav aria-label="Breadcrumb" className="mb-6 flex justify-center">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
@@ -215,13 +215,30 @@ export default function RealEstateLeadGenerationPage() {
             </a>
             <p className="text-xs text-muted-foreground">Takes about 2 minutes · Personalized to your business</p>
           </motion.div>
+
+          <motion.a
+            href="#assessment"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: [0, 6, 0] }}
+            transition={{ opacity: { duration: 0.6, delay: 0.6 }, y: { duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 } }}
+            className="mt-9 inline-flex flex-col items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+            data-testid="link-scroll-hint"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-wider">13 quick questions</span>
+            <ChevronDown className="h-4 w-4" aria-hidden="true" />
+          </motion.a>
         </div>
       </header>
 
-      {/* Assessment */}
-      <section className="py-14 md:py-20" aria-label="Lead generation assessment">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-card-border bg-card p-6 md:p-10 shadow-sm">
+      {/* Assessment -- a distinct "live tool" surface, not another content card */}
+      <section className="relative py-10 md:py-16 overflow-hidden" aria-label="Lead generation assessment">
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.05] via-transparent to-primary/[0.04]" />
+          <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute -bottom-24 right-1/4 h-72 w-72 rounded-full bg-orange-300/10 blur-3xl" />
+        </div>
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[2rem] border-2 border-primary/15 bg-gradient-to-b from-card to-card/95 p-6 md:p-10 shadow-[0_0_0_1px_hsl(var(--primary)/0.06),0_24px_60px_-24px_hsl(var(--primary)/0.25)]">
             <LeadGenAssessment />
           </div>
         </div>
