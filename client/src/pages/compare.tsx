@@ -85,7 +85,7 @@ const DIFFERENTIATORS: {
     icon: Database,
     title: "CRM context",
     blacksync:
-      "Integrates with Follow Up Boss, Sierra, and kvCORE. The agent can use lead name, property address, budget, last interaction, assigned agent, prior notes, and buyer or seller status on the call itself. No CRM yet? A spreadsheet of leads works too, as long as it has the fields you want the agent to use.",
+      "Integrates with Follow Up Boss, Sierra, and kvCORE natively, plus 5,000+ other applications through Zapier. The agent can use lead name, property address, budget, last interaction, assigned agent, prior notes, and buyer or seller status on the call itself. No CRM yet? A spreadsheet of leads works too, as long as it has the fields you want the agent to use.",
     ylopo:
       "Natively syncs with Follow Up Boss, Sierra, Lofty, and Wise Agent, with partial two-way sync to 15+ other CRMs. AI Voice specifically is currently available only on Follow Up Boss.",
   },
@@ -93,7 +93,7 @@ const DIFFERENTIATORS: {
     icon: Repeat,
     title: "Follow-up logic",
     blacksync:
-      "You set when to redial, how often, when to stop, when to switch campaigns, when to escalate to a human, and how callbacks are handled.",
+      "You set when to redial, how often, when to stop, when to switch campaigns, when to escalate to a human, and how callbacks are handled. A call that does not connect can retry from a different number in your pool, so it does not read as the same company calling back again and again. Built for teams that already know strong follow-up is everything.",
     ylopo:
       "AI Voice runs on a fixed 90 day calling window. Teams that want more control over redial frequency and campaign-specific behavior may prefer a more configurable setup.",
   },
@@ -241,7 +241,7 @@ const FAQS = [
   },
   {
     q: "Does BlackSync integrate with Follow Up Boss?",
-    a: "Yes. BlackSync integrates with Follow Up Boss, and also with Sierra, kvCORE, Salesforce, HubSpot and other platforms through native integrations, Zapier and webhooks. Your agent can read lead context from the CRM before the call and write call outcomes, recordings, transcripts, dispositions and tags back afterwards.",
+    a: "Yes. BlackSync integrates natively with Follow Up Boss, Sierra, kvCORE, Salesforce, HubSpot and more, plus 5,000+ other applications through Zapier and webhooks. Your agent can read lead context from the CRM before the call and write call outcomes, recordings, transcripts, dispositions and tags back afterwards.",
   },
   {
     q: "Can BlackSync call old buyer and seller leads?",
