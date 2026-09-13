@@ -1,4 +1,5 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { useEffect } from "react";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -27,9 +28,29 @@ import RealEstateLeadGenerationPage from "@/pages/real-estate-lead-generation";
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
 const ROUTER_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+/**
+ * A client-side route change doesn't get the browser's native "new page
+ * starts at the top" behavior -- without this, navigating to another page
+ * (e.g. clicking "See Pricing" from partway down the homepage) lands on
+ * that page at whatever scroll position the previous page was at.
+ *
+ * Skipped when the destination carries a hash (e.g. "#assessment" on this
+ * same page) so in-page anchor scrolling and useScrollToHash (cross-page
+ * "/#section" links) both keep working.
+ */
+function ScrollToTop() {
+  const [pathname] = useLocation();
+  useEffect(() => {
+    if (window.location.hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function Router() {
   return (
     <WouterRouter base={ROUTER_BASE}>
+    <ScrollToTop />
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/pricing" component={PricingPage} />
