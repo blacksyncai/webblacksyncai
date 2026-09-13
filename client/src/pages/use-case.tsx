@@ -107,6 +107,74 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "Expired Listing AI", href: "/expired-listing-ai" },
       { label: "FSBO AI", href: "/fsbo-ai" },
       { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
+      { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
+      { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Ylopo alternative", href: "/compare/ylopo-alternative" },
+    ],
+  },
+
+  "ai-cold-caller": {
+    slug: "ai-cold-caller",
+    metaTitle: "AI Cold Caller for Batch Calling Real Estate Leads",
+    metaDescription:
+      "BlackSync is an AI cold caller built for batch calling — load a list of hundreds or thousands of real estate leads and it works the whole thing, qualifies who's worth a callback, and books the appointment.",
+    eyebrow: "Batch Calling",
+    headline: "An AI Cold Caller Built to Batch Call Your Whole List",
+    subhead:
+      "Load a list of 500 or 5,000 leads and BlackSync's AI cold caller works through the entire batch — old buyers, past clients, expired leads, a purchased list — instead of the 40 or 50 an ISA can get through in a day.",
+    painPoints: [
+      "A list of thousands of old leads sitting untouched because no human can dial through it",
+      "ISAs cold calling manually get through maybe 40–50 dials a day before burning out",
+      "Purchased or scraped lists go stale fast — the longer a batch sits, the colder it gets",
+      "Hiring more callers to work a big list costs more than the list is worth",
+    ],
+    helps: [
+      {
+        title: "Calls the Whole Batch, Not a Sample",
+        description:
+          "Upload a list of any size — CSV, CRM export, or a live feed — and the AI works every record instead of the ISA-sized chunk a human could realistically dial.",
+      },
+      {
+        title: "Redials and Retries on Its Own",
+        description:
+          "No-answer? It retries on your schedule. Busy line? Same. You set how often and how long before a lead is marked dead, and it just runs.",
+      },
+      {
+        title: "Only Hands You the Ones Worth a Callback",
+        description:
+          "Every call is qualified, scored, and tagged. You see who's warm and why, instead of a spreadsheet of dial attempts with no context.",
+      },
+    ],
+    integrations: ["Follow Up Boss", "Sierra Interactive", "kvCORE", "Vulcan7", "REDX", "Zapier"],
+    testimonial: {
+      quote:
+        "We had 4,000 old leads nobody had called in two years. BlackSync worked the entire list in about a week and handed us back 60 warm conversations to follow up on ourselves.",
+      name: "Chris B.",
+      role: "Broker/Owner, Orlando FL",
+    },
+    faqs: [
+      {
+        q: "What is an AI cold caller?",
+        a: "An AI cold caller is a voice agent that places outbound calls to a list of leads on your behalf, holds a real conversation, handles objections, and qualifies who's worth a follow-up — the same job a human cold caller does, but able to work a much larger list.",
+      },
+      {
+        q: "Can it batch call an entire list at once?",
+        a: "Yes. Upload a list of any size and the AI works through it as a campaign, not one lead at a time. That's the difference between batch calling and a single ISA making calls off a spreadsheet.",
+      },
+      {
+        q: "How big of a list can it handle?",
+        a: "There's no practical size limit on the list itself — teams run this against databases from a few hundred leads up to tens of thousands. Call volume is governed by your plan and credits.",
+      },
+      {
+        q: "Does it work old or purchased lists, not just fresh leads?",
+        a: "Yes. Old buyer and seller databases, expired listings, FSBOs, and purchased or scraped lists are all common batches teams run through BlackSync.",
+      },
+    ],
+    related: [
+      { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
+      { label: "Expired Listing AI", href: "/expired-listing-ai" },
+      { label: "FSBO AI", href: "/fsbo-ai" },
+      { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
       { label: "Ylopo alternative", href: "/compare/ylopo-alternative" },
     ],
@@ -169,6 +237,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "FSBO AI", href: "/fsbo-ai" },
       { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
       { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
+      { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
       { label: "Real Estate industry page", href: "/industry/real-estate" },
       { label: "Compare BlackSync and Ylopo", href: "/compare/ylopo-alternative" },
     ],

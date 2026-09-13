@@ -53,6 +53,7 @@ function Router() {
       <Route path="/ai-lead-generation" component={() => <UseCasePage slug="ai-lead-generation" />} />
       <Route path="/ai-appointment-setter" component={() => <UseCasePage slug="ai-appointment-setter" />} />
       <Route path="/ai-lead-qualification-software" component={() => <UseCasePage slug="ai-lead-qualification-software" />} />
+      <Route path="/ai-cold-caller" component={() => <UseCasePage slug="ai-cold-caller" />} />
       <Route component={NotFound} />
     </Switch>
     </WouterRouter>
