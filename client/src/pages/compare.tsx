@@ -5,8 +5,8 @@ import {
   Check,
   ChevronRight,
   Database,
-  Gauge,
   Layers,
+  Mic,
   PhoneCall,
   Plug,
   Repeat,
@@ -16,7 +16,7 @@ import {
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Eyebrow, Reveal, SectionHeading } from "@/components/ui/section";
+import { Eyebrow, Reveal } from "@/components/ui/section";
 import {
   Accordion,
   AccordionItem,
@@ -50,79 +50,84 @@ const CAMPAIGNS = [
   "FSBO outreach",
   "Circle prospecting",
   "Database reactivation",
-  "Recruiting",
+  "Agent recruiting",
   "Appointment reminders",
   "Inbound lead qualification",
 ];
 
+/**
+ * Point-by-point comparison rows. Every `ylopo` line is traceable to a source
+ * in SOURCES below -- nothing here is inferred or guessed.
+ */
 const DIFFERENTIATORS: {
   icon: typeof PhoneCall;
   title: string;
-  body: string[];
+  blacksync: string;
+  ylopo: string;
 }[] = [
   {
     icon: Settings2,
-    title: "Agents built for one job, not one template",
-    body: [
-      "BlackSync does not ship a single generic agent that every team has to work around. Each agent is built for a specific job, and a team can run several at once.",
-      "Scripts, objection handling, qualification criteria, transfer rules, booking behavior, follow-up cadence, and agent personality are all set per agent. An agent working a five year old buyer database should not sound like one calling a lead that came in ninety seconds ago, and here it does not have to.",
-    ],
+    title: "Agent design",
+    blacksync:
+      "Every agent is built for one job. Scripts, objection handling, qualification criteria, transfer rules, and personality are set per agent, and a team can run several at once. An agent working a five year old buyer database does not have to sound like one calling a lead from ninety seconds ago.",
+    ylopo:
+      "AI Voice runs from scripts written per use case, for example adjusted for luxury or investment properties, inside a more standardized platform build.",
   },
   {
     icon: PhoneCall,
-    title: "Built for high-volume outbound",
-    body: [
-      "BlackSync runs its own ISA platform designed for outbound calling at scale, not only for answering new inbound leads.",
-      "That covers large calling campaigns, redial logic, retrying no-answers, callback handling, warm transfers, calendar booking, dispositioning, and tagging. Campaign-specific logic means a database reactivation push and a speed-to-lead queue can run side by side under different rules.",
-    ],
+    title: "Outbound volume",
+    blacksync:
+      "Runs as its own ISA platform for outbound at scale: large calling campaigns, redial logic, no-answer retries, callback handling, and campaign-specific rules that run side by side.",
+    ylopo:
+      "AI Voice calls new and re-engaged leads and keeps trying for up to 90 days, averaging about 7 calls to connect, per Ylopo's own published numbers.",
   },
   {
     icon: Database,
-    title: "Calls that use your CRM context",
-    body: [
-      "BlackSync integrates with CRMs including Follow Up Boss, Sierra, and kvCORE, and the agent can use what is already on the record.",
-      "Lead name, property address, area of interest, budget, last interaction, assigned agent, prior notes, buyer or seller status, and other CRM fields all feed the conversation. The call lands as a continuation of a relationship your team already has, not a cold call from a stranger.",
-    ],
+    title: "CRM context",
+    blacksync:
+      "Integrates with Follow Up Boss, Sierra, and kvCORE. The agent can use lead name, property address, budget, last interaction, assigned agent, prior notes, and buyer or seller status on the call itself.",
+    ylopo:
+      "Natively syncs with Follow Up Boss, Sierra, Lofty, and Wise Agent, with partial two-way sync to 15+ other CRMs. AI Voice specifically is currently available only on Follow Up Boss.",
   },
   {
     icon: Repeat,
-    title: "Follow-up logic you actually set",
-    body: [
-      "Persistence is a preference, and teams disagree about it. BlackSync workflows are configured around when to redial, how often to call, when to stop, when to switch campaigns, when to escalate to a human, when to book, when to warm transfer, and how to handle callbacks.",
-      "Teams that want more control over outreach frequency, redial logic, and campaign-specific calling behavior may prefer a more configurable platform.",
-    ],
+    title: "Follow-up logic",
+    blacksync:
+      "You set when to redial, how often, when to stop, when to switch campaigns, when to escalate to a human, and how callbacks are handled.",
+    ylopo:
+      "AI Voice runs on a fixed 90 day calling window. Teams that want more control over redial frequency and campaign-specific behavior may prefer a more configurable setup.",
   },
   {
     icon: Wallet,
-    title: "Spend your budget on conversations, not ringing",
-    body: [
-      "BlackSync is structured so credits are primarily used when the agent actually reaches and speaks with a lead. No answer, a busy line, and voicemail do not consume the same usage as a real conversation, and a quick hang-up is not counted as a full one.",
-      "Working a large old database means a lot of calls that nobody picks up. Pricing that charges the same for those as for live conversations makes reactivation expensive for the wrong reason.",
-    ],
+    title: "Pricing model",
+    blacksync:
+      "No answer and a busy line cost 0 credits. Voicemail costs 0 credits too, and a quick hang-up is not counted as a full conversation. You are paying for the agent talking to your lead, not for the phone ringing.",
+    ylopo:
+      "Pricing is not published. Ylopo's own FAQ says it depends on market, team size, lead type, and database size, with different lead sources priced differently.",
   },
   {
     icon: Layers,
-    title: "Start small, prove it, then scale",
-    body: [
-      "You can start with one campaign, one agent, and one segment of your database, then expand once the numbers hold up.",
-      "Ylopo's published Platform as a Service Agreement states that a subscription term renews automatically unless a party gives written notice at least ninety days before expiration, and that either party may terminate for convenience on at least ninety days prior written notice, with prepaid fees non-refundable. BlackSync is designed to make it easier to test a smaller pilot and expand based on results.",
-    ],
+    title: "Getting started",
+    blacksync:
+      "Start with one campaign and one segment of your database, then expand once the numbers hold up.",
+    ylopo:
+      "Ylopo's Platform as a Service Agreement states subscription terms auto-renew unless a party gives 90 days written notice, and either party may terminate for convenience on 90 days written notice, with prepaid fees non-refundable.",
   },
   {
-    icon: Gauge,
-    title: "Voice quality and response speed",
-    body: [
-      "A lead decides whether they are talking to a machine in the first few seconds. BlackSync puts real weight on natural conversation, low latency, fast response times, handling interruptions, and conversational pacing.",
-      "Custom voices are available, and the target is a call that moves the way a person moves, without the robotic pause before every reply.",
-    ],
+    icon: Mic,
+    title: "Voice and language",
+    blacksync:
+      "40+ voice options and support for 40+ languages, so an agent can match your brand and market. Heavy emphasis on low latency, fast response times, and handling interruptions so a call moves like a conversation, not a script being read.",
+    ylopo:
+      "Publishes four named AI Voice demos: Donna, Ryan, Selena, and Kathy. Spanish language support is listed as coming soon as of this writing.",
   },
   {
     icon: Plug,
-    title: "It plugs into your stack",
-    body: [
-      "BlackSync is not trying to replace everything you run. If you already like Follow Up Boss, your lead sources, your ad spend, and the rest of your stack, BlackSync can act as the AI calling and follow-up layer on top of it.",
-      "You keep your CRM, your lead flow, and your process. The agent works inside them.",
-    ],
+    title: "Fits your stack",
+    blacksync:
+      "Not trying to replace your CRM, lead sources, or ad spend. BlackSync sits on top as the AI calling and follow-up layer.",
+    ylopo:
+      "Built as a fuller ecosystem: lead generation, advertising, and retargeting alongside AI, designed to work alongside your existing CRM.",
   },
 ];
 
@@ -194,8 +199,18 @@ const TABLE: { feature: string; blacksync: Cell; ylopo: Cell }[] = [
   },
   {
     feature: "Pay-for-real-conversation model",
-    blacksync: { text: "Yes, credits weighted to live conversations", tone: "yes" },
+    blacksync: { text: "Yes, no answer and busy lines cost 0 credits", tone: "yes" },
     ylopo: { text: "Pricing not published, varies by market and setup", tone: "neutral" },
+  },
+  {
+    feature: "Voice options",
+    blacksync: { text: "40+ voices, fully customizable", tone: "yes" },
+    ylopo: { text: "4 named voice demos published (Donna, Ryan, Selena, Kathy)", tone: "neutral" },
+  },
+  {
+    feature: "Multilingual support",
+    blacksync: { text: "Yes, 40+ languages", tone: "yes" },
+    ylopo: { text: "Spanish listed as coming soon, confirm current status", tone: "neutral" },
   },
   {
     feature: "Broader marketing and lead generation ecosystem",
@@ -234,7 +249,7 @@ const FAQS = [
   },
   {
     q: "Does BlackSync charge for unanswered calls?",
-    a: "BlackSync is structured so credits are primarily used when the agent actually reaches and speaks with a lead. No answer, busy lines and voicemails do not consume the same usage as a real conversation, and a quick hang-up is not counted as a full one. Current details are on the pricing page.",
+    a: "No. No answer and a busy line cost 0 credits, and voicemail costs 0 credits too. A quick hang-up is not counted as a full conversation. You are paying for the agent actually talking to your lead, not for the phone ringing. Current details are on the pricing page.",
   },
   {
     q: "Can I use BlackSync without replacing my CRM?",
@@ -259,7 +274,7 @@ const SOURCES = [
   {
     label: "Ylopo AI Voice",
     href: "https://www.ylopo.com/ylopo-ai-voice",
-    note: "Calling window, live transfers, scheduled callbacks",
+    note: "Calling window, live transfers, scheduled callbacks, named voice demos",
   },
   {
     label: "Ylopo AI²",
@@ -270,6 +285,11 @@ const SOURCES = [
     label: "Ylopo FAQ",
     href: "https://www.ylopo.com/faq",
     note: "Pricing approach and contract statements",
+  },
+  {
+    label: "rAIya Voice Enhancements",
+    href: "https://www.ylopo.com/ylopo-v2/new-raiya-voice-features",
+    note: "Voice options and multilingual support status",
   },
 ];
 
@@ -406,6 +426,48 @@ export default function ComparePage() {
         </div>
       </header>
 
+      {/* Quick verdict: a head-to-head snapshot, not a homepage-style feature section */}
+      <section className="py-10 md:py-14" aria-labelledby="verdict-heading">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="verdict-heading" className="sr-only">
+            BlackSync AI and Ylopo at a glance
+          </h2>
+          <div
+            className="grid sm:grid-cols-2 gap-px rounded-2xl border border-card-border bg-border overflow-hidden"
+            data-testid="card-quick-verdict"
+          >
+            <div className="bg-card p-6 md:p-7">
+              <p className="font-mono text-[10px] uppercase tracking-wider text-primary mb-2">
+                BlackSync AI
+              </p>
+              <p className="font-display text-lg md:text-xl font-semibold tracking-tight mb-4">
+                Custom AI calling layer
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>Built around your CRM and workflow</li>
+                <li>No answer and busy lines cost 0 credits</li>
+                <li>Start with one campaign, no long lock-in</li>
+                <li>40+ voices, 40+ languages</li>
+              </ul>
+            </div>
+            <div className="bg-card p-6 md:p-7">
+              <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
+                Ylopo
+              </p>
+              <p className="font-display text-lg md:text-xl font-semibold tracking-tight mb-4">
+                All-in-one marketing ecosystem
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>Lead gen, ads, and retargeting plus AI</li>
+                <li>AI Voice currently requires Follow Up Boss</li>
+                <li>90 days written notice to cancel, per its agreement</li>
+                <li>4 named AI Voice demos published</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Positioning */}
       <section className="py-16 md:py-20" aria-labelledby="positioning-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -440,155 +502,176 @@ export default function ComparePage() {
         </div>
       </section>
 
-      {/* Differentiators */}
+      {/* Point-by-point comparison */}
       <section className="py-16 md:py-24 bg-muted/40 border-y border-border" aria-labelledby="diff-heading">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div id="diff-heading">
-            <SectionHeading
-              eyebrow="What Is Different"
-              title={
-                <>
-                  Where BlackSync <span className="text-accent-grad">takes a different approach</span>
-                </>
-              }
-              lead="Eight things teams tell us matter most when they are comparing BlackSync and Ylopo."
-            />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12 md:mb-14">
+            <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">
+              Feature by feature
+            </p>
+            <h2
+              id="diff-heading"
+              className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-balance"
+            >
+              BlackSync vs Ylopo, point by point
+            </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-14">
+          <div className="divide-y divide-border rounded-2xl border border-card-border bg-card overflow-hidden">
             {DIFFERENTIATORS.map((d, i) => (
-              <Reveal key={d.title} delay={i * 0.05} className="h-full">
-                <article
-                  className="flex h-full flex-col rounded-2xl border border-card-border bg-card p-6 md:p-7 shadow-sm"
-                  data-testid={`card-differentiator-${i}`}
-                >
-                  <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <d.icon className="h-5 w-5" />
+              <div key={d.title} className="p-6 md:p-8" data-testid={`row-differentiator-${i}`}>
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <d.icon className="h-4 w-4" />
                   </span>
-                  <h3 className="font-display text-lg md:text-xl font-semibold tracking-tight mb-3 text-pretty">
+                  <h3 className="font-display text-base md:text-lg font-semibold tracking-tight">
                     {d.title}
                   </h3>
-                  <div className="space-y-3 text-sm md:text-base text-muted-foreground leading-relaxed text-pretty">
-                    {d.body.map((p) => (
-                      <p key={p.slice(0, 40)}>{p}</p>
-                    ))}
+                </div>
+                <div className="grid md:grid-cols-2 gap-5 md:gap-8 md:pl-12">
+                  <div className="md:border-l md:border-border md:pl-6">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-primary mb-1.5">
+                      BlackSync AI
+                    </p>
+                    <p className="text-sm md:text-base text-foreground/90 leading-relaxed text-pretty">
+                      {d.blacksync}
+                    </p>
                   </div>
-                </article>
-              </Reveal>
+                  <div className="md:border-l md:border-border md:pl-6">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-1.5">
+                      Ylopo
+                    </p>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed text-pretty">
+                      {d.ylopo}
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
-          <Reveal delay={0.1}>
-            <div className="mt-12 rounded-2xl border border-card-border bg-card p-6 md:p-8">
-              <h3 className="font-display text-lg font-semibold tracking-tight mb-2">
-                Campaigns teams run on BlackSync
-              </h3>
-              <p className="text-sm text-muted-foreground mb-5">
-                Each of these can be its own agent, with its own script, criteria, and follow-up rules.
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {CAMPAIGNS.map((c) => (
-                  <li
-                    key={c}
-                    className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-xs md:text-sm font-medium text-foreground/85"
-                    data-testid={`chip-campaign-${c.toLowerCase().replace(/\s+/g, "-")}`}
-                  >
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+          <div className="mt-8 rounded-2xl border border-card-border bg-card p-6 md:p-8">
+            <h3 className="font-display text-base md:text-lg font-semibold tracking-tight mb-2">
+              Campaigns teams run on BlackSync
+            </h3>
+            <p className="text-sm text-muted-foreground mb-5">
+              Each of these can be its own agent, with its own script, criteria, and follow-up rules.
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {CAMPAIGNS.map((c) => (
+                <li
+                  key={c}
+                  className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-xs md:text-sm font-medium text-foreground/85"
+                  data-testid={`chip-campaign-${c.toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  {c}
+                </li>
+              ))}
+              <li
+                className="inline-flex items-center rounded-full border border-dashed border-primary/50 bg-primary/5 px-3 py-1.5 text-xs md:text-sm font-medium text-primary"
+                data-testid="chip-campaign-custom"
+              >
+                Whatever your heart desires, we will build it
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
       {/* Comparison table */}
       <section className="py-16 md:py-24" aria-labelledby="table-heading">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div id="table-heading">
-            <SectionHeading
-              eyebrow="Side by Side"
-              title={
-                <>
-                  BlackSync vs Ylopo <span className="text-accent-grad">at a glance</span>
-                </>
-              }
-              lead="Ylopo does not publish every detail, so anything we could not verify from their own material is marked as such rather than guessed at."
-            />
+          <div className="max-w-2xl mb-10">
+            <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">
+              Full comparison table
+            </p>
+            <h2
+              id="table-heading"
+              className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-balance"
+            >
+              BlackSync vs Ylopo at a glance
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground leading-relaxed text-pretty">
+              Ylopo does not publish every detail, so anything we could not
+              verify from their own material is marked as such rather than
+              guessed at.
+            </p>
           </div>
 
-          <Reveal delay={0.05}>
-            <div className="mt-12 overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
-              <table className="w-full text-left" data-testid="table-comparison">
-                <caption className="sr-only">
-                  Feature comparison between BlackSync AI and Ylopo
-                </caption>
-                <thead className="hidden md:table-header-group">
-                  <tr className="border-b border-border bg-muted/50">
-                    <th scope="col" className="p-4 font-display text-sm font-semibold w-[30%]">
-                      Capability
-                    </th>
-                    <th scope="col" className="p-4 font-display text-sm font-semibold text-primary w-[35%]">
-                      BlackSync AI
-                    </th>
-                    <th scope="col" className="p-4 font-display text-sm font-semibold w-[35%]">
-                      Ylopo
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {TABLE.map((row, i) => (
-                    <tr
-                      key={row.feature}
-                      className="block border-b border-border last:border-0 p-4 md:p-0 md:table-row"
-                      data-testid={`row-compare-${i}`}
+          <div className="overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
+            <table className="w-full text-left" data-testid="table-comparison">
+              <caption className="sr-only">
+                Feature comparison between BlackSync AI and Ylopo
+              </caption>
+              <thead className="hidden md:table-header-group">
+                <tr className="border-b border-border bg-muted/50">
+                  <th scope="col" className="p-4 font-display text-sm font-semibold w-[30%]">
+                    Capability
+                  </th>
+                  <th scope="col" className="p-4 font-display text-sm font-semibold text-primary bg-primary/[0.06] w-[35%]">
+                    BlackSync AI
+                  </th>
+                  <th scope="col" className="p-4 font-display text-sm font-semibold w-[35%]">
+                    Ylopo
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {TABLE.map((row, i) => (
+                  <tr
+                    key={row.feature}
+                    className={`block border-b border-border last:border-0 p-4 md:p-0 md:table-row ${
+                      i % 2 === 1 ? "md:bg-muted/20" : ""
+                    }`}
+                    data-testid={`row-compare-${i}`}
+                  >
+                    <th
+                      scope="row"
+                      className="block text-left font-display text-base font-semibold md:table-cell md:p-4 md:align-top md:text-sm"
                     >
-                      <th
-                        scope="row"
-                        className="block text-left font-display text-base font-semibold md:table-cell md:p-4 md:align-top md:text-sm"
+                      {row.feature}
+                    </th>
+                    <td
+                      className={`block pt-3 md:table-cell md:p-4 md:align-top md:pt-4 md:bg-primary/[0.06]`}
+                    >
+                      <span className="md:hidden font-mono text-[10px] uppercase tracking-wider text-primary block mb-1">
+                        BlackSync AI
+                      </span>
+                      <span
+                        className={`flex items-start gap-2 text-sm ${
+                          row.blacksync.tone === "yes"
+                            ? "text-foreground font-medium"
+                            : "text-muted-foreground"
+                        }`}
                       >
-                        {row.feature}
-                      </th>
-                      <td className="block pt-3 md:table-cell md:p-4 md:align-top md:pt-4">
-                        <span className="md:hidden font-mono text-[10px] uppercase tracking-wider text-primary block mb-1">
-                          BlackSync AI
-                        </span>
-                        <span
-                          className={`flex items-start gap-2 text-sm ${
-                            row.blacksync.tone === "yes"
-                              ? "text-foreground font-medium"
-                              : "text-muted-foreground"
-                          }`}
-                        >
-                          {row.blacksync.tone === "yes" && (
-                            <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-                          )}
-                          {row.blacksync.text}
-                        </span>
-                      </td>
-                      <td className="block pt-3 md:table-cell md:p-4 md:align-top md:pt-4">
-                        <span className="md:hidden font-mono text-[10px] uppercase tracking-wider text-muted-foreground block mb-1">
-                          Ylopo
-                        </span>
-                        <span
-                          className={`flex items-start gap-2 text-sm ${
-                            row.ylopo.tone === "yes"
-                              ? "text-foreground font-medium"
-                              : "text-muted-foreground"
-                          }`}
-                        >
-                          {row.ylopo.tone === "yes" && (
-                            <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-                          )}
-                          {row.ylopo.text}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Reveal>
+                        {row.blacksync.tone === "yes" && (
+                          <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                        )}
+                        {row.blacksync.text}
+                      </span>
+                    </td>
+                    <td className="block pt-3 md:table-cell md:p-4 md:align-top md:pt-4">
+                      <span className="md:hidden font-mono text-[10px] uppercase tracking-wider text-muted-foreground block mb-1">
+                        Ylopo
+                      </span>
+                      <span
+                        className={`flex items-start gap-2 text-sm ${
+                          row.ylopo.tone === "yes"
+                            ? "text-foreground font-medium"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {row.ylopo.tone === "yes" && (
+                          <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                        )}
+                        {row.ylopo.text}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <Reveal delay={0.1}>
             <div className="mt-6 rounded-xl border border-border bg-muted/40 p-5">
