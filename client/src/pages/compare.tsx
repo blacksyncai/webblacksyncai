@@ -85,7 +85,7 @@ const DIFFERENTIATORS: {
     icon: Database,
     title: "CRM context",
     blacksync:
-      "Integrates with Follow Up Boss, Sierra, and kvCORE. The agent can use lead name, property address, budget, last interaction, assigned agent, prior notes, and buyer or seller status on the call itself.",
+      "Integrates with Follow Up Boss, Sierra, and kvCORE. The agent can use lead name, property address, budget, last interaction, assigned agent, prior notes, and buyer or seller status on the call itself. No CRM yet? A spreadsheet of leads works too, as long as it has the fields you want the agent to use.",
     ylopo:
       "Natively syncs with Follow Up Boss, Sierra, Lofty, and Wise Agent, with partial two-way sync to 15+ other CRMs. AI Voice specifically is currently available only on Follow Up Boss.",
   },
@@ -109,7 +109,7 @@ const DIFFERENTIATORS: {
     icon: Layers,
     title: "Getting started",
     blacksync:
-      "Start with one campaign and one segment of your database, then expand once the numbers hold up.",
+      "Start with one campaign and one segment of your database, then expand once the numbers hold up. Every plan is month to month: downgrade, pause, or cancel before your next billing cycle, no notice period required.",
     ylopo:
       "Ylopo's Platform as a Service Agreement states subscription terms auto-renew unless a party gives 90 days written notice, and either party may terminate for convenience on 90 days written notice, with prepaid fees non-refundable.",
   },
@@ -236,6 +236,10 @@ const FAQS = [
     a: "It depends on what you want the AI to do. If you want one platform that handles advertising, lead generation, nurturing and AI together, Ylopo is a strong fit. If you already have lead sources and a CRM you like and you want a highly configurable AI calling and follow-up layer on top of them, BlackSync is built for that. BlackSync lets you build separate agents per campaign, set your own redial and escalation logic, and use your existing CRM context on every call.",
   },
   {
+    q: "Does BlackSync require a contract or cancellation notice?",
+    a: "No. Every BlackSync plan is month to month, with no cancellation notice or required timeframe. You can cancel any time before your next billing cycle, downgrade a plan, or scale up or down as your needs change. Ylopo's published Platform as a Service Agreement requires at least 90 days written notice to cancel or to stop automatic renewal.",
+  },
+  {
     q: "Does BlackSync integrate with Follow Up Boss?",
     a: "Yes. BlackSync integrates with Follow Up Boss, and also with Sierra, kvCORE, Salesforce, HubSpot and other platforms through native integrations, Zapier and webhooks. Your agent can read lead context from the CRM before the call and write call outcomes, recordings, transcripts, dispositions and tags back afterwards.",
   },
@@ -253,7 +257,7 @@ const FAQS = [
   },
   {
     q: "Can I use BlackSync without replacing my CRM?",
-    a: "Yes, and that is the intended setup. BlackSync is the AI calling and follow-up layer, not a replacement for your CRM, your lead sources or your ad spend. If Follow Up Boss and your current lead flow are working, you keep them and BlackSync works inside them.",
+    a: "Yes, and that is the intended setup. BlackSync is the AI calling and follow-up layer, not a replacement for your CRM, your lead sources or your ad spend. If Follow Up Boss and your current lead flow are working, you keep them and BlackSync works inside them. Do not have a CRM at all? A spreadsheet of leads with the right fields works too.",
   },
   {
     q: "Can BlackSync warm transfer leads to an agent?",
@@ -446,7 +450,7 @@ export default function ComparePage() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>Built around your CRM and workflow</li>
                 <li>No answer and busy lines cost 0 credits</li>
-                <li>Start with one campaign, no long lock-in</li>
+                <li>Month to month, cancel before your next bill</li>
                 <li>40+ voices, 40+ languages</li>
               </ul>
             </div>
@@ -463,6 +467,50 @@ export default function ComparePage() {
                 <li>90 days written notice to cancel, per its agreement</li>
                 <li>4 named AI Voice demos published</li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* No lock-in: pulled up front and given its own section because it is
+          the thing most likely to actually change a team's decision. */}
+      <section className="py-10 md:py-14" aria-labelledby="lockin-heading">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-primary/30 bg-primary/[0.04] p-6 md:p-9">
+            <div className="flex items-start gap-4">
+              <span className="hidden sm:flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Layers className="h-5 w-5" />
+              </span>
+              <div>
+                <h2
+                  id="lockin-heading"
+                  className="font-display text-xl md:text-2xl font-semibold tracking-tight mb-3 text-balance"
+                >
+                  No lock-in, month to month
+                </h2>
+                <div className="space-y-3 text-sm md:text-base text-foreground/90 leading-relaxed text-pretty">
+                  <p>
+                    BlackSync does not need to lock you into a plan to make
+                    money. We believe that if we deliver results, you will
+                    stay because it works, not because you are stuck.
+                  </p>
+                  <p>
+                    Every plan is month to month. There is no cancellation
+                    notice or required timeframe. Cancel any time before your
+                    next billing cycle.
+                  </p>
+                  <p>
+                    Downgrade when you need to. Scale up when a campaign is
+                    working. Slow down when it is not. You pay for what you
+                    use.
+                  </p>
+                  <p className="text-muted-foreground">
+                    For comparison, Ylopo's published Platform as a Service
+                    Agreement requires at least 90 days written notice to
+                    cancel or to stop automatic renewal.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
