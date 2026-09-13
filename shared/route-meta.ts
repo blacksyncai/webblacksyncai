@@ -32,6 +32,12 @@ export function fullTitle(title?: string): string {
 export const ROUTE_META: Record<string, RouteMeta> = {
   "/": {},
 
+  "/real-estate-lead-generation": {
+    title: "Real Estate AI Lead Generation",
+    description:
+      "Answer a few questions and get a personalized real estate lead generation strategy built around your market, lead type, growth goals, and budget. Buyer and seller lead generation, done for you or DIY.",
+  },
+
   // Core marketing pages
   "/pricing": {
     title: "Pricing - AI Calling Plans from $98/mo",
