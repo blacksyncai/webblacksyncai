@@ -15,6 +15,7 @@ export function AiSdrSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Corporate Sales Teams"
+          eyebrowClassName="text-sm"
           title={
             <>
               Need a <span className="text-accent-grad">Sales Development Representative</span>?
