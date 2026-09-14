@@ -35,13 +35,19 @@ export function AiSdrSection() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <div className="mt-9 flex justify-center">
+          <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/ai-sdr">
-              <Button size="lg" data-testid="button-ai-sdr-explore">
+              <Button size="lg" className="w-full sm:w-auto" data-testid="button-ai-sdr-explore">
                 Explore the AI SDR
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </Link>
+            <a href="#enterprise">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto" data-testid="button-ai-sdr-enterprise">
+                Enterprise
+                <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </a>
           </div>
         </Reveal>
       </div>
