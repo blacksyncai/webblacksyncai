@@ -1,26 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  CheckCircle2,
-  XCircle,
-  PhoneCall,
-  Target,
-  Repeat,
-  Database,
-  Zap,
-  Building2,
-  TrendingUp,
-  CalendarClock,
-  Landmark,
-  Shield,
-  Truck,
-  Wrench,
-  Layers,
-  Users,
-  Home,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, XCircle, PhoneCall, ChevronRight } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -113,53 +93,45 @@ const PIPELINE = [
 ];
 
 const WORKFLOWS = [
-  { icon: Target, title: "Prospecting", body: "Call target accounts and qualify interest." },
-  { icon: Database, title: "Database Reactivation", body: "Wake up old leads, dormant accounts, and stale opportunities." },
-  { icon: Repeat, title: "Follow-Up", body: "Work callbacks and prospects that were not ready the first time." },
-  { icon: Zap, title: "Speed to Lead", body: "Respond to inbound leads immediately." },
-  { icon: Users, title: "Partner / Dealer Acquisition", body: "Recruit dealers, vendors, brokers, channel partners, or referral partners." },
-  { icon: TrendingUp, title: "Account Expansion", body: "Reach existing customers around new offers, renewals, or additional services." },
-  { icon: CalendarClock, title: "Event / Campaign Follow-Up", body: "Call webinar attendees, event leads, content downloads, demo requests, or quote inquiries." },
+  { title: "Prospecting", body: "Call target accounts and qualify interest." },
+  { title: "Database Reactivation", body: "Wake up old leads, dormant accounts, and stale opportunities." },
+  { title: "Follow-Up", body: "Work callbacks and prospects that were not ready the first time." },
+  { title: "Speed to Lead", body: "Respond to inbound leads immediately." },
+  { title: "Partner / Dealer Acquisition", body: "Recruit dealers, vendors, brokers, channel partners, or referral partners." },
+  { title: "Account Expansion", body: "Reach existing customers around new offers, renewals, or additional services." },
+  { title: "Event / Campaign Follow-Up", body: "Call webinar attendees, event leads, content downloads, demo requests, or quote inquiries." },
 ];
 
 const INDUSTRIES = [
   {
-    icon: Wrench,
     name: "Equipment Finance",
     points: ["Dealer acquisition", "Borrower prospecting", "Lease maturity outreach", "Dormant account reactivation"],
   },
   {
-    icon: Shield,
     name: "Commercial Insurance",
     points: ["Renewal-date prospecting", "Business-owner outreach", "Appointment setting", "Old quote follow-up"],
   },
   {
-    icon: Truck,
     name: "Logistics / 3PL",
     points: ["Shipper acquisition", "Lane-specific outreach", "Dormant shipper reactivation"],
   },
   {
-    icon: Building2,
     name: "Commercial Services",
     points: ["Facility manager prospecting", "Contract renewal outreach", "Quote follow-up"],
   },
   {
-    icon: Layers,
     name: "Vertical SaaS",
     points: ["Target account prospecting", "Demo booking", "Event lead follow-up"],
   },
   {
-    icon: Users,
     name: "Staffing",
     points: ["Employer acquisition", "Hiring-demand qualification"],
   },
   {
-    icon: Landmark,
     name: "Mortgage / Lending",
     points: ["Database reactivation", "Product-specific outreach", "Old inquiry follow-up", "Appointment setting"],
   },
   {
-    icon: Home,
     name: "Real Estate",
     points: ["Expireds", "FSBO", "Old buyer/seller reactivation", "Database prospecting"],
   },
@@ -571,9 +543,6 @@ export default function AiSdrPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {WORKFLOWS.map((w) => (
               <div key={w.title} className="rounded-2xl border border-card-border bg-card p-6" data-testid={`workflow-${w.title}`}>
-                <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-900">
-                  <w.icon className="h-4 w-4 text-zinc-300" />
-                </span>
                 <h3 className="font-display text-base font-semibold tracking-tight mb-1.5">{w.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{w.body}</p>
               </div>
@@ -602,9 +571,6 @@ export default function AiSdrPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {INDUSTRIES.map((ind) => (
               <div key={ind.name} className="rounded-2xl border border-card-border bg-card p-5" data-testid={`industry-${ind.name}`}>
-                <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-900">
-                  <ind.icon className="h-4 w-4 text-zinc-300" />
-                </span>
                 <h3 className="font-display text-sm font-semibold tracking-tight mb-2">{ind.name}</h3>
                 <ul className="space-y-1">
                   {ind.points.map((p) => (
