@@ -4,6 +4,7 @@ const footerLinks = {
   Product: [
     { label: "How it Works", href: "#how-it-works" },
     { label: "Pricing", href: "/pricing" },
+    { label: "AI SDR for Sales Teams", href: "/ai-sdr" },
     { label: "Book a Demo", href: "/book-demo" },
     { label: "Integrations", href: "#integrations" },
     { label: "Changelog", href: "#" },

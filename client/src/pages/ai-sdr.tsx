@@ -622,18 +622,21 @@ export default function AiSdrPage() {
       {/* ============ LIVE CALL DEMO ============ */}
       <section className="py-20 md:py-28" aria-labelledby="demo-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-12">
+          <div className="max-w-2xl mx-auto text-center mb-4">
             <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">Sample Call</p>
             <h2 id="demo-heading" className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
               What a First-Touch Call Sounds Like
             </h2>
           </div>
+          <p className="text-center text-sm text-muted-foreground mb-12">
+            Example: BlackSync deployed inside an equipment finance company.
+          </p>
 
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8" data-testid="call-demo">
             <div className="flex items-center gap-2 mb-6 pb-4 border-b border-zinc-800">
               <PhoneCall className="h-4 w-4 text-primary" />
               <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
-                Outbound · Equipment Finance Prospecting
+                AI SDR · Dealer Acquisition
               </span>
             </div>
 
@@ -643,30 +646,50 @@ export default function AiSdrPage() {
                 Yeah.
               </CallLine>
               <CallLine speaker="AI SDR — Lilly">
-                Perfect. This is Lilly. Quick heads up, I'm actually an AI agent. The reason I'm calling instead of
-                someone from the sales team is because I handle their first-touch outbound. Give me 20 seconds?
+                Perfect. This is Lilly calling with Summit Equipment Finance. Quick reason for the call, we work with
+                equipment dealers that want to give customers more financing options without slowing down the sales
+                desk. Are you currently using one finance partner, or a few?
               </CallLine>
               <CallLine speaker="Prospect" muted>
-                Sure.
+                We have a couple.
               </CallLine>
               <CallLine speaker="AI SDR — Lilly">
-                We work with equipment dealers that need more financing options for customers without adding more
-                work to the sales desk. Are you currently using one finance partner, or do you offer customers
-                multiple options?
+                Got it. And when a customer doesn't fit your primary lender, do you normally have a second option in
+                place, or does the deal usually stall there?
+              </CallLine>
+              <CallLine speaker="Prospect" muted>
+                Depends on the deal.
+              </CallLine>
+              <CallLine speaker="AI SDR — Lilly">
+                Makes sense. That's exactly why I called. Summit works as an additional financing option for deals
+                that don't fit cleanly with a dealer's primary lender. If it makes sense, I can connect you with
+                someone on the team for a quick conversation.
               </CallLine>
             </div>
 
             <div className="mt-7 pt-5 border-t border-zinc-800">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-3">Possible outcomes</p>
+              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-3">This call's outcome</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  Qualified
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-zinc-600 shrink-0" aria-hidden="true" />
+                <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  Live Transfer
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">or</span>
+                <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  Meeting Booked
+                </span>
+              </div>
+              <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-zinc-600 mb-2">
+                Other calls route to
+              </p>
               <div className="flex flex-wrap gap-2">
-                {OUTCOMES.map((o) => (
+                {OUTCOMES.filter((o) => o.tone !== "primary").map((o) => (
                   <span
                     key={o.label}
-                    className={`inline-flex items-center rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-wider ${
-                      o.tone === "primary"
-                        ? "border-primary/40 bg-primary/10 text-primary"
-                        : "border-zinc-700 bg-zinc-900 text-zinc-400"
-                    }`}
+                    className="inline-flex items-center rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-400"
                   >
                     {o.label}
                   </span>
@@ -674,6 +697,10 @@ export default function AiSdrPage() {
               </div>
             </div>
           </div>
+
+          <p className="mt-8 text-center font-display text-xl sm:text-2xl font-semibold tracking-tight text-balance">
+            Lilly doesn't sell BlackSync. <span className="text-primary">She sells for you.</span>
+          </p>
         </div>
       </section>
 
