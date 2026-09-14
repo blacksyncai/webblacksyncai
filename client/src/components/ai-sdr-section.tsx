@@ -14,7 +14,7 @@ export function AiSdrSection() {
     <section data-testid="section-ai-sdr" className="py-20 md:py-28 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="AI SDR"
+          eyebrow="Corporate Sales Teams"
           title={
             <>
               Need a <span className="text-accent-grad">Sales Development Representative</span>?
