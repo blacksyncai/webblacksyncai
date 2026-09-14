@@ -1,26 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  CheckCircle2,
-  XCircle,
-  PhoneCall,
-  Target,
-  Repeat,
-  Database,
-  Zap,
-  Building2,
-  TrendingUp,
-  CalendarClock,
-  Landmark,
-  Shield,
-  Truck,
-  Wrench,
-  Layers,
-  Users,
-  Home,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, XCircle, PhoneCall, ChevronRight } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -113,53 +93,45 @@ const PIPELINE = [
 ];
 
 const WORKFLOWS = [
-  { icon: Target, title: "Prospecting", body: "Call target accounts and qualify interest." },
-  { icon: Database, title: "Database Reactivation", body: "Wake up old leads, dormant accounts, and stale opportunities." },
-  { icon: Repeat, title: "Follow-Up", body: "Work callbacks and prospects that were not ready the first time." },
-  { icon: Zap, title: "Speed to Lead", body: "Respond to inbound leads immediately." },
-  { icon: Users, title: "Partner / Dealer Acquisition", body: "Recruit dealers, vendors, brokers, channel partners, or referral partners." },
-  { icon: TrendingUp, title: "Account Expansion", body: "Reach existing customers around new offers, renewals, or additional services." },
-  { icon: CalendarClock, title: "Event / Campaign Follow-Up", body: "Call webinar attendees, event leads, content downloads, demo requests, or quote inquiries." },
+  { title: "Prospecting", body: "Call target accounts and qualify interest." },
+  { title: "Database Reactivation", body: "Wake up old leads, dormant accounts, and stale opportunities." },
+  { title: "Follow-Up", body: "Work callbacks and prospects that were not ready the first time." },
+  { title: "Speed to Lead", body: "Respond to inbound leads immediately." },
+  { title: "Partner / Dealer Acquisition", body: "Recruit dealers, vendors, brokers, channel partners, or referral partners." },
+  { title: "Account Expansion", body: "Reach existing customers around new offers, renewals, or additional services." },
+  { title: "Event / Campaign Follow-Up", body: "Call webinar attendees, event leads, content downloads, demo requests, or quote inquiries." },
 ];
 
 const INDUSTRIES = [
   {
-    icon: Wrench,
     name: "Equipment Finance",
     points: ["Dealer acquisition", "Borrower prospecting", "Lease maturity outreach", "Dormant account reactivation"],
   },
   {
-    icon: Shield,
     name: "Commercial Insurance",
     points: ["Renewal-date prospecting", "Business-owner outreach", "Appointment setting", "Old quote follow-up"],
   },
   {
-    icon: Truck,
     name: "Logistics / 3PL",
     points: ["Shipper acquisition", "Lane-specific outreach", "Dormant shipper reactivation"],
   },
   {
-    icon: Building2,
     name: "Commercial Services",
     points: ["Facility manager prospecting", "Contract renewal outreach", "Quote follow-up"],
   },
   {
-    icon: Layers,
     name: "Vertical SaaS",
     points: ["Target account prospecting", "Demo booking", "Event lead follow-up"],
   },
   {
-    icon: Users,
     name: "Staffing",
     points: ["Employer acquisition", "Hiring-demand qualification"],
   },
   {
-    icon: Landmark,
     name: "Mortgage / Lending",
     points: ["Database reactivation", "Product-specific outreach", "Old inquiry follow-up", "Appointment setting"],
   },
   {
-    icon: Home,
     name: "Real Estate",
     points: ["Expireds", "FSBO", "Old buyer/seller reactivation", "Database prospecting"],
   },
@@ -571,9 +543,6 @@ export default function AiSdrPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {WORKFLOWS.map((w) => (
               <div key={w.title} className="rounded-2xl border border-card-border bg-card p-6" data-testid={`workflow-${w.title}`}>
-                <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-900">
-                  <w.icon className="h-4 w-4 text-zinc-300" />
-                </span>
                 <h3 className="font-display text-base font-semibold tracking-tight mb-1.5">{w.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{w.body}</p>
               </div>
@@ -602,9 +571,6 @@ export default function AiSdrPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {INDUSTRIES.map((ind) => (
               <div key={ind.name} className="rounded-2xl border border-card-border bg-card p-5" data-testid={`industry-${ind.name}`}>
-                <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-900">
-                  <ind.icon className="h-4 w-4 text-zinc-300" />
-                </span>
                 <h3 className="font-display text-sm font-semibold tracking-tight mb-2">{ind.name}</h3>
                 <ul className="space-y-1">
                   {ind.points.map((p) => (
@@ -622,18 +588,21 @@ export default function AiSdrPage() {
       {/* ============ LIVE CALL DEMO ============ */}
       <section className="py-20 md:py-28" aria-labelledby="demo-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-12">
+          <div className="max-w-2xl mx-auto text-center mb-4">
             <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">Sample Call</p>
             <h2 id="demo-heading" className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
               What a First-Touch Call Sounds Like
             </h2>
           </div>
+          <p className="text-center text-sm text-muted-foreground mb-12">
+            Example: BlackSync deployed inside an equipment finance company.
+          </p>
 
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8" data-testid="call-demo">
             <div className="flex items-center gap-2 mb-6 pb-4 border-b border-zinc-800">
               <PhoneCall className="h-4 w-4 text-primary" />
               <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
-                Outbound · Equipment Finance Prospecting
+                AI SDR · Dealer Acquisition
               </span>
             </div>
 
@@ -643,30 +612,50 @@ export default function AiSdrPage() {
                 Yeah.
               </CallLine>
               <CallLine speaker="AI SDR — Lilly">
-                Perfect. This is Lilly. Quick heads up, I'm actually an AI agent. The reason I'm calling instead of
-                someone from the sales team is because I handle their first-touch outbound. Give me 20 seconds?
+                Perfect. This is Lilly calling with Summit Equipment Finance. Quick reason for the call, we work with
+                equipment dealers that want to give customers more financing options without slowing down the sales
+                desk. Are you currently using one finance partner, or a few?
               </CallLine>
               <CallLine speaker="Prospect" muted>
-                Sure.
+                We have a couple.
               </CallLine>
               <CallLine speaker="AI SDR — Lilly">
-                We work with equipment dealers that need more financing options for customers without adding more
-                work to the sales desk. Are you currently using one finance partner, or do you offer customers
-                multiple options?
+                Got it. And when a customer doesn't fit your primary lender, do you normally have a second option in
+                place, or does the deal usually stall there?
+              </CallLine>
+              <CallLine speaker="Prospect" muted>
+                Depends on the deal.
+              </CallLine>
+              <CallLine speaker="AI SDR — Lilly">
+                Makes sense. That's exactly why I called. Summit works as an additional financing option for deals
+                that don't fit cleanly with a dealer's primary lender. If it makes sense, I can connect you with
+                someone on the team for a quick conversation.
               </CallLine>
             </div>
 
             <div className="mt-7 pt-5 border-t border-zinc-800">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-3">Possible outcomes</p>
+              <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-3">This call's outcome</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  Qualified
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-zinc-600 shrink-0" aria-hidden="true" />
+                <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  Live Transfer
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">or</span>
+                <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  Meeting Booked
+                </span>
+              </div>
+              <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-zinc-600 mb-2">
+                Other calls route to
+              </p>
               <div className="flex flex-wrap gap-2">
-                {OUTCOMES.map((o) => (
+                {OUTCOMES.filter((o) => o.tone !== "primary").map((o) => (
                   <span
                     key={o.label}
-                    className={`inline-flex items-center rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-wider ${
-                      o.tone === "primary"
-                        ? "border-primary/40 bg-primary/10 text-primary"
-                        : "border-zinc-700 bg-zinc-900 text-zinc-400"
-                    }`}
+                    className="inline-flex items-center rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-400"
                   >
                     {o.label}
                   </span>
@@ -674,6 +663,10 @@ export default function AiSdrPage() {
               </div>
             </div>
           </div>
+
+          <p className="mt-8 text-center font-display text-xl sm:text-2xl font-semibold tracking-tight text-balance">
+            Lilly doesn't sell BlackSync. <span className="text-primary">She sells for you.</span>
+          </p>
         </div>
       </section>
 

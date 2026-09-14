@@ -1,26 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
 import { ArrowRight, Globe } from "lucide-react";
 import { Link } from "wouter";
 import { Eyebrow, Reveal } from "@/components/ui/section";
 
-const models = [
+const MODEL_GROUPS = [
   // OpenAI — GPT-5.6 shipped Jul 2026 in three tiers (Sol / Terra / Luna).
-  { name: "GPT-5.6 Sol", provider: "OpenAI", short: "5.6 Sol", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5.6 Terra", provider: "OpenAI", short: "5.6 Terra", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5.6 Luna", provider: "OpenAI", short: "5.6 Luna", color: "bg-emerald-500", premium: false },
-  // Kept deliberately: the realtime voice model, which is what powers calling.
-  { name: "GPT-4o Realtime", provider: "OpenAI", short: "4o-RT", color: "bg-emerald-500", premium: true },
-
-  { name: "Claude Opus 5", provider: "Anthropic", short: "Opus 5", color: "bg-orange-500", premium: true },
-  { name: "Claude Sonnet 5", provider: "Anthropic", short: "Sonnet 5", color: "bg-orange-500", premium: true },
-  { name: "Claude Haiku 4.5", provider: "Anthropic", short: "Haiku 4.5", color: "bg-orange-500", premium: false },
-
-  { name: "Gemini 3.1 Pro", provider: "Google", short: "Gemini 3.1", color: "bg-blue-500", premium: true },
-  { name: "Gemini 3.6 Flash", provider: "Google", short: "3.6 Flash", color: "bg-blue-500", premium: false },
-
-  { name: "Grok 4.6", provider: "xAI", short: "Grok 4.6", color: "bg-violet-500", premium: true },
+  // GPT-4o Realtime is kept deliberately: it's the realtime voice model that powers calling.
+  { provider: "OpenAI", models: ["GPT-5.6 Sol", "GPT-5.6 Terra", "GPT-5.6 Luna", "GPT-4o Realtime"] },
+  { provider: "Anthropic", models: ["Claude Opus 5", "Claude Sonnet 5", "Claude Haiku 4.5"] },
+  { provider: "Google", models: ["Gemini 3.1 Pro", "Gemini 3.6 Flash"] },
+  { provider: "xAI", models: ["Grok 4.6"] },
 ];
 
 export function AIModelsSection() {
@@ -74,7 +63,8 @@ export function AIModelsSection() {
                     size="lg"
                     data-testid="button-ai-models-enterprise"
                   >
-                    Talk to Sales →
+                    Talk to Sales
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </a>
               </div>
@@ -88,37 +78,19 @@ export function AIModelsSection() {
             </div>
 
             {/* RIGHT */}
-            <div className="relative grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-              {models.map((model, idx) => (
-                <motion.div
-                  key={model.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: idx * 0.03 }}
-                  className="group relative aspect-square p-2 bg-background border border-border flex flex-col items-center justify-center text-center shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 cursor-default"
-                  style={{
-                    clipPath:
-                      "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
-                  }}
-                  data-testid={`tile-model-${idx}`}
-                  title={`${model.name} · ${model.provider}`}
-                >
-                  <div
-                    className={`w-2 h-2 rounded-full ${model.color} mb-1 ring-2 ring-transparent group-hover:ring-primary/20 transition-all`}
-                  />
-                  <span className="font-display text-[10px] sm:text-[11px] font-semibold leading-tight text-foreground">
-                    {model.short}
+            <div
+              className="relative rounded-2xl border border-border bg-background/60 divide-y divide-border"
+              data-testid="list-model-groups"
+            >
+              {MODEL_GROUPS.map((group) => (
+                <div key={group.provider} className="flex flex-col sm:flex-row sm:items-baseline gap-x-4 gap-y-1 px-5 py-4">
+                  <span className="shrink-0 w-24 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                    {group.provider}
                   </span>
-                  {model.premium && (
-                    <Badge
-                      variant="secondary"
-                      className="mt-1 font-mono text-[8px] px-1.5 py-0 h-3.5 leading-none tracking-wider"
-                    >
-                      PRO
-                    </Badge>
-                  )}
-                </motion.div>
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {group.models.join(", ")}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
