@@ -359,7 +359,7 @@ export default function AiSdrPage() {
           >
             <a href="#assessment" onClick={() => track("ai_sdr_cta_click", { label: "hero_primary" })}>
               <Button size="lg" className="w-full sm:w-auto" data-testid="button-hero-primary">
-                Build My AI SDR
+                Hire My AI SDR
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </a>
@@ -781,7 +781,7 @@ export default function AiSdrPage() {
           <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#assessment" onClick={() => track("ai_sdr_cta_click", { label: "final_primary" })}>
               <Button size="lg" className="w-full sm:w-auto" data-testid="button-final-primary">
-                Build My AI SDR
+                Hire My AI SDR
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </a>
