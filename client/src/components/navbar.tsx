@@ -39,6 +39,7 @@ import {
   Search,
   Flower2,
   Scale,
+  Briefcase,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { StartTrialDialog } from "@/components/start-trial-dialog";
@@ -193,6 +194,7 @@ const industries: IndustryDetail[] = [
 ];
 
 const resourceItems = [
+  { icon: Briefcase, label: "AI SDR", href: "/ai-sdr" },
   { icon: BookOpen, label: "Blog", href: "#" },
   { icon: FileText, label: "Documentation / API Docs", href: "#" },
   { icon: Clock, label: "Changelog", href: "#" },
