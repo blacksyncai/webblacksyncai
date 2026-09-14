@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, XCircle, PhoneCall, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, XCircle, PhoneCall, Mail, ChevronRight } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -64,7 +64,11 @@ const INTEGRATION_LEVEL_STYLE: Record<IntegrationLevel, string> = {
 };
 
 const PIPELINE = [
-  { n: "01", title: "Target", body: "Connect lead lists, CRM segments, inbound leads, or external data sources." },
+  {
+    n: "01",
+    title: "Prospect",
+    body: "Connect existing lead lists and CRM segments, or let BlackSync auto-prospect and build new target lists that match your ICP — everything flows into one pipeline.",
+  },
   {
     n: "02",
     title: "Personalize",
@@ -100,6 +104,25 @@ const WORKFLOWS = [
   { title: "Partner / Dealer Acquisition", body: "Recruit dealers, vendors, brokers, channel partners, or referral partners." },
   { title: "Account Expansion", body: "Reach existing customers around new offers, renewals, or additional services." },
   { title: "Event / Campaign Follow-Up", body: "Call webinar attendees, event leads, content downloads, demo requests, or quote inquiries." },
+];
+
+const CHANNELS = [
+  {
+    title: "Calling",
+    body: "Dials leads the moment they hit your pipeline — dozens of lines at once, with automated re-dials until someone picks up.",
+  },
+  {
+    title: "Email",
+    body: "Sends a personalized follow-up after every call, nurtures leads that aren't ready yet, and keeps the thread alive until they are.",
+  },
+  {
+    title: "LinkedIn",
+    body: "Connects with target accounts, opens conversations, and works replies in the same cadence as your calls and emails.",
+  },
+  {
+    title: "Landing Pages & Funnels",
+    body: "Spins up campaign-specific landing pages to capture inbound interest, then routes it straight into outbound follow-up.",
+  },
 ];
 
 const INDUSTRIES = [
@@ -555,6 +578,33 @@ export default function AiSdrPage() {
         </div>
       </section>
 
+      {/* ============ CHANNELS ============ */}
+      <section className="py-20 md:py-28" aria-labelledby="channels-heading">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">Every Channel</p>
+            <h2
+              id="channels-heading"
+              className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-balance"
+            >
+              One AI SDR. Every Channel Your Prospects Are On.
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground leading-relaxed text-pretty">
+              Calling is the core of it — but it doesn't work alone.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {CHANNELS.map((c) => (
+              <div key={c.title} className="rounded-2xl border border-card-border bg-card p-6" data-testid={`channel-${c.title}`}>
+                <h3 className="font-display text-base font-semibold tracking-tight mb-1.5">{c.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ============ INDUSTRIES ============ */}
       <section className="py-20 md:py-28 bg-muted/40 border-y border-border" aria-labelledby="industries-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -599,11 +649,31 @@ export default function AiSdrPage() {
           </p>
 
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8" data-testid="call-demo">
-            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-zinc-800">
-              <PhoneCall className="h-4 w-4 text-primary" />
-              <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
-                AI SDR · Dealer Acquisition
-              </span>
+            <div className="mb-6 pb-5 border-b border-zinc-800">
+              <div className="flex items-center gap-2 mb-4">
+                <PhoneCall className="h-4 w-4 text-primary" />
+                <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+                  AI SDR · Dealer Acquisition
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4" data-testid="live-dialing">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-zinc-500">Live Dialing</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-emerald-500">
+                    <span className="relative flex w-1.5 h-1.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                      <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    </span>
+                    90 calls running at once
+                  </span>
+                </div>
+                <div className="space-y-1.5">
+                  <DialRow number="(415) 555-0134" status="Ringing · 1" />
+                  <DialRow number="(212) 555-0198" status="Ringing · 3" />
+                  <DialRow number="(305) 555-0122" status="Connected · Ring 4" connected />
+                </div>
+              </div>
             </div>
 
             <div className="space-y-4">
@@ -662,6 +732,27 @@ export default function AiSdrPage() {
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8" data-testid="followup-email">
+            <div className="flex items-center gap-2 mb-5 pb-4 border-b border-zinc-800">
+              <Mail className="h-4 w-4 text-primary" />
+              <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+                Automated Follow-Up · Email
+              </span>
+            </div>
+            <p className="font-mono text-[9px] uppercase tracking-wider text-zinc-500 mb-1">Subject</p>
+            <p className="text-sm font-semibold text-zinc-100 mb-4">
+              Great talking, Mark — here's the info you requested
+            </p>
+            <p className="text-sm text-zinc-300 leading-relaxed">
+              Hey Mark, thanks for hopping on the call. Attached is a quick overview of how Summit works alongside a
+              dealer's primary lender, plus next steps to get you in front of the team. Let me know if anything
+              comes up before then.
+            </p>
+            <p className="mt-5 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+              Sent automatically · 3 minutes after the call
+            </p>
           </div>
 
           <p className="mt-8 text-center font-display text-xl sm:text-2xl font-semibold tracking-tight text-balance">
@@ -843,6 +934,27 @@ export default function AiSdrPage() {
       </section>
 
       <Footer />
+    </div>
+  );
+}
+
+function DialRow({
+  number,
+  status,
+  connected = false,
+}: {
+  number: string;
+  status: string;
+  connected?: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between rounded-lg bg-zinc-900 border border-zinc-800 px-3 py-2">
+      <span className="font-mono text-xs text-zinc-400">{number}</span>
+      <span
+        className={`font-mono text-[10px] uppercase tracking-wider ${connected ? "text-primary" : "text-zinc-500"}`}
+      >
+        {status}
+      </span>
     </div>
   );
 }

@@ -43,6 +43,7 @@ export function Reveal({
 /** Centered section heading block: eyebrow + title + optional lead. */
 export function SectionHeading({
   eyebrow,
+  eyebrowClassName,
   title,
   lead,
   className,
@@ -50,6 +51,8 @@ export function SectionHeading({
   as: Title = "h2",
 }: {
   eyebrow?: React.ReactNode;
+  /** Extra classes for the eyebrow pill, e.g. to bump its text size for one section. */
+  eyebrowClassName?: string;
   title: React.ReactNode;
   lead?: React.ReactNode;
   className?: string;
@@ -67,7 +70,7 @@ export function SectionHeading({
     >
       {eyebrow && (
         <Reveal>
-          <Eyebrow>{eyebrow}</Eyebrow>
+          <Eyebrow className={eyebrowClassName}>{eyebrow}</Eyebrow>
         </Reveal>
       )}
       <Reveal delay={0.05}>
