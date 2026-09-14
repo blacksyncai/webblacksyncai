@@ -151,12 +151,12 @@ const INDUSTRIES = [
     points: ["Employer acquisition", "Hiring-demand qualification"],
   },
   {
-    name: "Mortgage / Lending",
-    points: ["Database reactivation", "Product-specific outreach", "Old inquiry follow-up", "Appointment setting"],
+    name: "Merchant Services",
+    points: ["Business acquisition", "Rate-review outreach", "Dormant account reactivation", "Appointment setting"],
   },
   {
-    name: "Real Estate",
-    points: ["Expireds", "FSBO", "Old buyer/seller reactivation", "Database prospecting"],
+    name: "Payroll & HR Services",
+    points: ["Target account prospecting", "Demo booking", "Renewal-date outreach", "Event lead follow-up"],
   },
 ];
 
@@ -741,10 +741,18 @@ export default function AiSdrPage() {
                 Automated Follow-Up · Email
               </span>
             </div>
-            <p className="font-mono text-[9px] uppercase tracking-wider text-zinc-500 mb-1">Subject</p>
-            <p className="text-sm font-semibold text-zinc-100 mb-4">
-              Great talking, Mark — here's the info you requested
-            </p>
+            <div className="space-y-1.5 mb-4">
+              <div className="flex gap-2 text-xs">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-zinc-600 w-12 shrink-0 pt-0.5">To</span>
+                <span className="text-zinc-400">mark@[dealership].com</span>
+              </div>
+              <div className="flex gap-2 text-xs">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-zinc-600 w-12 shrink-0 pt-0.5">Subject</span>
+                <span className="text-sm font-semibold text-zinc-100">
+                  Great talking, Mark — here's the info you requested
+                </span>
+              </div>
+            </div>
             <p className="text-sm text-zinc-300 leading-relaxed">
               Hey Mark, thanks for hopping on the call. Attached is a quick overview of how Summit works alongside a
               dealer's primary lender, plus next steps to get you in front of the team. Let me know if anything
