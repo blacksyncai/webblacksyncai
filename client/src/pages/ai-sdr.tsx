@@ -171,7 +171,7 @@ const ENTERPRISE_CAPABILITIES = [
 const FAQS = [
   {
     q: "What is an AI SDR?",
-    a: "An AI SDR is a managed AI agent that handles outbound sales development — prospecting, calling, qualifying, following up, and handing off interested prospects — the same job a human SDR does, deployed as software your team configures around its own process.",
+    a: "SDR stands for Sales Development Representative. An AI SDR is a managed AI agent that handles outbound sales development — prospecting, calling, qualifying, following up, and handing off interested prospects — the same job a human Sales Development Representative does, deployed as software your team configures around its own process.",
   },
   {
     q: "Does BlackSync replace our existing SDR team?",
@@ -316,7 +316,7 @@ export default function AiSdrPage() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
             <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">
-              AI SDR / AI Sales Workforce
+              AI Sales Development Representative (SDR)
             </span>
           </motion.div>
 
