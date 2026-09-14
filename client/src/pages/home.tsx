@@ -4,6 +4,7 @@ import { CustomBuildSection } from "@/components/custom-build-section";
 import { DashboardMockupSection } from "@/components/dashboard-mockup-section";
 import { TrustStrip } from "@/components/trust-strip";
 import { ProductsSection } from "@/components/products-section";
+import { AiSdrSection } from "@/components/ai-sdr-section";
 import { PlatformBentoSection } from "@/components/platform-bento-section";
 import { AIModelsSection } from "@/components/ai-models-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
@@ -30,6 +31,7 @@ export default function Home() {
       <ClippedVideoTab />
       <TrustStrip />
       <ProductsSection />
+      <AiSdrSection />
       <PlatformBentoSection />
       <AIModelsSection />
       <HowItWorksSection />
