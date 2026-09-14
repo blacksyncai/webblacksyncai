@@ -126,7 +126,7 @@ export function BookCallDialog({
           <>
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-semibold tracking-tight">
-            Book a free 15-min call
+            Book a free 15-min Discovery Call
           </DialogTitle>
           <DialogDescription>
             Just a couple details so we can tailor the call to you.
