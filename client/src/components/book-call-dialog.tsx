@@ -36,13 +36,34 @@ const INDUSTRY_OPTIONS = [
   "Other",
 ];
 
+// Corporate/B2B outbound verticals -- matches the Industries grid on /ai-sdr,
+// since the generic consumer-facing list above doesn't fit that audience.
+const ENTERPRISE_INDUSTRY_OPTIONS = [
+  "Equipment Finance",
+  "Commercial Insurance",
+  "Logistics / 3PL",
+  "Commercial Services",
+  "Vertical SaaS",
+  "Staffing",
+  "Merchant Services",
+  "Payroll & HR Services",
+  "Real Estate",
+  "Insurance",
+  "Mortgage & Lending",
+  "Other",
+];
+
 export function BookCallDialog({
   children,
   onOpen,
+  context = "general",
 }: {
   children: React.ReactNode;
   onOpen?: () => void;
+  /** "enterprise" swaps the Industry options to corporate/B2B verticals. */
+  context?: "general" | "enterprise";
 }) {
+  const industryOptions = context === "enterprise" ? ENTERPRISE_INDUSTRY_OPTIONS : INDUSTRY_OPTIONS;
   const [open, setOpen] = useState(false);
   const [booking, setBooking] = useState(false);
   const [phone, setPhone] = useState("");
@@ -157,7 +178,7 @@ export function BookCallDialog({
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
-                {INDUSTRY_OPTIONS.map((opt) => (
+                {industryOptions.map((opt) => (
                   <SelectItem key={opt} value={opt}>
                     {opt}
                   </SelectItem>

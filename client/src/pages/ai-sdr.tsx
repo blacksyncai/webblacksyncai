@@ -853,7 +853,10 @@ export default function AiSdrPage() {
             </ul>
 
             <div className="mt-9">
-              <BookCallDialog onOpen={() => track("ai_sdr_enterprise_click", { label: "enterprise_section" })}>
+              <BookCallDialog
+                context="enterprise"
+                onOpen={() => track("ai_sdr_enterprise_click", { label: "enterprise_section" })}
+              >
                 <Button size="lg" data-testid="button-talk-enterprise">
                   Talk to Enterprise
                   <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -884,7 +887,10 @@ export default function AiSdrPage() {
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </a>
-            <BookCallDialog onOpen={() => track("ai_sdr_cta_click", { label: "final_secondary" })}>
+            <BookCallDialog
+              context="enterprise"
+              onOpen={() => track("ai_sdr_cta_click", { label: "final_secondary" })}
+            >
               <Button
                 size="lg"
                 variant="outline"
