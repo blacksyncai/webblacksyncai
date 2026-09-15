@@ -40,6 +40,7 @@ import {
   Flower2,
   Scale,
   Briefcase,
+  Info,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { StartTrialDialog } from "@/components/start-trial-dialog";
@@ -195,6 +196,7 @@ const industries: IndustryDetail[] = [
 
 const resourceItems = [
   { icon: Briefcase, label: "AI SDR", href: "/ai-sdr" },
+  { icon: Info, label: "Why BlackSync", href: "/why-blacksync" },
   { icon: BookOpen, label: "Blog", href: "#" },
   { icon: FileText, label: "Documentation / API Docs", href: "#" },
   { icon: Clock, label: "Changelog", href: "#" },
