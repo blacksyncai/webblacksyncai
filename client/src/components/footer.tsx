@@ -27,7 +27,7 @@ const footerLinks = {
     { label: "Ylopo Alternative", href: "/compare/ylopo-alternative" },
   ],
   Company: [
-    { label: "About", href: "#" },
+    { label: "About BlackSync", href: "/why-blacksync" },
     { label: "Blog", href: "#" },
     { label: "Careers", href: "/careers" },
     { label: "Enterprise", href: "/enterprise" },

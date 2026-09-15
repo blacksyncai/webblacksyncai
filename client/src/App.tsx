@@ -24,6 +24,7 @@ import ContactPage from "@/pages/contact";
 import ComparePage from "@/pages/compare";
 import RealEstateLeadGenerationPage from "@/pages/real-estate-lead-generation";
 import AiSdrPage from "@/pages/ai-sdr";
+import WhyBlackSyncPage from "@/pages/why-blacksync";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -69,6 +70,7 @@ function Router() {
       <Route path="/compare/ylopo-alternative" component={ComparePage} />
       <Route path="/real-estate-lead-generation" component={RealEstateLeadGenerationPage} />
       <Route path="/ai-sdr" component={AiSdrPage} />
+      <Route path="/why-blacksync" component={WhyBlackSyncPage} />
       <Route path="/industry/:slug" component={IndustryPage} />
       <Route path="/real-estate-ai-caller" component={() => <UseCasePage slug="real-estate-ai-caller" />} />
       <Route path="/expired-listing-ai" component={() => <UseCasePage slug="expired-listing-ai" />} />

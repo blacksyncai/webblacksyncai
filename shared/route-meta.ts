@@ -12,9 +12,9 @@ export const SITE_NAME = "BlackSync.ai";
 export const SITE_URL = "https://www.blacksync.ai";
 
 export const DEFAULT_TITLE =
-  `${SITE_NAME} - Your AI Outbound Sales Colleague | Real Estate, Insurance, Mortgage`;
+  "BlackSync | Custom AI Voice Agents for Sales & Customer Service";
 export const DEFAULT_DESCRIPTION =
-  "BlackSync is the AI ISA and SDR that calls your leads, books appointments, and fills your calendar. Built for real estate agents, insurance brokers, and mortgage lenders.";
+  "BlackSync builds custom AI voice agents for outbound sales, inbound calls, lead follow-up, appointment booking, and customer service. Built around your workflows, tools, and data.";
 
 export type RouteMeta = {
   /** Page title, without the " | BlackSync.ai" suffix. Omit for the homepage. */
@@ -31,6 +31,12 @@ export function fullTitle(title?: string): string {
 
 export const ROUTE_META: Record<string, RouteMeta> = {
   "/": {},
+
+  "/why-blacksync": {
+    title: "Why BlackSync",
+    description:
+      "BlackSync builds custom AI voice agents around your workflows, CRM, and business processes — for outbound sales, inbound calls, lead follow-up, and appointment booking.",
+  },
 
   "/ai-sdr": {
     title: "AI SDR for Outbound Sales Teams",

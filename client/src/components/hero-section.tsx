@@ -207,8 +207,8 @@ export function HeroSection() {
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-2 md:mb-3 leading-relaxed text-pretty"
             data-testid="text-hero-subheadline"
           >
-            Your workflows. Your tools. Your data. Built from scratch to work
-            like part of your team.
+            BlackSync builds custom AI voice agents around your workflows,
+            tools, and data, so they operate like part of your team.
           </motion.p>
 
           <motion.p
