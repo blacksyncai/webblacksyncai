@@ -214,12 +214,19 @@ export function EnterpriseSection() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
+                              <SelectItem value="equipment-finance">Equipment Finance</SelectItem>
+                              <SelectItem value="commercial-insurance">Commercial Insurance</SelectItem>
+                              <SelectItem value="logistics-3pl">Logistics / 3PL</SelectItem>
+                              <SelectItem value="commercial-services">Commercial Services</SelectItem>
+                              <SelectItem value="vertical-saas">Vertical SaaS</SelectItem>
+                              <SelectItem value="staffing">Staffing</SelectItem>
+                              <SelectItem value="merchant-services">Merchant Services</SelectItem>
+                              <SelectItem value="payroll-hr-services">Payroll & HR Services</SelectItem>
                               <SelectItem value="real-estate">Real Estate</SelectItem>
                               <SelectItem value="insurance">Insurance</SelectItem>
                               <SelectItem value="mortgage">Mortgage & Lending</SelectItem>
                               <SelectItem value="property-management">Property Management</SelectItem>
                               <SelectItem value="healthcare">Healthcare</SelectItem>
-                              <SelectItem value="home-services">Home Services</SelectItem>
                               <SelectItem value="auto-pc">Auto & P&C</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
