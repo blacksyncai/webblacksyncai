@@ -6,6 +6,7 @@ import { SectionHeading, Reveal } from "@/components/ui/section";
 import { Link } from "wouter";
 import { useState } from "react";
 import { CheckoutDialog, type CheckoutPlan } from "@/components/checkout-dialog";
+import { BookCallDialog } from "@/components/book-call-dialog";
 
 const creditFairness = [
   "No answer? 0 credits.",
@@ -153,10 +154,6 @@ export function PricingSection({ variant = "full" }: PricingSectionProps) {
     // restoring the setCheckoutPlan branch -- CheckoutDialog is still wired up.
     if (plan.checkoutUrl) {
       window.location.href = plan.checkoutUrl;
-    } else {
-      document
-        .getElementById("enterprise")
-        ?.scrollIntoView({ behavior: "smooth" });
     }
   }
 
@@ -272,15 +269,36 @@ export function PricingSection({ variant = "full" }: PricingSectionProps) {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    className="w-full"
-                    size="lg"
-                    variant={plan.popular ? "default" : "outline"}
-                    onClick={() => handlePlanClick(plan)}
-                    data-testid={`button-pricing-${plan.name.toLowerCase().replace(/\s/g, "-")}`}
-                  >
-                    {plan.cta}
-                  </Button>
+                  {plan.checkoutUrl ? (
+                    <Button
+                      className="w-full"
+                      size="lg"
+                      variant={plan.popular ? "default" : "outline"}
+                      onClick={() => handlePlanClick(plan)}
+                      data-testid={`button-pricing-${plan.name.toLowerCase().replace(/\s/g, "-")}`}
+                    >
+                      {plan.cta}
+                    </Button>
+                  ) : (
+                    <div className="space-y-2.5">
+                      <BookCallDialog context="enterprise">
+                        <Button
+                          className="w-full"
+                          size="lg"
+                          variant="outline"
+                          data-testid={`button-pricing-${plan.name.toLowerCase().replace(/\s/g, "-")}`}
+                        >
+                          {plan.cta}
+                        </Button>
+                      </BookCallDialog>
+                      <Link href="/ai-sdr" data-testid="link-pricing-corporate-sales">
+                        <Button className="w-full" size="lg" variant="ghost">
+                          Corporate Sales
+                          <ArrowRight className="w-4 h-4 ml-1.5" />
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </Reveal>
