@@ -73,7 +73,6 @@ export const CRM_OPTIONS: Option[] = [
   { value: "close", label: "Close" },
   { value: "zoho", label: "Zoho" },
   { value: "pipedrive", label: "Pipedrive" },
-  { value: "ghl", label: "GoHighLevel" },
   { value: "other", label: "Other" },
   { value: "none", label: "No CRM" },
 ];
