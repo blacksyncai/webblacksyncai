@@ -150,22 +150,22 @@ const TABLE: { feature: string; blacksync: Cell; ylopo: Cell }[] = [
   {
     feature: "High-volume outbound calling",
     blacksync: { text: "Yes, core of the platform", tone: "yes" },
-    ylopo: { text: "Available, varies by plan and setup", tone: "neutral" },
+    ylopo: { text: "Available, varies by plan and setup — AI Voice requires Follow Up Boss", tone: "neutral" },
   },
   {
     feature: "Database reactivation",
     blacksync: { text: "Yes, dedicated campaigns", tone: "yes" },
-    ylopo: { text: "Available through AI Text and AI Voice", tone: "neutral" },
+    ylopo: { text: "Available through AI Text and AI Voice — AI Voice requires Follow Up Boss", tone: "neutral" },
   },
   {
     feature: "Expired and FSBO campaigns",
     blacksync: { text: "Yes, dedicated agents", tone: "yes" },
-    ylopo: { text: "Not documented publicly, confirm with Ylopo", tone: "neutral" },
+    ylopo: { text: "Not documented publicly — any AI Voice component requires Follow Up Boss", tone: "neutral" },
   },
   {
     feature: "Redial logic",
     blacksync: { text: "Configurable per campaign", tone: "yes" },
-    ylopo: { text: "Available, Ylopo publishes a 90 day calling window", tone: "neutral" },
+    ylopo: { text: "Available, Ylopo publishes a 90 day calling window — requires Follow Up Boss for AI Voice", tone: "neutral" },
   },
   {
     feature: "CRM context personalization",
@@ -180,7 +180,7 @@ const TABLE: { feature: string; blacksync: Cell; ylopo: Cell }[] = [
   {
     feature: "Warm transfers",
     blacksync: { text: "Yes", tone: "yes" },
-    ylopo: { text: "Yes, live transfer to agents", tone: "neutral" },
+    ylopo: { text: "Yes, live transfer to agents — requires Follow Up Boss for AI Voice", tone: "neutral" },
   },
   {
     feature: "Calendar booking",
