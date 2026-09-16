@@ -1,12 +1,12 @@
 import { ToolDock, ToolDockTile, type ToolDockItem } from "@/components/ui/techstack";
 
-type Brand = { label: string; file: string; fit: string };
+type Brand = { label: string; gridLabel?: string; file: string; fit: string };
 
 const BRANDS: Brand[] = [
   { label: "Salesforce", file: "salesforce", fit: "size-[56%]" },
   { label: "HubSpot", file: "hubspot", fit: "size-[58%]" },
+  { label: "Microsoft Dynamics 365", gridLabel: "Dynamics 365", file: "dynamics365", fit: "size-[58%]" },
   { label: "ZoomInfo", file: "zoominfo", fit: "size-[56%]" },
-  { label: "Outreach", file: "outreach", fit: "size-[58%]" },
   { label: "Gong", file: "gong", fit: "size-[62%]" },
   { label: "Oracle", file: "oracle", fit: "size-[72%]" },
 ];
@@ -65,7 +65,7 @@ export function StackDockSection() {
                 <BrandLogo file={brand.file} fit={brand.fit} />
               </ToolDockTile>
             </div>
-            <span className="text-sm font-medium text-foreground">{brand.label}</span>
+            <span className="text-sm font-medium text-foreground">{brand.gridLabel ?? brand.label}</span>
           </div>
         ))}
       </div>
