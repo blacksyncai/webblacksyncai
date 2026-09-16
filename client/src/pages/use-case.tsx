@@ -31,7 +31,6 @@ type UseCase = {
   painPoints: string[];
   helps: { title: string; description: string }[];
   integrations: string[];
-  testimonial: { quote: string; name: string; role: string };
   faqs: { q: string; a: string }[];
   related: { label: string; href: string }[];
 };
@@ -79,12 +78,6 @@ export const USE_CASES: Record<string, UseCase> = {
       "Realtor.com",
       "Calendly",
     ],
-    testimonial: {
-      quote:
-        "We replaced two ISAs with BlackSync. It works FSBOs and Expireds all morning, hits speed-to-lead the second a Zillow inquiry comes in, and books showings straight onto our calendars. 8 appointments our first week.",
-      name: "Marcus K.",
-      role: "Broker/Owner, Atlanta GA",
-    },
     faqs: [
       {
         q: "Does the AI sound like a robot?",
@@ -147,12 +140,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Follow Up Boss", "Sierra Interactive", "kvCORE", "Vulcan7", "REDX", "Zapier"],
-    testimonial: {
-      quote:
-        "We had 4,000 old leads nobody had called in two years. BlackSync worked the entire list in about a week and handed us back 60 warm conversations to follow up on ourselves.",
-      name: "Chris B.",
-      role: "Broker/Owner, Orlando FL",
-    },
     faqs: [
       {
         q: "What is an AI cold caller?",
@@ -215,12 +202,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Vulcan7", "REDX", "Espresso Agent", "Follow Up Boss", "kvCORE", "Calendly"],
-    testimonial: {
-      quote:
-        "We replaced two ISAs with BlackSync. It works FSBOs and Expireds all morning, hits speed-to-lead the second a Zillow inquiry comes in, and books showings straight onto our calendars. 8 appointments our first week.",
-      name: "Gina P.",
-      role: "Broker/Owner, Sacramento CA",
-    },
     faqs: [
       {
         q: "How do I get my expired listing leads into BlackSync?",
@@ -279,12 +260,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Vulcan7", "REDX", "Espresso Agent", "Zillow Premier", "Realtor.com", "Follow Up Boss"],
-    testimonial: {
-      quote:
-        "We replaced two ISAs with BlackSync. It works FSBOs and Expireds all morning, hits speed-to-lead the second a Zillow inquiry comes in, and books showings straight onto our calendars. 8 appointments our first week.",
-      name: "Kevin D.",
-      role: "Broker/Owner, Nashville TN",
-    },
     faqs: [
       {
         q: "Does the AI push for the listing on the first call?",
@@ -340,12 +315,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["LendingTree", "Encompass", "Salesforce", "HubSpot", "Calendly", "Zapier"],
-    testimonial: {
-      quote:
-        "We were missing 60% of leads after-hours. Now BlackSync calls them all and books them on my calendar before I wake up.",
-      name: "James R.",
-      role: "Loan Officer, Phoenix AZ",
-    },
     faqs: [
       {
         q: "What information does the AI collect before booking?",
@@ -400,12 +369,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Follow Up Boss", "Salesforce", "HubSpot", "kvCORE", "Zapier", "Calendly"],
-    testimonial: {
-      quote:
-        "We replaced two ISAs with one AI agent. Cost dropped 80%, qualified appointments tripled, and it never misses a follow-up.",
-      name: "David L.",
-      role: "Broker, Mortgage — Denver CO",
-    },
     faqs: [
       {
         q: "Does BlackSync find new leads for me, or work the ones I already have?",
@@ -462,12 +425,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Calendly", "Follow Up Boss", "HubSpot", "Salesforce", "Zapier"],
-    testimonial: {
-      quote:
-        "Our calendar went from empty Tuesdays to fully booked. BlackSync called 400 leads our team had given up on and booked 23 showings.",
-      name: "Jessica M.",
-      role: "Team Lead, Real Estate — Tampa FL",
-    },
     faqs: [
       {
         q: "What does an AI appointment setter actually do?",
@@ -522,12 +479,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Follow Up Boss", "Salesforce", "HubSpot", "kvCORE", "Zapier"],
-    testimonial: {
-      quote:
-        "Set it up Monday morning. Had 6 qualified policy reviews booked by Friday. The voice is honestly indistinguishable from a real rep.",
-      name: "Priya S.",
-      role: "Agency Owner, Insurance — Dallas TX",
-    },
     faqs: [
       {
         q: "What signals does the AI use to score a lead?",
@@ -582,12 +533,6 @@ export const USE_CASES: Record<string, UseCase> = {
       },
     ],
     integrations: ["Applied", "EZLynx", "HubSpot", "Salesforce", "Zapier", "Twilio"],
-    testimonial: {
-      quote:
-        "Our AI agent calls every quote request, qualifies it, and books my CSR's calendar. Closing rate went up, payroll went down.",
-      name: "Sarah T.",
-      role: "Agency Owner, Austin TX",
-    },
     faqs: [
       {
         q: "What types of insurance leads can it handle?",
@@ -799,23 +744,6 @@ export default function UseCasePage({ slug }: { slug: string }) {
                 </div>
               ))}
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Reveal>
-            <p className="font-display text-2xl md:text-3xl font-medium leading-snug mb-8 text-foreground text-balance">
-              "{useCase.testimonial.quote}"
-            </p>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p className="text-sm font-semibold">{useCase.testimonial.name}</p>
-            <p className="text-sm font-mono uppercase tracking-wide text-muted-foreground">
-              {useCase.testimonial.role}
-            </p>
           </Reveal>
         </div>
       </section>
