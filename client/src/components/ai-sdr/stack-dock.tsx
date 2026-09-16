@@ -1,17 +1,23 @@
 import { ToolDock, ToolDockTile, type ToolDockItem } from "@/components/ui/techstack";
 
-type Brand = { label: string; gridLabel?: string; file: string; fit: string };
+type Brand = { label: string; gridLabel?: string; file: string; fit: string; tile: string };
 
 const BRANDS: Brand[] = [
-  { label: "Salesforce", file: "salesforce", fit: "size-[56%]" },
-  { label: "HubSpot", file: "hubspot", fit: "size-[58%]" },
-  { label: "Microsoft Dynamics 365", gridLabel: "Dynamics 365", file: "dynamics365", fit: "size-[58%]" },
-  { label: "ZoomInfo", file: "zoominfo", fit: "size-[56%]" },
-  { label: "Gong", file: "gong", fit: "size-[62%]" },
-  { label: "Oracle", file: "oracle", fit: "size-[72%]" },
+  { label: "Salesforce", file: "salesforce", fit: "size-[56%]", tile: "bg-[#00A1E0]" },
+  { label: "HubSpot", file: "hubspot", fit: "size-[58%]", tile: "bg-[#FF7A59]" },
+  {
+    label: "Microsoft Dynamics 365",
+    gridLabel: "Dynamics 365",
+    file: "dynamics365",
+    fit: "size-[58%]",
+    tile: "bg-[#0078D4]",
+  },
+  { label: "ZoomInfo", file: "zoominfo", fit: "size-[56%]", tile: "bg-[#EA1B15]" },
+  { label: "Gong", file: "gong", fit: "size-[62%]", tile: "bg-[#7121DB]" },
+  { label: "Oracle", file: "oracle", fit: "size-[72%]", tile: "bg-[#C74634]" },
 ];
 
-/** A brand's official mark, stored locally under /brand-logos, in a neutral charcoal tone. */
+/** A brand's official mark, stored locally under /brand-logos, in white on its brand-color tile. */
 function BrandLogo({ file, fit }: { file: string; fit: string }) {
   return (
     <img
@@ -27,7 +33,7 @@ function logo(brand: Brand): ToolDockItem {
   return {
     label: brand.label,
     icon: (
-      <ToolDockTile>
+      <ToolDockTile className={brand.tile}>
         <BrandLogo file={brand.file} fit={brand.fit} />
       </ToolDockTile>
     ),
@@ -61,7 +67,7 @@ export function StackDockSection() {
             data-testid={`stack-grid-${brand.label.toLowerCase()}`}
           >
             <div className="size-9 shrink-0">
-              <ToolDockTile>
+              <ToolDockTile className={brand.tile}>
                 <BrandLogo file={brand.file} fit={brand.fit} />
               </ToolDockTile>
             </div>
