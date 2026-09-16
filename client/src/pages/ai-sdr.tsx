@@ -43,27 +43,6 @@ const BLACKSYNC_SDR = [
   "CRM updates, multiple campaigns",
 ];
 
-type IntegrationLevel = "Native" | "API" | "Custom Integration" | "Workflow Layer";
-
-const INTEGRATIONS: { name: string; level: IntegrationLevel }[] = [
-  { name: "Salesforce", level: "Native" },
-  { name: "HubSpot", level: "Native" },
-  { name: "Oracle", level: "API" },
-  { name: "Microsoft Dynamics", level: "API" },
-  { name: "Zoho", level: "API" },
-  { name: "Close", level: "API" },
-  { name: "Pipedrive", level: "API" },
-  { name: "GoHighLevel", level: "API" },
-  { name: "Custom CRM", level: "Custom Integration" },
-];
-
-const INTEGRATION_LEVEL_STYLE: Record<IntegrationLevel, string> = {
-  Native: "text-primary border-primary/30 bg-primary/10",
-  API: "text-zinc-300 border-zinc-600 bg-zinc-800",
-  "Custom Integration": "text-zinc-300 border-zinc-600 bg-zinc-800",
-  "Workflow Layer": "text-zinc-300 border-zinc-600 bg-zinc-800",
-};
-
 const PIPELINE = [
   {
     n: "01",
@@ -488,48 +467,6 @@ export default function AiSdrPage() {
           </div>
           <div className="dark rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 md:p-10">
             <AiSdrAssessment />
-          </div>
-        </div>
-      </section>
-
-      {/* ============ SALES STACK / INTEGRATIONS ============ */}
-      <section className="py-20 md:py-28" aria-labelledby="stack-heading">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">Sales Stack</p>
-            <h2 id="stack-heading" className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-balance">
-              Fits Into the Sales Stack You Already Use
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {INTEGRATIONS.map((i) => (
-              <button
-                key={i.name}
-                type="button"
-                onClick={() => track("ai_sdr_integration_click", { label: i.name })}
-                className="flex flex-col items-start gap-3 rounded-xl border border-border bg-card p-5 text-left hover:border-primary/30 transition-colors"
-                data-testid={`integration-${i.name.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                <span className="font-display text-sm font-semibold tracking-tight">{i.name}</span>
-                <span
-                  className={`inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider ${INTEGRATION_LEVEL_STYLE[i.level]}`}
-                >
-                  {i.level}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-10 max-w-2xl mx-auto text-center space-y-3">
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed text-pretty">
-              BlackSync can be configured to pull prospect context, update dispositions, push notes and transcripts,
-              trigger workflows, book meetings, and route qualified opportunities back into your existing sales
-              stack.
-            </p>
-            <p className="text-sm md:text-base font-medium text-foreground">
-              Your team keeps the systems they already use. BlackSync becomes the outbound execution layer.
-            </p>
           </div>
         </div>
       </section>

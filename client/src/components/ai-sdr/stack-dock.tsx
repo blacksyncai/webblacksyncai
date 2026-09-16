@@ -76,9 +76,12 @@ export function StackDockSection() {
         ))}
       </div>
 
-      <p className="mt-6 text-center text-xs text-muted-foreground">
-        Plus 5,000+ more apps via Zapier
-      </p>
+      <div className="mt-6 max-w-xl mx-auto text-center space-y-2 px-4">
+        <p className="text-xs text-muted-foreground">Plus custom API connections for the rest of your stack</p>
+        <p className="text-sm font-medium text-foreground">
+          Your team keeps the systems they already use. BlackSync becomes the outbound execution layer.
+        </p>
+      </div>
     </section>
   );
 }
