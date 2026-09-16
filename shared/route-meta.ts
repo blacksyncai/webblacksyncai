@@ -199,6 +199,12 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "BlackSync's AI calls auto, home, life, and commercial insurance leads within seconds, gathers underwriting info, and books the call with your licensed agent.",
   },
 
+  "/unsubscribe": {
+    title: "Unsubscribe",
+    description: "Unsubscribe an email address from BlackSync communications.",
+    noindex: true,
+  },
+
   // Account flow -- intentionally kept out of the index and the sitemap.
   "/login": {
     title: "Log In",
