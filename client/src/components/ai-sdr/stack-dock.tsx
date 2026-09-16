@@ -1,11 +1,11 @@
 import { ToolDock, ToolDockTile, type ToolDockItem } from "@/components/ui/techstack";
 
-/** A brand's official mark, stored locally under /brand-logos, on a neutral app-icon tile. */
-function logo(label: string, file: string, fit: string): ToolDockItem {
+/** A brand's official mark, stored locally under /brand-logos, in its real color on an app-icon tile. */
+function logo(label: string, file: string, tile: string, fit: string): ToolDockItem {
   return {
     label,
     icon: (
-      <ToolDockTile>
+      <ToolDockTile className={tile}>
         <img
           src={`/brand-logos/${file}.svg`}
           alt=""
@@ -18,12 +18,12 @@ function logo(label: string, file: string, fit: string): ToolDockItem {
 }
 
 const STACK_ITEMS: ToolDockItem[] = [
-  logo("Salesforce", "salesforce", "size-[56%]"),
-  logo("HubSpot", "hubspot", "size-[58%]"),
-  logo("ZoomInfo", "zoominfo", "size-[56%]"),
-  logo("Outreach", "outreach", "size-[58%]"),
-  logo("Gong", "gong", "size-[62%]"),
-  logo("Oracle", "oracle", "size-[62%]"),
+  logo("Salesforce", "salesforce", "bg-white", "size-[56%]"),
+  logo("HubSpot", "hubspot", "bg-white", "size-[58%]"),
+  logo("ZoomInfo", "zoominfo", "bg-[#EA1B15]", "size-[56%]"),
+  logo("Outreach", "outreach", "bg-white", "size-[58%]"),
+  logo("Gong", "gong", "bg-white", "size-[62%]"),
+  logo("Oracle", "oracle", "bg-white", "size-[62%]"),
 ];
 
 export function StackDockSection() {
