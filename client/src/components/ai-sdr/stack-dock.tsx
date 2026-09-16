@@ -13,7 +13,7 @@ const BRANDS: Brand[] = [
     tile: "bg-[#0078D4]",
   },
   { label: "ZoomInfo", file: "zoominfo", fit: "size-[56%]", tile: "bg-[#EA1B15]" },
-  { label: "Gong", file: "gong", fit: "size-[62%]", tile: "bg-[#7121DB]" },
+  { label: "Slack", file: "slack", fit: "size-[58%]", tile: "bg-[#4A154B]" },
   { label: "Oracle", file: "oracle", fit: "size-[72%]", tile: "bg-[#C74634]" },
 ];
 
@@ -75,6 +75,10 @@ export function StackDockSection() {
           </div>
         ))}
       </div>
+
+      <p className="mt-6 text-center text-xs text-muted-foreground">
+        Plus 5,000+ more apps via Zapier
+      </p>
     </section>
   );
 }
