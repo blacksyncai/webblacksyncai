@@ -39,6 +39,7 @@ const footerLinks = {
     { label: "Terms of Service", href: "/terms" },
     { label: "Security", href: "/security" },
     { label: "Request a DPA", href: "/enterprise" },
+    { label: "Unsubscribe", href: "/unsubscribe" },
   ],
 };
 
