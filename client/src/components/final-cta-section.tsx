@@ -93,7 +93,7 @@ export function FinalCtaSection() {
               className="text-base md:text-lg text-background/70 mb-8 leading-relaxed text-pretty"
               data-testid="text-final-cta-subhead"
             >
-              No long-term contracts. No sales call required. Live in under 5 minutes.
+              No long-term contracts.
             </p>
 
             <form
