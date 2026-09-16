@@ -288,8 +288,12 @@ export function ToolDock({
           initial="hidden"
           whileInView="shown"
           viewport={{ once: true, amount: 0.2 }}
-          onPointerMove={(event) => track(event.clientX)}
-          onPointerDown={(event) => track(event.clientX)}
+          onPointerMove={(event) => {
+            if (event.pointerType === "mouse") track(event.clientX);
+          }}
+          onPointerDown={(event) => {
+            if (event.pointerType === "mouse") track(event.clientX);
+          }}
           onPointerLeave={release}
           onPointerUp={(event) => {
             if (event.pointerType !== "mouse") release();
