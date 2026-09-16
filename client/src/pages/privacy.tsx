@@ -16,8 +16,8 @@ export default function PrivacyPage() {
       </p>
 
       <h2>1. Information We Collect</h2>
-      <p><strong>Information you provide to us</strong>, such as when you request a demo, start a
-      free trial, book a call, or contact us:</p>
+      <p><strong>Information you provide to us</strong>, such as when you request a demo, request
+      access, book a call, or contact us:</p>
       <ul>
         <li>Name, email address, phone number, and company name</li>
         <li>Industry and details about how you plan to use BlackSync</li>

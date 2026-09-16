@@ -75,7 +75,7 @@ export function StartTrialDialog({
         email: email.trim(),
         industry: industry || undefined,
         company: company.trim() || undefined,
-        useCase: "Free trial signup",
+        useCase: "Get Access signup",
       });
     },
     onSuccess: () => {
@@ -116,10 +116,10 @@ export function StartTrialDialog({
         <div className="relative px-6 pt-6 pb-5 bg-gradient-to-br from-primary/12 via-orange-500/8 to-transparent">
           <DialogHeader className="space-y-1 text-left">
             <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-card px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-primary">
-              <Sparkles className="w-3 h-3" /> Free trial
+              <Sparkles className="w-3 h-3" /> Get access
             </span>
             <DialogTitle className="font-display text-2xl font-semibold tracking-tight pt-1">
-              Start your free trial
+              Get your access
             </DialogTitle>
             <DialogDescription className="text-sm">
               Two quick details — we'll tune your AI agent and set up your access next.
@@ -176,7 +176,7 @@ export function StartTrialDialog({
 
               <Button type="submit" size="lg" className="w-full" disabled={mutation.isPending} data-testid="button-trial-submit">
                 {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                Start Free Trial
+                Get Access
                 {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1" />}
               </Button>
 
