@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { AiSdrAssessment } from "@/components/ai-sdr/assessment";
+import { StackDockSection } from "@/components/ai-sdr/stack-dock";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
 import { track } from "@/lib/ai-sdr-funnel-session";
@@ -350,9 +351,8 @@ export default function AiSdrPage() {
             className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] leading-[1.05] text-balance text-zinc-50"
             data-testid="text-hero-headline"
           >
-            Don't Hire Another SDR.
-            <br className="hidden sm:block" /> Add More{" "}
-            <span className="text-primary">Outbound Capacity.</span>
+            Add <span className="text-primary">2,500–5,000</span> Outbound Calls a Day
+            <br className="hidden sm:block" /> Without Adding Another SDR Team.
           </motion.h1>
 
           <motion.p
@@ -361,8 +361,8 @@ export default function AiSdrPage() {
             transition={{ duration: 0.5, delay: 0.16 }}
             className="mt-6 text-lg md:text-xl text-zinc-400 leading-relaxed text-pretty max-w-2xl mx-auto"
           >
-            BlackSync deploys managed AI SDRs that prospect, qualify, follow up, and hand live opportunities directly
-            to your sales team.
+            First touch, follow-up, qualification, warm transfer to your SDR/BDR team, or direct booking onto AE
+            calendars — BlackSync's managed AI SDRs handle it and hand live opportunities to your sales team.
           </motion.p>
 
           <motion.p
@@ -418,6 +418,9 @@ export default function AiSdrPage() {
           </div>
         </motion.div>
       </header>
+
+      {/* ============ STACK DOCK ============ */}
+      <StackDockSection />
 
       {/* ============ HEADCOUNT VS CAPACITY ============ */}
       <section className="py-20 md:py-28" aria-labelledby="capacity-heading">
