@@ -3,7 +3,6 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { BookCallDialog } from "@/components/book-call-dialog";
-import { StartTrialDialog } from "@/components/start-trial-dialog";
 import { Eyebrow, Reveal } from "@/components/ui/section";
 import { ArrowRight } from "lucide-react";
 import { usePageMeta } from "@/hooks/use-page-meta";
@@ -197,12 +196,12 @@ export default function WhyBlackSyncPage() {
             around your business, and designed to work like part of your team from the first call.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-            <StartTrialDialog>
+            <BookCallDialog>
               <Button size="lg" className="w-full sm:w-auto" data-testid="button-why-blacksync-start-free">
-                Start Free
+                Request a Pilot
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
-            </StartTrialDialog>
+            </BookCallDialog>
             <BookCallDialog>
               <Button size="lg" variant="outline" className="w-full sm:w-auto" data-testid="button-why-blacksync-book-call">
                 Book a Call

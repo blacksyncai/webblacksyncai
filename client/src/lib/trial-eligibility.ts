@@ -10,8 +10,8 @@ export const INDUSTRY_OPTIONS = [
   "Other",
 ];
 
-// Only these industries can self-serve a free trial. Everyone else gets
-// routed to a call to discuss a Free Pilot instead.
+// Only these industries can self-serve setup. Everyone else gets routed to
+// a call to discuss a pilot instead.
 const TRIAL_ELIGIBLE_INDUSTRIES = new Set([
   "Home Services",
   "Auto & P&C",
@@ -23,4 +23,4 @@ export function isTrialEligible(industry: string): boolean {
 }
 
 export const TRIAL_INELIGIBLE_MESSAGE =
-  "Sorry, we don't offer free trials for your industry — book a call to discuss Free Pilot Opportunities.";
+  "Sorry, we don't offer self-serve setup for your industry — book a call to discuss pilot opportunities.";

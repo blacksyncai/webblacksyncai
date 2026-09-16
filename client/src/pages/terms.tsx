@@ -53,8 +53,8 @@ export default function TermsPage() {
       <p>
         Paid plans are billed on the cycle shown at signup. You can cancel at any time; there
         are no long-term contracts. Fees are non-refundable except where required by law or
-        stated otherwise at the time of purchase. Free trials convert to a paid plan only if you
-        choose to continue.
+        stated otherwise at the time of purchase. Any trial access converts to a paid plan only
+        if you choose to continue.
       </p>
 
       <h2>5. Intellectual Property</h2>

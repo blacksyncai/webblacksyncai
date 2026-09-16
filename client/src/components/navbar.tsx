@@ -43,7 +43,6 @@ import {
   Info,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { StartTrialDialog } from "@/components/start-trial-dialog";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { APP_LOGIN_URL } from "@/lib/register";
 
@@ -359,11 +358,11 @@ export function Navbar() {
               </Button>
             </BookCallDialog>
 
-            <StartTrialDialog>
+            <BookCallDialog>
               <Button size="sm" data-testid="button-get-started">
-                Start Free
+                Request a Pilot
               </Button>
-            </StartTrialDialog>
+            </BookCallDialog>
 
             <Button
               size="icon"
@@ -650,11 +649,11 @@ export function Navbar() {
                   </BookCallDialog>
                 </div>
                 <div className="flex-1">
-                  <StartTrialDialog onOpen={() => setMobileOpen(false)}>
+                  <BookCallDialog onOpen={() => setMobileOpen(false)}>
                     <Button className="w-full" size="sm">
-                      Start Free
+                      Request a Pilot
                     </Button>
-                  </StartTrialDialog>
+                  </BookCallDialog>
                 </div>
               </div>
             </div>
