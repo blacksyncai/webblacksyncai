@@ -18,12 +18,12 @@ function logo(label: string, file: string, tile: string, fit: string): ToolDockI
 }
 
 const STACK_ITEMS: ToolDockItem[] = [
-  logo("Salesforce", "salesforce", "bg-white", "size-[56%]"),
-  logo("HubSpot", "hubspot", "bg-white", "size-[58%]"),
+  logo("Salesforce", "salesforce", "bg-[#00A1E0]", "size-[56%]"),
+  logo("HubSpot", "hubspot", "bg-[#FF7A59]", "size-[58%]"),
   logo("ZoomInfo", "zoominfo", "bg-[#EA1B15]", "size-[56%]"),
-  logo("Outreach", "outreach", "bg-white", "size-[58%]"),
-  logo("Gong", "gong", "bg-white", "size-[62%]"),
-  logo("Oracle", "oracle", "bg-white", "size-[62%]"),
+  logo("Outreach", "outreach", "bg-[#5951FF]", "size-[58%]"),
+  logo("Gong", "gong", "bg-[#7121DB]", "size-[62%]"),
+  logo("Oracle", "oracle", "bg-[#C74634]", "size-[62%]"),
 ];
 
 export function StackDockSection() {
