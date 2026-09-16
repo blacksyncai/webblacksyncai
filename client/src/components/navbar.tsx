@@ -444,6 +444,18 @@ export function Navbar() {
                         </a>
                       ))}
                     </div>
+
+                    <div className="mt-4 pt-3 border-t border-border/50">
+                      <a
+                        href="/ai-sdr"
+                        onClick={close}
+                        className="flex items-center gap-2.5 px-2 py-2 rounded-md text-sm w-full text-left text-muted-foreground hover-elevate transition-colors"
+                        data-testid="link-industry-enterprise-corporate-sales"
+                      >
+                        <Briefcase className="w-4 h-4 shrink-0" />
+                        <span>Enterprise / Corporate Sales</span>
+                      </a>
+                    </div>
                   </div>
 
                   <div className="flex-1 pl-8">
@@ -536,6 +548,21 @@ export function Navbar() {
                     </a>
                   ))}
                 </div>
+              </div>
+
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
+                  Enterprise / Corporate Sales
+                </p>
+                <a
+                  href="/ai-sdr"
+                  onClick={() => setMobileOpen(false)}
+                  data-testid="link-mobile-enterprise-corporate-sales"
+                  className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                >
+                  <Briefcase className="w-3.5 h-3.5 shrink-0" />
+                  <span>AI SDR for Sales Teams</span>
+                </a>
               </div>
 
               <a
