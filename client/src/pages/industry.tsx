@@ -49,7 +49,6 @@ type Industry = {
   painPoints: string[];
   outcomes: { label: string; value: string; icon: any }[];
   integrations: string[];
-  testimonial?: { quote: string; name: string; role: string };
   // Optional per-industry overrides for the shared template below.
   metaTitle?: string;
   ctaLabel?: string;
@@ -98,12 +97,6 @@ const INDUSTRIES: Record<string, Industry> = {
       "Espresso Agent",
       "Calendly",
     ],
-    testimonial: {
-      quote:
-        "We replaced two ISAs with BlackSync. It works FSBOs and Expireds all morning, hits speed-to-lead the second a Zillow inquiry comes in, and books showings straight onto our calendars. 8 appointments our first week.",
-      name: "Marcus K.",
-      role: "Broker/Owner, Atlanta GA",
-    },
   },
   mortgage: {
     slug: "mortgage",
@@ -124,12 +117,6 @@ const INDUSTRIES: Record<string, Industry> = {
       { label: "Cost per qualified lead", value: "−68%", icon: Phone },
     ],
     integrations: ["LendingTree", "Encompass", "Salesforce", "HubSpot", "Calendly", "Zapier"],
-    testimonial: {
-      quote:
-        "We were missing 60% of leads after-hours. Now BlackSync calls them all and books them on my calendar before I wake up.",
-      name: "James R.",
-      role: "Loan Officer, Phoenix AZ",
-    },
   },
   insurance: {
     slug: "insurance",
@@ -150,12 +137,6 @@ const INDUSTRIES: Record<string, Industry> = {
       { label: "Languages supported", value: "40+", icon: Phone },
     ],
     integrations: ["Applied", "EZLynx", "HubSpot", "Salesforce", "Zapier", "Twilio"],
-    testimonial: {
-      quote:
-        "Our AI agent calls every quote request, qualifies it, and books my CSR's calendar. Closing rate went up, payroll went down.",
-      name: "Sarah T.",
-      role: "Agency Owner, Austin TX",
-    },
   },
   "home-services": {
     slug: "home-services",
@@ -176,12 +157,6 @@ const INDUSTRIES: Record<string, Industry> = {
       { label: "Avg response time", value: "11s", icon: Phone },
     ],
     integrations: ["ServiceTitan", "Housecall Pro", "Jobber", "Google LSA", "Zapier", "Twilio"],
-    testimonial: {
-      quote:
-        "We doubled bookings without adding a single dispatcher. BlackSync just works — nights, weekends, holidays.",
-      name: "Danny R.",
-      role: "Operations Lead, Charlotte NC",
-    },
   },
   healthcare: {
     slug: "healthcare",
@@ -202,12 +177,6 @@ const INDUSTRIES: Record<string, Industry> = {
       { label: "Languages", value: "40+", icon: Phone },
     ],
     integrations: ["Athena", "Epic", "DrChrono", "Calendly", "Twilio", "Zapier"],
-    testimonial: {
-      quote:
-        "Our front desk got their day back. BlackSync handles recalls, confirmations, and new patient intake.",
-      name: "Alicia N.",
-      role: "Practice Manager, Columbus OH",
-    },
   },
   "auto-pc": {
     slug: "auto-pc",
@@ -228,12 +197,6 @@ const INDUSTRIES: Record<string, Industry> = {
       { label: "Coverage", value: "24/7", icon: Phone },
     ],
     integrations: ["EZLynx", "Applied", "PL Rating", "HubSpot", "Salesforce", "Zapier"],
-    testimonial: {
-      quote:
-        "We bind more policies per producer now because BlackSync filters every lead before it hits their desk.",
-      name: "Rob M.",
-      role: "Agency Principal, Boise ID",
-    },
   },
   "property-management": {
     slug: "property-management",
@@ -254,12 +217,6 @@ const INDUSTRIES: Record<string, Industry> = {
       { label: "Coverage", value: "24/7", icon: Phone },
     ],
     integrations: ["AppFolio", "Buildium", "Yardi", "Rentvine", "Calendly", "Zapier"],
-    testimonial: {
-      quote:
-        "Maintenance triage alone paid for BlackSync three times over. Vacancies fill faster too.",
-      name: "Tanya W.",
-      role: "Portfolio Manager, Kansas City MO",
-    },
   },
   "funeral-homes": {
     slug: "funeral-homes",
@@ -845,23 +802,6 @@ export default function IndustryPage() {
           </Reveal>
         </div>
       </section>
-
-      {/* Testimonial */}
-      {industry.testimonial && (
-        <section className="py-16 md:py-24 bg-muted">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Reveal>
-              <p className="font-display text-2xl md:text-3xl font-medium leading-snug mb-8 text-foreground text-balance">
-                "{industry.testimonial.quote}"
-              </p>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <p className="text-sm font-semibold">{industry.testimonial.name}</p>
-              <p className="text-sm font-mono uppercase tracking-wide text-muted-foreground">{industry.testimonial.role}</p>
-            </Reveal>
-          </div>
-        </section>
-      )}
 
       {/* Final CTA */}
       <section className="py-16 md:py-24">

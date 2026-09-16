@@ -21,27 +21,6 @@ const stats = [
   { value: 60, suffix: "s", decimals: 0, label: "From lead capture to first live call" },
 ];
 
-const testimonials = [
-  {
-    quote: "Our calendar went from empty Tuesdays to fully booked. BlackSync called 400 leads our team had given up on and booked 23 showings.",
-    name: "Jessica M.",
-    role: "Team Lead, Real Estate — Tampa FL",
-    initials: "JM",
-  },
-  {
-    quote: "We replaced two ISAs with one AI agent. Cost dropped 80%, qualified appointments tripled, and it never misses a follow-up.",
-    name: "David L.",
-    role: "Broker, Mortgage — Denver CO",
-    initials: "DL",
-  },
-  {
-    quote: "Set it up Monday morning. Had 6 qualified policy reviews booked by Friday. The voice is honestly indistinguishable from a real rep.",
-    name: "Priya S.",
-    role: "Agency Owner, Insurance — Dallas TX",
-    initials: "PS",
-  },
-];
-
 const trustedBy = [
   { name: "Follow Up Boss", src: followUpBossLogo, height: "h-7 md:h-8" },
   { name: "Sierra Interactive", src: sierraInteractiveLogo, height: "h-10 md:h-12" },
