@@ -12,7 +12,7 @@ export const SITE_NAME = "BlackSync.ai";
 export const SITE_URL = "https://www.blacksync.ai";
 
 export const DEFAULT_TITLE =
-  "BlackSync | Custom AI Voice Agents for Sales & Customer Service";
+  "BlackSync | Custom AI Voice Agents for Sales and AI SDR Software";
 export const DEFAULT_DESCRIPTION =
   "BlackSync builds custom AI voice agents for outbound sales, inbound calls, lead follow-up, appointment booking, and customer service. Built around your workflows, tools, and data.";
 
