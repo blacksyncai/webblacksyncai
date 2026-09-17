@@ -15,6 +15,11 @@ import {
   Users,
   CreditCard,
   Wallet,
+  Target,
+  Sparkles,
+  Repeat,
+  Handshake,
+  Database,
 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -63,31 +68,37 @@ const PIPELINE = [
   {
     n: "01",
     title: "Prospect",
+    icon: Target,
     body: "Connect existing lead lists and CRM segments, or let BlackSync auto-prospect and build new target lists that match your ICP — everything flows into one pipeline.",
   },
   {
     n: "02",
     title: "Personalize",
+    icon: Sparkles,
     body: "BlackSync uses available context to tailor the call around the prospect, campaign, account, or opportunity.",
   },
   {
     n: "03",
     title: "Call",
+    icon: PhoneCall,
     body: "The AI SDR handles first-touch outreach, qualification, common objections, and intent detection.",
   },
   {
     n: "04",
     title: "Follow Up",
+    icon: Repeat,
     body: "No answer, callback request, not ready yet, stale opportunity? BlackSync keeps working the contact automatically.",
   },
   {
     n: "05",
     title: "Hand Off",
+    icon: Handshake,
     body: "Book a meeting, live transfer, route to the right AE, or trigger the next sales workflow.",
   },
   {
     n: "06",
     title: "Sync",
+    icon: Database,
     body: "Push disposition, notes, recordings, transcripts, and next actions back into the sales system.",
   },
 ];
@@ -505,15 +516,19 @@ export default function AiSdrPage() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <AnimatedFeatureGrid className="grid grid-cols-1 divide-x divide-y divide-dashed border border-dashed sm:grid-cols-2 lg:grid-cols-3">
             {PIPELINE.map((step) => (
-              <div key={step.n} className="rounded-2xl border border-card-border bg-card p-6" data-testid={`pipeline-${step.n}`}>
-                <span className="font-mono text-xs text-primary">{step.n}</span>
-                <h3 className="font-display text-base font-semibold tracking-tight mt-2 mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{step.body}</p>
-              </div>
+              <FeatureCard
+                key={step.n}
+                feature={{
+                  title: `${step.n} · ${step.title}`,
+                  icon: step.icon,
+                  description: step.body,
+                }}
+                data-testid={`pipeline-${step.n}`}
+              />
             ))}
-          </div>
+          </AnimatedFeatureGrid>
         </div>
       </section>
 
@@ -582,7 +597,7 @@ export default function AiSdrPage() {
             </h2>
           </div>
 
-          <IndustriesGrid
+          <AnimatedFeatureGrid
             className="grid grid-cols-1 divide-x divide-y divide-dashed border border-dashed sm:grid-cols-2 lg:grid-cols-4"
           >
             {INDUSTRIES.map((ind) => (
@@ -596,7 +611,7 @@ export default function AiSdrPage() {
                 data-testid={`industry-${ind.name}`}
               />
             ))}
-          </IndustriesGrid>
+          </AnimatedFeatureGrid>
         </div>
       </section>
 
@@ -957,7 +972,7 @@ function CallLine({
   );
 }
 
-function IndustriesGrid({ className, children }: { className?: string; children: React.ReactNode }) {
+function AnimatedFeatureGrid({ className, children }: { className?: string; children: React.ReactNode }) {
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
