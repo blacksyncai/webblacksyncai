@@ -1,10 +1,26 @@
 import { Link } from "wouter";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, XCircle, PhoneCall, Mail, ChevronRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  CheckCircle2,
+  XCircle,
+  PhoneCall,
+  Mail,
+  ChevronRight,
+  Banknote,
+  ShieldCheck,
+  Truck,
+  Building2,
+  Layers,
+  Users,
+  CreditCard,
+  Wallet,
+} from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { AiSdrAssessment } from "@/components/ai-sdr/assessment";
 import { StackDockSection } from "@/components/ai-sdr/stack-dock";
@@ -108,34 +124,42 @@ const CHANNELS = [
 const INDUSTRIES = [
   {
     name: "Equipment Finance",
+    icon: Banknote,
     points: ["Dealer acquisition", "Borrower prospecting", "Lease maturity outreach", "Dormant account reactivation"],
   },
   {
     name: "Commercial Insurance",
+    icon: ShieldCheck,
     points: ["Renewal-date prospecting", "Business-owner outreach", "Appointment setting", "Old quote follow-up"],
   },
   {
     name: "Logistics / 3PL",
+    icon: Truck,
     points: ["Shipper acquisition", "Lane-specific outreach", "Dormant shipper reactivation"],
   },
   {
     name: "Commercial Services",
+    icon: Building2,
     points: ["Facility manager prospecting", "Contract renewal outreach", "Quote follow-up"],
   },
   {
     name: "Vertical SaaS",
+    icon: Layers,
     points: ["Target account prospecting", "Demo booking", "Event lead follow-up"],
   },
   {
     name: "Staffing",
+    icon: Users,
     points: ["Employer acquisition", "Hiring-demand qualification"],
   },
   {
     name: "Merchant Services",
+    icon: CreditCard,
     points: ["Business acquisition", "Rate-review outreach", "Dormant account reactivation", "Appointment setting"],
   },
   {
     name: "Payroll & HR Services",
+    icon: Wallet,
     points: ["Target account prospecting", "Demo booking", "Renewal-date outreach", "Event lead follow-up"],
   },
 ];
@@ -558,20 +582,21 @@ export default function AiSdrPage() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <IndustriesGrid
+            className="grid grid-cols-1 divide-x divide-y divide-dashed border border-dashed sm:grid-cols-2 lg:grid-cols-4"
+          >
             {INDUSTRIES.map((ind) => (
-              <div key={ind.name} className="rounded-2xl border border-card-border bg-card p-5" data-testid={`industry-${ind.name}`}>
-                <h3 className="font-display text-sm font-semibold tracking-tight mb-2">{ind.name}</h3>
-                <ul className="space-y-1">
-                  {ind.points.map((p) => (
-                    <li key={p} className="text-xs text-muted-foreground leading-relaxed">
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <FeatureCard
+                key={ind.name}
+                feature={{
+                  title: ind.name,
+                  icon: ind.icon,
+                  description: ind.points.join(" · "),
+                }}
+                data-testid={`industry-${ind.name}`}
+              />
             ))}
-          </div>
+          </IndustriesGrid>
         </div>
       </section>
 
@@ -929,5 +954,25 @@ function CallLine({
         <p className="text-sm text-zinc-100 leading-relaxed">{children}</p>
       </div>
     </div>
+  );
+}
+
+function IndustriesGrid({ className, children }: { className?: string; children: React.ReactNode }) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
+      whileInView={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
   );
 }
