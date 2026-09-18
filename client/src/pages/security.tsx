@@ -56,7 +56,7 @@ export default function SecurityPage() {
       <h2>Report a Concern</h2>
       <p>
         If you believe you've found a security issue, please email{" "}
-        <a href="mailto:sales@blacksync.ai">sales@blacksync.ai</a> — we take reports seriously
+        <a href="mailto:Admin@BlackSync.network">Admin@BlackSync.network</a> — we take reports seriously
         and will respond promptly.
       </p>
     </LegalPage>
