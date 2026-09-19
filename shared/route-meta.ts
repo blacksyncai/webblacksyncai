@@ -39,7 +39,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
   },
 
   "/ai-sdr": {
-    title: "AI SDR for Outbound Sales Teams",
+    title: "AI SDR for Sales Teams",
     description:
       "Deploy managed AI SDRs that prospect, qualify, follow up, book meetings, and hand live opportunities to your sales team. Scale outbound capacity without adding more SDR headcount.",
   },
