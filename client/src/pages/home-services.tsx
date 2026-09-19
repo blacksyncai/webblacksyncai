@@ -65,7 +65,7 @@ const ADD_ONS = [
   },
 ];
 
-const INTEGRATIONS = ["Follow Up Boss", "ServiceTitan", "HubSpot", "GoHighLevel", "Zoho", "No CRM? Fine too."];
+const INTEGRATIONS = ["ServiceTitan", "Housecall Pro", "QuickBooks", "HubSpot", "GoHighLevel", "No CRM? Fine too."];
 
 type LeadForm = {
   name: string;
