@@ -43,7 +43,8 @@ export async function helcimFetch(
   path: string,
   apiToken: string,
   body?: unknown,
-  method: "GET" | "POST" = "POST",
+  method: "GET" | "POST" | "DELETE" = "POST",
+  idempotencyKey?: string,
 ): Promise<{ ok: boolean; status: number; data: any }> {
   const res = await fetch(`${HELCIM_API}${path}`, {
     method,
@@ -51,6 +52,7 @@ export async function helcimFetch(
       accept: "application/json",
       "content-type": "application/json",
       "api-token": apiToken,
+      ...(idempotencyKey ? { "idempotency-key": idempotencyKey } : {}),
     },
     body: body === undefined ? undefined : JSON.stringify(body),
     signal: AbortSignal.timeout(15000),
@@ -64,6 +66,7 @@ export type Req = {
   method?: string;
   body?: any;
   headers: Record<string, string | string[] | undefined>;
+  query?: Record<string, string | string[] | undefined>;
 };
 export type Res = {
   status(code: number): Res;
