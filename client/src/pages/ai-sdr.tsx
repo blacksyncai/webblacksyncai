@@ -279,7 +279,7 @@ export default function AiSdrPage() {
   useJsonLd("ai-sdr-webpage", {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "AI SDR for Outbound Sales Teams",
+    name: "AI SDR for Sales Teams",
     description:
       "Deploy managed AI SDRs that prospect, qualify, follow up, book meetings, and hand live opportunities to your sales team.",
     url: `${SITE_URL}${PATH}`,
