@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eyebrow, Reveal } from "@/components/ui/section";
+import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import {
   ArrowRight,
   Loader2,
@@ -16,6 +18,7 @@ import {
   Zap,
   RotateCcw,
   BellRing,
+  PhoneCall,
 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -61,6 +64,8 @@ const ADD_ONS = [
     body: "Automated calls and texts that cut down on no-shows before the job.",
   },
 ];
+
+const INTEGRATIONS = ["Follow Up Boss", "ServiceTitan", "HubSpot", "GoHighLevel", "Zoho", "No CRM? Fine too."];
 
 type LeadForm = {
   name: string;
@@ -124,37 +129,103 @@ export default function HomeServicesPage() {
 
   return (
     <div className="min-h-screen bg-background" data-testid="page-home-services">
-      <Navbar />
+      <div className="dark">
+        <Navbar />
+      </div>
 
-      {/* ============ HERO + PRICING + CTA ============ */}
-      <header className="relative pt-28 pb-16 md:pt-36 md:pb-20 hero-gradient overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
+      {/* ============ HERO + PRICING + CTA (dark, dramatic) ============ */}
+      <header className="relative bg-zinc-950 pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse 70% 60% at 50% 20%, black, transparent 75%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 20%, black, transparent 75%)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <motion.div
+            animate={{ y: [0, -22, 0], rotate: [0, 6, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-16 left-[4%] w-40 h-40 md:w-56 md:h-56 rounded-full opacity-60 blur-[2px]"
+            style={{
+              background: "radial-gradient(circle at 32% 28%, #ffe2cf 0%, #f08a4f 42%, #c5491f 74%, #8f300f 100%)",
+            }}
+          />
+          <motion.div
+            animate={{ y: [0, 18, 0], rotate: [0, -8, 0] }}
+            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[38%] right-[2%] w-28 h-28 md:w-40 md:h-40 rounded-full opacity-40 blur-[2px]"
+            style={{
+              background: "radial-gradient(circle at 34% 30%, #fff0d8 0%, #f4b56a 44%, #d98a35 76%, #a8631f 100%)",
+            }}
+          />
+        </div>
+
         <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Eyebrow data-testid="badge-home-services">AI Answering Service for Home Services</Eyebrow>
-          <h1
-            className="mt-5 font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6 text-balance"
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1.5 mb-7"
+            data-testid="badge-home-services"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+            <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">
+              AI Answering Service for Home Services
+            </span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6 text-balance text-zinc-50"
             data-testid="text-home-services-h1"
           >
-            Never miss another service call.
-          </h1>
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-pretty mb-3">
+            Never miss another <span className="text-accent-grad">service call.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.16 }}
+            className="text-base md:text-lg text-zinc-400 leading-relaxed text-pretty mb-3"
+          >
             An AI answering service and AI voice agent for home service businesses — answers every call, books
             the job to your calendar, and follows up so no lead falls through the cracks.
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed text-pretty mb-10">
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.22 }}
+            className="text-sm text-zinc-500 leading-relaxed text-pretty mb-10"
+          >
             Built for you by our team, not a DIY setup. One missed $300–$400 job pays for months of this.
-          </p>
+          </motion.p>
 
-          <Reveal>
-            <div className="rounded-2xl border border-card-border bg-card p-8 md:p-10 shadow-lg max-w-md mx-auto">
-              <div className="flex items-end justify-center gap-2 mb-1">
-                <span className="font-display text-5xl font-semibold tracking-tight" data-testid="text-price-intro">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 md:p-10 max-w-md mx-auto">
+              <span className="inline-flex items-center rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary mb-5">
+                50% off to start
+              </span>
+              <div className="flex items-end justify-center gap-2.5 mb-1">
+                <span className="text-lg text-zinc-600 line-through pb-1.5" data-testid="text-price-original">
+                  $98
+                </span>
+                <span className="font-display text-6xl font-semibold tracking-tight text-zinc-50" data-testid="text-price-intro">
                   $49
                 </span>
-                <span className="text-sm text-muted-foreground pb-1.5">your first month</span>
               </div>
-              <p className="text-sm text-muted-foreground mb-7" data-testid="text-price-ongoing">
-                then $98/month — cancel anytime
+              <p className="text-sm text-zinc-500 mb-7" data-testid="text-price-ongoing">
+                your first month, then $98/month — cancel anytime
               </p>
 
               <a href="#get-started">
@@ -164,9 +235,34 @@ export default function HomeServicesPage() {
                 </Button>
               </a>
 
-              <p className="mt-4 text-xs text-muted-foreground">An expert builds your agent for you — no setup on your end.</p>
+              <p className="mt-4 text-xs text-zinc-500">An expert builds your agent for you — no setup on your end.</p>
             </div>
-          </Reveal>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.38 }}
+            className="mt-10 max-w-sm mx-auto rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-left"
+            data-testid="live-call-mock"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-zinc-500">
+                <PhoneCall className="h-3 w-3 text-primary" /> Incoming Call
+              </span>
+              <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-emerald-500">
+                <span className="relative flex w-1.5 h-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                  <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                </span>
+                Answered in 2 rings
+              </span>
+            </div>
+            <p className="text-xs text-zinc-300 leading-relaxed">
+              "Thanks for calling — I can get a tech out for that. Are mornings or afternoons better for you this
+              week?"
+            </p>
+          </motion.div>
         </div>
       </header>
 
@@ -183,19 +279,31 @@ export default function HomeServicesPage() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 divide-x divide-y divide-dashed border border-dashed sm:grid-cols-3">
             {CORE_INCLUDED.map((item) => (
-              <div
+              <FeatureCard
                 key={item.title}
-                className="rounded-2xl border border-card-border bg-card p-6"
+                feature={{ title: item.title, icon: item.icon, description: item.body }}
                 data-testid={`included-${item.title}`}
-              >
-                <item.icon className="w-6 h-6 text-primary mb-4" strokeWidth={1.5} />
-                <h3 className="font-display text-base font-semibold tracking-tight mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-              </div>
+              />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ============ VALUE STAT ============ */}
+      <section className="py-16 md:py-20 bg-zinc-950" aria-labelledby="stat-heading">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p
+            id="stat-heading"
+            className="font-display text-6xl sm:text-7xl font-semibold tracking-tight text-accent-grad mb-3"
+          >
+            $300–$400
+          </p>
+          <p className="text-base md:text-lg text-zinc-400 leading-relaxed text-pretty max-w-lg mx-auto">
+            The average job value most home service businesses lose every time a call goes to voicemail. Your
+            agent picks up every time.
+          </p>
         </div>
       </section>
 
@@ -215,17 +323,13 @@ export default function HomeServicesPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 divide-x divide-y divide-dashed border border-dashed bg-background sm:grid-cols-3">
             {ADD_ONS.map((item) => (
-              <div
+              <FeatureCard
                 key={item.title}
-                className="rounded-2xl border border-card-border bg-card p-6"
+                feature={{ title: item.title, icon: item.icon, description: item.body }}
                 data-testid={`addon-${item.title}`}
-              >
-                <item.icon className="w-6 h-6 text-muted-foreground mb-4" strokeWidth={1.5} />
-                <h3 className="font-display text-base font-semibold tracking-tight mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-              </div>
+              />
             ))}
           </div>
         </div>
@@ -233,24 +337,32 @@ export default function HomeServicesPage() {
 
       {/* ============ INTEGRATIONS ============ */}
       <section className="py-16 md:py-20" aria-labelledby="integrations-heading">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 id="integrations-heading" className="text-sm font-medium text-muted-foreground mb-4">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 id="integrations-heading" className="text-sm font-medium text-muted-foreground mb-5">
             Works with the CRM you already use
           </h2>
-          <p className="text-sm text-muted-foreground">
-            Follow Up Boss, ServiceTitan, HubSpot, GoHighLevel, Zoho, and more — or no CRM at all to start.
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            {INTEGRATIONS.map((name) => (
+              <span
+                key={name}
+                className="inline-flex items-center rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium text-foreground/80"
+                data-testid={`integration-${name}`}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ============ GET STARTED FORM ============ */}
-      <section id="get-started" className="py-20 md:py-28 bg-muted/40 border-t border-border" aria-labelledby="get-started-heading">
+      <section id="get-started" className="py-20 md:py-28 bg-zinc-950" aria-labelledby="get-started-heading">
         <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 id="get-started-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-balance">
+            <h2 id="get-started-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-balance text-zinc-50">
               Get started for $49
             </h2>
-            <p className="mt-3 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-zinc-500">
               Tell us about your business and an expert will reach out to build your agent.
             </p>
           </div>
@@ -258,63 +370,67 @@ export default function HomeServicesPage() {
           <Reveal>
             {submitted ? (
               <div
-                className="rounded-2xl border border-card-border bg-card p-8 text-center"
+                className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 text-center"
                 data-testid="home-services-confirmation"
               >
                 <CheckCircle2 className="w-9 h-9 text-primary mx-auto mb-4" />
-                <h3 className="font-display text-xl font-semibold tracking-tight mb-2">You're in!</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-display text-xl font-semibold tracking-tight text-zinc-50 mb-2">You're in!</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">
                   Someone from our team will reach out within 24 hours to get your agent built.
                 </p>
               </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="rounded-2xl border border-card-border bg-card p-8 space-y-4"
+                className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-4"
                 data-testid="form-home-services"
               >
                 <HoneypotInput inputRef={hpRef} />
                 <div className="space-y-1.5">
-                  <Label htmlFor="hs-name">Your name</Label>
+                  <Label htmlFor="hs-name" className="text-zinc-300">Your name</Label>
                   <Input
                     id="hs-name"
                     placeholder="Jane Doe"
                     value={form.name}
                     onChange={(e) => update("name", e.target.value)}
+                    className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                     data-testid="input-home-services-name"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="hs-email">Email</Label>
+                  <Label htmlFor="hs-email" className="text-zinc-300">Email</Label>
                   <Input
                     id="hs-email"
                     type="email"
                     placeholder="you@company.com"
                     value={form.email}
                     onChange={(e) => update("email", e.target.value)}
+                    className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                     data-testid="input-home-services-email"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="hs-phone">Phone</Label>
+                  <Label htmlFor="hs-phone" className="text-zinc-300">Phone</Label>
                   <Input
                     id="hs-phone"
                     type="tel"
                     placeholder="(555) 123-4567"
                     value={form.phone}
                     onChange={(e) => update("phone", e.target.value)}
+                    className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                     data-testid="input-home-services-phone"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="hs-company">
-                    Company <span className="text-muted-foreground font-normal">(optional)</span>
+                  <Label htmlFor="hs-company" className="text-zinc-300">
+                    Company <span className="text-zinc-500 font-normal">(optional)</span>
                   </Label>
                   <Input
                     id="hs-company"
                     placeholder="Acme Plumbing"
                     value={form.company}
                     onChange={(e) => update("company", e.target.value)}
+                    className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                     data-testid="input-home-services-company"
                   />
                 </div>
@@ -329,7 +445,7 @@ export default function HomeServicesPage() {
                   Get My Agent Built
                   {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1.5" />}
                 </Button>
-                <p className="text-xs text-center text-muted-foreground">$49 your first month, then $98/month. Cancel anytime.</p>
+                <p className="text-xs text-center text-zinc-500">$49 your first month, then $98/month. Cancel anytime.</p>
               </form>
             )}
           </Reveal>
