@@ -2,10 +2,13 @@
  * Lazy Postgres connection for the Helcim signup flow (api/_signup.ts).
  *
  * Only used by the signup endpoints today — nothing else in api/ touches a
- * database. Requires DATABASE_URL (a real Postgres instance, e.g. Neon or
- * Vercel Postgres). Returns null when it isn't set, so a deploy without a
- * database configured degrades to "signup not configured" instead of
- * throwing — same graceful-degradation idiom as api/_helcim.ts.
+ * database. Reads DATABASE_URL, or POSTGRES_URL — the name Vercel's own
+ * Postgres integration (Storage tab, Neon-backed) auto-injects when it's
+ * connected to the project, so this picks it up either way without needing
+ * a second, redundantly-named env var. Returns null when neither is set,
+ * so a deploy without a database configured degrades to "signup not
+ * configured" instead of throwing — same graceful-degradation idiom as
+ * api/_helcim.ts.
  *
  * The pool is cached on the module scope so warm Vercel function instances
  * reuse it instead of opening a new connection per request. Kept small
@@ -22,7 +25,7 @@ import * as schema from "../shared/schema";
 let db: NodePgDatabase<typeof schema> | null = null;
 
 export function getDb(): NodePgDatabase<typeof schema> | null {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
   if (!connectionString) return null;
   if (!db) {
     const pool = new Pool({ connectionString, max: 3 });
