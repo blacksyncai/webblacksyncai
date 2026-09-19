@@ -6,6 +6,14 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Eyebrow, Reveal } from "@/components/ui/section";
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import {
@@ -67,14 +75,34 @@ const ADD_ONS = [
 
 const INTEGRATIONS = ["ServiceTitan", "Housecall Pro", "QuickBooks", "HubSpot", "GoHighLevel", "No CRM? Fine too."];
 
-type LeadForm = {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-};
+const TRADE_OPTIONS = [
+  "HVAC",
+  "Plumbing",
+  "Electrical",
+  "Roofing",
+  "Landscaping / Lawn Care",
+  "Pest Control",
+  "Garage Door",
+  "Pool Service",
+  "General Contractor",
+  "Other",
+];
 
-const EMPTY_FORM: LeadForm = { name: "", email: "", phone: "", company: "" };
+const CALL_VOLUME_OPTIONS = ["0–50", "50–100", "100–150", "150+"];
+
+const HELP_WITH_OPTIONS = [
+  "Missed calls",
+  "After-hours calls",
+  "Booking jobs",
+  "Screening calls",
+  "Following up with old leads (outbound)",
+];
+
+type Step1Form = { name: string; phone: string; email: string };
+type Step2Form = { trade: string; callVolume: string; helpWith: string[] };
+
+const EMPTY_STEP1: Step1Form = { name: "", phone: "", email: "" };
+const EMPTY_STEP2: Step2Form = { trade: "", callVolume: "", helpWith: [] };
 
 export default function HomeServicesPage() {
   usePageMeta({ path: PATH });
@@ -89,42 +117,82 @@ export default function HomeServicesPage() {
     isPartOf: { "@type": "WebSite", name: "BlackSync.ai", url: `${SITE_URL}/` },
   });
 
-  const [form, setForm] = useState<LeadForm>(EMPTY_FORM);
-  const [submitted, setSubmitted] = useState(false);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step1, setStep1] = useState<Step1Form>(EMPTY_STEP1);
+  const [step2, setStep2] = useState<Step2Form>(EMPTY_STEP2);
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
-  function update<K extends keyof LeadForm>(key: K, value: LeadForm[K]) {
-    setForm((prev) => ({ ...prev, [key]: value }));
+  function updateStep1<K extends keyof Step1Form>(key: K, value: Step1Form[K]) {
+    setStep1((prev) => ({ ...prev, [key]: value }));
   }
 
-  const mutation = useMutation({
+  function toggleHelpWith(value: string) {
+    setStep2((prev) => ({
+      ...prev,
+      helpWith: prev.helpWith.includes(value)
+        ? prev.helpWith.filter((v) => v !== value)
+        : [...prev.helpWith, value],
+    }));
+  }
+
+  const step1Mutation = useMutation({
     mutationFn: async () => {
       await apiRequest("POST", "/api/leads", {
-        name: form.name.trim(),
-        email: form.email.trim(),
-        phone: form.phone.trim() || undefined,
-        company: form.company.trim() || undefined,
+        name: step1.name.trim(),
+        email: step1.email.trim() || undefined,
+        phone: step1.phone.trim() || undefined,
         industry: "Home Services",
-        useCase: "Home Services landing page — $49/mo start offer",
+        useCase: "Home Services landing page — quick capture (step 1 of 2)",
       });
     },
-    onSuccess: () => setSubmitted(true),
+    onSuccess: () => setStep(2),
     onError: () =>
       toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" }),
   });
 
-  function handleSubmit(e: React.FormEvent) {
+  const step2Mutation = useMutation({
+    mutationFn: async () => {
+      await apiRequest("POST", "/api/leads", {
+        name: step1.name.trim(),
+        email: step1.email.trim() || undefined,
+        phone: step1.phone.trim() || undefined,
+        industry: "Home Services",
+        trade: step2.trade || undefined,
+        callVolume: step2.callVolume || undefined,
+        helpWith: step2.helpWith.join(", ") || undefined,
+        useCase: "Home Services landing page — $49/mo start offer (step 2 of 2)",
+      });
+    },
+    onSuccess: () => setStep(3),
+    onError: () =>
+      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" }),
+  });
+
+  function handleStep1Submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.includes("@") || !form.phone.trim()) {
-      toast({ title: "Fill in your name, email, and phone", variant: "destructive" });
+    if (!step1.name.trim() || (!step1.phone.trim() && !step1.email.trim())) {
+      toast({ title: "Enter your name and a phone number or email", variant: "destructive" });
+      return;
+    }
+    if (step1.email.trim() && !step1.email.includes("@")) {
+      toast({ title: "Enter a valid email", variant: "destructive" });
       return;
     }
     if (isBot()) {
-      setSubmitted(true);
+      setStep(2);
       return;
     }
-    mutation.mutate();
+    step1Mutation.mutate();
+  }
+
+  function handleStep2Submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (isBot()) {
+      setStep(3);
+      return;
+    }
+    step2Mutation.mutate();
   }
 
   return (
@@ -368,7 +436,7 @@ export default function HomeServicesPage() {
           </div>
 
           <Reveal>
-            {submitted ? (
+            {step === 3 ? (
               <div
                 className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 text-center"
                 data-testid="home-services-confirmation"
@@ -379,34 +447,23 @@ export default function HomeServicesPage() {
                   Someone from our team will reach out within 24 hours to get your agent built.
                 </p>
               </div>
-            ) : (
+            ) : step === 1 ? (
               <form
-                onSubmit={handleSubmit}
+                onSubmit={handleStep1Submit}
                 className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-4"
-                data-testid="form-home-services"
+                data-testid="form-home-services-step1"
               >
+                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 1 of 2</p>
                 <HoneypotInput inputRef={hpRef} />
                 <div className="space-y-1.5">
                   <Label htmlFor="hs-name" className="text-zinc-300">Your name</Label>
                   <Input
                     id="hs-name"
                     placeholder="Jane Doe"
-                    value={form.name}
-                    onChange={(e) => update("name", e.target.value)}
+                    value={step1.name}
+                    onChange={(e) => updateStep1("name", e.target.value)}
                     className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                     data-testid="input-home-services-name"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="hs-email" className="text-zinc-300">Email</Label>
-                  <Input
-                    id="hs-email"
-                    type="email"
-                    placeholder="you@company.com"
-                    value={form.email}
-                    onChange={(e) => update("email", e.target.value)}
-                    className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
-                    data-testid="input-home-services-email"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -415,35 +472,124 @@ export default function HomeServicesPage() {
                     id="hs-phone"
                     type="tel"
                     placeholder="(555) 123-4567"
-                    value={form.phone}
-                    onChange={(e) => update("phone", e.target.value)}
+                    value={step1.phone}
+                    onChange={(e) => updateStep1("phone", e.target.value)}
                     className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                     data-testid="input-home-services-phone"
                   />
                 </div>
+                <div className="relative flex items-center py-1">
+                  <div className="flex-1 border-t border-zinc-800" />
+                  <span className="px-3 text-[11px] uppercase tracking-wider text-zinc-600">or</span>
+                  <div className="flex-1 border-t border-zinc-800" />
+                </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="hs-company" className="text-zinc-300">
-                    Company <span className="text-zinc-500 font-normal">(optional)</span>
-                  </Label>
+                  <Label htmlFor="hs-email" className="text-zinc-300">Email</Label>
                   <Input
-                    id="hs-company"
-                    placeholder="Acme Plumbing"
-                    value={form.company}
-                    onChange={(e) => update("company", e.target.value)}
+                    id="hs-email"
+                    type="email"
+                    placeholder="you@company.com"
+                    value={step1.email}
+                    onChange={(e) => updateStep1("email", e.target.value)}
                     className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
-                    data-testid="input-home-services-company"
+                    data-testid="input-home-services-email"
                   />
                 </div>
                 <Button
                   type="submit"
                   size="lg"
                   className="w-full"
-                  disabled={mutation.isPending}
-                  data-testid="button-home-services-submit"
+                  disabled={step1Mutation.isPending}
+                  data-testid="button-home-services-step1-submit"
                 >
-                  {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                  {step1Mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                  Continue
+                  {!step1Mutation.isPending && <ArrowRight className="w-4 h-4 ml-1.5" />}
+                </Button>
+                <p className="text-xs text-center text-zinc-500">$49 your first month, then $98/month. Cancel anytime.</p>
+              </form>
+            ) : (
+              <form
+                onSubmit={handleStep2Submit}
+                className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-5"
+                data-testid="form-home-services-step2"
+              >
+                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 2 of 2</p>
+                <div className="space-y-1.5">
+                  <Label htmlFor="hs-trade" className="text-zinc-300">What's your trade?</Label>
+                  <Select value={step2.trade} onValueChange={(v) => setStep2((p) => ({ ...p, trade: v }))}>
+                    <SelectTrigger
+                      id="hs-trade"
+                      className="border-zinc-700 bg-zinc-800 text-zinc-100"
+                      data-testid="select-home-services-trade"
+                    >
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {TRADE_OPTIONS.map((opt) => (
+                        <SelectItem key={opt} value={opt}>
+                          {opt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="hs-call-volume" className="text-zinc-300">How many calls do you get a month?</Label>
+                  <Select
+                    value={step2.callVolume}
+                    onValueChange={(v) => setStep2((p) => ({ ...p, callVolume: v }))}
+                  >
+                    <SelectTrigger
+                      id="hs-call-volume"
+                      className="border-zinc-700 bg-zinc-800 text-zinc-100"
+                      data-testid="select-home-services-call-volume"
+                    >
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CALL_VOLUME_OPTIONS.map((opt) => (
+                        <SelectItem key={opt} value={opt}>
+                          {opt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-zinc-300">What do you want help with?</Label>
+                  <div className="space-y-2.5 rounded-lg border border-zinc-700 bg-zinc-800/60 p-3.5">
+                    {HELP_WITH_OPTIONS.map((opt) => (
+                      <label
+                        key={opt}
+                        htmlFor={`hs-help-${opt}`}
+                        className="flex items-center gap-2.5 text-sm text-zinc-300 cursor-pointer"
+                      >
+                        <Checkbox
+                          id={`hs-help-${opt}`}
+                          checked={step2.helpWith.includes(opt)}
+                          onCheckedChange={() => toggleHelpWith(opt)}
+                          className="border-zinc-600"
+                          data-testid={`checkbox-home-services-help-${opt}`}
+                        />
+                        {opt}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={step2Mutation.isPending}
+                  data-testid="button-home-services-step2-submit"
+                >
+                  {step2Mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                   Get My Agent Built
-                  {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-1.5" />}
+                  {!step2Mutation.isPending && <ArrowRight className="w-4 h-4 ml-1.5" />}
                 </Button>
                 <p className="text-xs text-center text-zinc-500">$49 your first month, then $98/month. Cancel anytime.</p>
               </form>
