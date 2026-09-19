@@ -130,16 +130,19 @@ export default function HomeServicesPage() {
       <header className="relative pt-28 pb-16 md:pt-36 md:pb-20 hero-gradient overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
         <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Eyebrow data-testid="badge-home-services">Home Services</Eyebrow>
+          <Eyebrow data-testid="badge-home-services">AI Answering Service for Home Services</Eyebrow>
           <h1
             className="mt-5 font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6 text-balance"
             data-testid="text-home-services-h1"
           >
             Never miss another service call.
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-pretty mb-10">
-            A custom AI voice agent answers every call, books the job to your calendar, and follows up so no
-            lead falls through the cracks — built for you by our team, not a DIY setup.
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-pretty mb-3">
+            An AI answering service and AI voice agent for home service businesses — answers every call, books
+            the job to your calendar, and follows up so no lead falls through the cracks.
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed text-pretty mb-10">
+            Built for you by our team, not a DIY setup. One missed $300–$400 job pays for months of this.
           </p>
 
           <Reveal>

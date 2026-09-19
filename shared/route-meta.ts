@@ -51,9 +51,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
 
   // Core marketing pages
   "/home-services": {
-    title: "AI Voice Agent for Home Services — $49 First Month",
+    title: "AI Answering Service for Home Services — $49/mo",
     description:
-      "BlackSync builds a custom AI voice agent for your home services business. Answers every call, books jobs to your calendar, and follows up on old quotes. $49 your first month, then $98/month.",
+      "AI answering service and AI voice agent for home service businesses. Never miss a call, capture $300-$400+ jobs your voicemail is losing, and book straight to your calendar. Start for $49 your first month, then $98/month.",
   },
   "/pricing": {
     title: "Pricing - AI Calling Plans from $98/mo",
