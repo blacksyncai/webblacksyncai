@@ -11,7 +11,7 @@
  * Body:  { plan, cardToken, email, name?, company?, phone? }
  * Reply: { ok: true, subscriptionId } | { error }
  */
-import { getConfig, helcimFetch, isPlanKey, readBody, type Req, type Res } from "../_helcim";
+import { getConfig, helcimFetch, isPlanKey, readBody, type Req, type Res } from "../_helcim.js";
 
 function str(v: unknown): string | undefined {
   return typeof v === "string" && v.trim() ? v.trim() : undefined;
