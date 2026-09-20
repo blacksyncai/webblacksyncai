@@ -28,8 +28,18 @@ export function getDb(): NodePgDatabase<typeof schema> | null {
   const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
   if (!connectionString) return null;
   if (!db) {
-    const pool = new Pool({ connectionString, max: 3 });
-    db = drizzle(pool, { schema });
+    // Belt-and-suspenders: pg.Pool/drizzle() didn't throw synchronously in
+    // local testing even against malformed connection strings, but nothing
+    // here should ever be allowed to crash the whole request if that
+    // assumption turns out to be wrong on some input — fall back to "not
+    // configured" like the missing-env-var case above instead.
+    try {
+      const pool = new Pool({ connectionString, max: 3 });
+      db = drizzle(pool, { schema });
+    } catch (err) {
+      console.error("getDb: failed to construct Postgres pool", err);
+      return null;
+    }
   }
   return db;
 }
