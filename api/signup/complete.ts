@@ -11,7 +11,7 @@
  * Body:  { signupId, helcimResponseData, hash }
  * Reply: { ok: true, activationDate, subscriptionId } | { error }
  */
-import { helcimFetch, readBody, type Req, type Res } from "../_helcim";
+import { helcimFetch, readBody, type Req, type Res } from "../_helcim.js";
 import {
   getSignupConfig,
   getPendingCheckout,
@@ -19,8 +19,8 @@ import {
   getOrCreateIdempotencyKey,
   calculateActivationDateOneMonthOut,
   validateHelcimPayResponse,
-} from "../_signup";
-import { getDb } from "../_db";
+} from "../_signup.js";
+import { getDb } from "../_db.js";
 
 function clientIp(req: Req): string | undefined {
   const forwarded = req.headers["x-forwarded-for"];

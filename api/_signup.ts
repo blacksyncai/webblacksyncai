@@ -29,9 +29,9 @@
  */
 import { eq } from "drizzle-orm";
 import { randomUUID, randomBytes, createHash } from "crypto";
-import { getDb } from "./_db";
-import { helcimPendingCheckouts, helcimIdempotencyKeys } from "../shared/schema";
-import { helcimFetch, HELCIM_API } from "./_helcim";
+import { getDb } from "./_db.js";
+import { helcimPendingCheckouts, helcimIdempotencyKeys } from "../shared/schema.js";
+import { helcimFetch, HELCIM_API } from "./_helcim.js";
 
 export type SignupConfig = {
   apiToken: string;

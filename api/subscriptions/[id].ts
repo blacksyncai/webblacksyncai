@@ -4,8 +4,8 @@
  * Cancels a Front Desk Starter subscription so no further $98 charges
  * occur. No self-serve UI calls this yet — it exists for support/ops use.
  */
-import { helcimFetch, type Req, type Res } from "../_helcim";
-import { getSignupConfig } from "../_signup";
+import { helcimFetch, type Req, type Res } from "../_helcim.js";
+import { getSignupConfig } from "../_signup.js";
 
 export default async function handler(req: Req, res: Res) {
   if (req.method !== "DELETE") {

@@ -14,9 +14,9 @@
  *          credentials or DATABASE_URL aren't set yet — the frontend falls
  *          back to "we'll follow up" messaging instead of erroring
  */
-import { helcimFetch, readBody, type Req, type Res } from "../_helcim";
-import { getSignupConfig, findOrCreateCustomer, savePendingCheckout, newSignupId } from "../_signup";
-import { getDb } from "../_db";
+import { helcimFetch, readBody, type Req, type Res } from "../_helcim.js";
+import { getSignupConfig, findOrCreateCustomer, savePendingCheckout, newSignupId } from "../_signup.js";
+import { getDb } from "../_db.js";
 
 function str(v: unknown): string | undefined {
   return typeof v === "string" && v.trim() ? v.trim() : undefined;
