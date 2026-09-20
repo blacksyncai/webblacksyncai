@@ -105,6 +105,12 @@ type Step2Form = { trade: string; callVolume: string; helpWith: string[] };
 const EMPTY_STEP1: Step1Form = { name: "", phone: "", email: "" };
 const EMPTY_STEP2: Step2Form = { trade: "", callVolume: "", helpWith: [] };
 
+/** US/Canada numbers: 10 digits, or 11 with a leading 1 country code. */
+function isValidPhone(phone: string): boolean {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 10 || (digits.length === 11 && digits.startsWith("1"));
+}
+
 export default function HomeServicesPage() {
   usePageMeta({ path: PATH });
 
@@ -177,6 +183,10 @@ export default function HomeServicesPage() {
     e.preventDefault();
     if (!step1.name.trim() || (!step1.phone.trim() && !step1.email.trim())) {
       toast({ title: "Enter your name and a phone number or email", variant: "destructive" });
+      return;
+    }
+    if (step1.phone.trim() && !isValidPhone(step1.phone)) {
+      toast({ title: "Enter a valid 10-digit phone number", variant: "destructive" });
       return;
     }
     if (step1.email.trim() && !step1.email.includes("@")) {
