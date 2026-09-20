@@ -21,7 +21,22 @@ export type SignupResult =
   | { status: "declined"; message: string }
   | { status: "unavailable" };
 
+/**
+ * Helcim's own widget (secure.helcim.app/helcim-pay/services/start.js) only
+ * removes its iframe (id="helcimPayIframe") when it receives an explicit
+ * HIDE postMessage — not on every exit path. A retry after a decline calls
+ * appendHelcimPayIframe() again without ever having gotten a HIDE event, so
+ * a stale iframe node (or its now-closed underlying HelcimPay session) can
+ * be left in the DOM and block the next attempt from opening cleanly.
+ * Belt-and-suspenders: always clear it ourselves before starting a new one.
+ */
+function removeStaleHelcimIframe() {
+  document.getElementById("helcimPayIframe")?.remove();
+}
+
 export async function runHomeServicesSignup(buyer: SignupBuyer): Promise<SignupResult> {
+  removeStaleHelcimIframe();
+
   let signupId: string;
   let checkoutToken: string;
   try {
