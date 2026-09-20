@@ -29,7 +29,6 @@ import {
   PhoneCall,
 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
-import { runHomeServicesSignup } from "@/lib/home-services-signup";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
 import { usePageMeta } from "@/hooks/use-page-meta";
@@ -118,12 +117,9 @@ export default function HomeServicesPage() {
     isPartOf: { "@type": "WebSite", name: "BlackSync.ai", url: `${SITE_URL}/` },
   });
 
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [step1, setStep1] = useState<Step1Form>(EMPTY_STEP1);
   const [step2, setStep2] = useState<Step2Form>(EMPTY_STEP2);
-  const [paymentState, setPaymentState] = useState<"idle" | "pending" | "error">("idle");
-  const [paymentError, setPaymentError] = useState<string | null>(null);
-  const [activationDate, setActivationDate] = useState<string | null>(null);
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
@@ -197,38 +193,6 @@ export default function HomeServicesPage() {
       return;
     }
     step2Mutation.mutate();
-  }
-
-  async function handlePayment() {
-    setPaymentState("pending");
-    setPaymentError(null);
-    try {
-      const result = await runHomeServicesSignup({
-        name: step1.name.trim(),
-        email: step1.email.trim() || undefined,
-        phone: step1.phone.trim() || undefined,
-      });
-      if (result.status === "complete") {
-        setActivationDate(result.activationDate);
-        setPaymentState("idle");
-        setStep(4);
-        return;
-      }
-      if (result.status === "cancelled") {
-        setPaymentState("idle");
-        return;
-      }
-      if (result.status === "declined") {
-        setPaymentState("error");
-        setPaymentError(result.message);
-        return;
-      }
-      setPaymentState("error");
-      setPaymentError("Payment isn't available right now. We already have your info — a rep will reach out to get you set up.");
-    } catch {
-      setPaymentState("error");
-      setPaymentError("Something went wrong finishing your signup. Please try again, or we'll follow up using the info you gave us.");
-    }
   }
 
   return (
@@ -472,7 +436,7 @@ export default function HomeServicesPage() {
           </div>
 
           <Reveal>
-            {step === 4 ? (
+            {step === 3 ? (
               <div
                 className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 text-center"
                 data-testid="home-services-confirmation"
@@ -480,46 +444,8 @@ export default function HomeServicesPage() {
                 <CheckCircle2 className="w-9 h-9 text-primary mx-auto mb-4" />
                 <h3 className="font-display text-xl font-semibold tracking-tight text-zinc-50 mb-2">You're in!</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">
-                  $49 was charged for your first month. Your $98/month subscription starts{" "}
-                  {activationDate ? <span className="text-zinc-200">{activationDate}</span> : "next month"}. An
-                  expert will reach out within 24 hours to get your agent built.
+                  Someone from our team will reach out within 24 hours to get your agent built.
                 </p>
-              </div>
-            ) : step === 3 ? (
-              <div
-                className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-4"
-                data-testid="form-home-services-step3"
-              >
-                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 3 of 3</p>
-                <div>
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-zinc-50 mb-1">
-                    Add your card to activate
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
-                    $49 charged today, then $98/month starting next month. Handled securely by Helcim — we never
-                    see or store your card details.
-                  </p>
-                </div>
-
-                {paymentState === "error" && paymentError ? (
-                  <p className="rounded-lg border border-red-900/50 bg-red-950/40 px-3.5 py-2.5 text-sm text-red-300">
-                    {paymentError}
-                  </p>
-                ) : null}
-
-                <Button
-                  type="button"
-                  size="lg"
-                  className="w-full"
-                  disabled={paymentState === "pending"}
-                  onClick={handlePayment}
-                  data-testid="button-home-services-pay"
-                >
-                  {paymentState === "pending" ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                  {paymentState === "pending" ? "Opening secure payment…" : "Continue to Payment"}
-                  {paymentState !== "pending" && <ArrowRight className="w-4 h-4 ml-1.5" />}
-                </Button>
-                <p className="text-xs text-center text-zinc-500">$49 your first month, then $98/month. Cancel anytime.</p>
               </div>
             ) : step === 1 ? (
               <form
@@ -527,7 +453,7 @@ export default function HomeServicesPage() {
                 className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-4"
                 data-testid="form-home-services-step1"
               >
-                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 1 of 3</p>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 1 of 2</p>
                 <HoneypotInput inputRef={hpRef} />
                 <div className="space-y-1.5">
                   <Label htmlFor="hs-name" className="text-zinc-300">Your name</Label>
@@ -588,7 +514,7 @@ export default function HomeServicesPage() {
                 className="card-glow rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-5"
                 data-testid="form-home-services-step2"
               >
-                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 2 of 3</p>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Step 2 of 2</p>
                 <div className="space-y-1.5">
                   <Label htmlFor="hs-trade" className="text-zinc-300">What's your trade?</Label>
                   <Select value={step2.trade} onValueChange={(v) => setStep2((p) => ({ ...p, trade: v }))}>
@@ -662,7 +588,7 @@ export default function HomeServicesPage() {
                   data-testid="button-home-services-step2-submit"
                 >
                   {step2Mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                  Continue to Payment
+                  Get My Agent Built
                   {!step2Mutation.isPending && <ArrowRight className="w-4 h-4 ml-1.5" />}
                 </Button>
                 <p className="text-xs text-center text-zinc-500">$49 your first month, then $98/month. Cancel anytime.</p>
