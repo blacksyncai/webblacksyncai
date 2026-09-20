@@ -23,7 +23,7 @@ declare global {
 export type PlanKey = "solo" | "team";
 
 let scriptPromise: Promise<void> | null = null;
-function loadHelcimPay(): Promise<void> {
+export function loadHelcimPay(): Promise<void> {
   if (scriptPromise) return scriptPromise;
   scriptPromise = new Promise<void>((resolve, reject) => {
     if (window.appendHelcimPayIframe) return resolve();
