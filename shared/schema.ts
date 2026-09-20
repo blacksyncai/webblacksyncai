@@ -74,3 +74,28 @@ export const insertEnterpriseLeadSchema = createInsertSchema(enterpriseLeads).pi
 
 export type InsertEnterpriseLead = z.infer<typeof insertEnterpriseLeadSchema>;
 export type EnterpriseLead = typeof enterpriseLeads.$inferSelect;
+
+// --- Helcim "Front Desk Starter" signup flow (see api/_signup.ts) ---
+//
+// Serverless functions are stateless between invocations, so the signup
+// flow's short-lived state has to live somewhere durable rather than in a
+// local JSON file. These two tables replace that.
+
+export const helcimPendingCheckouts = pgTable("helcim_pending_checkouts", {
+  // The signupId minted by POST /api/signup/start; the browser round-trips
+  // it back on /api/signup/complete once HelcimPay.js reports success.
+  id: varchar("id").primaryKey(),
+  customerCode: text("customer_code").notNull(),
+  customerId: text("customer_id").notNull(),
+  // Only ever read server-side to validate the HelcimPay.js response hash.
+  secretToken: text("secret_token").notNull(),
+  signupDate: timestamp("signup_date").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const helcimIdempotencyKeys = pgTable("helcim_idempotency_keys", {
+  // e.g. "first-month-charge:<signupId>" or "subscription-create:<signupId>"
+  operationKey: text("operation_key").primaryKey(),
+  idempotencyKey: text("idempotency_key").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
