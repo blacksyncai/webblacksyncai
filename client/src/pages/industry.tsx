@@ -383,20 +383,12 @@ export default function IndustryPage() {
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
-  // Open the discovery-call prompt once the visitor has scrolled a bit
-  // (not immediately on load), only on the real-estate page.
+  // Open the discovery-call prompt after the visitor's had a few seconds on
+  // the page (not immediately on load), only on the real-estate page.
   useEffect(() => {
     if (slug !== "real-estate") return;
-    let fired = false;
-    const onScroll = () => {
-      if (!fired && window.scrollY > 700) {
-        fired = true;
-        setQualifyOpen(true);
-        window.removeEventListener("scroll", onScroll);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const timer = window.setTimeout(() => setQualifyOpen(true), 9000);
+    return () => window.clearTimeout(timer);
   }, [slug]);
 
   // Both choices book a free 15-min discovery call. Never Stripe.
