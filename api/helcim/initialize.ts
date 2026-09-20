@@ -11,7 +11,7 @@
  *                                                   which tells the client to
  *                                                   use the hosted Helcim link
  */
-import { getConfig, helcimFetch, isPlanKey, readBody, type Req, type Res } from "../_helcim";
+import { getConfig, helcimFetch, isPlanKey, readBody, type Req, type Res } from "../_helcim.js";
 
 export default async function handler(req: Req, res: Res) {
   if (req.method !== "POST") {
