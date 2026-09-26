@@ -55,6 +55,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "AI answering service and AI voice agent for home service businesses. Never miss a call, capture $300-$400+ jobs your voicemail is losing, and book straight to your calendar. Start for $49 your first month, then $98/month.",
   },
+  "/front-desk-ai": {
+    title: "AI Front Desk & Automated Calling for Home Services — $49/mo",
+    description:
+      "BlackSync Front Desk AI answers every call, qualifies the job, and books the estimate — then calls out to follow up on old quotes, reactivate past customers, and bring in new jobs. Built for landscaping, roofing, HVAC, and plumbing businesses. Plans from $49/month.",
+  },
   "/pricing": {
     title: "Pricing - AI Calling Plans from $98/mo",
     description:
