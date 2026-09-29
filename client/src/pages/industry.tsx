@@ -815,7 +815,7 @@ export default function IndustryPage() {
                   Talk to Sales <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
-              <Link href={slug === "home-services" ? "/front-desk-ai" : "/pricing"}>
+              <Link href={slug === "home-services" ? "/front-desk-ai#pricing" : "/pricing"}>
                 <Button size="lg" variant="outline" data-testid="button-industry-pricing">
                   See pricing
                 </Button>
