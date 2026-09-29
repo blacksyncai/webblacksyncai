@@ -19,8 +19,8 @@
  *   If/when GTM or GA4 is installed, every event this funnel already fired
  *   becomes usable with zero code changes; until then this is an inert,
  *   harmless queue.
- * - Because a webhook call here becomes an email to admin@blacksync.network
- *   and a GHL contact (not a silent database write), this does NOT fire a
+ * - Because a webhook call here becomes an email notification (via
+ *   Web3Forms) and a GHL contact (not a silent database write), this does NOT fire a
  *   webhook on every multiple-choice click — that would be 13+ emails per
  *   visitor. Answers are saved to localStorage immediately (as required);
  *   the webhook fires at real lead-capture milestones (first name, email,

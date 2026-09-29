@@ -25,8 +25,9 @@ const LEAD_ENDPOINTS = [
   "/api/unsubscribe",
 ];
 
-// Web3Forms public access key → emails every submission to admin@blacksync.network.
-const WEB3FORMS_ACCESS_KEY = "7bd3edd1-dcf9-4041-9fff-14161cf49bbf";
+// Web3Forms public access key. Routes to whatever destination email is
+// configured for this key on Web3Forms' own dashboard (not set here).
+const WEB3FORMS_ACCESS_KEY = "3f4bdb32-e7ac-42f7-ab62-42282940e45a";
 
 // Normalize a lead payload so CRMs that expect first/last name + email + phone
 // (like GoHighLevel "Create Contact") map cleanly regardless of which form sent it.
@@ -57,8 +58,8 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // Route lead submissions to email (Web3Forms → admin@blacksync.network) and,
-  // if configured, the GHL CRM webhook. Static-host friendly (no backend).
+  // Route lead submissions to email (via Web3Forms) and, if configured, the
+  // GHL CRM webhook. Static-host friendly (no backend).
   if (method.toUpperCase() === "POST" && LEAD_ENDPOINTS.includes(url)) {
     const lead = normalizeLead(url, data);
 
@@ -72,7 +73,8 @@ export async function apiRequest(
       }).catch(() => {});
     }
 
-    // 2) Web3Forms — emails every submission to admin@blacksync.network.
+    // 2) Web3Forms — emails every submission to whatever address this access
+    // key is configured to notify.
     // FormData (multipart) is a "simple" request: no CORS preflight, most reliable.
     // Never blocks the visitor on failure, but DOES log failures loudly so a
     // silently-broken key/domain doesn't go unnoticed (open DevTools > Console).
