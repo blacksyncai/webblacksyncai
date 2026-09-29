@@ -11,7 +11,6 @@ import { BookCallDialog } from "@/components/book-call-dialog";
 import {
   ArrowRight,
   Check,
-  Play,
   PhoneIncoming,
   CalendarCheck,
   ClipboardList,
@@ -31,19 +30,17 @@ import {
 } from "lucide-react";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
+import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { SITE_URL } from "@shared/route-meta";
 
 const PATH = "/front-desk-ai";
 
 // ---------------------------------------------------------------------
-// Pricing placeholders. Credit allowances, the Growth plan's overage
-// price, and the Custom tier's implementation fee are NOT finalized --
-// these are clearly-labeled placeholders, not invented numbers. Swap the
-// bracketed values once real figures are decided; everything else in the
-// plan objects below is safe to edit freely (copy, feature lists, price).
+// Pricing placeholders. The Growth plan's overage price and the Custom
+// tier's implementation fee are NOT finalized -- clearly-labeled
+// placeholders, not invented numbers. Swap once real figures are decided;
+// everything else in the plan objects below is safe to edit freely.
 // ---------------------------------------------------------------------
-const STARTER_CREDITS_PLACEHOLDER = "[X] conversations/mo included";
-const GROWTH_CREDITS_PLACEHOLDER = "[X] conversations/mo included";
 const OVERAGE_PLACEHOLDER = "Additional credits available a la carte (pricing TBD)";
 const CUSTOM_FEE_PLACEHOLDER = "One-time implementation fee (custom quote) + monthly service & usage";
 
@@ -190,7 +187,6 @@ const PLANS: Plan[] = [
       "Collects name, number, address & service request",
       "Email notifications & call summaries",
       "1 AI agent, 1 phone number",
-      STARTER_CREDITS_PLACEHOLDER,
     ],
     footnote: "Advanced customization, outbound campaigns, and complex integrations aren't included at this tier.",
     popular: false,
@@ -214,7 +210,6 @@ const PLANS: Plan[] = [
       "Calendar integration & appointment booking",
       "CSV contact uploads",
       "Campaign reporting & lead notifications",
-      GROWTH_CREDITS_PLACEHOLDER,
     ],
     footnote: OVERAGE_PLACEHOLDER,
     popular: true,
@@ -247,6 +242,7 @@ const PLANS: Plan[] = [
 
 export default function FrontDeskAiPage() {
   usePageMeta({ path: PATH });
+  useScrollToHash();
 
   useJsonLd("front-desk-ai-webpage", {
     "@context": "https://schema.org",
@@ -357,36 +353,6 @@ export default function FrontDeskAiPage() {
                 Book a Demo
               </Button>
             </BookCallDialog>
-          </motion.div>
-
-          {/* Sample call — prominent, honest placeholder (no real audio asset yet) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.32 }}
-            className="mt-10 max-w-md mx-auto rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-left"
-            data-testid="sample-call-player"
-          >
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                disabled
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary cursor-not-allowed"
-                aria-label="Sample call audio coming soon"
-                data-testid="button-play-sample-call"
-              >
-                <Play className="h-4 w-4 ml-0.5" fill="currentColor" />
-              </button>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-zinc-200">Listen to a sample call</p>
-                <p className="text-[11px] text-zinc-500">Sample audio coming soon</p>
-              </div>
-              <div className="flex items-end gap-0.5 h-6" aria-hidden="true">
-                {[6, 12, 8, 16, 10, 14, 7].map((h, i) => (
-                  <span key={i} className="w-0.5 rounded-full bg-zinc-700" style={{ height: `${h}px` }} />
-                ))}
-              </div>
-            </div>
           </motion.div>
         </div>
       </header>
@@ -546,8 +512,8 @@ export default function FrontDeskAiPage() {
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground max-w-2xl mx-auto">
-            Credit allowances and exact overage pricing shown above are placeholders pending final decision — ask
-            your rep for current numbers.
+            Exact overage pricing shown above is a placeholder pending final decision — ask your rep for current
+            numbers.
           </p>
         </div>
       </section>
