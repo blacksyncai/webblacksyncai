@@ -69,10 +69,18 @@ const ROLES: Role[] = [
       },
       {
         id: "linkedin",
-        label: "LinkedIn or resume link",
+        label: "LinkedIn profile",
         type: "text",
         placeholder: "linkedin.com/in/...",
         optional: true,
+      },
+      {
+        id: "resume",
+        label: "Resume",
+        type: "file",
+        accept: "application/pdf",
+        optional: true,
+        helper: "PDF only, up to 5MB.",
       },
       {
         id: "why",
