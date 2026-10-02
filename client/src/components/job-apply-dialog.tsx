@@ -27,11 +27,13 @@ import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
 export type JobField = {
   id: string;
   label: string;
-  type: "text" | "tel" | "email" | "textarea" | "select";
+  type: "text" | "tel" | "email" | "textarea" | "select" | "file";
   placeholder?: string;
   options?: string[];
   optional?: boolean;
   helper?: string;
+  accept?: string;
+  maxSizeMB?: number;
 };
 
 export function JobApplyDialog({
@@ -45,6 +47,7 @@ export function JobApplyDialog({
 }) {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState<Record<string, string>>({});
+  const [files, setFiles] = useState<Record<string, File | null>>({});
   const { toast } = useToast();
   const { ref: hpRef, isBot } = useHoneypot();
 
@@ -52,20 +55,47 @@ export function JobApplyDialog({
     setValues((prev) => ({ ...prev, [id]: v }));
   }
 
+  function setFile(field: JobField, file: File | null) {
+    if (file) {
+      const maxSizeMB = field.maxSizeMB ?? 5;
+      if (field.accept?.includes("pdf") && file.type !== "application/pdf") {
+        toast({ title: "Please upload a PDF file", variant: "destructive" });
+        return;
+      }
+      if (file.size > maxSizeMB * 1024 * 1024) {
+        toast({ title: `File is too large — max ${maxSizeMB}MB`, variant: "destructive" });
+        return;
+      }
+    }
+    setFiles((prev) => ({ ...prev, [field.id]: file }));
+  }
+
   const mutation = useMutation({
     mutationFn: async () => {
       const extra = fields
-        .filter((f) => !["name", "email", "phone"].includes(f.id))
+        .filter((f) => !["name", "email", "phone"].includes(f.id) && f.type !== "file")
         .map((f) => `${f.label}: ${values[f.id]?.trim() || "—"}`)
         .join("\n");
-      await apiRequest("POST", "/api/leads", {
+      const fileLines = fields
+        .filter((f) => f.type === "file")
+        .map((f) => `${f.label}: ${files[f.id]?.name || "—"}`)
+        .join("\n");
+
+      const data: Record<string, unknown> = {
         name: values.name?.trim(),
         email: values.email?.trim(),
         phone: values.phone?.trim(),
         company: `Job Application — ${roleTitle}`,
         useCase: `Careers: ${roleTitle}`,
-        message: extra,
-      });
+        message: [extra, fileLines].filter(Boolean).join("\n"),
+      };
+      fields
+        .filter((f) => f.type === "file")
+        .forEach((f) => {
+          if (files[f.id]) data[f.id] = files[f.id];
+        });
+
+      await apiRequest("POST", "/api/leads", data);
     },
     onSuccess: () => {
       toast({
@@ -74,6 +104,7 @@ export function JobApplyDialog({
       });
       setOpen(false);
       setValues({});
+      setFiles({});
     },
     onError: () =>
       toast({
@@ -85,7 +116,9 @@ export function JobApplyDialog({
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    const missing = fields.filter((f) => !f.optional && !values[f.id]?.trim());
+    const missing = fields.filter((f) =>
+      !f.optional && (f.type === "file" ? !files[f.id] : !values[f.id]?.trim()),
+    );
     if (missing.length) {
       toast({
         title: "A few required fields are missing",
@@ -102,6 +135,7 @@ export function JobApplyDialog({
       toast({ title: "Application received!", description: "We'll be in touch if it's a fit." });
       setOpen(false);
       setValues({});
+      setFiles({});
       return;
     }
     mutation.mutate();
@@ -154,6 +188,19 @@ export function JobApplyDialog({
                     ))}
                   </SelectContent>
                 </Select>
+              ) : f.type === "file" ? (
+                <>
+                  <Input
+                    id={`job-${f.id}`}
+                    type="file"
+                    accept={f.accept}
+                    onChange={(e) => setFile(f, e.target.files?.[0] || null)}
+                    data-testid={`input-job-${f.id}`}
+                  />
+                  {files[f.id] && (
+                    <p className="text-xs text-muted-foreground">Selected: {files[f.id]!.name}</p>
+                  )}
+                </>
               ) : (
                 <Input
                   id={`job-${f.id}`}

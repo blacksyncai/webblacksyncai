@@ -64,10 +64,14 @@ export async function apiRequest(
     const lead = normalizeLead(url, data);
 
     // 1) GoHighLevel inbound webhook — fire-and-forget (opaque/no-cors).
+    // Files can't travel as JSON, so swap any File value for its filename here.
     if (LEADS_WEBHOOK_URL) {
+      const ghlSafeLead = Object.fromEntries(
+        Object.entries(lead).map(([k, v]) => [k, v instanceof File ? v.name : v]),
+      );
       fetch(LEADS_WEBHOOK_URL, {
         method: "POST",
-        body: JSON.stringify(lead),
+        body: JSON.stringify(ghlSafeLead),
         mode: "no-cors",
         keepalive: true,
       }).catch(() => {});
@@ -89,7 +93,11 @@ export async function apiRequest(
       );
       fd.append("from_name", "BlackSync Website");
       Object.entries(lead).forEach(([k, v]) => {
-        if (v !== undefined && v !== null && v !== "") fd.append(k, String(v));
+        if (v instanceof File) {
+          fd.append(k, v, v.name);
+        } else if (v !== undefined && v !== null && v !== "") {
+          fd.append(k, String(v));
+        }
       });
       // Time-boxed: the visitor's next step (e.g. the booking scheduler) waits on
       // this promise, so a slow or unreachable Web3Forms must not hang the UI.
