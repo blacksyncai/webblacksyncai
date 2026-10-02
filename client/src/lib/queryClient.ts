@@ -92,9 +92,14 @@ export async function apiRequest(
           : `New ${lead.formType || "website"} lead — ${lead.fullName || lead.email}`,
       );
       fd.append("from_name", "BlackSync Website");
+      // Web3Forms only accepts real file attachments on a Pro plan — sending one
+      // on a free-plan key appears to get the WHOLE submission rejected, not just
+      // the attachment dropped. Until the plan is confirmed/upgraded, send the
+      // filename as a text note instead of the file itself, so submissions with
+      // an upload still go through.
       Object.entries(lead).forEach(([k, v]) => {
         if (v instanceof File) {
-          fd.append(k, v, v.name);
+          fd.append(k, `${v.name} (uploaded, not attached — contact applicant for a copy)`);
         } else if (v !== undefined && v !== null && v !== "") {
           fd.append(k, String(v));
         }
