@@ -27,6 +27,8 @@ import {
   SITE_URL,
   DEFAULT_DESCRIPTION,
   fullTitle,
+  pageH1,
+  pageContent,
 } from "../shared/route-meta";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -93,10 +95,36 @@ function renderRoute(shell: string, path: string): string {
 
   html = html.replace(
     '<div id="root"></div>',
-    `<div id="root">\n${crawlableNav(path)}\n    </div>`,
+    `<div id="root">\n${crawlableContent(path)}\n${crawlableNav(path)}\n    </div>`,
   );
 
   return html;
+}
+
+/**
+ * Real, readable content fallback for non-JS clients (AI crawlers/agents
+ * that never execute the client bundle). A clean <h1> plus a few paragraphs
+ * of accurate copy pulled from the same ROUTE_META table the live page's
+ * hero/description are built from, so this can never drift out of sync or
+ * contradict what a JS-executing visitor actually sees ("cloaking").
+ *
+ * Hidden the same way as crawlableNav below: present in the DOM for a
+ * non-rendering crawler, visually clipped before React mounts and replaces
+ * the subtree, so a real visitor never sees it flash.
+ */
+function crawlableContent(path: string): string {
+  const h1 = pageH1(path);
+  const paragraphs = pageContent(path);
+  const clip =
+    "position:absolute;width:1px;height:1px;padding:0;margin:-1px;" +
+    "overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0";
+
+  return [
+    `      <div style="${clip}">`,
+    `        <h1>${escapeText(h1)}</h1>`,
+    ...paragraphs.map((p) => `        <p>${escapeText(p)}</p>`),
+    "      </div>",
+  ].join("\n");
 }
 
 /**
