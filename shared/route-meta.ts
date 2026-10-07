@@ -22,6 +22,18 @@ export type RouteMeta = {
   description?: string;
   /** Excluded from the sitemap and served with robots: noindex, nofollow. */
   noindex?: boolean;
+  /**
+   * Heading shown to non-JS clients (crawlers, agents) in place of the real
+   * client-rendered <h1>. Defaults to the page title when omitted.
+   */
+  h1?: string;
+  /**
+   * Paragraph(s) of real page content served to non-JS clients, in addition
+   * to the meta description. Defaults to [description] when omitted. Keep
+   * this accurate to what the live page actually says — it's read by
+   * crawlers and AI agents that never run the client JS.
+   */
+  content?: string[];
 };
 
 /** Full <title> for a page title, matching what usePageMeta produces. */
@@ -30,7 +42,14 @@ export function fullTitle(title?: string): string {
 }
 
 export const ROUTE_META: Record<string, RouteMeta> = {
-  "/": {},
+  "/": {
+    h1: "AI voice agents built around your business.",
+    content: [
+      "BlackSync builds custom AI voice agents around your workflows, tools, and data, so they operate like part of your team. Hundreds of personalized calls in minutes, not days.",
+      "BlackSync's AI agents handle outbound sales prospecting, inbound call answering, lead follow-up, appointment booking, and customer service — in 40+ languages, built on GPT-5, Claude, and Gemini.",
+      "Built for real estate, mortgage and lending, insurance, home services, healthcare, property management, funeral homes, and law firms — every call is logged, every lead is qualified, and bookings sync straight to your calendar and CRM.",
+    ],
+  },
 
   "/why-blacksync": {
     title: "Why BlackSync",
@@ -234,4 +253,49 @@ export const ROUTE_META: Record<string, RouteMeta> = {
 export const INDEXABLE_ROUTES = Object.entries(ROUTE_META)
   .filter(([, m]) => !m.noindex)
   .map(([path]) => path);
+
+/**
+ * Every real route the app serves, indexable or not (e.g. /login, /signup,
+ * /dashboard are real pages that just shouldn't be indexed). Use this, not
+ * INDEXABLE_ROUTES, to decide whether a path actually exists.
+ */
+export const KNOWN_ROUTES = Object.keys(ROUTE_META);
+
+/** Heading shown to non-JS clients for a given path. */
+export function pageH1(path: string): string {
+  const meta = ROUTE_META[path];
+  return meta?.h1 ?? meta?.title ?? SITE_NAME;
+}
+
+/** Paragraph(s) of real content shown to non-JS clients for a given path. */
+export function pageContent(path: string): string[] {
+  const meta = ROUTE_META[path];
+  if (meta?.content?.length) return meta.content;
+  return [meta?.description ?? DEFAULT_DESCRIPTION];
+}
+
+/** Full Markdown representation of a known, indexable page. */
+export function toMarkdown(path: string): string {
+  const h1 = pageH1(path);
+  const paragraphs = pageContent(path);
+  const url = `${SITE_URL}${path}`;
+  return [
+    `# ${h1}`,
+    ...paragraphs,
+    "---",
+    `Canonical URL: ${url}`,
+    `Sitemap: ${SITE_URL}/sitemap.xml`,
+    `Agent guide: ${SITE_URL}/llms.txt`,
+  ].join("\n\n") + "\n";
+}
+
+/** Markdown body for a path that doesn't exist on the site. */
+export function notFoundMarkdown(path: string): string {
+  return [
+    "# 404 — Page not found",
+    `The page at \`${path}\` does not exist on ${SITE_NAME}.`,
+    `Sitemap: ${SITE_URL}/sitemap.xml`,
+    `Agent guide: ${SITE_URL}/llms.txt`,
+  ].join("\n\n") + "\n";
+}
 
