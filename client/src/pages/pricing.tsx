@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "How do I buy more credits?",
-    a: "Credit packs are available anytime in 500, 1,000, or 3,000 credit increments, with better per-credit value at higher volumes — no need to change your plan to add more calling capacity.",
+    a: "Credit packs are available anytime in 500, 1,000, or 2,500 credit increments, with better per-credit value at higher volumes — no need to change your plan to add more calling capacity.",
   },
 ];
 

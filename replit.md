@@ -30,7 +30,7 @@ Two conversion paths:
 - `components/how-it-works-section.tsx` - 4 steps: Connect Leads, AI Builds Agent, Calls & Qualifies, Calendar Booking
 - `components/why-section.tsx` - AI vs Human ISA comparison (9 rows) + 6 advantage cards
 - `components/testimonials-section.tsx` - 3 testimonials (James R., Sarah T., Marcus K.)
-- `components/pricing-section.tsx` - 3 plans (Solo $98, Team $296, Enterprise custom) + Credits (500/$197, 1000/$350, 3000/$800) + Add-ons (Expert Dev Build, Workflow Automation, CRM Sync + Agentic AI)
+- `components/pricing-section.tsx` - 3 plans (Solo $98, Team $296, Enterprise custom) + Credits (500/$139, 1000/$260, 2500/$599) + Add-ons (Expert Dev Build, Workflow Automation, CRM Sync + Agentic AI)
 - `components/enterprise-section.tsx` - Two-column: copy + lead capture form with dropdowns (industry, team size, monthly leads, referral source)
 - `components/final-cta-section.tsx` - Bottom CTA with email input
 - `components/footer.tsx` - 4 columns (BlackSync, Product, Company, Legal) + trust badges bottom bar
@@ -70,7 +70,7 @@ Two conversion paths:
 ## Key Numbers
 - Trial: 7 days
 - Solo: $98/mo, Team: $296/mo, Enterprise: Custom
-- Credits: $197 / $350 / $800
+- Credits: $139 / $260 / $599
 - Phone number: from $3.50/mo
 - Response time: 11 seconds
 - Calls: 10K+, Appointments: 847, Rating: 4.9★
