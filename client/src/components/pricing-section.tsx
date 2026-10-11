@@ -87,19 +87,19 @@ const plans = [
 const credits = [
   {
     amount: "500 Credits",
-    price: "$197",
+    price: "$139",
     detail: "",
     highlight: false,
   },
   {
     amount: "1,000 Credits",
-    price: "$350",
+    price: "$260",
     detail: "Best value",
     highlight: true,
   },
   {
-    amount: "3,000 Credits",
-    price: "$800",
+    amount: "2,500 Credits",
+    price: "$599",
     detail: "High-volume",
     highlight: false,
   },

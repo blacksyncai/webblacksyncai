@@ -63,7 +63,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
   "/pricing": {
     title: "Pricing - AI Calling Plans from $98/mo",
     description:
-      "BlackSync AI calling plans: Solo Agent $98/mo, Team $296/mo, and custom Enterprise. Call credits from $197, add-on builds, and answers to the questions we get asked most. No hidden fees, cancel anytime.",
+      "BlackSync AI calling plans: Solo Agent $98/mo, Team $296/mo, and custom Enterprise. Call credits from $139, add-on builds, and answers to the questions we get asked most. No hidden fees, cancel anytime.",
   },
   // Competitor comparisons
   "/compare/ylopo-alternative": {
