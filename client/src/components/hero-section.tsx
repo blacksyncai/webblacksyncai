@@ -1,37 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { ArrowRight, Loader2, Sparkles } from "lucide-react";
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
+import { ArrowRight } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 import { Link } from "wouter";
-import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { goToRegister } from "@/lib/register";
 import { BookCallDialog } from "@/components/book-call-dialog";
-import { INDUSTRY_OPTIONS, isTrialEligible, TRIAL_INELIGIBLE_MESSAGE } from "@/lib/trial-eligibility";
-import { PhoneCall } from "lucide-react";
 
-const TEAM_SIZE_OPTIONS = ["Just me", "2-5", "6-15", "16-50", "50+"];
+// Where the real app's signup flow lives (a separate app from this
+// marketing site -- see @/lib/register for the other app the rest of the
+// site links into).
+const SIGNUP_URL = "https://blacksync.si/sign-up";
 
 const industryChips = [
   { label: "Real Estate", slug: "real-estate", icon: Home, top: "8%", left: "6%", delay: 0.5 },
@@ -43,92 +21,7 @@ const industryChips = [
   { label: "Property Mgmt", slug: "property-management", icon: KeyRound, top: "30%", left: "18%", delay: 1.4 },
 ];
 
-type HeroLead = {
-  name: string;
-  email: string;
-  phone: string;
-  industry: string;
-  company: string;
-  teamSize: string;
-  useCase: string;
-};
-
-const EMPTY_LEAD: HeroLead = {
-  name: "",
-  email: "",
-  phone: "",
-  industry: "",
-  company: "",
-  teamSize: "",
-  useCase: "",
-};
-
 export function HeroSection() {
-  const [email, setEmail] = useState("");
-  const [open, setOpen] = useState(false);
-  const [form, setForm] = useState<HeroLead>(EMPTY_LEAD);
-  const { toast } = useToast();
-  const { ref: hpRef, isBot } = useHoneypot();
-  const blocked = form.industry !== "" && !isTrialEligible(form.industry);
-
-  function update<K extends keyof HeroLead>(key: K, value: HeroLead[K]) {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  }
-
-  const mutation = useMutation({
-    mutationFn: async (data: HeroLead) => {
-      await apiRequest("POST", "/api/leads", {
-        name: data.name.trim() || data.email.split("@")[0],
-        email: data.email.trim(),
-        phone: data.phone.trim() || undefined,
-        industry: data.industry || undefined,
-        company: data.company.trim() || undefined,
-        teamSize: data.teamSize || undefined,
-        useCase: data.useCase.trim() || undefined,
-      });
-    },
-    onSuccess: (_d, data) => {
-      toast({ title: "You're in!", description: "Taking you to set up your access…" });
-      setOpen(false);
-      goToRegister({
-        email: data.email,
-        name: data.name,
-        company: data.company,
-        phone: data.phone,
-      });
-    },
-    onError: () => {
-      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
-    },
-  });
-
-  function handleStart(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email || !email.includes("@")) {
-      toast({ title: "Invalid email", description: "Please enter a valid work email.", variant: "destructive" });
-      return;
-    }
-    setForm({ ...EMPTY_LEAD, email });
-    setOpen(true);
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!form.industry) {
-      toast({ title: "Pick your industry", description: "This helps us tailor your plan.", variant: "destructive" });
-      return;
-    }
-    if (blocked) return;
-    if (isBot()) {
-      toast({ title: "You're in!", description: "We'll be in touch with your custom plan shortly." });
-      setForm(EMPTY_LEAD);
-      setEmail("");
-      setOpen(false);
-      return;
-    }
-    mutation.mutate(form);
-  }
-
   return (
     <section
       data-testid="section-hero"
@@ -228,23 +121,12 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-4 mb-5"
           >
-            <form
-              onSubmit={handleStart}
-              className="flex flex-col sm:flex-row items-center justify-center gap-2.5 w-full max-w-md p-1.5 sm:rounded-2xl sm:border sm:border-border sm:bg-card sm:shadow-lg"
-            >
-              <Input
-                type="email"
-                placeholder="Enter your work email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 h-12 sm:border-transparent sm:bg-transparent sm:shadow-none sm:focus-visible:ring-0"
-                data-testid="input-hero-email"
-              />
-              <Button size="lg" type="submit" className="w-full sm:w-auto" data-testid="button-hero-cta">
-                Build My Agent
+            <a href={SIGNUP_URL} className="w-full max-w-md">
+              <Button size="lg" className="w-full h-12" data-testid="button-hero-cta">
+                Get Started Now
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
-            </form>
+            </a>
 
             <p className="text-xs text-muted-foreground" data-testid="text-hero-subtext">
               AI agent builder included · Phone number from $3.50/mo · No
@@ -334,133 +216,6 @@ export function HeroSection() {
           })}
         </motion.div>
       </div>
-
-      {/* Qualifying dialog — opens after the email step */}
-      <Dialog open={open} onOpenChange={(v) => !mutation.isPending && setOpen(v)}>
-        <DialogContent className="sm:max-w-md" data-testid="dialog-hero-qualify">
-          <DialogHeader>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary">
-                <Sparkles className="w-4 h-4" />
-              </span>
-              <DialogTitle data-testid="text-dialog-title">Let's build your custom plan</DialogTitle>
-            </div>
-            <DialogDescription data-testid="text-dialog-desc">
-              A few quick details and we'll tailor BlackSync to your business.
-            </DialogDescription>
-          </DialogHeader>
-
-          <form onSubmit={handleSubmit} className="space-y-4 pt-1">
-            <HoneypotInput inputRef={hpRef} />
-            <div className="space-y-1.5">
-              <Label htmlFor="hero-name">Your name</Label>
-              <Input
-                id="hero-name"
-                placeholder="Jane Doe"
-                value={form.name}
-                onChange={(e) => update("name", e.target.value)}
-                data-testid="input-dialog-name"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label htmlFor="hero-phone">Phone (optional)</Label>
-                <Input
-                  id="hero-phone"
-                  type="tel"
-                  placeholder="+1 555 123 4567"
-                  value={form.phone}
-                  onChange={(e) => update("phone", e.target.value)}
-                  data-testid="input-dialog-phone"
-                />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="hero-team">Team size</Label>
-                <Select value={form.teamSize} onValueChange={(v) => update("teamSize", v)}>
-                  <SelectTrigger id="hero-team" data-testid="select-dialog-team-size">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TEAM_SIZE_OPTIONS.map((opt) => (
-                      <SelectItem key={opt} value={opt}>
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="hero-industry">Industry</Label>
-              <Select value={form.industry} onValueChange={(v) => update("industry", v)}>
-                <SelectTrigger id="hero-industry" data-testid="select-dialog-industry">
-                  <SelectValue placeholder="Select your industry" />
-                </SelectTrigger>
-                <SelectContent>
-                  {INDUSTRY_OPTIONS.map((opt) => (
-                    <SelectItem key={opt} value={opt}>
-                      {opt}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {blocked ? (
-              <div
-                className="rounded-xl border border-primary/20 bg-primary/5 p-5 text-center space-y-4"
-                data-testid="panel-hero-trial-blocked"
-              >
-                <p className="text-sm text-foreground leading-relaxed">{TRIAL_INELIGIBLE_MESSAGE}</p>
-                <BookCallDialog>
-                  <Button type="button" className="w-full" data-testid="button-hero-blocked-book-call">
-                    <PhoneCall className="w-4 h-4 mr-2" /> Book a Call
-                  </Button>
-                </BookCallDialog>
-              </div>
-            ) : (
-              <>
-                <div className="space-y-1.5">
-                  <Label htmlFor="hero-company">Company / team name (optional)</Label>
-                  <Input
-                    id="hero-company"
-                    placeholder="Acme Realty Group"
-                    value={form.company}
-                    onChange={(e) => update("company", e.target.value)}
-                    data-testid="input-dialog-company"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="hero-usecase">What do you want to automate? (optional)</Label>
-                  <Textarea
-                    id="hero-usecase"
-                    rows={2}
-                    placeholder="e.g. follow up calls, appointment setting..."
-                    value={form.useCase}
-                    onChange={(e) => update("useCase", e.target.value)}
-                    data-testid="textarea-dialog-use-case"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full"
-                  disabled={mutation.isPending}
-                  data-testid="button-dialog-submit"
-                >
-                  {mutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                  Get My Custom Plan
-                  {!mutation.isPending && <ArrowRight className="w-4 h-4 ml-2" />}
-                </Button>
-              </>
-            )}
-          </form>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }
