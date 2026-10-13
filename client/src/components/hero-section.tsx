@@ -121,12 +121,24 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-4 mb-5"
           >
-            <a href={SIGNUP_URL} className="w-full max-w-md">
-              <Button size="lg" className="w-full h-12" data-testid="button-hero-cta">
-                Get Started Now
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Button>
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
+              <a href={SIGNUP_URL} className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto h-12" data-testid="button-hero-cta">
+                  Build My Agent
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </a>
+              <BookCallDialog>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto h-12"
+                  data-testid="button-hero-demo"
+                >
+                  Get a Demo
+                </Button>
+              </BookCallDialog>
+            </div>
 
             <p className="text-xs text-muted-foreground" data-testid="text-hero-subtext">
               AI agent builder included · Phone number from $3.50/mo · No
@@ -143,16 +155,6 @@ export function HeroSection() {
             <span className="flex items-center gap-1.5 text-muted-foreground">
               <span className="text-primary">★★★★★</span> 4.9 average
             </span>
-            <span className="hidden sm:inline w-px h-4 bg-border" aria-hidden="true" />
-            <BookCallDialog>
-              <button
-                type="button"
-                className="text-muted-foreground hover:text-foreground font-medium transition-colors"
-                data-testid="link-hero-demo"
-              >
-                or Book a free 15-min call <ArrowRight className="w-3 h-3 inline ml-0.5" />
-              </button>
-            </BookCallDialog>
           </motion.div>
 
         </div>
