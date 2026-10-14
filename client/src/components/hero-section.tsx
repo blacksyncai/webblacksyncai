@@ -123,16 +123,22 @@ export function HeroSection() {
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
               <a href={SIGNUP_URL} className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto h-12" data-testid="button-hero-cta">
-                  Build My Agent
-                  <ArrowRight className="w-4 h-4 ml-1" />
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto h-12 rounded-full pl-7 pr-1.5 active:scale-[0.97]"
+                  data-testid="button-hero-cta"
+                >
+                  Get Started Now
+                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-primary-foreground text-primary ml-1 shrink-0">
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
                 </Button>
               </a>
               <BookCallDialog>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto h-12"
+                  className="w-full sm:w-auto h-12 rounded-full active:scale-[0.97]"
                   data-testid="button-hero-demo"
                 >
                   Get a Demo
