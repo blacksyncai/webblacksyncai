@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
@@ -10,6 +10,58 @@ import { BookCallDialog } from "@/components/book-call-dialog";
 // marketing site -- see @/lib/register for the other app the rest of the
 // site links into).
 const SIGNUP_URL = "https://blacksync.si/sign-up";
+
+/**
+ * Primary hero CTA: a pill button whose arrow badge nudges toward the
+ * cursor as it moves anywhere over the button ("magnetic" hover). Tracked
+ * with motion values (not React state) so the mousemove listener never
+ * re-renders the hero -- this sits right next to a 3D Spline scene and
+ * floating orbs, so re-rendering that whole tree on every mousemove would
+ * be expensive.
+ */
+function MagneticCta({ href, testId, children }: { href: string; testId: string; children: React.ReactNode }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 300, damping: 20, mass: 0.4 });
+  const springY = useSpring(y, { stiffness: 300, damping: 20, mass: 0.4 });
+  const MAX_OFFSET = 8;
+
+  function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = e.clientX - (rect.left + rect.width / 2);
+    const relY = e.clientY - (rect.top + rect.height / 2);
+    x.set(Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, relX * 0.2)));
+    y.set(Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, relY * 0.5)));
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <a
+      href={href}
+      className="w-full sm:w-auto"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Button
+        size="lg"
+        className="w-full sm:w-auto h-12 rounded-full pl-7 pr-1.5 active:scale-[0.97]"
+        data-testid={testId}
+      >
+        {children}
+        <motion.span
+          style={{ x: springX, y: springY }}
+          className="flex items-center justify-center w-9 h-9 rounded-full bg-primary-foreground text-black ml-1 shrink-0"
+        >
+          <ArrowRight className="w-4 h-4" />
+        </motion.span>
+      </Button>
+    </a>
+  );
+}
 
 const industryChips = [
   { label: "Real Estate", slug: "real-estate", icon: Home, top: "8%", left: "6%", delay: 0.5 },
@@ -122,18 +174,9 @@ export function HeroSection() {
             className="flex flex-col items-center gap-4 mb-5"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
-              <a href={SIGNUP_URL} className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto h-12 rounded-full pl-7 pr-1.5 active:scale-[0.97]"
-                  data-testid="button-hero-cta"
-                >
-                  Get Started Now
-                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-primary-foreground text-primary ml-1 shrink-0">
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-              </a>
+              <MagneticCta href={SIGNUP_URL} testId="button-hero-cta">
+                Get Started Now
+              </MagneticCta>
               <BookCallDialog>
                 <Button
                   size="lg"
