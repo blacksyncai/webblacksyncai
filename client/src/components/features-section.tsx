@@ -9,6 +9,7 @@ import {
   Plug,
   Brain,
   Users,
+  Bot,
 } from "lucide-react";
 
 const features = [
@@ -105,6 +106,33 @@ export function FeaturesSection() {
             </motion.div>
           ))}
         </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-4 group p-6 rounded-lg border border-primary/30 bg-gradient-to-r from-primary/10 via-card/30 to-card/30 backdrop-blur-sm hover-elevate transition-all duration-200"
+          data-testid="feature-chatgpt-plugin"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div className="w-10 h-10 shrink-0 rounded-md bg-primary/10 text-primary flex items-center justify-center">
+              <Bot className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1.5">
+                ChatGPT & Claude Plugins
+                <span className="ml-2 text-xs font-medium uppercase tracking-wide text-primary">
+                  New
+                </span>
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Control your AI calling agents from ChatGPT or Claude. Launch
+                campaigns, check call results, and update lead lists straight
+                from the assistant you already use — no dashboard required.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

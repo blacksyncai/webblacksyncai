@@ -23,7 +23,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { CalendlyEmbed } from "@/components/calendly-embed";
+import { CalEmbed } from "@/components/cal-embed";
 
 const INDUSTRY_OPTIONS = [
   "Real Estate",
@@ -135,12 +135,7 @@ export function BookCallDialog({
               </DialogDescription>
             </DialogHeader>
             <div className="px-2 pb-2 sm:px-4 sm:pb-4">
-              <CalendlyEmbed
-                height={640}
-                prefill={{
-                  customAnswers: { a1: phone.trim() },
-                }}
-              />
+              <CalEmbed height={640} />
             </div>
           </>
         ) : (

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { CalendlyEmbed } from "@/components/calendly-embed";
+import { CalEmbed } from "@/components/cal-embed";
 import {
   objectiveLabel,
   labelFor,
@@ -223,7 +223,7 @@ function DfyBlock({ isPriority }: { isPriority: boolean }) {
             <DialogTitle>Book your strategy call</DialogTitle>
             <DialogDescription>Pick a time that works — we'll walk through your plan live.</DialogDescription>
           </DialogHeader>
-          <CalendlyEmbed height={640} />
+          <CalEmbed height={640} />
         </DialogContent>
       </Dialog>
     </div>

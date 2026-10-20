@@ -29,7 +29,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
 import { goToRegister } from "@/lib/register";
-import { CalendlyEmbed } from "@/components/calendly-embed";
+import { CalEmbed } from "@/components/cal-embed";
 import {
   Dialog,
   DialogContent,
@@ -464,7 +464,7 @@ export default function IndustryPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="px-2 pb-2 sm:px-4 sm:pb-4">
-                <CalendlyEmbed height={640} />
+                <CalEmbed height={640} />
               </div>
             </>
           ) : (

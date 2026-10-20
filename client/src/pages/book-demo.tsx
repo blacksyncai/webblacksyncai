@@ -18,7 +18,7 @@ import { ArrowRight, Loader2, CalendarCheck, PhoneCall, ListChecks } from "lucid
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { CalendlyEmbed } from "@/components/calendly-embed";
+import { CalEmbed } from "@/components/cal-embed";
 import { usePageMeta } from "@/hooks/use-page-meta";
 
 const INDUSTRY_OPTIONS = [
@@ -146,7 +146,7 @@ export default function BookDemoPage() {
                   : "Just a couple details so we can tailor the call to you."}
               </p>
               {booking ? (
-                <CalendlyEmbed height={660} prefill={{ customAnswers: { a1: phone.trim() } }} />
+                <CalEmbed height={660} />
               ) : (
               <form onSubmit={submit} className="space-y-4" data-testid="form-book-demo">
                 <HoneypotInput inputRef={hpRef} />
