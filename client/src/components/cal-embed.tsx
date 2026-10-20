@@ -84,14 +84,18 @@ export function CalEmbed({
     window.Cal!.ns?.["15min"]?.("inline", {
       elementOrSelector: el,
       config: {
-        layout: "week_view",
+        layout: "month_view",
+        useSlotsViewOnSmallScreen: "true",
       },
       calLink: BOOK_CAL_LINK,
     });
     window.Cal!.ns?.["15min"]?.("ui", {
-      cssVarsPerTheme: { light: { "cal-brand": "#e96e14" } },
+      cssVarsPerTheme: {
+        light: { "cal-brand": "#e37a3b" },
+        dark: { "cal-brand": "#ecdfdf" },
+      },
       hideEventTypeDetails: false,
-      layout: "week_view",
+      layout: "month_view",
     });
 
     const deadline = Date.now() + 12000;
