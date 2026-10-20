@@ -218,12 +218,12 @@ function DfyBlock({ isPriority }: { isPriority: boolean }) {
           if (v) track("real_estate_lead_strategy_call_booked", { step: "book_call_dialog_open" });
         }}
       >
-        <DialogContent className="sm:max-w-xl p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-4xl p-0 overflow-hidden">
           <DialogHeader className="p-6 pb-0">
             <DialogTitle>Book your strategy call</DialogTitle>
             <DialogDescription>Pick a time that works — we'll walk through your plan live.</DialogDescription>
           </DialogHeader>
-          <CalEmbed height={640} />
+          <CalEmbed height={700} />
         </DialogContent>
       </Dialog>
     </div>

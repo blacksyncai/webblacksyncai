@@ -464,7 +464,7 @@ export default function IndustryPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="px-2 pb-2 sm:px-4 sm:pb-4">
-                <CalEmbed height={640} />
+                <CalEmbed height={700} />
               </div>
             </>
           ) : (

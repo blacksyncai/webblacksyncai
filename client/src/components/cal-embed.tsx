@@ -84,15 +84,14 @@ export function CalEmbed({
     window.Cal!.ns?.["15min"]?.("inline", {
       elementOrSelector: el,
       config: {
-        layout: "month_view",
-        useSlotsViewOnSmallScreen: "true",
+        layout: "week_view",
       },
       calLink: BOOK_CAL_LINK,
     });
     window.Cal!.ns?.["15min"]?.("ui", {
       cssVarsPerTheme: { light: { "cal-brand": "#e96e14" } },
       hideEventTypeDetails: false,
-      layout: "month_view",
+      layout: "week_view",
     });
 
     const deadline = Date.now() + 12000;

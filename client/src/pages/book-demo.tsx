@@ -146,7 +146,7 @@ export default function BookDemoPage() {
                   : "Just a couple details so we can tailor the call to you."}
               </p>
               {booking ? (
-                <CalEmbed height={660} />
+                <CalEmbed height={700} />
               ) : (
               <form onSubmit={submit} className="space-y-4" data-testid="form-book-demo">
                 <HoneypotInput inputRef={hpRef} />

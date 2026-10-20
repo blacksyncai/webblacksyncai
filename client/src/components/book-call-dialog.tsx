@@ -121,7 +121,7 @@ export function BookCallDialog({
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        className={booking ? "sm:max-w-3xl p-0 overflow-hidden" : "sm:max-w-md"}
+        className={booking ? "sm:max-w-4xl p-0 overflow-hidden" : "sm:max-w-md"}
         data-testid="dialog-book-call"
       >
         {booking ? (
@@ -135,7 +135,7 @@ export function BookCallDialog({
               </DialogDescription>
             </DialogHeader>
             <div className="px-2 pb-2 sm:px-4 sm:pb-4">
-              <CalEmbed height={640} />
+              <CalEmbed height={700} />
             </div>
           </>
         ) : (
