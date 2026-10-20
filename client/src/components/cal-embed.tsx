@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2, ExternalLink } from "lucide-react";
-import { BOOK_CAL_LINK, BOOK_CALL_URL } from "@/lib/register";
+import { BOOK_CALL_URL } from "@/lib/register";
 
 const EMBED_SRC = "https://app.cal.com/embed/embed.js";
 
@@ -8,7 +8,7 @@ declare global {
   interface Window {
     Cal?: {
       (...args: unknown[]): void;
-      ns?: Record<string, unknown>;
+      ns?: Record<string, ((...args: unknown[]) => void) & { q: unknown[] }>;
       config?: Record<string, unknown>;
       loaded?: boolean;
       q?: unknown[];
@@ -39,10 +39,20 @@ function loadCalScript(): Promise<void> {
   return scriptPromise;
 }
 
-export type CalPrefill = {
-  name?: string;
-  email?: string;
-};
+/** Attaches the element as an inline embed using Cal.com's official flow. */
+function initInline(el: HTMLElement) {
+  const Cal = window.Cal;
+  if (!Cal) return;
+  Cal("init", "15min", { origin: "https://app.cal.com" });
+  Cal.ns?.["15min"]?.("ui", {
+    hideEventTypeDetails: false,
+    layout: "month_view",
+  });
+  Cal("inline", {
+    elementOrSelector: el,
+    config: { layout: "month_view" },
+  });
+}
 
 /**
  * Inline Cal.com scheduler, so visitors book without leaving the site.
@@ -51,11 +61,9 @@ export type CalPrefill = {
  * ad blocker) — a booking CTA should never dead-end.
  */
 export function CalEmbed({
-  prefill,
   className = "",
   height = 700,
 }: {
-  prefill?: CalPrefill;
   className?: string;
   height?: number;
 }) {
@@ -71,20 +79,11 @@ export function CalEmbed({
       setTimeout(() => reject(new Error("Cal.com load timed out")), 12000),
     );
 
+    // The embed renders into the element that carries the data-cal attributes.
     Promise.race([loadCalScript(), timeout])
       .then(() => {
-        if (cancelled || !window.Cal) return;
-        window.Cal("init", "15min", { origin: "https://app.cal.com" });
-        window.Cal?.ns?.["15min"];
-        window.Cal("inline", {
-          elementOrSelector: el,
-          config: {
-            layout: "month_view",
-            useSlotsViewOnSmallScreen: "true",
-            ...(prefill?.name ? { name: prefill.name } : {}),
-            ...(prefill?.email ? { email: prefill.email } : {}),
-          },
-        });
+        if (cancelled) return;
+        initInline(el);
         setState("ready");
       })
       .catch(() => {
@@ -134,7 +133,8 @@ export function CalEmbed({
         ref={containerRef}
         style={{ minWidth: 320, height }}
         data-cal-namespace="15min"
-        data-cal-link={BOOK_CAL_LINK}
+        data-cal-link="hamza-basal-v1hqkl/15min"
+        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
         data-testid="cal-inline-widget"
       />
     </div>
