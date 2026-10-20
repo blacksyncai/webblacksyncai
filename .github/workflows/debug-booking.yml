@@ -25,7 +25,8 @@ jobs:
           page.on('pageerror', e => logs.push(`[pageerror] ${e.message}`));
           page.on('requestfailed', r => logs.push(`[reqfail] ${r.url().slice(0,120)} ${r.failure()?.errorText}`));
           page.on('response', r => { if (r.url().includes('cal.com')) logs.push(`[cal.com ${r.status()}] ${r.url().slice(0,140)}`); });
-          await page.goto('https://www.blacksync.ai/', {waitUntil:'networkidle2', timeout:60000});
+          await page.goto('https://www.blacksync.ai/', {waitUntil:'domcontentloaded', timeout:90000});
+          await new Promise(r => setTimeout(r, 6000));
           // Find and click the Book a Call button
           const clicked = await page.evaluate(() => {
             const els = [...document.querySelectorAll('button, a')];
