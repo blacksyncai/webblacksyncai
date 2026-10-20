@@ -1,4 +1,4 @@
-name: Debug Cal.com event availability
+name: Headless browser test of booking flow
 
 on:
   push:
@@ -6,25 +6,65 @@ on:
     paths: [".github/workflows/debug-booking.yml"]
 
 jobs:
-  debug:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe event page and availability APIs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install puppeteer
+        run: npm i puppeteer --silent --no-fund --no-audit
+      - name: Load live site, open Book a Call, submit form, watch embed
         run: |
-          echo "=== 1. Booking page title/content ==="
-          PAGE=$(curl -sL "https://cal.com/hamza-basal-v1hqkl/15min")
-          echo "$PAGE" | grep -oE "<title>[^<]*</title>"
-          echo "$PAGE" | grep -oE '"username":"[^"]*"' | head -3
-          echo "$PAGE" | grep -c "eventTypeId" || echo "no eventTypeId found in page"
-          echo "--- next data / booking data present?"
-          echo "$PAGE" | grep -oE '(15 ?min|Discovery|Call)' | sort | uniq -c | head -5
-          echo "$PAGE" | grep -oE '"error"[^,]{0,120}' | head -3
-          echo
-          echo "=== 2. trpc public/event (GET, correct shape) ==="
-          curl -s "https://app.cal.com/api/trpc/public/event?input=%7B%22json%22%3A%7B%22username%22%3A%22hamza-basal-v1hqkl%22%2C%22eventSlug%22%3A%2215min%22%2C%22isTeamEvent%22%3Afalse%2C%22org%22%3Anull%2C%22language%22%3A%22en%22%7D%7D" | head -c 800
-          echo
-          echo "=== 3. Slots check for this week ==="
-          curl -s "https://app.cal.com/api/trpc/public/slots?input=%7B%22json%22%3A%7B%22username%22%3A%22hamza-basal-v1hqkl%22%2C%22eventSlug%22%3A%2215min%22%2C%22start%22%3A%222026-10-20T00%3A00%3A00.000Z%22%2C%22end%22%3A%226%20 2026-10-27T00%3A00%3A00.000Z%22%2C%22timezone%22%3A%22America%2FLos_Angeles%22%7D%7D" | head -c 500
-          echo
-          echo "=== 4. Username exists check (public page) ==="
-          curl -s -o /dev/null -w "user page: %{http_code}\n" "https://cal.com/hamza-basal-v1hqkl"
+          cat > test.mjs <<'EOF'
+          import puppeteer from 'puppeteer';
+          const browser = await puppeteer.launch({headless: 'new', args:['--no-sandbox']});
+          const page = await browser.newPage();
+          const logs = [];
+          page.on('console', m => logs.push(`[console.${m.type()}] ${m.text()}`));
+          page.on('pageerror', e => logs.push(`[pageerror] ${e.message}`));
+          page.on('requestfailed', r => logs.push(`[reqfail] ${r.url().slice(0,120)} ${r.failure()?.errorText}`));
+          page.on('response', r => { if (r.url().includes('cal.com')) logs.push(`[cal.com ${r.status()}] ${r.url().slice(0,140)}`); });
+          await page.goto('https://www.blacksync.ai/', {waitUntil:'networkidle2', timeout:60000});
+          // Find and click the Book a Call button
+          const clicked = await page.evaluate(() => {
+            const els = [...document.querySelectorAll('button, a')];
+            const b = els.find(e => /book a call/i.test(e.textContent||''));
+            if (b) { b.click(); return true; }
+            return false;
+          });
+          console.log('clicked Book a Call:', clicked);
+          await new Promise(r => setTimeout(r, 2000));
+          // Fill the form if present
+          const filled = await page.evaluate(() => {
+            const tel = document.querySelector('input[type="tel"], input[name="phone"]');
+            if (tel) { const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,'value').set; setter.call(tel,'5551234567'); tel.dispatchEvent(new Event('input',{bubbles:true})); return true; }
+            return false;
+          });
+          console.log('phone field found:', filled);
+          await new Promise(r => setTimeout(r, 1000));
+          const submitted = await page.evaluate(() => {
+            const btns = [...document.querySelectorAll('button')];
+            const b = btns.find(e => /book|schedule|continue|submit|get started/i.test(e.textContent||'') && !/cancel/i.test(e.textContent||''));
+            if (b && b.offsetParent !== null) { b.click(); return b.textContent; }
+            return null;
+          });
+          console.log('submitted with:', submitted);
+          // Wait and observe the embed
+          for (let i = 0; i <= 30; i++) {
+            await new Promise(r => setTimeout(r, 1000));
+            const s = await page.evaluate(() => {
+              const dialog = document.querySelector('[role="dialog"]');
+              const iframe = document.querySelector('[data-testid="cal-inline-widget"] iframe, [role="dialog"] iframe');
+              const loading = document.querySelector('[data-testid="cal-loading"]');
+              const fallback = document.querySelector('[data-testid="cal-fallback"]');
+              return { iframe: !!iframe, loadingVisible: !!loading && loading.offsetParent !== null, fallback: !!fallback, dialog: !!dialog };
+            });
+            if (i % 5 === 0 || s.iframe || s.fallback) console.log(`t=${i}s:`, JSON.stringify(s));
+            if (s.iframe || s.fallback) break;
+          }
+          console.log('--- page log ---');
+          logs.slice(0, 60).forEach(l => console.log(l));
+          await browser.close();
+          EOF
+          node test.mjs
