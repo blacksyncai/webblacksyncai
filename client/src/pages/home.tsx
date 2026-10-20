@@ -7,6 +7,7 @@ import { ProductsSection } from "@/components/products-section";
 import { AiSdrSection } from "@/components/ai-sdr-section";
 import { PlatformBentoSection } from "@/components/platform-bento-section";
 import { AIModelsSection } from "@/components/ai-models-section";
+import { FeaturesSection } from "@/components/features-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import ClippedVideoTab from "@/components/ui/clipped-video-tab";
 import { SocialProofSection } from "@/components/social-proof-section";
@@ -34,6 +35,7 @@ export default function Home() {
       <AiSdrSection />
       <PlatformBentoSection />
       <AIModelsSection />
+      <FeaturesSection />
       <HowItWorksSection />
       <SocialProofSection />
       <WhySection />
