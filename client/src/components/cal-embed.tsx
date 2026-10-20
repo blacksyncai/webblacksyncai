@@ -10,41 +10,57 @@ declare global {
       ns?: Record<string, (...args: unknown[]) => void>;
       config?: Record<string, unknown>;
       loaded?: boolean;
+      ns?: Record<string, unknown>;
       q?: unknown[];
     };
   }
 }
 
-/** Loads the Cal.com embed script once, shared across every embed on the page. */
-let scriptPromise: Promise<void> | null = null;
-
-function loadCalScript(): Promise<void> {
-  if (scriptPromise) return scriptPromise;
-  scriptPromise = new Promise<void>((resolve, reject) => {
-    if (window.Cal?.loaded) return resolve();
-    const existing = document.querySelector<HTMLScriptElement>(`script[src="${EMBED_SRC}"]`);
-    if (existing) {
-      existing.addEventListener("load", () => resolve());
-      existing.addEventListener("error", () => reject(new Error("Cal.com script failed")));
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = EMBED_SRC;
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Cal.com script failed"));
-    document.head.appendChild(script);
-  });
-  return scriptPromise;
+/**
+ * Installs Cal.com's official embed loader (the exact IIFE from their
+ * snippet). Safe to call repeatedly: the loader itself guards against
+ * double-loading, and queues "inline" calls until the real script is ready.
+ */
+function ensureCalLoader() {
+  if (typeof window === "undefined") return;
+  window.Cal =
+    window.Cal ||
+    function (...args: unknown[]) {
+      const cal = window.Cal as unknown as {
+        loaded?: boolean;
+        ns: Record<string, (...a: unknown[]) => void>;
+        q: unknown[][] | undefined;
+      };
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        const script = document.createElement("script");
+        script.src = EMBED_SRC;
+        document.head.appendChild(script);
+        cal.loaded = true;
+      }
+      if (args[0] === "init") {
+        const api = (...a: unknown[]) => {
+          (api as unknown as { q: unknown[] }).q.push(a);
+        };
+        (api as unknown as { q: unknown[] }).q = [];
+        const namespace = args[1];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || (api as never);
+          cal.ns[namespace](args);
+          cal.q?.push(["initNamespace", namespace]);
+          return;
+        }
+      }
+      cal.q?.push(args);
+    } as never;
 }
 
 /**
  * Inline Cal.com scheduler — mirrors the official inline embed snippet:
- * init the "15min" namespace, then ns("inline") with calLink + config,
- * then ns("ui") for layout options.
+ * loader -> init namespace -> ns("inline", {calLink}) -> ns("ui", ...).
  *
- * Verifies the booking iframe actually rendered; falls back to a direct
- * booking link if it hasn't within 12s (blocked script, CSP, ad blocker).
+ * Falls back to a direct booking link if the iframe hasn't rendered in 12s.
  */
 export function CalEmbed({
   className = "",
@@ -61,43 +77,40 @@ export function CalEmbed({
     const el = containerRef.current;
     if (!el) return;
 
-    loadCalScript()
-      .then(() => {
-        if (cancelled || !window.Cal) return;
-        const Cal = window.Cal;
-        Cal("init", "15min", { origin: "https://app.cal.com" });
-        Cal.config = Cal.config || {};
-        Cal.config.forwardQueryParams = true;
-        Cal.ns?.["15min"]("inline", {
-          elementOrSelector: el,
-          config: {
-            layout: "month_view",
-            useSlotsViewOnSmallScreen: "true",
-          },
-          calLink: BOOK_CAL_LINK,
-        });
-        Cal.ns?.["15min"]("ui", {
-          hideEventTypeDetails: false,
-          layout: "month_view",
-        });
-        const deadline = Date.now() + 12000;
-        const poll = window.setInterval(() => {
-          if (cancelled) return window.clearInterval(poll);
-          if (el.querySelector("iframe")) {
-            window.clearInterval(poll);
-            setState("ready");
-          } else if (Date.now() > deadline) {
-            window.clearInterval(poll);
-            setState("error");
-          }
-        }, 500);
-      })
-      .catch(() => {
-        if (!cancelled) setState("error");
-      });
+    ensureCalLoader();
+    const Cal = window.Cal!;
+    Cal("init", "15min", { origin: "https://app.cal.com" });
+    window.Cal!.config = window.Cal!.config || {};
+    window.Cal!.config.forwardQueryParams = true;
+    window.Cal!.ns?.["15min"]?.("inline", {
+      elementOrSelector: el,
+      config: {
+        layout: "month_view",
+        useSlotsViewOnSmallScreen: "true",
+      },
+      calLink: BOOK_CAL_LINK,
+    });
+    window.Cal!.ns?.["15min"]?.("ui", {
+      cssVarsPerTheme: { light: { "cal-brand": "#e96e14" } },
+      hideEventTypeDetails: false,
+      layout: "month_view",
+    });
+
+    const deadline = Date.now() + 12000;
+    const poll = window.setInterval(() => {
+      if (cancelled) return window.clearInterval(poll);
+      if (el.querySelector("iframe")) {
+        window.clearInterval(poll);
+        setState("ready");
+      } else if (Date.now() > deadline) {
+        window.clearInterval(poll);
+        setState("error");
+      }
+    }, 500);
 
     return () => {
       cancelled = true;
+      window.clearInterval(poll);
     };
   }, []);
 
