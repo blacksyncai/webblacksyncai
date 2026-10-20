@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui/section";
 export default function LoginPage() {
   useEffect(() => {
     window.location.replace("https://blacksync.si/login");
-  }, [];
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-login">
