@@ -28,6 +28,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { AiSdrAssessment } from "@/components/ai-sdr/assessment";
+import { MynaHero } from "@/components/ui/myna-hero";
 import { StackDockSection } from "@/components/ai-sdr/stack-dock";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
@@ -308,123 +309,19 @@ export default function AiSdrPage() {
   return (
     <div className="min-h-screen bg-background" data-testid="page-ai-sdr">
       <Navbar />
-      {/* ============ HERO — light, with floating orbs (matches homepage) ============ */}
-      <header className="relative pt-28 pb-16 md:pt-36 md:pb-20 hero-gradient overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-60" aria-hidden="true" />
-        {/* Floating 3D orbs — glossy spheres for depth */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <motion.div
-            animate={{ y: [0, 14, 0], rotate: [0, 6, 0] }}
-            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-24 left-[6%] w-36 h-36 md:w-44 md:h-44 rounded-full opacity-90"
-            style={{
-              background: "radial-gradient(circle at 32% 28%, #ffe2cf 0%, #f08a4f 42%, #c5491f 74%, #8f300f 100%)",
-              boxShadow:
-                "0 34px 60px -18px rgba(180,110,40,0.4), inset -8px -12px 28px rgba(130,80,20,0.5), inset 7px 9px 22px rgba(255,240,215,0.8)",
-            }}
-          />
-          <motion.div
-            animate={{ y: [0, 18, 0], rotate: [0, -8, 0] }}
-            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[42%] right-[7%] w-24 h-24 md:w-28 md:h-28 rounded-full opacity-80"
-            style={{
-              background: "radial-gradient(circle at 34% 30%, #fff0d8 0%, #f4b56a 44%, #d98a35 76%, #a8631f 100%)",
-              boxShadow:
-                "0 34px 60px -18px rgba(180,110,40,0.4), inset -8px -12px 28px rgba(130,80,20,0.5), inset 7px 9px 22px rgba(255,240,215,0.8)",
-            }}
-          />
-          <motion.div
-            animate={{ y: [0, -14, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-16 left-[16%] w-16 h-16 md:w-20 md:h-20 rounded-full opacity-70"
-            style={{
-              background: "radial-gradient(circle at 32% 28%, #ffe7d6 0%, #ef8a52 46%, #b5421a 100%)",
-              boxShadow:
-                "0 24px 44px -14px rgba(170,65,25,0.4), inset -6px -9px 22px rgba(110,35,10,0.5), inset 5px 7px 16px rgba(255,225,205,0.7)",
-            }}
-          />
-        </div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <nav aria-label="Breadcrumb" className="mb-7 flex justify-center">
-            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  Home
-                </Link>
-              </li>
-              <ChevronRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-              <li aria-current="page" className="text-foreground font-medium">
-                AI SDR
-              </li>
-            </ol>
-          </nav>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 mb-7"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-              AI Sales Development Representative (SDR)
-            </span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] leading-[1.05] text-balance text-foreground"
-            data-testid="text-hero-headline"
-          >
-            Add <span className="text-primary">2,500–5,000</span> Outbound Calls a Day
-            <br className="hidden sm:block" /> Without Adding Another SDR Team.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.16 }}
-            className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed text-pretty max-w-2xl mx-auto"
-          >
-            First touch, follow-up, qualification, warm transfer to your SDR/BDR team, or direct booking onto AE
-            calendars — BlackSync's managed AI SDRs handle it and hand live opportunities to your sales team.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.22 }}
-            className="mt-3 text-sm text-muted-foreground"
-          >
-            Built around your offer, your ICP, your CRM, and your sales process.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-9 flex flex-col sm:flex-row gap-3 justify-center"
-          >
-            <a href="#assessment" onClick={() => track("ai_sdr_cta_click", { label: "hero_primary" })}>
-              <Button size="lg" className="w-full sm:w-auto" data-testid="button-hero-primary">
-                Hire My AI SDR
-                <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </a>
-            <a href="#how-it-works" onClick={() => track("ai_sdr_cta_click", { label: "hero_secondary" })}>
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto "
-                data-testid="button-hero-secondary"
-              >
-                See How It Works
-              </Button>
-            </a>
-          </motion.div>
-        </div>
+      {/* ============ HERO — Myna-style, minimal mono ============ */}
+      <MynaHero
+        headlineWords={["OUTBOUND", "CAPACITY", "WITHOUT", "HEADCOUNT"]}
+        subline="BlackSync's managed AI SDRs prospect, call, qualify, follow up, and hand live opportunities to your sales team."
+        note="Built around your offer, your ICP, your CRM, and your sales process."
+        primaryLabel="HIRE MY AI SDR"
+        primaryHref="#assessment"
+        secondaryLabel="SEE HOW IT WORKS"
+        secondaryHref="#how-it-works"
+        onPrimaryClick={() => track("ai_sdr_cta_click", { label: "hero_primary" })}
+        onSecondaryClick={() => track("ai_sdr_cta_click", { label: "hero_secondary" })}
+      />
+      <header className="relative">
 
         {/* Operating strip -- labels only, no fabricated metrics */}
         <motion.div
