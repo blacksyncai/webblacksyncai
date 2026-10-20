@@ -1,0 +1,30 @@
+name: Debug Cal.com event availability
+
+on:
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/debug-booking.yml"]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe event page and availability APIs
+        run: |
+          echo "=== 1. Booking page title/content ==="
+          PAGE=$(curl -sL "https://cal.com/hamza-basal-v1hqkl/15min")
+          echo "$PAGE" | grep -oE "<title>[^<]*</title>"
+          echo "$PAGE" | grep -oE '"username":"[^"]*"' | head -3
+          echo "$PAGE" | grep -c "eventTypeId" || echo "no eventTypeId found in page"
+          echo "--- next data / booking data present?"
+          echo "$PAGE" | grep -oE '(15 ?min|Discovery|Call)' | sort | uniq -c | head -5
+          echo "$PAGE" | grep -oE '"error"[^,]{0,120}' | head -3
+          echo
+          echo "=== 2. trpc public/event (GET, correct shape) ==="
+          curl -s "https://app.cal.com/api/trpc/public/event?input=%7B%22json%22%3A%7B%22username%22%3A%22hamza-basal-v1hqkl%22%2C%22eventSlug%22%3A%2215min%22%2C%22isTeamEvent%22%3Afalse%2C%22org%22%3Anull%2C%22language%22%3A%22en%22%7D%7D" | head -c 800
+          echo
+          echo "=== 3. Slots check for this week ==="
+          curl -s "https://app.cal.com/api/trpc/public/slots?input=%7B%22json%22%3A%7B%22username%22%3A%22hamza-basal-v1hqkl%22%2C%22eventSlug%22%3A%2215min%22%2C%22start%22%3A%222026-10-20T00%3A00%3A00.000Z%22%2C%22end%22%3A%226%20 2026-10-27T00%3A00%3A00.000Z%22%2C%22timezone%22%3A%22America%2FLos_Angeles%22%7D%7D" | head -c 500
+          echo
+          echo "=== 4. Username exists check (public page) ==="
+          curl -s -o /dev/null -w "user page: %{http_code}\n" "https://cal.com/hamza-basal-v1hqkl"
