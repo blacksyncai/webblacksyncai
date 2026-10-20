@@ -106,20 +106,48 @@ export default function UpdateArticlePage({ slug }: { slug: string }) {
             analytics — without ever opening a separate dashboard.
           </p>
 
-          <Section title="Manage your AI agents">
+          <Section title="Build agents right inside your chat">
             <p>
-              Create, update, and refine your AI voice agents through natural
-              conversation. Describe the persona, script, and guardrails, and
-              BlackSync builds the agent around your instructions — then lets
-              you iterate on it the same way.
+              Describe the agent you want — the persona, the script, the
+              objection handling, the guardrails — and BlackSync builds it
+              inside your ChatGPT conversation. Want it warmer? More direct?
+              Bilingual? Ask, and the agent updates on the spot. No builder
+              UI, no forms, no setup wizard: if you can describe it, you can
+              ship it.
             </p>
           </Section>
 
-          <Section title="Launch and monitor campaigns">
+          <Section title="Launch campaigns from a prompt">
             <p>
-              Start outbound campaigns from a chat prompt. Point BlackSync at a
-              lead list or CRM segment, set your cadence, and watch live
-              results stream back into the conversation as calls complete.
+              Point BlackSync at a lead list or CRM segment, tell it your
+              cadence and follow-up rules, and the campaign starts dialing —
+              hundreds of personalized calls in minutes. Live results stream
+              back into the conversation as calls complete, so you can steer
+              mid-campaign instead of waiting for a report.
+            </p>
+          </Section>
+
+          <Section title="All your context, already with you">
+            <p>
+              The integration carries your context into every request. Your
+              agents, campaigns, contacts, and call history are all available
+              conversationally, so a question like &ldquo;how did the expired
+              listing campaign do yesterday?&rdquo; gets a real answer with
+              transcripts, outcomes, and booked appointments — not a link to
+              a dashboard.
+            </p>
+          </Section>
+
+          <Section title="And everything else you can yap about">
+            <p>
+              Because it runs on natural language, the integration flexes
+              beyond the basics. Draft a new script variant and A/B it against
+              your current one. Ask for a weekly digest of connect rates and
+              bookings. Pull the full transcript of the call that closed your
+              best appointment last Tuesday. Segment your contacts by
+              qualification score and re-dial only the warm ones. If it can
+              be asked, BlackSync can usually do it — and when it can&rsquo;t,
+              it tells you exactly what it needs.
             </p>
           </Section>
 

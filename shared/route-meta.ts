@@ -59,7 +59,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     image: `${SITE_URL}/images/blacksync-chatgpt-launch.jpg`,
     content: [
       "Your AI workforce just moved into the tool you already use. With the new BlackSync integration for ChatGPT, you can run your entire voice-agent operation — agents, campaigns, calls, contacts, and analytics — without ever opening a separate dashboard.",
-      "Create and refine AI voice agents through natural conversation, launch outbound campaigns from a chat prompt, review call summaries and transcripts on command, manage contacts with automatic CRM sync, and ask for connect rates, appointment counts, or cost-per-booking in plain English.",
+      "Build AI voice agents right inside your chat — describe the persona, script, and guardrails and BlackSync ships it. Launch campaigns from a prompt with live results streaming back into the conversation. Your agents, campaigns, contacts, and call history are all available conversationally, so any question gets a real answer with transcripts, outcomes, and booked appointments.",
       "Sign up today and get complimentary signup credits to test the integration with your own agents and lead lists. No credit card required.",
     ],
   },
