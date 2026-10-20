@@ -10,8 +10,7 @@ declare global {
       ns?: Record<string, (...args: unknown[]) => void>;
       config?: Record<string, unknown>;
       loaded?: boolean;
-      ns?: Record<string, unknown>;
-      q?: unknown[];
+      q?: unknown[][];
     };
   }
 }
