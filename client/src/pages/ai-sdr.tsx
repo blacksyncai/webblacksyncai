@@ -313,7 +313,7 @@ export default function AiSdrPage() {
       <div className="dark">
         <Hero
           eyebrow="AI Sales Development, Managed"
-          title="Outbound capacity without headcount"
+          title="Add 2,500–5,000 outbound calls a day — without adding another SDR team"
           subtitle="BlackSync's managed AI SDRs prospect, call, qualify, and follow up — handing live opportunities straight to your sales team."
           note="Built around your offer, your ICP, your CRM, and your sales process."
           ctaLabel="Hire My AI SDR"
