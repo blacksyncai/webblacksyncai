@@ -314,7 +314,7 @@ export function Navbar() {
             </Button>
 
             <a
-              href="https://ai.blacksync.network/"
+              href="https://blacksync.si/login"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex"
@@ -566,7 +566,7 @@ export function Navbar() {
               ))}
 
               <a
-                href="https://ai.blacksync.network/"
+                href="https://blacksync.si/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
