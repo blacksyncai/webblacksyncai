@@ -1,6 +1,6 @@
 // Where the BlackSync app lives. Every link off the marketing site into the
 // product is built from this, so moving the app is a one-line change.
-export const APP_BASE_URL = "https://ai.blacksync.cloud";
+export const APP_BASE_URL = "https://blacksync.si";
 
 // The BlackSync app registration / free-access page. After we capture a lead
 // on the marketing site (which fires the GHL webhook = inbound lead), we send
