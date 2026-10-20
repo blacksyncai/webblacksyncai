@@ -44,7 +44,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookCallDialog } from "@/components/book-call-dialog";
-import { APP_LOGIN_URL } from "@/lib/register";
+import { APP_LOGIN_URL, REGISTER_URL } from "@/lib/register";
 
 type MegaColumn = {
   heading: string;
@@ -352,6 +352,16 @@ export function Navbar() {
               </Button>
             </a>
 
+            <a
+              href={REGISTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex"
+            >
+              <Button variant="outline" size="sm" data-testid="button-try-free">
+                Try It Free
+              </Button>
+            </a>
             <BookCallDialog>
               <Button variant="ghost" size="sm" className="hidden sm:inline-flex" data-testid="button-talk-sales">
                 Book a Call
@@ -640,6 +650,19 @@ export function Navbar() {
                   Log in
                 </Button>
               </a>
+              <div className="px-2 mt-2">
+                <a
+                  href={REGISTER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="block"
+                >
+                  <Button variant="outline" className="w-full" size="sm" data-testid="button-try-free-mobile">
+                    Try It Free
+                  </Button>
+                </a>
+              </div>
               <div className="flex gap-2 mt-2 px-2">
                 <div className="flex-1">
                   <BookCallDialog onOpen={() => setMobileOpen(false)}>
