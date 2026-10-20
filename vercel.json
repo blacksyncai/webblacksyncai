@@ -3,6 +3,9 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist/public",
   "framework": null,
+  "redirects": [
+    { "source": "/login", "destination": "https://blacksync.si/login", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/((?!assets/|.*\\.).*)", "destination": "/index.html" }
   ]

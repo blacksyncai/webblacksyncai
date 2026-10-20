@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Eyebrow } from "@/components/ui/section";
 
 export default function LoginPage() {
+  useEffect(() => {
+    window.location.replace("https://blacksync.si/login");
+  }, [];
+
   return (
     <div className="min-h-screen bg-background flex flex-col" data-testid="page-login">
       <Navbar />
