@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2, ExternalLink } from "lucide-react";
-import { BOOK_CALL_URL } from "@/lib/register";
+import { BOOK_CAL_LINK, BOOK_CALL_URL } from "@/lib/register";
 
 const EMBED_SRC = "https://app.cal.com/embed/embed.js";
 
 declare global {
   interface Window {
     Cal?: ((...args: unknown[]) => void) & {
-      ns?: Record<string, unknown>;
+      ns?: Record<string, (...args: unknown[]) => void>;
       config?: Record<string, unknown>;
       loaded?: boolean;
       q?: unknown[];
@@ -39,11 +39,12 @@ function loadCalScript(): Promise<void> {
 }
 
 /**
- * Inline Cal.com scheduler so visitors book without leaving the site.
+ * Inline Cal.com scheduler — mirrors the official inline embed snippet:
+ * init the "15min" namespace, then ns("inline") with calLink + config,
+ * then ns("ui") for layout options.
  *
- * Renders the official inline embed, then verifies the booking iframe actually
- * appeared. If it hasn't within 10s (blocked script, CSP, ad blocker, Cal.com
- * outage), swaps to a direct booking link — a booking CTA should never dead-end.
+ * Verifies the booking iframe actually rendered; falls back to a direct
+ * booking link if it hasn't within 12s (blocked script, CSP, ad blocker).
  */
 export function CalEmbed({
   className = "",
@@ -63,12 +64,23 @@ export function CalEmbed({
     loadCalScript()
       .then(() => {
         if (cancelled || !window.Cal) return;
-        window.Cal("inline", {
+        const Cal = window.Cal;
+        Cal("init", "15min", { origin: "https://app.cal.com" });
+        Cal.config = Cal.config || {};
+        Cal.config.forwardQueryParams = true;
+        Cal.ns?.["15min"]("inline", {
           elementOrSelector: el,
-          config: { layout: "month_view" },
+          config: {
+            layout: "month_view",
+            useSlotsViewOnSmallScreen: "true",
+          },
+          calLink: BOOK_CAL_LINK,
         });
-        // Verify the iframe actually rendered; if not, fall back to a link.
-        const deadline = Date.now() + 10000;
+        Cal.ns?.["15min"]("ui", {
+          hideEventTypeDetails: false,
+          layout: "month_view",
+        });
+        const deadline = Date.now() + 12000;
         const poll = window.setInterval(() => {
           if (cancelled) return window.clearInterval(poll);
           if (el.querySelector("iframe")) {
@@ -126,8 +138,6 @@ export function CalEmbed({
       <div
         ref={containerRef}
         style={{ minWidth: 320, height }}
-        data-cal-link="hamza-basal-v1hqkl/15min"
-        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
         data-testid="cal-inline-widget"
       />
     </div>
