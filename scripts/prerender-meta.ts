@@ -92,6 +92,23 @@ function renderRoute(shell: string, path: string): string {
     /<meta\s+property="og:url"[^>]*>/i,
     `<meta property="og:url" content="${escapeAttr(url)}" />`,
   );
+  if (meta.image) {
+    html = upsert(
+      html,
+      /<meta\s+property="og:image"[^>]*>/i,
+      `<meta property="og:image" content="${escapeAttr(meta.image)}" />`,
+    );
+    html = upsert(
+      html,
+      /<meta\s+name="twitter:card"[^>]*>/i,
+      `<meta name="twitter:card" content="summary_large_image" />`,
+    );
+    html = upsert(
+      html,
+      /<meta\s+name="twitter:image"[^>]*>/i,
+      `<meta name="twitter:image" content="${escapeAttr(meta.image)}" />`,
+    );
+  }
 
   html = html.replace(
     '<div id="root"></div>',

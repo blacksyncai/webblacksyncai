@@ -34,6 +34,8 @@ export type RouteMeta = {
    * crawlers and AI agents that never run the client JS.
    */
   content?: string[];
+  /** Absolute URL for og:image / twitter:image on this page. */
+  image?: string;
 };
 
 /** Full <title> for a page title, matching what usePageMeta produces. */
@@ -42,6 +44,25 @@ export function fullTitle(title?: string): string {
 }
 
 export const ROUTE_META: Record<string, RouteMeta> = {
+  "/updates": {
+    title: "Product Updates",
+    description: "Product announcements, integrations, and improvements from the BlackSync team — new AI voice agent features, releases, and platform updates.",
+    h1: "What's new at BlackSync",
+    content: [
+      "Product announcements, integrations, and improvements from the BlackSync team. The latest: BlackSync AI for ChatGPT — manage agents, campaigns, calls, contacts, and analytics straight from ChatGPT.",
+    ],
+  },
+  "/updates/chatgpt-integration": {
+    title: "Introducing BlackSync AI for ChatGPT",
+    description: "Manage your AI agents, campaigns, calls, contacts, and analytics straight from ChatGPT. Try it free with complimentary signup credits — no credit card required.",
+    h1: "Introducing BlackSync AI for ChatGPT",
+    image: `${SITE_URL}/images/blacksync-chatgpt-launch.jpg`,
+    content: [
+      "Your AI workforce just moved into the tool you already use. With the new BlackSync integration for ChatGPT, you can run your entire voice-agent operation — agents, campaigns, calls, contacts, and analytics — without ever opening a separate dashboard.",
+      "Create and refine AI voice agents through natural conversation, launch outbound campaigns from a chat prompt, review call summaries and transcripts on command, manage contacts with automatic CRM sync, and ask for connect rates, appointment counts, or cost-per-booking in plain English.",
+      "Sign up today and get complimentary signup credits to test the integration with your own agents and lead lists. No credit card required.",
+    ],
+  },
   "/": {
     h1: "The AI workforce behind every conversation.",
     content: [

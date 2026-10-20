@@ -7,7 +7,7 @@ const footerLinks = {
     { label: "AI SDR for Sales Teams", href: "/ai-sdr" },
     { label: "Book a Demo", href: "/book-demo" },
     { label: "Integrations", href: "#integrations" },
-    { label: "Changelog", href: "#" },
+    { label: "Product Updates", href: "/updates" },
     { label: "API Docs", href: "#" },
   ],
   Solutions: [

@@ -28,6 +28,8 @@ import ComparePage from "@/pages/compare";
 import RealEstateLeadGenerationPage from "@/pages/real-estate-lead-generation";
 import AiSdrPage from "@/pages/ai-sdr";
 import WhyBlackSyncPage from "@/pages/why-blacksync";
+import UpdatesPage from "@/pages/updates";
+import UpdateArticlePage from "@/pages/update-article";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -58,6 +60,13 @@ function Router() {
     <ScrollToTop />
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/updates" component={UpdatesPage} />
+      <Route
+        path="/updates/:slug"
+        component={(props: { params: { slug: string } }) => (
+          <UpdateArticlePage slug={props.params.slug} />
+        )}
+      />
       <Route path="/pricing" component={PricingPage} />
       <Route path="/signup" component={SignupPage} />
       <Route path="/login" component={LoginPage} />

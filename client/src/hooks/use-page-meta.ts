@@ -53,6 +53,12 @@ export function usePageMeta({ title, description, path, noindex }: PageMetaOptio
     setMetaTag("name", "description", desc);
     setMetaTag("property", "og:title", finalTitle);
     setMetaTag("property", "og:description", desc);
+    const image = fromTable?.image;
+    if (image) {
+      setMetaTag("property", "og:image", image);
+      setMetaTag("name", "twitter:image", image);
+      setMetaTag("name", "twitter:card", "summary_large_image");
+    }
 
     if (path) {
       setCanonical(path);
