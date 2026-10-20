@@ -5,6 +5,7 @@ import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
 import { BookCallDialog } from "@/components/book-call-dialog";
+import { RetroButton } from "@/components/ui/button-retro";
 
 // Where the real app's signup flow lives (a separate app from this
 // marketing site -- see @/lib/register for the other app the rest of the
@@ -174,18 +175,15 @@ export function HeroSection() {
             className="flex flex-col items-center gap-4 mb-5"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
-              <MagneticCta href={SIGNUP_URL} testId="button-hero-cta">
-                Get Started Now
-              </MagneticCta>
+              <a href={SIGNUP_URL} className="w-full sm:w-auto" data-testid="button-hero-cta">
+                <RetroButton className="w-full sm:w-44" type="button">
+                  Get Started
+                </RetroButton>
+              </a>
               <BookCallDialog>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto h-12 rounded-full active:scale-[0.97]"
-                  data-testid="button-hero-demo"
-                >
-                  Get a Demo
-                </Button>
+                <RetroButton variant="lightGray" className="w-full sm:w-44" data-testid="button-hero-demo">
+                  Book a Demo
+                </RetroButton>
               </BookCallDialog>
             </div>
 
