@@ -43,7 +43,7 @@ export function fullTitle(title?: string): string {
 
 export const ROUTE_META: Record<string, RouteMeta> = {
   "/": {
-    h1: "AI voice agents built around your business.",
+    h1: "The AI workforce behind every conversation.",
     content: [
       "BlackSync builds custom AI voice agents around your workflows, tools, and data, so they operate like part of your team. Hundreds of personalized calls in minutes, not days.",
       "BlackSync's AI agents handle outbound sales prospecting, inbound call answering, lead follow-up, appointment booking, and customer service — in 40+ languages, built on GPT-5, Claude, and Gemini.",
