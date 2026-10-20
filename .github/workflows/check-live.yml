@@ -23,3 +23,4 @@ jobs:
           done
           echo "=== /login status ==="
           curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://blacksync.ai/login
+# trigger check: 20261020T073438Z
