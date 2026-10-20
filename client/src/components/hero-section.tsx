@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
@@ -176,7 +176,10 @@ export function HeroSection() {
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
               <ShinyButton href={SIGNUP_URL} testId="button-hero-cta" className="w-full sm:w-auto">
-                Get Started Now
+                <span className="inline-flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  Get Started
+                </span>
               </ShinyButton>
               <BookCallDialog>
                 <Button
@@ -196,16 +199,7 @@ export function HeroSection() {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-14 flex items-center justify-center gap-4 text-sm"
-          >
-            <span className="flex items-center gap-1.5 text-muted-foreground">
-              <span className="text-primary">★★★★★</span> 4.9 average
-            </span>
-          </motion.div>
+
 
         </div>
 
