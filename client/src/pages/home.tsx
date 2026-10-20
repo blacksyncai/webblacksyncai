@@ -31,11 +31,11 @@ export default function Home() {
       <DashboardMockupSection />
       <ClippedVideoTab />
       <TrustStrip />
+      <FeaturesSection />
       <ProductsSection />
       <AiSdrSection />
       <PlatformBentoSection />
       <AIModelsSection />
-      <FeaturesSection />
       <HowItWorksSection />
       <SocialProofSection />
       <WhySection />
