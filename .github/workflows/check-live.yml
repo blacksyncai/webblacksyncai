@@ -1,7 +1,9 @@
 name: Check live blacksync.ai content
 
 on:
-  workflow_dispatch:
+  push:
+    branches: ["claude/nice-keller-ur7mnt"]
+    paths: [".github/workflows/check-live.yml"]
 
 jobs:
   check:
