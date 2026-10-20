@@ -5,6 +5,7 @@ import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
 import { BookCallDialog } from "@/components/book-call-dialog";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 // Where the real app's signup flow lives (a separate app from this
 // marketing site -- see @/lib/register for the other app the rest of the
@@ -174,9 +175,9 @@ export function HeroSection() {
             className="flex flex-col items-center gap-4 mb-5"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
-              <MagneticCta href={SIGNUP_URL} testId="button-hero-cta">
+              <ShinyButton href={SIGNUP_URL} testId="button-hero-cta" className="w-full sm:w-auto">
                 Get Started Now
-              </MagneticCta>
+              </ShinyButton>
               <BookCallDialog>
                 <Button
                   size="lg"
