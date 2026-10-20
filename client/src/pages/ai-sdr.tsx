@@ -28,7 +28,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { AiSdrAssessment } from "@/components/ai-sdr/assessment";
-import { MynaHero } from "@/components/ui/myna-hero";
+import { Hero } from "@/components/ui/hero-1";
 import { StackDockSection } from "@/components/ai-sdr/stack-dock";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
@@ -309,33 +309,36 @@ export default function AiSdrPage() {
   return (
     <div className="min-h-screen bg-background" data-testid="page-ai-sdr">
       <Navbar />
-      {/* ============ HERO — Myna-style, minimal mono ============ */}
-      <MynaHero
-        headlineWords={["OUTBOUND", "CAPACITY", "WITHOUT", "HEADCOUNT"]}
-        subline="BlackSync's managed AI SDRs prospect, call, qualify, follow up, and hand live opportunities to your sales team."
-        note="Built around your offer, your ICP, your CRM, and your sales process."
-        primaryLabel="HIRE MY AI SDR"
-        primaryHref="#assessment"
-        secondaryLabel="SEE HOW IT WORKS"
-        secondaryHref="#how-it-works"
-        onPrimaryClick={() => track("ai_sdr_cta_click", { label: "hero_primary" })}
-        onSecondaryClick={() => track("ai_sdr_cta_click", { label: "hero_secondary" })}
-      />
-      <header className="relative">
+      {/* ============ HERO — dark grey, Hero-1 style ============ */}
+      <div className="dark">
+        <Hero
+          eyebrow="AI Sales Development, Managed"
+          title="Outbound capacity without headcount"
+          subtitle="BlackSync's managed AI SDRs prospect, call, qualify, and follow up — handing live opportunities straight to your sales team."
+          note="Built around your offer, your ICP, your CRM, and your sales process."
+          ctaLabel="Hire My AI SDR"
+          ctaHref="#assessment"
+          secondaryLabel="See How It Works"
+          secondaryHref="#how-it-works"
+          onCtaClick={() => track("ai_sdr_cta_click", { label: "hero_primary" })}
+          onSecondaryClick={() => track("ai_sdr_cta_click", { label: "hero_secondary" })}
+        />
+      </div>
+      <header className="relative bg-[#1f1f21]">
 
         {/* Operating strip -- labels only, no fabricated metrics */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="relative mt-16 border-t border-border"
+          className="relative mt-0 pt-10 border-t border-white/10"
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
               {OPERATING_STRIP.map((label) => (
                 <div key={label} className="py-6 px-4 text-center">
                   <div className="mx-auto mb-2 h-px w-6 bg-primary" aria-hidden="true" />
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-gray-400">{label}</p>
                 </div>
               ))}
             </div>
