@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
       - name: Install Vercel CLI
         run: npm i -g vercel@latest
       - name: Guard token
@@ -49,3 +49,4 @@ jobs:
 # trigger deploy: 20260626T155131Z
 
 # trigger deploy: 20261020T065435Z
+# trigger deploy: 20261020T065528Z
