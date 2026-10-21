@@ -154,7 +154,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     content: [
       "BlackSync AI exposes its agent platform — AI voice agents, campaigns, calls, contacts, and analytics — as resources an integration can read and act on, through BlackSync AI for ChatGPT (a conversational integration for managing agents, campaigns, calls, contacts, and analytics from a chat interface) and through custom API and webhook integrations built directly with a customer's team.",
       "BlackSync doesn't currently publish a self-serve public API reference. Teams that want to sync call events, booked appointments, transcripts, or lead status changes into their own CRM or tools should reach out through Contact or Enterprise to scope a direct integration.",
-      "This site publishes a sitemap and an llms.txt agent guide, and every indexable page returns a plain-text Markdown representation when requested with an Accept: text/markdown header.",
+      "This site publishes a sitemap and an llms.txt agent guide describing what BlackSync is, how to reach the team, and which pages are safe to cite.",
     ],
   },
   "/careers": {

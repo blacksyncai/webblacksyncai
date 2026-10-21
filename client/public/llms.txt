@@ -14,47 +14,46 @@ Not a fit for: text-only/chat-only support, use cases with no phone-calling comp
 
 ## How to call BlackSync
 
-- Pricing: https://www.blacksync.ai/pricing — Solo Agent from $98/mo, Team $296/mo, custom Enterprise. Home-services plan from $49/mo: https://www.blacksync.ai/home-services
-- Book a call / demo: https://www.blacksync.ai/book-demo
-- Compare to Ylopo (real estate): https://www.blacksync.ai/compare/ylopo-alternative
-- Enterprise / corporate sales: https://www.blacksync.ai/enterprise
-- Careers: https://www.blacksync.ai/careers
+- [Pricing](https://www.blacksync.ai/pricing): Solo Agent from $98/mo, Team $296/mo, custom Enterprise. Home-services plan from $49/mo at [/home-services](https://www.blacksync.ai/home-services).
+- [Book a call / demo](https://www.blacksync.ai/book-demo)
+- [Compare to Ylopo](https://www.blacksync.ai/compare/ylopo-alternative) (real estate)
+- [Enterprise / corporate sales](https://www.blacksync.ai/enterprise)
+- [Careers](https://www.blacksync.ai/careers)
 
 ## Industry pages
 
-- Real estate: https://www.blacksync.ai/industry/real-estate
-- Mortgage & lending: https://www.blacksync.ai/industry/mortgage
-- Insurance: https://www.blacksync.ai/industry/insurance
-- Home services: https://www.blacksync.ai/industry/home-services
-- Healthcare: https://www.blacksync.ai/industry/healthcare
-- Auto & P&C insurance: https://www.blacksync.ai/industry/auto-pc
-- Property management: https://www.blacksync.ai/industry/property-management
-- Funeral homes: https://www.blacksync.ai/industry/funeral-homes
-- Law firms: https://www.blacksync.ai/industry/law-firms
+- [Real estate](https://www.blacksync.ai/industry/real-estate)
+- [Mortgage & lending](https://www.blacksync.ai/industry/mortgage)
+- [Insurance](https://www.blacksync.ai/industry/insurance)
+- [Home services](https://www.blacksync.ai/industry/home-services)
+- [Healthcare](https://www.blacksync.ai/industry/healthcare)
+- [Auto & P&C insurance](https://www.blacksync.ai/industry/auto-pc)
+- [Property management](https://www.blacksync.ai/industry/property-management)
+- [Funeral homes](https://www.blacksync.ai/industry/funeral-homes)
+- [Law firms](https://www.blacksync.ai/industry/law-firms)
 
 ## Education & enrollment (consultation-only, no self-serve signup)
 
-- Charter schools: https://www.blacksync.ai/charter-schools
-- Private & independent K-12 schools: https://www.blacksync.ai/private-schools
-- Daycares & preschools: https://www.blacksync.ai/daycare-preschool
-- Trade & vocational schools: https://www.blacksync.ai/trade-schools
+- [Charter schools](https://www.blacksync.ai/charter-schools)
+- [Private & independent K-12 schools](https://www.blacksync.ai/private-schools)
+- [Daycares & preschools](https://www.blacksync.ai/daycare-preschool)
+- [Trade & vocational schools](https://www.blacksync.ai/trade-schools)
 
 ## Company & trust
 
-- About BlackSync: https://www.blacksync.ai/about
-- Why BlackSync: https://www.blacksync.ai/why-blacksync
-- Contact: https://www.blacksync.ai/contact
-- Privacy Policy: https://www.blacksync.ai/privacy
-- Terms of Service: https://www.blacksync.ai/terms
-- Security: https://www.blacksync.ai/security
+- [About BlackSync](https://www.blacksync.ai/about)
+- [Why BlackSync](https://www.blacksync.ai/why-blacksync)
+- [Contact](https://www.blacksync.ai/contact)
+- [Privacy Policy](https://www.blacksync.ai/privacy)
+- [Terms of Service](https://www.blacksync.ai/terms)
+- [Security](https://www.blacksync.ai/security)
 
 ## Developer resources
 
-- Developer resources & integration options: https://www.blacksync.ai/developers
-- BlackSync AI for ChatGPT (conversational integration for agents, campaigns, calls, contacts, analytics): https://www.blacksync.ai/updates/chatgpt-integration
-- There is no public self-serve API reference yet. For custom API/webhook access, use the Developer resources page or Contact.
+- [Developer resources & integration options](https://www.blacksync.ai/developers)
+- [BlackSync AI for ChatGPT](https://www.blacksync.ai/updates/chatgpt-integration): conversational integration for agents, campaigns, calls, contacts, and analytics.
+- There is no public self-serve API reference yet. For custom API/webhook access, use [Developer resources](https://www.blacksync.ai/developers) or [Contact](https://www.blacksync.ai/contact).
 
 ## Machine-readable
 
-- Sitemap: https://www.blacksync.ai/sitemap.xml
-- Every page above also responds to `Accept: text/markdown` with a Markdown version of its content.
+- [Sitemap](https://www.blacksync.ai/sitemap.xml)

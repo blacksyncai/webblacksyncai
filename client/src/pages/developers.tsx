@@ -39,10 +39,7 @@ export default function DevelopersPage() {
       <p>
         This site publishes a <a href="/sitemap.xml">sitemap</a> and an{" "}
         <a href="/llms.txt">llms.txt</a> agent guide describing what BlackSync is, how to reach
-        the team, and which pages are safe to cite. Every indexable page on blacksync.ai also
-        returns a plain-text Markdown representation when requested with an{" "}
-        <code>Accept: text/markdown</code> header, so agents and crawlers get real content without
-        running JavaScript.
+        the team, and which pages are safe to cite.
       </p>
 
       <h2>Questions</h2>
