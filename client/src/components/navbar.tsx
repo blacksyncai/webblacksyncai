@@ -41,6 +41,10 @@ import {
   Scale,
   Briefcase,
   Info,
+  GraduationCap,
+  Baby,
+  HardHat,
+  School,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookCallDialog } from "@/components/book-call-dialog";
@@ -191,6 +195,46 @@ const industries: IndustryDetail[] = [
     link: "/industry/law-firms",
     linkLabel: "See Law Firms use case",
   },
+  {
+    icon: School,
+    label: "Charter Schools",
+    title: "Built for Charter School Enrollment",
+    description:
+      "Calls families in your enrollment zone and lottery waitlist, explains what makes your school different, answers the questions parents actually ask, and books the tour.",
+    stat: "Built around your enrollment zone and lottery rules",
+    link: "/charter-schools",
+    linkLabel: "See Charter Schools use case",
+  },
+  {
+    icon: GraduationCap,
+    label: "Private & Independent Schools",
+    title: "Built for Private & Independent School Admissions",
+    description:
+      "Follows up on inquiries, open-house no-shows, and past prospects, covers financial aid, and books the tour or admissions interview for your school.",
+    stat: "Consultation-only — no self-serve signup",
+    link: "/private-schools",
+    linkLabel: "See Private Schools use case",
+  },
+  {
+    icon: Baby,
+    label: "Daycare & Preschool",
+    title: "Built for Daycare & Preschool Enrollment",
+    description:
+      "Calls nearby families about open infant, toddler, and pre-K slots, follows up on your waitlist, and books the facility tour.",
+    stat: "Built around your real-time openings and waitlist",
+    link: "/daycare-preschool",
+    linkLabel: "See Daycare & Preschool use case",
+  },
+  {
+    icon: HardHat,
+    label: "Trade & Vocational Schools",
+    title: "Built for Trade & Vocational School Admissions",
+    description:
+      "Calls every new inquiry fast, follows up on past prospects, covers program details and financial aid, and books the admissions call.",
+    stat: "Calls new inquiries within minutes",
+    link: "/trade-schools",
+    linkLabel: "See Trade Schools use case",
+  },
 ];
 
 const resourceItems = [
@@ -199,7 +243,6 @@ const resourceItems = [
   { icon: BookOpen, label: "Blog", href: "#" },
   { icon: FileText, label: "Documentation / API Docs", href: "#" },
   { icon: Clock, label: "Changelog", href: "#" },
-  { icon: BarChart, label: "Case Studies", href: "#" },
   { icon: Scale, label: "Compare BlackSync and Ylopo", href: "/compare/ylopo-alternative" },
   { icon: HelpCircle, label: "Help Center", href: "#" },
 ];
