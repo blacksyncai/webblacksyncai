@@ -3,6 +3,16 @@
   "buildCommand": "vite build && tsx scripts/prerender-meta.ts",
   "outputDirectory": "dist/public",
   "framework": null,
+  "redirects": [
+    { "source": "/industry/real-estate", "destination": "/real-estate", "statusCode": 301 },
+    { "source": "/industry/mortgage", "destination": "/mortgage", "statusCode": 301 },
+    { "source": "/industry/insurance", "destination": "/insurance", "statusCode": 301 },
+    { "source": "/industry/healthcare", "destination": "/healthcare", "statusCode": 301 },
+    { "source": "/industry/auto-pc", "destination": "/auto-pc", "statusCode": 301 },
+    { "source": "/industry/property-management", "destination": "/property-management", "statusCode": 301 },
+    { "source": "/industry/funeral-homes", "destination": "/funeral-homes", "statusCode": 301 },
+    { "source": "/industry/law-firms", "destination": "/law-firms", "statusCode": 301 }
+  ],
   "headers": [
     {
       "source": "/:path((?!api/|assets/|.*\\.).*)",

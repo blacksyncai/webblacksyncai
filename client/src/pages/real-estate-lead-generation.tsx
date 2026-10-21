@@ -111,7 +111,7 @@ const FAQS = [
 ];
 
 const INTERNAL_LINKS = [
-  { label: "Real Estate AI Sales Agent", href: "/industry/real-estate" },
+  { label: "Real Estate AI Sales Agent", href: "/real-estate" },
   { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
   { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
   { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },

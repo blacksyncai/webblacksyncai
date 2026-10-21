@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eyebrow, Reveal } from "@/components/ui/section";
 import { motion } from "framer-motion";
-import { useRoute, Link } from "wouter";
+import { Link } from "wouter";
 import {
   Home,
   Building2,
@@ -369,12 +369,10 @@ const INDUSTRIES: Record<string, Industry> = {
   },
 };
 
-export default function IndustryPage() {
-  const [, params] = useRoute<{ slug: string }>("/industry/:slug");
-  const slug = params?.slug ?? "real-estate";
+export default function IndustryPage({ slug, path }: { slug: string; path: string }) {
   const industry = INDUSTRIES[slug] ?? INDUSTRIES["real-estate"];
 
-  usePageMeta({ path: `/industry/${industry.slug}` });
+  usePageMeta({ path });
 
   const [email, setEmail] = useState("");
   const [qualifyOpen, setQualifyOpen] = useState(false);

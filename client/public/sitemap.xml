@@ -91,17 +91,17 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/real-estate</loc>
+    <loc>https://www.blacksync.ai/real-estate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/mortgage</loc>
+    <loc>https://www.blacksync.ai/mortgage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/insurance</loc>
+    <loc>https://www.blacksync.ai/insurance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -111,27 +111,27 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/healthcare</loc>
+    <loc>https://www.blacksync.ai/healthcare</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/auto-pc</loc>
+    <loc>https://www.blacksync.ai/auto-pc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/property-management</loc>
+    <loc>https://www.blacksync.ai/property-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/funeral-homes</loc>
+    <loc>https://www.blacksync.ai/funeral-homes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.blacksync.ai/industry/law-firms</loc>
+    <loc>https://www.blacksync.ai/law-firms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

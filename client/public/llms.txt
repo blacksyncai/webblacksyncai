@@ -22,15 +22,15 @@ Not a fit for: text-only/chat-only support, use cases with no phone-calling comp
 
 ## Industry pages
 
-- [Real estate](https://www.blacksync.ai/industry/real-estate)
-- [Mortgage & lending](https://www.blacksync.ai/industry/mortgage)
-- [Insurance](https://www.blacksync.ai/industry/insurance)
+- [Real estate](https://www.blacksync.ai/real-estate)
+- [Mortgage & lending](https://www.blacksync.ai/mortgage)
+- [Insurance](https://www.blacksync.ai/insurance)
 - [Home services](https://www.blacksync.ai/industry/home-services)
-- [Healthcare](https://www.blacksync.ai/industry/healthcare)
-- [Auto & P&C insurance](https://www.blacksync.ai/industry/auto-pc)
-- [Property management](https://www.blacksync.ai/industry/property-management)
-- [Funeral homes](https://www.blacksync.ai/industry/funeral-homes)
-- [Law firms](https://www.blacksync.ai/industry/law-firms)
+- [Healthcare](https://www.blacksync.ai/healthcare)
+- [Auto & P&C insurance](https://www.blacksync.ai/auto-pc)
+- [Property management](https://www.blacksync.ai/property-management)
+- [Funeral homes](https://www.blacksync.ai/funeral-homes)
+- [Law firms](https://www.blacksync.ai/law-firms)
 
 ## Education & enrollment (consultation-only, no self-serve signup)
 

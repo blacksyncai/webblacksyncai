@@ -30,11 +30,11 @@ const industries = [
 
 const moreIndustries = [
   { icon: Wrench, name: "Home Services", href: "/industry/home-services" },
-  { icon: Flower2, name: "Funeral Homes", href: "/industry/funeral-homes" },
-  { icon: Scale, name: "Law Firms", href: "/industry/law-firms" },
-  { icon: Stethoscope, name: "Healthcare", href: "/industry/healthcare" },
-  { icon: Building2, name: "Property Management", href: "/industry/property-management" },
-  { icon: Car, name: "Auto & P&C", href: "/industry/auto-pc" },
+  { icon: Flower2, name: "Funeral Homes", href: "/funeral-homes" },
+  { icon: Scale, name: "Law Firms", href: "/law-firms" },
+  { icon: Stethoscope, name: "Healthcare", href: "/healthcare" },
+  { icon: Building2, name: "Property Management", href: "/property-management" },
+  { icon: Car, name: "Auto & P&C", href: "/auto-pc" },
 ];
 
 export function ProductsSection() {
