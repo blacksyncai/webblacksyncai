@@ -32,6 +32,28 @@ Not a fit for: text-only/chat-only support, use cases with no phone-calling comp
 - Funeral homes: https://www.blacksync.ai/industry/funeral-homes
 - Law firms: https://www.blacksync.ai/industry/law-firms
 
+## Education & enrollment (consultation-only, no self-serve signup)
+
+- Charter schools: https://www.blacksync.ai/charter-schools
+- Private & independent K-12 schools: https://www.blacksync.ai/private-schools
+- Daycares & preschools: https://www.blacksync.ai/daycare-preschool
+- Trade & vocational schools: https://www.blacksync.ai/trade-schools
+
+## Company & trust
+
+- About BlackSync: https://www.blacksync.ai/about
+- Why BlackSync: https://www.blacksync.ai/why-blacksync
+- Contact: https://www.blacksync.ai/contact
+- Privacy Policy: https://www.blacksync.ai/privacy
+- Terms of Service: https://www.blacksync.ai/terms
+- Security: https://www.blacksync.ai/security
+
+## Developer resources
+
+- Developer resources & integration options: https://www.blacksync.ai/developers
+- BlackSync AI for ChatGPT (conversational integration for agents, campaigns, calls, contacts, analytics): https://www.blacksync.ai/updates/chatgpt-integration
+- There is no public self-serve API reference yet. For custom API/webhook access, use the Developer resources page or Contact.
+
 ## Machine-readable
 
 - Sitemap: https://www.blacksync.ai/sitemap.xml

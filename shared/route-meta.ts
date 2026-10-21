@@ -15,6 +15,8 @@ export const DEFAULT_TITLE =
   "BlackSync | Custom AI Voice Agents for Sales and AI SDR Software";
 export const DEFAULT_DESCRIPTION =
   "BlackSync builds custom AI voice agents for outbound sales, inbound calls, lead follow-up, appointment booking, and customer service. Built around your workflows, tools, and data.";
+/** Fallback og:image / twitter:image for any route without its own. */
+export const DEFAULT_IMAGE = `${SITE_URL}/images/og-default.png`;
 
 export type RouteMeta = {
   /** Page title, without the " | BlackSync.ai" suffix. Omit for the homepage. */
@@ -126,6 +128,34 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     title: "Contact",
     description:
       "Get in touch with the BlackSync team — questions, support, or just want to talk before booking a call.",
+    h1: "Get in touch.",
+    content: [
+      "Questions about BlackSync, or want to talk to a person before booking a call? Reach out by email at sales@blacksync.ai, or book a free 15-minute call directly with the team.",
+      "Brokerage or agency with higher-volume needs? Visit the Enterprise page for white-glove onboarding and unlimited capacity. Everyone else can send a message directly through the contact form on this page with a name, email, and what you're looking for.",
+      "BlackSync is available to teams in the United States, Australia, Canada, and the UAE. For product questions, pricing, partnership inquiries, or general support, the contact form and email above reach the same team that builds and runs BlackSync — not a ticket queue.",
+    ],
+  },
+  "/about": {
+    title: "About BlackSync",
+    h1: "About BlackSync",
+    description:
+      "BlackSync AI builds custom AI voice agents for outbound sales, inbound calls, lead follow-up, and appointment booking. Here's who we are and how we work.",
+    content: [
+      "BlackSync AI is a company that builds custom AI voice agents — phone-based AI that prospects leads, answers inbound calls, follows up on old leads sitting in a CRM, and books appointments straight onto a calendar. Every agent is built around a specific business's workflows, scripts, and systems instead of being a generic bot dropped onto a phone line.",
+      "Our product is AI voice agents that handle real phone conversations, both outbound and inbound, in 40+ languages, built on large language models including GPT-5, Claude, and Gemini. Agents prospect and qualify new leads, reactivate dormant leads, warm-transfer qualified calls to a live team member, answer inbound calls as a 24/7 front desk, and pull context from a business's CRM and systems mid-call.",
+      "BlackSync works with real estate teams and brokerages, mortgage and lending teams, insurance agencies, home services businesses, healthcare practices, property management companies, funeral homes, law firms, and education providers, and is available to customers in the United States, Australia, Canada, and the UAE.",
+    ],
+  },
+  "/developers": {
+    title: "Developer Resources",
+    h1: "BlackSync Developer Resources",
+    description:
+      "How to build with BlackSync AI: the BlackSync AI for ChatGPT integration, what's available to manage conversationally, and how to request API or webhook access for a custom integration.",
+    content: [
+      "BlackSync AI exposes its agent platform — AI voice agents, campaigns, calls, contacts, and analytics — as resources an integration can read and act on, through BlackSync AI for ChatGPT (a conversational integration for managing agents, campaigns, calls, contacts, and analytics from a chat interface) and through custom API and webhook integrations built directly with a customer's team.",
+      "BlackSync doesn't currently publish a self-serve public API reference. Teams that want to sync call events, booked appointments, transcripts, or lead status changes into their own CRM or tools should reach out through Contact or Enterprise to scope a direct integration.",
+      "This site publishes a sitemap and an llms.txt agent guide, and every indexable page returns a plain-text Markdown representation when requested with an Accept: text/markdown header.",
+    ],
   },
   "/careers": {
     title: "Careers",
@@ -143,6 +173,12 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     title: "Privacy Policy",
     description:
       "How BlackSync AI collects, uses, and protects your information.",
+    h1: "Privacy Policy",
+    content: [
+      "This Privacy Policy explains how BlackSync AI (\"BlackSync,\" \"we,\" \"us,\" or \"our\") collects, uses, shares, and protects information when you visit blacksync.ai, use our AI outbound calling and texting platform, or otherwise interact with us. By using our website or services, you agree to the practices described here.",
+      "We collect information you provide to us (name, email, phone, company, and message content), information collected automatically from standard server logs, and — for customers — lead and contact data processed through the service and the resulting call and SMS conversation data. We don't sell your personal information. We share it only with service providers who help us run the business (CRM, form/email delivery, payment processing, scheduling, and telephony/SMS infrastructure), for legal and safety reasons, or in a business transfer.",
+      "Depending on where you live, you may have rights to access, correct, delete, or export your personal information. California residents have rights under the CCPA; residents of the EU/EEA and UK have rights under the GDPR/UK GDPR. See the full policy for data retention, security, children's privacy, and international-user details.",
+    ],
   },
   "/terms": {
     title: "Terms of Service",
@@ -337,6 +373,11 @@ export function pageContent(path: string): string[] {
   const meta = ROUTE_META[path];
   if (meta?.content?.length) return meta.content;
   return [meta?.description ?? DEFAULT_DESCRIPTION];
+}
+
+/** Absolute og:image / twitter:image URL for a given path, with a site default. */
+export function pageImage(path: string): string {
+  return ROUTE_META[path]?.image ?? DEFAULT_IMAGE;
 }
 
 /** Full Markdown representation of a known, indexable page. */

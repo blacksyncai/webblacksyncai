@@ -20,6 +20,7 @@ import {
   ROUTE_META,
   pageH1,
   pageContent,
+  pageImage,
   toMarkdown,
   notFoundMarkdown,
 } from "../shared/route-meta";
@@ -87,6 +88,27 @@ function runStaticChecks() {
     ),
   );
   check("ROUTE_META and KNOWN_ROUTES agree on size", Object.keys(ROUTE_META).length === KNOWN_ROUTES.length);
+
+  // --- Trust anchor pages (About, Contact, Privacy): each needs 500+ chars ---
+  for (const path of ["/about", "/contact", "/privacy"]) {
+    check(`${path} is a known route`, KNOWN_ROUTES.includes(path));
+    const chars = (pageH1(path) + " " + pageContent(path).join(" ")).length;
+    check(`${path} has 500+ chars of crawlable content`, chars >= 500, `${chars} chars`);
+  }
+
+  // --- Developer resource discoverability ---
+  {
+    check("/developers is a known, indexable route", INDEXABLE_ROUTES.includes("/developers"));
+    const title = ROUTE_META["/developers"]?.title ?? "";
+    const h1 = pageH1("/developers");
+    check("developers page title/h1 mentions BlackSync", /blacksync/i.test(title) || /blacksync/i.test(h1));
+  }
+
+  // --- Metadata completeness: every indexable route resolves an og:image ---
+  {
+    const missingImage = INDEXABLE_ROUTES.filter((p) => !pageImage(p));
+    check("every indexable route resolves an og:image (page-specific or default)", missingImage.length === 0, missingImage.join(", "));
+  }
 }
 
 async function runLiveChecks(base: string) {
@@ -158,6 +180,35 @@ async function runLiveChecks(base: string) {
     const body = await res.text();
     check("GET /llms.txt returns 200", res.status === 200, `status ${res.status}`);
     check("llms.txt has a 'When to use' section", /when to use/i.test(body));
+    check("llms.txt links /about", body.includes("/about"));
+    check("llms.txt links /developers", body.includes("/developers"));
+  }
+
+  // --- Trust anchor pages: real HTML content without JS ---
+  for (const path of ["/about", "/contact", "/privacy"]) {
+    const res = await fetch(`${origin}${path}`);
+    const html = await res.text();
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+    const bodyHtml = (bodyMatch?.[1] ?? "").replace(/<script[\s\S]*?<\/script>/gi, "");
+    const text = bodyHtml.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    check(`GET ${path} returns 200`, res.status === 200, `status ${res.status}`);
+    check(`GET ${path} raw HTML has 500+ chars of text content`, text.length >= 500, `${text.length} chars`);
+  }
+
+  // --- Developer resource discoverability ---
+  {
+    const res = await fetch(`${origin}/developers`);
+    const html = await res.text();
+    check("GET /developers returns 200", res.status === 200, `status ${res.status}`);
+    check("GET /developers title mentions BlackSync", /<title>[^<]*blacksync/i.test(html));
+  }
+
+  // --- Metadata completeness: og:image present on homepage ---
+  {
+    const res = await fetch(`${origin}/`);
+    const html = await res.text();
+    check("GET / raw HTML has an og:image meta tag", /<meta\s+property="og:image"[^>]*>/i.test(html));
+    check("GET / has canonical, og:type, html lang present", /<link\s+rel="canonical"/i.test(html) && /property="og:type"/i.test(html) && /<html[^>]+lang=/i.test(html));
   }
 }
 
