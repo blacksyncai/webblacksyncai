@@ -1,0 +1,35 @@
+name: Screenshot homepage above fold
+
+on:
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/screenshot-home.yml"]
+
+jobs:
+  shot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm i puppeteer --silent --no-fund --no-audit
+      - name: Capture viewport screenshots
+        run: |
+          cat > shot.mjs <<'EOF'
+          import puppeteer from 'puppeteer';
+          const browser = await puppeteer.launch({headless:'new', args:['--no-sandbox','--enable-unsafe-swiftshader']});
+          for (const [w,h,label] of [[1440,900,'desktop'],[390,844,'mobile']]) {
+            const page = await browser.newPage();
+            await page.setViewport({width:w, height:h});
+            await page.goto('https://www.blacksync.ai/', {waitUntil:'domcontentloaded', timeout:90000});
+            await new Promise(r => setTimeout(r, 9000));
+            await page.screenshot({path:`/home/runner/work/fold-${label}.png`});
+            await page.close();
+          }
+          await browser.close();
+          EOF
+          node shot.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fold-screenshots
+          path: /home/runner/work/fold-*.png
