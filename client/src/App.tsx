@@ -30,6 +30,7 @@ import AiSdrPage from "@/pages/ai-sdr";
 import WhyBlackSyncPage from "@/pages/why-blacksync";
 import UpdatesPage from "@/pages/updates";
 import UpdateArticlePage from "@/pages/update-article";
+import EducationPage from "@/pages/education";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -96,6 +97,10 @@ function Router() {
       <Route path="/ai-appointment-setter" component={() => <UseCasePage slug="ai-appointment-setter" />} />
       <Route path="/ai-lead-qualification-software" component={() => <UseCasePage slug="ai-lead-qualification-software" />} />
       <Route path="/ai-cold-caller" component={() => <UseCasePage slug="ai-cold-caller" />} />
+      <Route path="/charter-schools" component={() => <EducationPage slug="charter-schools" />} />
+      <Route path="/private-schools" component={() => <EducationPage slug="private-schools" />} />
+      <Route path="/daycare-preschool" component={() => <EducationPage slug="daycare-preschool" />} />
+      <Route path="/trade-schools" component={() => <EducationPage slug="trade-schools" />} />
       <Route component={NotFound} />
     </Switch>
     </WouterRouter>

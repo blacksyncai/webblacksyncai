@@ -171,6 +171,26 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://www.blacksync.ai/charter-schools</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.blacksync.ai/private-schools</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.blacksync.ai/daycare-preschool</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.blacksync.ai/trade-schools</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.blacksync.ai/updates</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

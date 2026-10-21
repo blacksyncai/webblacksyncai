@@ -33,6 +33,7 @@ const INDUSTRY_OPTIONS = [
   "Healthcare",
   "Home Services",
   "Auto & P&C",
+  "Education",
   "Other",
 ];
 
