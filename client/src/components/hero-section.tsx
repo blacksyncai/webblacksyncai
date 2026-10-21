@@ -172,7 +172,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center gap-4 mb-5"
+            className="flex flex-col items-center gap-3 mb-3"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
               <ShinyButton href={SIGNUP_URL} testId="button-hero-cta" className="w-full sm:w-auto">
@@ -193,7 +193,7 @@ export function HeroSection() {
               </BookCallDialog>
             </div>
 
-            <p className="text-xs text-muted-foreground" data-testid="text-hero-subtext">
+            <p className="text-xs text-muted-foreground mb-0" data-testid="text-hero-subtext">
               AI agent builder included · Phone number from $3.50/mo · No
               contracts · Cancel anytime
             </p>
@@ -208,7 +208,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="relative w-full max-w-4xl mx-auto h-[180px] md:h-[240px] mb-0"
+          className="relative w-full max-w-4xl mx-auto h-[140px] md:h-[190px] mb-0"
           data-testid="hero-spline"
         >
           <SplineScene

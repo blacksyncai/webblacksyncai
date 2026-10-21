@@ -65,14 +65,14 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section id="features" data-testid="section-features" className="pt-12 md:pt-16 pb-24 md:pb-32 relative">
+    <section id="features" data-testid="section-features" className="pt-8 md:pt-10 pb-24 md:pb-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <Badge variant="secondary" className="mb-4">Platform Capabilities</Badge>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
