@@ -1,5 +1,8 @@
-// Mimics Vercel's static hosting for local verification:
-// filesystem first (including directory index.html), then the SPA rewrite.
+// Mimics Vercel's static hosting for local verification: filesystem only
+// (including directory index.html), no SPA catch-all rewrite -- matching
+// production now that vercel.json's blanket rewrite has been removed in
+// favor of real static files per route (see scripts/prerender-meta.ts) and
+// a real 404 for anything that isn't one of them.
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -16,7 +19,6 @@ http.createServer((req, res) => {
   const candidates = [
     path.join(root, url),
     path.join(root, url, 'index.html'),
-    path.join(root, 'index.html'), // SPA fallback, evaluated last
   ];
   for (const c of candidates) {
     if (!c.startsWith(root)) continue;
@@ -24,6 +26,11 @@ http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': types[path.extname(c)] || 'application/octet-stream' });
       return res.end(fs.readFileSync(c));
     }
+  }
+  const notFoundPage = path.join(root, '404.html');
+  if (fs.existsSync(notFoundPage)) {
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(fs.readFileSync(notFoundPage));
   }
   res.writeHead(404).end('not found');
 }).listen(4173, () => console.log('serving dist/public on http://localhost:4173'));
