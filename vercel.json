@@ -2,5 +2,20 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "vite build && tsx scripts/prerender-meta.ts",
   "outputDirectory": "dist/public",
-  "framework": null
+  "framework": null,
+  "headers": [
+    {
+      "source": "/:path((?!api/|assets/|.*\\.).*)",
+      "headers": [{ "key": "Vary", "value": "Accept" }]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path((?!api/|assets/|.*\\.).*)",
+      "has": [
+        { "type": "header", "key": "accept", "value": "(.*text/markdown.*)" }
+      ],
+      "destination": "/api/markdown?path=/:path"
+    }
+  ]
 }
