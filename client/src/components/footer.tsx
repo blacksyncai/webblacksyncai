@@ -14,17 +14,33 @@ const footerLinks = {
     { label: "AI Lead Generation", href: "/ai-lead-generation" },
     { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
     { label: "AI Lead Qualification", href: "/ai-lead-qualification-software" },
-    { label: "Real Estate AI Solutions", href: "/real-estate-ai-caller" },
     { label: "AI Cold Caller", href: "/ai-cold-caller" },
+    { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
     { label: "Real Estate Lead Generation", href: "/real-estate-lead-generation" },
     { label: "Expired Listing AI", href: "/expired-listing-ai" },
     { label: "FSBO AI", href: "/fsbo-ai" },
     { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },
     { label: "Insurance AI", href: "/insurance-ai" },
-    { label: "Home Services AI", href: "/industry/home-services" },
-    { label: "Funeral Home AI", href: "/industry/funeral-homes" },
-    { label: "Law Firm Intake AI", href: "/industry/law-firms" },
     { label: "Ylopo Alternative", href: "/compare/ylopo-alternative" },
+  ],
+  // Same industries, same order, same URLs as the navbar's Industries dropdown
+  // -- kept as its own column (rather than mixed into Solutions) so every
+  // industry/vertical page, including the newer education pages, gets a
+  // real footer link.
+  Industries: [
+    { label: "AI Calling for Real Estate", href: "/industry/real-estate" },
+    { label: "AI Calling for Mortgage & Lending", href: "/industry/mortgage" },
+    { label: "AI Calling for Property Management", href: "/industry/property-management" },
+    { label: "AI Calling for Insurance", href: "/industry/insurance" },
+    { label: "AI Calling for Home Services", href: "/industry/home-services" },
+    { label: "AI Calling for Healthcare", href: "/industry/healthcare" },
+    { label: "AI Calling for Auto & P&C", href: "/industry/auto-pc" },
+    { label: "AI Calling for Funeral Homes", href: "/industry/funeral-homes" },
+    { label: "AI Calling for Law Firms", href: "/industry/law-firms" },
+    { label: "AI Calling for Charter Schools", href: "/charter-schools" },
+    { label: "AI Calling for Private & Independent Schools", href: "/private-schools" },
+    { label: "AI Calling for Daycare & Preschool", href: "/daycare-preschool" },
+    { label: "AI Calling for Trade & Vocational Schools", href: "/trade-schools" },
   ],
   Company: [
     { label: "About", href: "/about" },
@@ -55,8 +71,8 @@ export function Footer() {
   return (
     <footer data-testid="footer" className="border-t border-border/50 bg-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-          <div className="col-span-2 md:col-span-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-10">
+          <div className="col-span-2 sm:col-span-1">
             <a href="#" className="flex items-center gap-2.5 mb-4" data-testid="link-footer-home">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary via-orange-500 to-amber-500 flex items-center justify-center shadow-sm ring-1 ring-black/5">
                 <span className="text-white font-display font-bold text-sm">B</span>
