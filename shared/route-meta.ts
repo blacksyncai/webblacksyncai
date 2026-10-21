@@ -249,6 +249,50 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "BlackSync's AI calls auto, home, life, and commercial insurance leads within seconds, gathers underwriting info, and books the call with your licensed agent.",
   },
 
+  // Education & enrollment -- premium, consultation-only vertical (no
+  // self-serve signup). One shared template (client/src/pages/education.tsx)
+  // mounted at each of these routes.
+  "/charter-schools": {
+    title: "AI Enrollment Calling for Charter Schools",
+    h1: "Fill every seat before the deadline.",
+    description:
+      "BlackSync calls families in your enrollment zone and lottery waitlist, explains what makes your charter school different, answers the questions parents actually ask, and books the tour — by consultation only.",
+    content: [
+      "BlackSync calls families in your charter school's enrollment zone and lottery waitlist, explains what makes your school different, answers the questions parents actually ask — class size, academic programs, safety and anti-bullying policies, online and hybrid options — and books the tour.",
+      "Built for charter school admissions and outreach teams, not a self-serve signup. Every program is set up on a consultation call around your real enrollment zone, lottery rules, and deadlines.",
+    ],
+  },
+  "/private-schools": {
+    title: "AI Admissions Calling for Private & Independent K-12 Schools",
+    h1: "Turn inquiries into enrolled families.",
+    description:
+      "BlackSync calls inquiry families, open-house no-shows, and past prospects for your private or independent school, communicates financial aid and what makes your school different, and books the tour — by consultation only.",
+    content: [
+      "BlackSync calls inquiry families, open-house no-shows, and past prospects for your private or independent K-12 school — following up while they're still warm, addressing financial aid and tuition assistance, and booking the tour or admissions interview.",
+      "Built for independent school admissions offices, not a self-serve signup. Set up on a consultation call around your real inquiry list, aid policies, and admissions calendar.",
+    ],
+  },
+  "/daycare-preschool": {
+    title: "AI Enrollment Calling for Daycares & Preschools",
+    h1: "Every empty slot is lost revenue, every month.",
+    description:
+      "BlackSync calls nearby families about open infant, toddler, and pre-K slots, follows up on your waitlist, and books the tour for your daycare or preschool — by consultation only.",
+    content: [
+      "BlackSync calls nearby working-parent households about your daycare or preschool's open infant, toddler, and pre-K slots, follows up on your waitlist the moment a spot opens, answers questions on hours, ratios, and curriculum, and books the facility tour.",
+      "Built for daycare and preschool directors, not a self-serve signup. Set up on a consultation call around your real service area, current openings, and waitlist.",
+    ],
+  },
+  "/trade-schools": {
+    title: "AI Enrollment Calling for Trade & Vocational Schools",
+    h1: "Call every lead before they enroll somewhere else.",
+    description:
+      "BlackSync calls inquiry leads the same hour they come in, follows up on past prospects, and books the admissions call for your trade or vocational school — by consultation only.",
+    content: [
+      "BlackSync calls trade and vocational school inquiry leads fast — often within minutes — follows up on past prospects from prior cohorts, covers program length, cost, financial aid, and job placement outcomes, and books the admissions call.",
+      "Built for trade school and vocational program admissions teams, not a self-serve signup. Set up on a consultation call around your real programs, cohorts, and admissions calendar.",
+    ],
+  },
+
   "/unsubscribe": {
     title: "Unsubscribe",
     description: "Unsubscribe an email address from BlackSync communications.",
