@@ -4,6 +4,7 @@ import {
   ROUTE_META,
   SITE_URL,
   fullTitle,
+  pageImage,
 } from "@shared/route-meta";
 
 type PageMetaOptions = {
@@ -53,7 +54,7 @@ export function usePageMeta({ title, description, path, noindex }: PageMetaOptio
     setMetaTag("name", "description", desc);
     setMetaTag("property", "og:title", finalTitle);
     setMetaTag("property", "og:description", desc);
-    const image = fromTable?.image;
+    const image = path ? pageImage(path) : fromTable?.image;
     if (image) {
       setMetaTag("property", "og:image", image);
       setMetaTag("name", "twitter:image", image);

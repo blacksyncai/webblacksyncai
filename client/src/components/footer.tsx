@@ -8,7 +8,7 @@ const footerLinks = {
     { label: "Book a Demo", href: "/book-demo" },
     { label: "Integrations", href: "#integrations" },
     { label: "Product Updates", href: "/updates" },
-    { label: "API Docs", href: "#" },
+    { label: "API Docs", href: "/developers" },
   ],
   Solutions: [
     { label: "AI Lead Generation", href: "/ai-lead-generation" },
@@ -27,7 +27,8 @@ const footerLinks = {
     { label: "Ylopo Alternative", href: "/compare/ylopo-alternative" },
   ],
   Company: [
-    { label: "About BlackSync", href: "/why-blacksync" },
+    { label: "About", href: "/about" },
+    { label: "Why BlackSync", href: "/why-blacksync" },
     { label: "Blog", href: "#" },
     { label: "Careers", href: "/careers" },
     { label: "Enterprise", href: "/enterprise" },

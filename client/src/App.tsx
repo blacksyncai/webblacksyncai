@@ -31,6 +31,8 @@ import WhyBlackSyncPage from "@/pages/why-blacksync";
 import UpdatesPage from "@/pages/updates";
 import UpdateArticlePage from "@/pages/update-article";
 import EducationPage from "@/pages/education";
+import AboutPage from "@/pages/about";
+import DevelopersPage from "@/pages/developers";
 
 // On GitHub Pages the app is served from a sub-path (e.g. /webblacksyncai/).
 // Vite sets BASE_URL accordingly; locally and on the real domain it's "/".
@@ -80,6 +82,8 @@ function Router() {
       <Route path="/enterprise" component={EnterprisePage} />
       <Route path="/book-demo" component={BookDemoPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/developers" component={DevelopersPage} />
       <Route path="/unsubscribe" component={UnsubscribePage} />
       <Route path="/home-services" component={HomeServicesPage} />
       <Route path="/front-desk-ai" component={FrontDeskAiPage} />
