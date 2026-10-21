@@ -8,6 +8,7 @@
     "build": "tsx script/build.ts",
     "start": "NODE_ENV=production node dist/index.cjs",
     "check": "tsc",
+    "verify:agentic": "tsx scripts/verify-agentic.ts",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.95",
     "@tanstack/react-query": "^5.60.5",
+    "@vercel/functions": "^3.9.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
