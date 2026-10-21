@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
@@ -215,16 +215,6 @@ export function HeroSection() {
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"
           />
-          <a
-            href="https://blacksync.si/sign-up"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute top-4 right-4 z-30 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white hover:bg-black/70 transition-colors"
-            data-testid="hero-try-it-free"
-          >
-            <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
-            Try It Free
-          </a>
 
           {/* Industry chips floating around the robot */}
           {industryChips.map((chip) => {
