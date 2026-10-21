@@ -226,7 +226,7 @@ export default function WhyBlackSyncPage() {
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
-              href="/industry/real-estate"
+              href="/real-estate"
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-2 font-medium text-foreground/85 hover:text-foreground hover:border-primary/40 transition-colors"
               data-testid="link-why-blacksync-real-estate"
             >
@@ -234,7 +234,7 @@ export default function WhyBlackSyncPage() {
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
-              href="/industry/mortgage"
+              href="/mortgage"
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-2 font-medium text-foreground/85 hover:text-foreground hover:border-primary/40 transition-colors"
               data-testid="link-why-blacksync-mortgage"
             >

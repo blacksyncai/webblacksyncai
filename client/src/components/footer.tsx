@@ -28,15 +28,15 @@ const footerLinks = {
   // industry/vertical page, including the newer education pages, gets a
   // real footer link.
   Industries: [
-    { label: "AI Calling for Real Estate", href: "/industry/real-estate" },
-    { label: "AI Calling for Mortgage & Lending", href: "/industry/mortgage" },
-    { label: "AI Calling for Property Management", href: "/industry/property-management" },
-    { label: "AI Calling for Insurance", href: "/industry/insurance" },
+    { label: "AI Calling for Real Estate", href: "/real-estate" },
+    { label: "AI Calling for Mortgage & Lending", href: "/mortgage" },
+    { label: "AI Calling for Property Management", href: "/property-management" },
+    { label: "AI Calling for Insurance", href: "/insurance" },
     { label: "AI Calling for Home Services", href: "/industry/home-services" },
-    { label: "AI Calling for Healthcare", href: "/industry/healthcare" },
-    { label: "AI Calling for Auto & P&C", href: "/industry/auto-pc" },
-    { label: "AI Calling for Funeral Homes", href: "/industry/funeral-homes" },
-    { label: "AI Calling for Law Firms", href: "/industry/law-firms" },
+    { label: "AI Calling for Healthcare", href: "/healthcare" },
+    { label: "AI Calling for Auto & P&C", href: "/auto-pc" },
+    { label: "AI Calling for Funeral Homes", href: "/funeral-homes" },
+    { label: "AI Calling for Law Firms", href: "/law-firms" },
     { label: "AI Calling for Charter Schools", href: "/charter-schools" },
     { label: "AI Calling for Private & Independent Schools", href: "/private-schools" },
     { label: "AI Calling for Daycare & Preschool", href: "/daycare-preschool" },

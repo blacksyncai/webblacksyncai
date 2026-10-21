@@ -64,13 +64,13 @@ function MagneticCta({ href, testId, children }: { href: string; testId: string;
 }
 
 const industryChips = [
-  { label: "Real Estate", slug: "real-estate", icon: Home, top: "8%", left: "6%", delay: 0.5 },
-  { label: "Mortgage & Lending", slug: "mortgage", icon: Building2, top: "20%", right: "4%", delay: 0.65 },
-  { label: "Insurance", slug: "insurance", icon: Shield, top: "44%", left: "0%", delay: 0.8 },
-  { label: "Home Services", slug: "home-services", icon: Wrench, top: "52%", right: "0%", delay: 0.95 },
-  { label: "Healthcare", slug: "healthcare", icon: Heart, bottom: "18%", left: "10%", delay: 1.1 },
-  { label: "Auto & P&C", slug: "auto-pc", icon: Car, bottom: "10%", right: "12%", delay: 1.25 },
-  { label: "Property Mgmt", slug: "property-management", icon: KeyRound, top: "30%", left: "18%", delay: 1.4 },
+  { label: "Real Estate", slug: "real-estate", href: "/real-estate", icon: Home, top: "8%", left: "6%", delay: 0.5 },
+  { label: "Mortgage & Lending", slug: "mortgage", href: "/mortgage", icon: Building2, top: "20%", right: "4%", delay: 0.65 },
+  { label: "Insurance", slug: "insurance", href: "/insurance", icon: Shield, top: "44%", left: "0%", delay: 0.8 },
+  { label: "Home Services", slug: "home-services", href: "/industry/home-services", icon: Wrench, top: "52%", right: "0%", delay: 0.95 },
+  { label: "Healthcare", slug: "healthcare", href: "/healthcare", icon: Heart, bottom: "18%", left: "10%", delay: 1.1 },
+  { label: "Auto & P&C", slug: "auto-pc", href: "/auto-pc", icon: Car, bottom: "10%", right: "12%", delay: 1.25 },
+  { label: "Property Mgmt", slug: "property-management", href: "/property-management", icon: KeyRound, top: "30%", left: "18%", delay: 1.4 },
 ];
 
 export function HeroSection() {
@@ -249,7 +249,7 @@ export function HeroSection() {
                   className="pointer-events-auto group"
                 >
                   <Link
-                    href={`/industry/${chip.slug}`}
+                    href={chip.href}
                     className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full bg-zinc-900 dark:bg-zinc-100 border border-zinc-900 dark:border-zinc-100 shadow-lg hover:shadow-xl hover:scale-105 hover:pr-4 transition-all duration-200 cursor-pointer"
                     data-testid={`link-industry-${chip.slug}`}
                   >

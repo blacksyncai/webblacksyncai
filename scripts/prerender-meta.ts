@@ -149,7 +149,7 @@ function crawlableContent(path: string): string {
  *
  * The navbar and footer are rendered by React, so a crawler that doesn't run JS
  * sees a page with zero <a> tags -- verified against production: 0 links on /,
- * /pricing and /industry/law-firms. Link-following is how Google discovers
+ * /pricing and /law-firms. Link-following is how Google discovers
  * pages, so every route was an island nothing pointed at.
  *
  * This writes the real navigation into #root as SPA fallback content. React's

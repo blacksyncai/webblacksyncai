@@ -299,7 +299,7 @@ const SOURCES = [
 
 const INTERNAL_LINKS = [
   { label: "Real Estate AI Solutions", href: "/real-estate-ai-caller" },
-  { label: "Real Estate AI Sales Agent", href: "/industry/real-estate" },
+  { label: "Real Estate AI Sales Agent", href: "/real-estate" },
   { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
   { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
   { label: "Expired Listing AI", href: "/expired-listing-ai" },

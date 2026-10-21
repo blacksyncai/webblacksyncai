@@ -268,8 +268,8 @@ const FAQS = [
 
 const INTERNAL_LINKS = [
   { label: "Enterprise", href: "/enterprise" },
-  { label: "Real Estate AI Sales Agent", href: "/industry/real-estate" },
-  { label: "Mortgage & Lending AI Sales Agent", href: "/industry/mortgage" },
+  { label: "Real Estate AI Sales Agent", href: "/real-estate" },
+  { label: "Mortgage & Lending AI Sales Agent", href: "/mortgage" },
   { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
   { label: "How It Works", href: "/#how-it-works" },
 ];

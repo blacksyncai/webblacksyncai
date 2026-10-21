@@ -191,18 +191,21 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "How BlackSync AI protects your data and your customers' data.",
   },
 
-  // Industry pages (/industry/:slug)
-  "/industry/real-estate": {
+  // Industry pages. Flat top-level URLs, except /industry/home-services --
+  // that slug is already taken by the separate /home-services marketing
+  // page, so the industry-specific one keeps its /industry/ prefix to avoid
+  // colliding with it.
+  "/real-estate": {
     title: "Real Estate AI Sales Agent",
     description:
       "BlackSync replaces your entire ISA bench with specialized AI agents for FSBOs, Expireds, Just Listed/Just Sold circle prospecting, speed-to-lead, sphere reactivation, and open house follow-up. Every lead called before your competition even sees the notification.",
   },
-  "/industry/mortgage": {
+  "/mortgage": {
     title: "Mortgage & Lending AI Sales Agent",
     description:
       "BlackSync's AI qualifies LendingTree, Zillow Home Loans, and webform leads instantly — pre-screens credit, intent, and loan amount before booking the call.",
   },
-  "/industry/insurance": {
+  "/insurance": {
     title: "Insurance AI Sales Agent",
     description:
       "BlackSync's AI calls auto, home, life, and commercial leads within seconds, gathers underwriting info, and books the call with your licensed agent.",
@@ -212,27 +215,27 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "BlackSync's AI answers and dials inbound + outbound leads 24/7 — qualifies job type, urgency, and location, then books trucks to the calendar.",
   },
-  "/industry/healthcare": {
+  "/healthcare": {
     title: "Healthcare AI Sales Agent",
     description:
       "BlackSync's AI handles appointment scheduling, recall outreach, and lead intake — fully HIPAA-aligned and integrated with your EHR.",
   },
-  "/industry/auto-pc": {
+  "/auto-pc": {
     title: "Auto & P&C Insurance AI Sales Agent",
     description:
       "BlackSync's AI dials auto and P&C leads in seconds, captures full underwriting info, and books the bind call with your licensed producer.",
   },
-  "/industry/property-management": {
+  "/property-management": {
     title: "Property Management AI Sales Agent",
     description:
       "BlackSync's AI qualifies prospective tenants, schedules showings, and triages maintenance calls 24/7 across your entire portfolio.",
   },
-  "/industry/funeral-homes": {
+  "/funeral-homes": {
     title: "24/7 AI Receptionist for Funeral Homes",
     description:
       "Replace expensive answering services with an AI receptionist trained exclusively for your funeral home. Answers every call with professionalism and empathy, books arrangements, warm-transfers urgent calls, and documents every conversation automatically.",
   },
-  "/industry/law-firms": {
+  "/law-firms": {
     title: "AI Client Intake & Missed Call Answering for Law Firms",
     description:
       "An AI intake assistant trained on your firm's practice areas and screening criteria. Answers every call, runs your intake questionnaire, flags conflicts and statute-of-limitations risk for your team, and books consultations. It gathers information — it never gives legal advice.",

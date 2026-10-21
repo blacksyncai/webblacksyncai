@@ -101,7 +101,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "FSBO AI", href: "/fsbo-ai" },
       { label: "AI Appointment Setter", href: "/ai-appointment-setter" },
       { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
-      { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Real Estate industry page", href: "/real-estate" },
       { label: "Real Estate Lead Generation", href: "/real-estate-lead-generation" },
       { label: "Ylopo alternative", href: "/compare/ylopo-alternative" },
     ],
@@ -163,7 +163,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "Expired Listing AI", href: "/expired-listing-ai" },
       { label: "FSBO AI", href: "/fsbo-ai" },
       { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
-      { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Real Estate industry page", href: "/real-estate" },
       { label: "Real Estate Lead Generation", href: "/real-estate-lead-generation" },
       { label: "Ylopo alternative", href: "/compare/ylopo-alternative" },
     ],
@@ -221,7 +221,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
       { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
       { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
-      { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Real Estate industry page", href: "/real-estate" },
       { label: "Real Estate Lead Generation", href: "/real-estate-lead-generation" },
       { label: "Compare BlackSync and Ylopo", href: "/compare/ylopo-alternative" },
     ],
@@ -278,7 +278,7 @@ export const USE_CASES: Record<string, UseCase> = {
       { label: "Expired Listing AI", href: "/expired-listing-ai" },
       { label: "Real Estate AI Caller", href: "/real-estate-ai-caller" },
       { label: "AI Lead Generation Software", href: "/ai-lead-generation" },
-      { label: "Real Estate industry page", href: "/industry/real-estate" },
+      { label: "Real Estate industry page", href: "/real-estate" },
     ],
   },
 
@@ -332,7 +332,7 @@ export const USE_CASES: Record<string, UseCase> = {
     related: [
       { label: "Insurance AI", href: "/insurance-ai" },
       { label: "AI Lead Generation Software", href: "/ai-lead-generation" },
-      { label: "Mortgage industry page", href: "/industry/mortgage" },
+      { label: "Mortgage industry page", href: "/mortgage" },
     ],
   },
 
@@ -550,7 +550,7 @@ export const USE_CASES: Record<string, UseCase> = {
     related: [
       { label: "Mortgage AI Caller", href: "/mortgage-ai-caller" },
       { label: "AI Lead Qualification Software", href: "/ai-lead-qualification-software" },
-      { label: "Insurance industry page", href: "/industry/insurance" },
+      { label: "Insurance industry page", href: "/insurance" },
     ],
   },
 };

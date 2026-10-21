@@ -91,7 +91,15 @@ function Router() {
       <Route path="/real-estate-lead-generation" component={RealEstateLeadGenerationPage} />
       <Route path="/ai-sdr" component={AiSdrPage} />
       <Route path="/why-blacksync" component={WhyBlackSyncPage} />
-      <Route path="/industry/:slug" component={IndustryPage} />
+      <Route path="/real-estate" component={() => <IndustryPage slug="real-estate" path="/real-estate" />} />
+      <Route path="/mortgage" component={() => <IndustryPage slug="mortgage" path="/mortgage" />} />
+      <Route path="/insurance" component={() => <IndustryPage slug="insurance" path="/insurance" />} />
+      <Route path="/industry/home-services" component={() => <IndustryPage slug="home-services" path="/industry/home-services" />} />
+      <Route path="/healthcare" component={() => <IndustryPage slug="healthcare" path="/healthcare" />} />
+      <Route path="/auto-pc" component={() => <IndustryPage slug="auto-pc" path="/auto-pc" />} />
+      <Route path="/property-management" component={() => <IndustryPage slug="property-management" path="/property-management" />} />
+      <Route path="/funeral-homes" component={() => <IndustryPage slug="funeral-homes" path="/funeral-homes" />} />
+      <Route path="/law-firms" component={() => <IndustryPage slug="law-firms" path="/law-firms" />} />
       <Route path="/real-estate-ai-caller" component={() => <UseCasePage slug="real-estate-ai-caller" />} />
       <Route path="/expired-listing-ai" component={() => <UseCasePage slug="expired-listing-ai" />} />
       <Route path="/fsbo-ai" component={() => <UseCasePage slug="fsbo-ai" />} />
