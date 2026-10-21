@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
 import { BookCallDialog } from "@/components/book-call-dialog";
-import { ShinyButton } from "@/components/ui/shiny-button";
 
 // Where the real app's signup flow lives (a separate app from this
 // marketing site -- see @/lib/register for the other app the rest of the
@@ -70,7 +69,7 @@ const industryChips = [
   { label: "Insurance", slug: "insurance", icon: Shield, top: "44%", left: "0%", delay: 0.8 },
   { label: "Home Services", slug: "home-services", icon: Wrench, top: "52%", right: "0%", delay: 0.95 },
   { label: "Healthcare", slug: "healthcare", icon: Heart, bottom: "18%", left: "10%", delay: 1.1 },
-  { label: "Auto & P&C", slug: "auto-pc", icon: Car, bottom: "3%", right: "10%", delay: 1.25 },
+  { label: "Auto & P&C", slug: "auto-pc", icon: Car, bottom: "10%", right: "12%", delay: 1.25 },
   { label: "Property Mgmt", slug: "property-management", icon: KeyRound, top: "30%", left: "18%", delay: 1.4 },
 ];
 
@@ -78,7 +77,7 @@ export function HeroSection() {
   return (
     <section
       data-testid="section-hero"
-      className="relative pt-24 pb-2 md:pt-28 md:pb-4 hero-gradient overflow-hidden"
+      className="relative pt-28 pb-10 md:pt-36 md:pb-16 hero-gradient overflow-hidden"
     >
       <div className="absolute inset-0 grid-bg opacity-60 dark:opacity-30" />
 
@@ -138,19 +137,19 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-5 font-display text-4xl leading-[1.05] sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] mb-4 text-balance"
+            className="mt-6 font-display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] mb-5 text-balance"
             data-testid="text-hero-headline"
           >
-            The AI workforce behind
+            AI voice agents built around
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent-grad">every conversation.</span>
+            <span className="text-accent-grad">your business.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-2 leading-relaxed text-pretty"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-2 md:mb-3 leading-relaxed text-pretty"
             data-testid="text-hero-subheadline"
           >
             BlackSync builds custom AI voice agents around your workflows,
@@ -161,7 +160,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base md:text-lg font-semibold text-foreground max-w-2xl mx-auto mb-6 text-pretty"
+            className="text-lg md:text-xl font-semibold text-foreground max-w-2xl mx-auto mb-9 text-pretty"
             data-testid="text-hero-supporting"
           >
             Hundreds of personalized calls{" "}
@@ -172,15 +171,12 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center gap-3 mb-3"
+            className="flex flex-col items-center gap-4 mb-5"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
-              <ShinyButton href={SIGNUP_URL} testId="button-hero-cta" className="w-full sm:w-auto">
-                <span className="inline-flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                  Get Started
-                </span>
-              </ShinyButton>
+              <MagneticCta href={SIGNUP_URL} testId="button-hero-cta">
+                Get Started Now
+              </MagneticCta>
               <BookCallDialog>
                 <Button
                   size="lg"
@@ -193,13 +189,22 @@ export function HeroSection() {
               </BookCallDialog>
             </div>
 
-            <p className="text-xs text-muted-foreground mb-0" data-testid="text-hero-subtext">
+            <p className="text-xs text-muted-foreground" data-testid="text-hero-subtext">
               AI agent builder included · Phone number from $3.50/mo · No
               contracts · Cancel anytime
             </p>
           </motion.div>
 
-
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-14 flex items-center justify-center gap-4 text-sm"
+          >
+            <span className="flex items-center gap-1.5 text-muted-foreground">
+              <span className="text-primary">★★★★★</span> 4.9 average
+            </span>
+          </motion.div>
 
         </div>
 
