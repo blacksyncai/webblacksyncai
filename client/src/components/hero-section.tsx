@@ -78,7 +78,7 @@ export function HeroSection() {
   return (
     <section
       data-testid="section-hero"
-      className="relative pt-28 pb-10 md:pt-36 md:pb-16 hero-gradient overflow-hidden"
+      className="relative pt-24 pb-6 md:pt-28 md:pb-8 hero-gradient overflow-hidden"
     >
       <div className="absolute inset-0 grid-bg opacity-60 dark:opacity-30" />
 
@@ -208,7 +208,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="relative w-full max-w-4xl mx-auto h-[360px] md:h-[480px] mb-4"
+          className="relative w-full max-w-4xl mx-auto h-[240px] md:h-[340px] mb-2"
           data-testid="hero-spline"
         >
           <SplineScene
