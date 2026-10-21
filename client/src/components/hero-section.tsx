@@ -140,9 +140,9 @@ export function HeroSection() {
             className="mt-6 font-display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] mb-5 text-balance"
             data-testid="text-hero-headline"
           >
-            AI voice agents built around
+            The AI workforce behind
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent-grad">your business.</span>
+            <span className="text-accent-grad">every conversation.</span>
           </motion.h1>
 
           <motion.p
