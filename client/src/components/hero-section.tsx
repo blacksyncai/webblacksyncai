@@ -78,7 +78,7 @@ export function HeroSection() {
   return (
     <section
       data-testid="section-hero"
-      className="relative pt-24 pb-4 md:pt-28 md:pb-6 hero-gradient overflow-hidden"
+      className="relative pt-24 pb-2 md:pt-28 md:pb-4 hero-gradient overflow-hidden"
     >
       <div className="absolute inset-0 grid-bg opacity-60 dark:opacity-30" />
 
@@ -138,7 +138,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 font-display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] mb-5 text-balance"
+            className="mt-5 font-display text-4xl leading-[1.05] sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] mb-4 text-balance"
             data-testid="text-hero-headline"
           >
             The AI workforce behind
@@ -150,7 +150,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-2 md:mb-3 leading-relaxed text-pretty"
+            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-2 leading-relaxed text-pretty"
             data-testid="text-hero-subheadline"
           >
             BlackSync builds custom AI voice agents around your workflows,
@@ -161,7 +161,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl font-semibold text-foreground max-w-2xl mx-auto mb-9 text-pretty"
+            className="text-base md:text-lg font-semibold text-foreground max-w-2xl mx-auto mb-6 text-pretty"
             data-testid="text-hero-supporting"
           >
             Hundreds of personalized calls{" "}
@@ -208,7 +208,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="relative w-full max-w-4xl mx-auto h-[200px] md:h-[280px] mb-0"
+          className="relative w-full max-w-4xl mx-auto h-[180px] md:h-[240px] mb-0"
           data-testid="hero-spline"
         >
           <SplineScene
