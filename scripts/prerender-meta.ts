@@ -186,6 +186,43 @@ function crawlableNav(currentPath: string): string {
   ].join("\n");
 }
 
+/**
+ * A real, branded 404 page for the Vercel static deployment's `404.html`
+ * convention: when no rewrite and no static file matches a path, Vercel
+ * serves this file with a genuine HTTP 404 status. No middleware, no
+ * serverless function -- a plain static file, built once here, same as
+ * every other prerendered page.
+ */
+function build404Page(): string {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>404 - Page not found | ${escapeText(SITE_NAME)}</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #0b0b0c; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; }
+  .wrap { max-width: 440px; padding: 24px; }
+  h1 { font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: #f97316; margin: 0 0 12px; }
+  p { font-size: 17px; line-height: 1.5; color: rgba(255, 255, 255, 0.75); margin: 0 0 24px; }
+  a { color: #f97316; text-decoration: none; font-weight: 600; margin: 0 10px; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>404</h1>
+    <p>This page doesn't exist on ${escapeText(SITE_NAME)}.</p>
+    <a href="/">Home</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="/llms.txt">Agent guide</a>
+  </div>
+</body>
+</html>
+`;
+}
+
 function main() {
   if (!existsSync(shellPath)) {
     throw new Error(`prerender: ${shellPath} not found — run the client build first.`);
@@ -221,6 +258,9 @@ function main() {
     writeFileSync(target, html, "utf8");
     written++;
   }
+
+  writeFileSync(join(outDir, "404.html"), build404Page(), "utf8");
+  written++;
 
   console.log(`prerendered metadata for ${written} routes`);
 }
