@@ -27,11 +27,11 @@ export default function Home() {
     <div className="min-h-screen bg-background" data-testid="page-home">
       <Navbar />
       <HeroSection />
+      <FeaturesSection />
       <CustomBuildSection />
       <DashboardMockupSection />
       <ClippedVideoTab />
       <TrustStrip />
-      <FeaturesSection />
       <ProductsSection />
       <AiSdrSection />
       <PlatformBentoSection />
