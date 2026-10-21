@@ -70,7 +70,7 @@ const industryChips = [
   { label: "Insurance", slug: "insurance", icon: Shield, top: "44%", left: "0%", delay: 0.8 },
   { label: "Home Services", slug: "home-services", icon: Wrench, top: "52%", right: "0%", delay: 0.95 },
   { label: "Healthcare", slug: "healthcare", icon: Heart, bottom: "18%", left: "10%", delay: 1.1 },
-  { label: "Auto & P&C", slug: "auto-pc", icon: Car, bottom: "10%", right: "12%", delay: 1.25 },
+  { label: "Auto & P&C", slug: "auto-pc", icon: Car, bottom: "3%", right: "10%", delay: 1.25 },
   { label: "Property Mgmt", slug: "property-management", icon: KeyRound, top: "30%", left: "18%", delay: 1.4 },
 ];
 
@@ -208,7 +208,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="relative w-full max-w-4xl mx-auto h-[220px] md:h-[300px] mb-0"
+          className="relative w-full max-w-4xl mx-auto h-[360px] md:h-[480px] mb-4"
           data-testid="hero-spline"
         >
           <SplineScene
@@ -231,7 +231,7 @@ export function HeroSection() {
                   left: chip.left,
                   right: chip.right,
                 }}
-                className="hidden md:block absolute z-20 pointer-events-none"
+                className="absolute z-20 pointer-events-none"
                 data-testid={`chip-industry-${chip.label.toLowerCase().replace(/\s|&/g, "-")}`}
               >
                 <motion.div
