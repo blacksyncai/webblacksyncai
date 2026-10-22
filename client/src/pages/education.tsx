@@ -477,8 +477,24 @@ export default function EducationPage({ slug }: { slug: string }) {
       </div>
 
       {/* ============ HERO ============ */}
-      <header className="relative pt-20 pb-20 md:pt-28 md:pb-28 hero-gradient overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
+      <header
+        className={cn(
+          "relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden",
+          !richHero && "hero-gradient",
+        )}
+      >
+        {richHero ? (
+          <div
+            className="pointer-events-none absolute -top-40 left-1/2 z-0 h-[32rem] w-[72rem] -translate-x-1/2 opacity-40 dark:opacity-50"
+            style={{
+              background: "linear-gradient(90deg, #D2522B 0%, #F97316 50%, #F59E0B 100%)",
+              filter: "blur(140px)",
+            }}
+            aria-hidden="true"
+          />
+        ) : (
+          <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
+        )}
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {richHero && (
@@ -525,8 +541,10 @@ export default function EducationPage({ slug }: { slug: string }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              "font-display font-semibold tracking-tight leading-[1.05] mb-6 text-balance",
-              richHero ? "text-4xl sm:text-6xl md:text-7xl" : "text-4xl sm:text-5xl md:text-6xl",
+              "font-display tracking-tight leading-[1.05] mb-6 text-balance",
+              richHero
+                ? "font-bold text-4xl sm:text-6xl md:text-7xl"
+                : "font-semibold text-4xl sm:text-5xl md:text-6xl",
             )}
             data-testid="text-education-h1"
           >
@@ -550,14 +568,27 @@ export default function EducationPage({ slug }: { slug: string }) {
           >
             <div className="flex flex-wrap items-center justify-center gap-3">
               <BookCallDialog context="general">
-                <Button size="lg" data-testid="button-hero-book-consultation">
+                <Button
+                  size="lg"
+                  data-testid="button-hero-book-consultation"
+                  className={
+                    richHero
+                      ? "rounded-full bg-foreground text-background hover:bg-foreground/90 hover:scale-[1.03] transition-transform px-7"
+                      : undefined
+                  }
+                >
                   Book a Consultation
                   <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Button>
               </BookCallDialog>
               {richHero && (
                 <a href="#how-it-works-heading">
-                  <Button size="lg" variant="outline" data-testid="button-hero-how-it-works">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    data-testid="button-hero-how-it-works"
+                    className="rounded-full hover:shadow-md hover:scale-[1.03] transition-all px-7"
+                  >
                     See How It Works
                   </Button>
                 </a>
