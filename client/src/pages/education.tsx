@@ -1,4 +1,6 @@
+import { Fragment } from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -30,7 +32,13 @@ import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
 import { SITE_URL } from "@shared/route-meta";
 
-type PainPoint = { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; title: string; description: string };
+type PainPoint = {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  description: string;
+  /** Short label for the hero capability pill, e.g. "Zone Calling". Falls back to `title`. */
+  pillLabel?: string;
+};
 type FAQ = { q: string; a: string };
 
 type ValueMath = {
@@ -119,21 +127,25 @@ const VERTICALS: Record<string, Vertical> = {
       {
         icon: PhoneCall,
         title: "Calls your enrollment zone",
+        pillLabel: "Zone Calling",
         description: "Reaches households in your district boundary or zoned area with a warm, natural call about open seats.",
       },
       {
         icon: Repeat,
         title: "Works the lottery waitlist",
+        pillLabel: "Waitlist Follow-Up",
         description: "Calls back through waitlisted families the moment a seat opens, instead of waiting on an email they'll miss.",
       },
       {
         icon: ClipboardList,
         title: "Answers the real questions",
+        pillLabel: "Live Q&A",
         description: "Class size, academic programs, extended day, online/hybrid options, and your safety and anti-bullying policies — handled in conversation, not a FAQ page.",
       },
       {
         icon: CalendarCheck,
         title: "Books the tour or info session",
+        pillLabel: "Tour Booking",
         description: "Qualified, interested families land straight on your admissions team's calendar.",
       },
     ],
@@ -427,6 +439,10 @@ const VERTICALS: Record<string, Vertical> = {
 
 export default function EducationPage({ slug }: { slug: string }) {
   const vertical = VERTICALS[slug];
+  // Richer hero treatment (capability pill row, bigger type, dual CTA) --
+  // piloting on charter-schools first before extending to the other
+  // education verticals.
+  const richHero = slug === "charter-schools";
   const path = `/${slug}`;
 
   usePageMeta({ path });
@@ -461,10 +477,52 @@ export default function EducationPage({ slug }: { slug: string }) {
       </div>
 
       {/* ============ HERO ============ */}
-      <header className="relative pt-28 pb-20 md:pt-36 md:pb-28 hero-gradient overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
+      <header
+        className={cn(
+          "relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden",
+          !richHero && "hero-gradient",
+        )}
+      >
+        {richHero ? (
+          <div
+            className="pointer-events-none absolute -top-40 left-1/2 z-0 h-[32rem] w-[72rem] -translate-x-1/2 opacity-40 dark:opacity-50"
+            style={{
+              background: "linear-gradient(90deg, #D2522B 0%, #F97316 50%, #F59E0B 100%)",
+              filter: "blur(140px)",
+            }}
+            aria-hidden="true"
+          />
+        ) : (
+          <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
+        )}
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {richHero && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="mb-8 flex justify-center"
+            >
+              <div
+                className="inline-flex max-w-full flex-wrap items-center justify-center rounded-full border border-border bg-card px-1.5 py-1 shadow-sm"
+                data-testid="pill-education-capabilities"
+              >
+                {vertical.whatWeDo.map((item, index) => (
+                  <Fragment key={item.title}>
+                    <span className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs whitespace-nowrap sm:text-sm">
+                      <item.icon className="w-3.5 h-3.5 text-primary shrink-0" aria-hidden="true" />
+                      <span className="text-muted-foreground">{item.pillLabel ?? item.title}</span>
+                    </span>
+                    {index < vertical.whatWeDo.length - 1 && (
+                      <span aria-hidden className="h-3.5 w-px shrink-0 bg-border" />
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -482,7 +540,12 @@ export default function EducationPage({ slug }: { slug: string }) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6 text-balance"
+            className={cn(
+              "font-display tracking-tight leading-[1.05] mb-6 text-balance",
+              richHero
+                ? "font-bold text-4xl sm:text-6xl md:text-7xl"
+                : "font-semibold text-4xl sm:text-5xl md:text-6xl",
+            )}
             data-testid="text-education-h1"
           >
             {vertical.headline} <span className="text-accent-grad">{vertical.headlineAccent}</span>
@@ -503,12 +566,34 @@ export default function EducationPage({ slug }: { slug: string }) {
             transition={{ duration: 0.5, delay: 0.24 }}
             className="flex flex-col items-center gap-3"
           >
-            <BookCallDialog context="general">
-              <Button size="lg" data-testid="button-hero-book-consultation">
-                Book a Consultation
-                <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </BookCallDialog>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <BookCallDialog context="general">
+                <Button
+                  size="lg"
+                  data-testid="button-hero-book-consultation"
+                  className={
+                    richHero
+                      ? "rounded-full bg-foreground text-background hover:bg-foreground/90 hover:scale-[1.03] transition-transform px-7"
+                      : undefined
+                  }
+                >
+                  Book a Consultation
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Button>
+              </BookCallDialog>
+              {richHero && (
+                <a href="#how-it-works-heading">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    data-testid="button-hero-how-it-works"
+                    className="rounded-full hover:shadow-md hover:scale-[1.03] transition-all px-7"
+                  >
+                    See How It Works
+                  </Button>
+                </a>
+              )}
+            </div>
             <p className="text-xs text-muted-foreground font-mono uppercase tracking-wide">{vertical.heroNote}</p>
           </motion.div>
         </div>
@@ -613,7 +698,7 @@ export default function EducationPage({ slug }: { slug: string }) {
             <p className="font-mono text-xs uppercase tracking-wider text-primary mb-3">How It Works</p>
             <h2
               id="how-it-works-heading"
-              className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-balance"
+              className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-balance scroll-mt-28"
             >
               Built with you, not self-serve.
             </h2>
