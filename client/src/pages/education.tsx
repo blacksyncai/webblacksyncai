@@ -3,7 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Reveal } from "@/components/ui/section";
+import { Eyebrow, Reveal } from "@/components/ui/section";
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { Link } from "wouter";
@@ -461,54 +461,28 @@ export default function EducationPage({ slug }: { slug: string }) {
       </div>
 
       {/* ============ HERO ============ */}
-      <header className="relative bg-zinc-950 pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-            maskImage: "radial-gradient(ellipse 70% 60% at 50% 20%, black, transparent 75%)",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 20%, black, transparent 75%)",
-          }}
-          aria-hidden="true"
-        />
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <motion.div
-            animate={{ y: [0, -22, 0], rotate: [0, 6, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-16 left-[4%] w-40 h-40 md:w-56 md:h-56 rounded-full opacity-60 blur-[2px]"
-            style={{
-              background: "radial-gradient(circle at 32% 28%, #ffe2cf 0%, #f08a4f 42%, #c5491f 74%, #8f300f 100%)",
-            }}
-          />
-          <motion.div
-            animate={{ y: [0, 18, 0], rotate: [0, -8, 0] }}
-            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[38%] right-[2%] w-28 h-28 md:w-40 md:h-40 rounded-full opacity-40 blur-[2px]"
-            style={{
-              background: "radial-gradient(circle at 34% 30%, #fff0d8 0%, #f4b56a 44%, #d98a35 76%, #a8631f 100%)",
-            }}
-          />
-        </div>
+      <header className="relative pt-28 pb-20 md:pt-36 md:pb-28 hero-gradient overflow-hidden">
+        <div className="absolute inset-0 grid-bg opacity-40 dark:opacity-20" />
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1.5 mb-7"
+            className="inline-flex mb-7"
             data-testid="badge-education-hero"
           >
-            <vertical.icon className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
-            <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">{vertical.badge}</span>
+            <Eyebrow>
+              <vertical.icon className="w-3.5 h-3.5" aria-hidden="true" />
+              {vertical.badge}
+            </Eyebrow>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6 text-balance text-zinc-50"
+            className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6 text-balance"
             data-testid="text-education-h1"
           >
             {vertical.headline} <span className="text-accent-grad">{vertical.headlineAccent}</span>
@@ -518,7 +492,7 @@ export default function EducationPage({ slug }: { slug: string }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16 }}
-            className="text-base md:text-lg text-zinc-400 leading-relaxed text-pretty mb-8"
+            className="text-base md:text-lg text-muted-foreground leading-relaxed text-pretty mb-8"
           >
             {vertical.subheadline}
           </motion.p>
@@ -535,7 +509,7 @@ export default function EducationPage({ slug }: { slug: string }) {
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </BookCallDialog>
-            <p className="text-xs text-zinc-500">{vertical.heroNote}</p>
+            <p className="text-xs text-muted-foreground font-mono uppercase tracking-wide">{vertical.heroNote}</p>
           </motion.div>
         </div>
       </header>
@@ -712,37 +686,28 @@ export default function EducationPage({ slug }: { slug: string }) {
       </section>
 
       {/* ============ FINAL CTA ============ */}
-      <section className="relative bg-zinc-950 py-20 md:py-28 overflow-hidden" aria-labelledby="final-cta-heading">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-            maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent 75%)",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent 75%)",
-          }}
-          aria-hidden="true"
-        />
-        <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 md:py-28" aria-labelledby="final-cta-heading">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <MapPin className="w-8 h-8 text-primary mx-auto mb-5" strokeWidth={1.5} />
-            <h2
-              id="final-cta-heading"
-              className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-balance text-zinc-50 mb-4"
-            >
-              Let's talk about your enrollment goals.
-            </h2>
-            <p className="text-base md:text-lg text-zinc-400 leading-relaxed text-pretty mb-8 max-w-lg mx-auto">
-              A real conversation about your program, your area, and what filling every seat is actually worth to
-              you — no self-serve signup, no platform access until we've built it together.
-            </p>
-            <BookCallDialog context="general">
-              <Button size="lg" data-testid="button-final-cta-book-consultation">
-                Book a Consultation
-                <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </BookCallDialog>
+            <div className="rounded-2xl border border-primary/25 bg-primary/[0.04] p-10 md:p-14 text-center">
+              <MapPin className="w-8 h-8 text-primary mx-auto mb-5" strokeWidth={1.5} />
+              <h2
+                id="final-cta-heading"
+                className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-balance mb-4"
+              >
+                Let's talk about your enrollment goals.
+              </h2>
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-pretty mb-8 max-w-lg mx-auto">
+                A real conversation about your program, your area, and what filling every seat is actually worth to
+                you — no self-serve signup, no platform access until we've built it together.
+              </p>
+              <BookCallDialog context="general">
+                <Button size="lg" data-testid="button-final-cta-book-consultation">
+                  Book a Consultation
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Button>
+              </BookCallDialog>
+            </div>
           </Reveal>
         </div>
       </section>
