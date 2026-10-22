@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plug } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
@@ -201,9 +201,14 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
             className="mb-14 flex items-center justify-center gap-4 text-sm"
           >
-            <span className="flex items-center gap-1.5 text-muted-foreground">
-              <span className="text-primary">★★★★★</span> 4.9 average
-            </span>
+            <Link
+              href="/updates/chatgpt-integration"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              data-testid="link-hero-integrations"
+            >
+              <Plug className="w-3 h-3" aria-hidden="true" />
+              Plugs into ChatGPT &amp; Claude
+            </Link>
           </motion.div>
 
         </div>
