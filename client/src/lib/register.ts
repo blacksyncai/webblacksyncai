@@ -5,7 +5,10 @@ export const APP_BASE_URL = "https://blacksync.si";
 // The BlackSync app registration / free-access page. After we capture a lead
 // on the marketing site (which fires the GHL webhook = inbound lead), we send
 // the visitor here to finish getting access — prefilled where possible.
-export const REGISTER_URL = `${APP_BASE_URL}/register`;
+//
+// This was /register, which 404s on the app (confirmed live) -- /sign-up is
+// the real, working page and accepts the same prefill query params.
+export const REGISTER_URL = `${APP_BASE_URL}/sign-up`;
 
 // Free 15-minute discovery call booking (Cal.com).
 export const BOOK_CAL_LINK = "hamza-basal-v1hqkl/15min";
