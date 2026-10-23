@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "What's the difference between Solo Agent and Team?",
-    a: "Solo Agent includes 1 AI voice agent with up to 500 outbound calls/mo, calendar booking, and call recordings — built for a single user running their own pipeline. Team includes everything in Solo plus up to 5 AI voice agents, emotion detection and tone mirroring, native CRM sync, custom objection handling, round-robin lead distribution, and advanced analytics.",
+    a: "Solo Agent includes 1 AI voice agent with up to 1,000 outbound calls/mo, calendar booking, and call recordings — built for a single user running their own pipeline. Team includes everything in Solo plus up to 5 AI voice agents, emotion detection and tone mirroring, native CRM sync, custom objection handling, round-robin lead distribution, and advanced analytics.",
   },
   {
     q: "Is there a setup fee or long-term contract?",

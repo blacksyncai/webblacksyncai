@@ -28,7 +28,7 @@ const plans = [
       "1 AI voice agent",
       "AI agent builder",
       "Calendar booking",
-      "Up to 500 outbound calls/mo",
+      "Up to 1,000 outbound calls/mo",
       "Unlimited SMS & email",
       "Call recordings + transcripts",
       "Zapier/webhook",
