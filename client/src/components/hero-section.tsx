@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
 import { ArrowRight, Plug } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
@@ -74,6 +75,13 @@ const industryChips = [
 ];
 
 export function HeroSection() {
+  const splineRef = useRef<HTMLDivElement>(null);
+  // Don't load the 3D scene or render the industry chips until this block is
+  // actually scrolled into view -- otherwise on short viewports they can
+  // peek above the fold half-visible, and the (heavy) 3D asset loads for
+  // visitors who never scroll down to see it.
+  const splineInView = useInView(splineRef, { once: true, margin: "0px 0px -300px 0px" });
+
   return (
     <section
       data-testid="section-hero"
@@ -213,21 +221,24 @@ export function HeroSection() {
 
         </div>
 
-        {/* 3D Spline scene */}
+        {/* 3D Spline scene -- only mounted once scrolled into view */}
         <motion.div
+          ref={splineRef}
           initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="relative w-full max-w-4xl mx-auto h-[360px] md:h-[480px] mb-4"
+          animate={splineInView ? { opacity: 1, scale: 1 } : undefined}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="relative w-full max-w-4xl mx-auto h-[360px] md:h-[480px] mt-10 md:mt-16 mb-4"
           data-testid="hero-spline"
         >
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-          />
+          {splineInView && (
+            <>
+              <SplineScene
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full"
+              />
 
-          {/* Industry chips floating around the robot */}
-          {industryChips.map((chip) => {
+              {/* Industry chips floating around the robot */}
+              {industryChips.map((chip) => {
             const Icon = chip.icon;
             return (
               <motion.div
@@ -270,6 +281,8 @@ export function HeroSection() {
               </motion.div>
             );
           })}
+            </>
+          )}
         </motion.div>
       </div>
     </section>
