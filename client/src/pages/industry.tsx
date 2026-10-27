@@ -28,7 +28,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { goToRegister } from "@/lib/register";
+import { goToRegister, REGISTER_URL } from "@/lib/register";
 import { CalEmbed } from "@/components/cal-embed";
 import {
   Dialog,
@@ -808,9 +808,14 @@ export default function IndustryPage({ slug, path }: { slug: string; path: strin
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href={REGISTER_URL}>
+                <Button size="lg" data-testid="button-industry-signup">
+                  Create Free Account <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </a>
               <Link href="/enterprise">
-                <Button size="lg" data-testid="button-industry-talk">
-                  Talk to Sales <ArrowRight className="w-4 h-4 ml-2" />
+                <Button size="lg" variant="outline" data-testid="button-industry-talk">
+                  Talk to Sales
                 </Button>
               </Link>
               <Link href={slug === "home-services" ? "/front-desk-ai#pricing" : "/pricing"}>

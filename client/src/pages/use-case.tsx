@@ -17,7 +17,7 @@ import {
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useHoneypot, HoneypotInput } from "@/components/ui/honeypot";
-import { goToRegister } from "@/lib/register";
+import { goToRegister, REGISTER_URL } from "@/lib/register";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
 
@@ -784,9 +784,14 @@ export default function UseCasePage({ slug }: { slug: string }) {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+              <a href={REGISTER_URL}>
+                <Button size="lg" data-testid="button-use-case-signup">
+                  Create Free Account <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </a>
               <Link href="/enterprise">
-                <Button size="lg" data-testid="button-use-case-talk">
-                  Talk to Sales <ArrowRight className="w-4 h-4 ml-2" />
+                <Button size="lg" variant="outline" data-testid="button-use-case-talk">
+                  Talk to Sales
                 </Button>
               </Link>
               <Link href="/pricing">
