@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
-import { ArrowRight, Plug, PlayCircle } from "lucide-react";
+import { ArrowRight, Plug } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
@@ -182,21 +182,10 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-4 mb-5"
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xl">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
               <MagneticCta href={SIGNUP_URL} testId="button-hero-cta">
                 Get Started Now
               </MagneticCta>
-              <a href="#hear-it-in-action" className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="w-full sm:w-auto h-12 rounded-full gap-2 active:scale-[0.97]"
-                  data-testid="button-hero-hear-it"
-                >
-                  <PlayCircle className="w-4 h-4" />
-                  Hear it in action
-                </Button>
-              </a>
               <BookCallDialog>
                 <Button
                   size="lg"
