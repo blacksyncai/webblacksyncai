@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
-import { ArrowRight, Plug } from "lucide-react";
+import { ArrowRight, Plug, PlayCircle } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Home, Building2, Shield, Wrench, Heart, Car, KeyRound } from "lucide-react";
 import { Link } from "wouter";
@@ -125,7 +125,7 @@ export function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Centered headline + CTAs */}
-        <div className="text-center max-w-3xl mx-auto">
+        <div className="text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -148,9 +148,9 @@ export function HeroSection() {
             className="mt-6 font-display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-7xl font-semibold tracking-[-0.03em] mb-5 text-balance"
             data-testid="text-hero-headline"
           >
-            The AI workforce behind
+            Human-sounding AI agents
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent-grad">every conversation.</span>
+            <span className="text-accent-grad">that know how to sell.</span>
           </motion.h1>
 
           <motion.p
@@ -160,8 +160,9 @@ export function HeroSection() {
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-2 md:mb-3 leading-relaxed text-pretty"
             data-testid="text-hero-subheadline"
           >
-            BlackSync builds custom AI voice agents around your workflows,
-            tools, and data, so they operate like part of your team.
+            Turn more leads into conversations and appointments with AI
+            voice agents that follow up, qualify prospects, and book
+            meetings directly into your calendar.
           </motion.p>
 
           <motion.p
@@ -181,10 +182,21 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-4 mb-5"
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xl">
               <MagneticCta href={SIGNUP_URL} testId="button-hero-cta">
                 Get Started Now
               </MagneticCta>
+              <a href="#hear-it-in-action" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="w-full sm:w-auto h-12 rounded-full gap-2 active:scale-[0.97]"
+                  data-testid="button-hero-hear-it"
+                >
+                  <PlayCircle className="w-4 h-4" />
+                  Hear it in action
+                </Button>
+              </a>
               <BookCallDialog>
                 <Button
                   size="lg"

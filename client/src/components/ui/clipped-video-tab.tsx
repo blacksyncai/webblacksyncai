@@ -100,7 +100,11 @@ export default function ClippedVideoTab() {
   const activeItem = items[activeTab];
 
   return (
-    <section className="bg-background py-20 overflow-hidden" data-testid="section-platform-demo">
+    <section
+      id="hear-it-in-action"
+      className="bg-background py-20 overflow-hidden scroll-mt-28"
+      data-testid="section-platform-demo"
+    >
       {/* TOP */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-14 items-start mb-10">

@@ -66,9 +66,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     ],
   },
   "/": {
-    h1: "The AI workforce behind every conversation.",
+    h1: "Human-sounding AI agents that know how to sell.",
     content: [
-      "BlackSync builds custom AI voice agents around your workflows, tools, and data, so they operate like part of your team. Hundreds of personalized calls in minutes, not days.",
+      "Turn more leads into conversations and appointments with AI voice agents that follow up, qualify prospects, and book meetings directly into your calendar.",
       "BlackSync's AI agents handle outbound sales prospecting, inbound call answering, lead follow-up, appointment booking, and customer service — in 40+ languages, built on GPT-5, Claude, and Gemini.",
       "Built for real estate, mortgage and lending, insurance, home services, healthcare, property management, funeral homes, and law firms — every call is logged, every lead is qualified, and bookings sync straight to your calendar and CRM.",
     ],
