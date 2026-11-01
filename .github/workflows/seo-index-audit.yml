@@ -9,6 +9,19 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
+      - name: Prepare parser
+        run: |
+          cat > /tmp/parse.py <<'PYEOF'
+          import re
+          h = open('/tmp/page.html').read()
+          body = re.search(r'<body.*?</body>', h, re.S)
+          txt = re.sub(r'<[^>]+>', ' ', body.group(0) if body else '')
+          txt = re.sub(r'\s+', ' ', txt).strip()
+          h1s = re.findall(r'<h1[^>]*>(.*?)</h1>', h, re.S)
+          for h1 in h1s[:2]:
+              print('   h1:', re.sub(r'<[^>]+>|\s+',' ',h1).strip()[:90])
+          print('   body text chars:', len(txt))
+          PYEOF
       - name: Fetch pages as Googlebot
         run: |
           UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
@@ -20,17 +33,8 @@ jobs:
             echo "-- robots meta:"; grep -oE '<meta name="robots" content="[^"]*"' /tmp/page.html | head -1
             echo "-- description:"; grep -oE '<meta name="description" content="[^"]*"' /tmp/page.html | head -1 | cut -c1-130
             echo "-- og:title:"; grep -oE '<meta property="og:title" content="[^"]*"' /tmp/page.html | head -1 | cut -c1-100
-            echo "-- body H1 + text length:"
-            python3 - <<'EOF'
-            import re
-            h = open('/tmp/page.html').read()
-            body = re.search(r'<body.*?</body>', h, re.S)
-            txt = re.sub(r'<[^>]+>', ' ', body.group(0) if body else '')
-            txt = re.sub(r'\s+', ' ', txt).strip()
-            h1s = re.findall(r'<h1[^>]*>(.*?)</h1>', h, re.S)
-            for h1 in h1s[:2]: print('   h1:', re.sub(r'<[^>]+>|\s+',' ',h1).strip()[:90])
-            print('   body text chars:', len(txt))
-            EOF
+            echo "-- body:"
+            python3 /tmp/parse.py
           done
           echo "########## sitemap/robots ##########"
           curl -s -o /dev/null -w "sitemap.xml: %{http_code}\n" https://www.blacksync.ai/sitemap.xml
