@@ -1,0 +1,39 @@
+name: SEO indexing audit for real-estate use-case pages
+
+on:
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/seo-index-audit.yml"]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch pages as Googlebot
+        run: |
+          UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+          for p in / /real-estate /fsbo-ai /expired-listing-ai /ai-cold-caller; do
+            echo "########## $p ##########"
+            curl -s -o /tmp/page.html -w "HTTP %{http_code} | final-url: %{url_effective}\n" -A "$UA" -L "https://www.blacksync.ai$p"
+            echo "-- title:"; grep -oE '<title>[^<]*</title>' /tmp/page.html | head -1
+            echo "-- canonical:"; grep -oE '<link rel="canonical" href="[^"]*"' /tmp/page.html | head -1
+            echo "-- robots meta:"; grep -oE '<meta name="robots" content="[^"]*"' /tmp/page.html | head -1
+            echo "-- description:"; grep -oE '<meta name="description" content="[^"]*"' /tmp/page.html | head -1 | cut -c1-130
+            echo "-- og:title:"; grep -oE '<meta property="og:title" content="[^"]*"' /tmp/page.html | head -1 | cut -c1-100
+            echo "-- body H1 + text length:"
+            python3 - <<'EOF'
+            import re
+            h = open('/tmp/page.html').read()
+            body = re.search(r'<body.*?</body>', h, re.S)
+            txt = re.sub(r'<[^>]+>', ' ', body.group(0) if body else '')
+            txt = re.sub(r'\s+', ' ', txt).strip()
+            h1s = re.findall(r'<h1[^>]*>(.*?)</h1>', h, re.S)
+            for h1 in h1s[:2]: print('   h1:', re.sub(r'<[^>]+>|\s+',' ',h1).strip()[:90])
+            print('   body text chars:', len(txt))
+            EOF
+          done
+          echo "########## sitemap/robots ##########"
+          curl -s -o /dev/null -w "sitemap.xml: %{http_code}\n" https://www.blacksync.ai/sitemap.xml
+          curl -s https://www.blacksync.ai/sitemap.xml | grep -oE '<loc>[^<]*(fsbo|expired|cold-caller|real-estate)[^<]*</loc>'
+          curl -s -o /dev/null -w "robots.txt: %{http_code}\n" https://www.blacksync.ai/robots.txt
+          curl -s https://www.blacksync.ai/robots.txt
