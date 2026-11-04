@@ -29,6 +29,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
+      <VoiceSamplesSection />
       <CustomBuildSection />
       <DashboardMockupSection />
       <ClippedVideoTab />
@@ -36,7 +37,6 @@ export default function Home() {
       <ProductsSection />
       <AiSdrSection />
       <PlatformBentoSection />
-      <VoiceSamplesSection />
       <AIModelsSection />
       <HowItWorksSection />
       <SocialProofSection />
