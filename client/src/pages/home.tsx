@@ -28,8 +28,8 @@ export default function Home() {
     <div className="min-h-screen bg-background" data-testid="page-home">
       <Navbar />
       <HeroSection />
-      <FeaturesSection />
       <VoiceSamplesSection />
+      <FeaturesSection />
       <CustomBuildSection />
       <DashboardMockupSection />
       <ClippedVideoTab />
