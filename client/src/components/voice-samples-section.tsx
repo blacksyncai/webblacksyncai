@@ -9,8 +9,12 @@ const SAMPLE_BASE = "https://blacksync.si/api/public/voice-samples";
 
 const voices = [
   { key: "marissa", name: "Marissa", desc: "Warm and upbeat" },
-  { key: "macco", name: "Macco", desc: "Deep and confident" },
+  // Not cached on the backend yet (blacksync.si/api/public/voice-samples
+  // only knows about marissa/macco/lauren/kate as of this writing) --
+  // shown as "coming soon" instead of wiring a sample that would 404.
+  { key: "zain", name: "Zain", desc: "Smooth and persuasive", comingSoon: true },
   { key: "lauren", name: "Lauren", desc: "Friendly and professional" },
+  { key: "macco", name: "Macco", desc: "Deep and confident" },
   { key: "kate", name: "Kate", desc: "Clear and easygoing" },
 ];
 
@@ -62,39 +66,49 @@ export function VoiceSamplesSection() {
           title={<>Voices that sound <span className="text-accent-grad">human</span></>}
           lead="Click a voice to hear how your AI agent sounds on a real call."
         />
-        <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 [&>*:nth-child(5)]:col-span-2 md:[&>*:nth-child(5)]:col-span-1">
           {voices.map((v, i) => {
             const active = playing === v.key;
+            const disabled = v.comingSoon === true;
             return (
               <Reveal key={v.key} delay={i * 0.06}>
                 <button
                   type="button"
-                  onClick={() => toggle(v.key)}
-                  aria-pressed={active}
-                  aria-label={`${active ? "Pause" : "Play"} ${v.name}`}
+                  onClick={() => !disabled && toggle(v.key)}
+                  disabled={disabled}
+                  aria-pressed={disabled ? undefined : active}
+                  aria-label={disabled ? `${v.name} — coming soon` : `${active ? "Pause" : "Play"} ${v.name}`}
                   data-testid={`voice-sample-${v.key}`}
-                  className={`group w-full h-full text-left rounded-2xl border bg-card p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition ${
-                    active ? "border-primary ring-2 ring-primary/20" : "border-card-border"
-                  }`}
+                  className={`group w-full h-full text-left rounded-xl border bg-card p-4 shadow-sm transition ${
+                    disabled
+                      ? "opacity-60 cursor-not-allowed"
+                      : `hover:shadow-md hover:-translate-y-0.5 ${
+                          active ? "border-primary ring-2 ring-primary/20" : "border-card-border"
+                        }`
+                  } ${disabled ? "border-card-border" : ""}`}
                 >
                   <span
-                    className={`flex items-center justify-center w-11 h-11 rounded-full transition ${
-                      active ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary group-hover:bg-primary/15"
+                    className={`flex items-center justify-center w-9 h-9 rounded-full transition ${
+                      disabled
+                        ? "bg-muted text-muted-foreground"
+                        : active
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-primary/10 text-primary group-hover:bg-primary/15"
                     }`}
                   >
                     {loading === v.key ? (
-                      <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                      <span className="w-3.5 h-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
                     ) : active ? (
-                      <Pause className="w-5 h-5" />
+                      <Pause className="w-4 h-4" />
                     ) : (
-                      <Play className="w-5 h-5 translate-x-px" />
+                      <Play className="w-4 h-4 translate-x-px" />
                     )}
                   </span>
-                  <span className="mt-4 block font-display text-lg font-semibold tracking-tight text-foreground">{v.name}</span>
-                  <span className="mt-0.5 block text-sm text-muted-foreground">
-                    {failed === v.key ? "Couldn't play — try again" : active ? "Playing…" : v.desc}
+                  <span className="mt-3 block font-display text-base font-semibold tracking-tight text-foreground">{v.name}</span>
+                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                    {disabled ? "Coming soon" : failed === v.key ? "Couldn't play — try again" : active ? "Playing…" : v.desc}
                   </span>
-                  <span className="mt-3 flex items-end gap-0.5 h-4" aria-hidden>
+                  <span className="mt-2.5 flex items-end gap-0.5 h-3.5" aria-hidden>
                     {[3, 6, 10, 7, 12, 5, 9, 4, 8, 6].map((h, j) => (
                       <span
                         key={j}
@@ -111,7 +125,7 @@ export function VoiceSamplesSection() {
 
         <Reveal delay={0.2} className="mt-10 flex flex-col items-center gap-2 text-center">
           <p className="text-sm text-muted-foreground">
-            These are 4 of 50+ voices in our library.
+            These are 5 of 50+ voices in our library.
           </p>
           <a
             href={REGISTER_URL}
