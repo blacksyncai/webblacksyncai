@@ -6,6 +6,7 @@ import { ProductsSection } from "@/components/products-section";
 import { PlatformBentoSection } from "@/components/platform-bento-section";
 import { AIModelsSection } from "@/components/ai-models-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
+import { VoiceSamplesSection } from "@/components/voice-samples-section";
 import ClippedVideoTab from "@/components/ui/clipped-video-tab";
 import { SocialProofSection } from "@/components/social-proof-section";
 import { WhySection } from "@/components/why-section";
@@ -24,6 +25,7 @@ export default function Home() {
       <TrustStrip />
       <ProductsSection />
       <PlatformBentoSection />
+      <VoiceSamplesSection />
       <AIModelsSection />
       <HowItWorksSection />
       <SocialProofSection />
