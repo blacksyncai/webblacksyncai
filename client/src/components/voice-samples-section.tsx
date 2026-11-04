@@ -7,12 +7,20 @@ import { REGISTER_URL } from "@/lib/register";
 // Served by the BlackSync app: each voice says one fixed preview line (generated once, cached).
 const SAMPLE_BASE = "https://blacksync.si/api/public/voice-samples";
 
-const voices = [
+type Voice = {
+  key: string;
+  name: string;
+  desc: string;
+  /** Overrides SAMPLE_BASE, e.g. for a sample not yet cached on the backend. */
+  url?: string;
+  comingSoon?: boolean;
+};
+
+const voices: Voice[] = [
   { key: "marissa", name: "Marissa", desc: "Warm and upbeat" },
-  // Not cached on the backend yet (blacksync.si/api/public/voice-samples
-  // only knows about marissa/macco/lauren/kate as of this writing) --
-  // shown as "coming soon" instead of wiring a sample that would 404.
-  { key: "zain", name: "Zain", desc: "Smooth and persuasive", comingSoon: true },
+  // Not cached on the blacksync.si backend yet, so served from a local
+  // copy instead of SAMPLE_BASE until it lands there too.
+  { key: "zain", name: "Zain", desc: "Smooth and persuasive", url: "/audio/zain-sample.wav" },
   { key: "lauren", name: "Lauren", desc: "Friendly and professional" },
   { key: "macco", name: "Macco", desc: "Deep and confident" },
   { key: "kate", name: "Kate", desc: "Clear and easygoing" },
@@ -26,7 +34,7 @@ export function VoiceSamplesSection() {
 
   useEffect(() => () => audio.current?.pause(), []);
 
-  function toggle(key: string) {
+  function toggle(key: string, url?: string) {
     setFailed(null);
     if (playing === key) {
       audio.current?.pause();
@@ -34,7 +42,7 @@ export function VoiceSamplesSection() {
       return;
     }
     audio.current?.pause();
-    const a = new Audio(`${SAMPLE_BASE}/${key}.wav`);
+    const a = new Audio(url ?? `${SAMPLE_BASE}/${key}.wav`);
     audio.current = a;
     setLoading(key);
     a.onplaying = () => {
@@ -74,7 +82,7 @@ export function VoiceSamplesSection() {
               <Reveal key={v.key} delay={i * 0.06}>
                 <button
                   type="button"
-                  onClick={() => !disabled && toggle(v.key)}
+                  onClick={() => !disabled && toggle(v.key, v.url)}
                   disabled={disabled}
                   aria-pressed={disabled ? undefined : active}
                   aria-label={disabled ? `${v.name} — coming soon` : `${active ? "Pause" : "Play"} ${v.name}`}
