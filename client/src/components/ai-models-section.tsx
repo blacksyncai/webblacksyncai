@@ -23,7 +23,7 @@ const points = [
   { title: "Private by default", body: "Your call data is never used to train public models." },
 ];
 
-/** Hardware promo clip, used with Cerebras' permission. Ends on "Powered by Cerebras". */
+/** Hardware clip, used with permission. */
 function Wafer() {
   return (
     <div className="relative w-full">
@@ -37,15 +37,12 @@ function Wafer() {
           loop
           playsInline
           preload="metadata"
-          aria-label="Wafer-scale AI hardware, powered by Cerebras"
+          aria-label="Wafer-scale AI hardware"
           data-testid="video-ai-hardware"
         >
           <source src="/media/wafer.webm" type="video/webm" />
           <source src="/media/wafer.mp4" type="video/mp4" />
         </video>
-      </div>
-      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-border bg-background px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground shadow-sm">
-        Powered by Cerebras
       </div>
     </div>
   );
