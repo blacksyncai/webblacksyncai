@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, ArrowRight } from "lucide-react";
 import { SectionHeading, Reveal } from "@/components/ui/section";
+import { LiveOrb } from "@/components/ui/live-orb";
+import { REGISTER_URL } from "@/lib/register";
 
 // Served by the BlackSync app: each voice says one fixed preview line (generated once, cached).
 const SAMPLE_BASE = "https://blacksync.si/api/public/voice-samples";
@@ -50,6 +52,11 @@ export function VoiceSamplesSection() {
   return (
     <section id="voices" data-testid="section-voices" className="py-20 md:py-28 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div aria-hidden="true">
+          <Reveal className="flex justify-center mb-2">
+            <LiveOrb size={104} variant="custom" color="#F97316" eyeColor="#FFFFFF" />
+          </Reveal>
+        </div>
         <SectionHeading
           eyebrow="Hear it for yourself"
           title={<>Voices that sound <span className="text-accent-grad">human</span></>}
@@ -101,6 +108,20 @@ export function VoiceSamplesSection() {
             );
           })}
         </div>
+
+        <Reveal delay={0.2} className="mt-10 flex flex-col items-center gap-2 text-center">
+          <p className="text-sm text-muted-foreground">
+            These are 4 of 50+ voices in our library.
+          </p>
+          <a
+            href={REGISTER_URL}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
+            data-testid="link-voices-cta"
+          >
+            Browse the full library
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </Reveal>
       </div>
     </section>
   );
