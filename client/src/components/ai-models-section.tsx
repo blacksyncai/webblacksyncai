@@ -23,35 +23,29 @@ const points = [
   { title: "Private by default", body: "Your call data is never used to train public models." },
 ];
 
-/** Original animated wafer: a grid of cores lit in a diagonal wave. */
+/** Hardware promo clip, used with Cerebras' permission. Ends on "Powered by Cerebras". */
 function Wafer() {
-  const n = 12;
-  const cells = Array.from({ length: n * n }, (_, i) => i);
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[22rem]">
-      <div
-        className="absolute inset-0 rounded-[1.75rem] bg-primary/15 blur-3xl"
-        aria-hidden="true"
-      />
-      <div className="relative h-full w-full rounded-[1.75rem] border border-border bg-foreground p-3 shadow-2xl">
-        <div className="grid h-full w-full gap-[3px]" style={{ gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))` }}>
-          {cells.map((i) => {
-            const r = Math.floor(i / n);
-            const c = i % n;
-            return (
-              <motion.div
-                key={i}
-                className="rounded-[2px] bg-primary"
-                initial={{ opacity: 0.12 }}
-                animate={{ opacity: [0.12, 0.95, 0.12] }}
-                transition={{ duration: 2.4, repeat: Infinity, delay: (r + c) * 0.08, ease: "easeInOut" }}
-              />
-            );
-          })}
-        </div>
+    <div className="relative w-full">
+      <div className="absolute inset-0 rounded-[1.75rem] bg-primary/15 blur-3xl" aria-hidden="true" />
+      <div className="relative overflow-hidden rounded-[1.75rem] border border-border bg-[#F4F2EF] shadow-2xl">
+        <video
+          className="block aspect-video w-full object-cover"
+          poster="/media/wafer-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label="Wafer-scale AI hardware, powered by Cerebras"
+          data-testid="video-ai-hardware"
+        >
+          <source src="/media/wafer.webm" type="video/webm" />
+          <source src="/media/wafer.mp4" type="video/mp4" />
+        </video>
       </div>
-      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-border bg-background px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground shadow-sm">
-        Wafer-scale inference
+      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-border bg-background px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground shadow-sm">
+        Powered by Cerebras
       </div>
     </div>
   );
