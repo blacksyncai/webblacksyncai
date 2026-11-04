@@ -1,125 +1,185 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe } from "lucide-react";
 import { Link } from "wouter";
 import { Eyebrow, Reveal } from "@/components/ui/section";
 
-const models = [
-  { name: "GPT-5", provider: "OpenAI", short: "GPT-5", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5.1", provider: "OpenAI", short: "GPT-5.1", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5.2", provider: "OpenAI", short: "GPT-5.2", color: "bg-emerald-500", premium: true },
-  { name: "GPT-5 Mini", provider: "OpenAI", short: "5-Mini", color: "bg-emerald-500", premium: false },
-  { name: "GPT-5 Nano", provider: "OpenAI", short: "5-Nano", color: "bg-emerald-500", premium: false },
-  { name: "GPT-4.1", provider: "OpenAI", short: "GPT-4.1", color: "bg-emerald-500", premium: true },
-  { name: "GPT-4.1 Mini", provider: "OpenAI", short: "4.1-Mini", color: "bg-emerald-500", premium: false },
-  { name: "GPT-4.1 Nano", provider: "OpenAI", short: "4.1-Nano", color: "bg-emerald-500", premium: false },
-  { name: "GPT-4o Realtime", provider: "OpenAI", short: "4o-RT", color: "bg-emerald-500", premium: true },
-  { name: "GPT-4o Mini Realtime", provider: "OpenAI", short: "4o-Mini", color: "bg-emerald-500", premium: false },
-  { name: "Claude 4.5 Sonnet", provider: "Anthropic", short: "Sonnet 4.5", color: "bg-orange-500", premium: true },
-  { name: "Claude 4.5 Haiku", provider: "Anthropic", short: "Haiku 4.5", color: "bg-orange-500", premium: false },
-  { name: "Gemini 3.0 Flash", provider: "Google", short: "Gemini 3.0", color: "bg-blue-500", premium: false },
-  { name: "Gemini 2.5 Flash", provider: "Google", short: "Gemini 2.5", color: "bg-blue-500", premium: false },
-  { name: "Gemini 2.5 Flash Lite", provider: "Google", short: "2.5 Lite", color: "bg-blue-500", premium: false },
+const otherModels = [
+  { provider: "OpenAI", names: ["GPT-5", "GPT-5.1", "GPT-5.2", "GPT-5 Mini", "GPT-5 Nano", "GPT-4.1", "GPT-4.1 Mini", "GPT-4.1 Nano", "GPT-4o Realtime", "GPT-4o Mini Realtime"] },
+  { provider: "Anthropic", names: ["Claude 4.5 Sonnet", "Claude 4.5 Haiku"] },
+  { provider: "Google", names: ["Gemini 3.0 Flash", "Gemini 2.5 Flash", "Gemini 2.5 Flash Lite"] },
 ];
+
+const stats = [
+  { value: "1,000s", label: "tokens per second" },
+  { value: "Low", label: "latency, every turn" },
+  { value: "Long", label: "multi-step workflows" },
+];
+
+const points = [
+  { title: "Built for the phone", body: "Tuned in-house for live sales calls: openers, objections, qualifying and booking." },
+  { title: "Dedicated wafer-scale hardware", body: "Runs on wafer-scale AI chips instead of shared GPU clouds, so replies land before the pause gets awkward." },
+  { title: "Holds long workflows", body: "Keeps context across long calls, transfers, follow-ups and CRM updates without losing the thread." },
+  { title: "Private by default", body: "Your call data is never used to train public models." },
+];
+
+/** Original animated wafer: a grid of cores lit in a diagonal wave. */
+function Wafer() {
+  const n = 12;
+  const cells = Array.from({ length: n * n }, (_, i) => i);
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-[22rem]">
+      <div
+        className="absolute inset-0 rounded-[1.75rem] bg-primary/15 blur-3xl"
+        aria-hidden="true"
+      />
+      <div className="relative h-full w-full rounded-[1.75rem] border border-border bg-foreground p-3 shadow-2xl">
+        <div className="grid h-full w-full gap-[3px]" style={{ gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))` }}>
+          {cells.map((i) => {
+            const r = Math.floor(i / n);
+            const c = i % n;
+            return (
+              <motion.div
+                key={i}
+                className="rounded-[2px] bg-primary"
+                initial={{ opacity: 0.12 }}
+                animate={{ opacity: [0.12, 0.95, 0.12] }}
+                transition={{ duration: 2.4, repeat: Infinity, delay: (r + c) * 0.08, ease: "easeInOut" }}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-border bg-background px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground shadow-sm">
+        Wafer-scale inference
+      </div>
+    </div>
+  );
+}
+
+/** Relative speed bars. Kept qualitative on the GPU side. */
+function SpeedBars() {
+  const bars = [
+    { label: "Standard GPU cloud", width: "8%", tone: "bg-muted-foreground/40", value: "" },
+    { label: "BlackSync Super Intelligence", width: "100%", tone: "bg-primary", value: "1,000s tk/s" },
+  ];
+  return (
+    <div className="mt-10 space-y-4">
+      {bars.map((b, i) => (
+        <div key={b.label}>
+          <div className="mb-1.5 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+            <span>{b.label}</span>
+            <span className="normal-case text-foreground">{b.value}</span>
+          </div>
+          <div className="h-2.5 w-full overflow-hidden rounded-full bg-muted">
+            <motion.div
+              className={`h-full rounded-full ${b.tone}`}
+              initial={{ width: 0 }}
+              whileInView={{ width: b.width }}
+              viewport={{ once: true }}
+              transition={{ duration: i ? 1.1 : 1.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function AIModelsSection() {
   return (
-    <section
-      id="ai-models"
-      data-testid="section-ai-models"
-      className="py-20 md:py-28 relative"
-    >
+    <section id="ai-models" data-testid="section-ai-models" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="relative grid md:grid-cols-2 gap-10 md:gap-12 items-center rounded-[2rem] border border-card-border bg-card p-7 md:p-12 shadow-lg overflow-hidden">
-            {/* subtle inner texture */}
-            <div
-              className="dot-bg pointer-events-none absolute inset-0 opacity-[0.35]"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
-              aria-hidden="true"
-            />
+          <div className="relative rounded-[2rem] border border-card-border bg-card p-7 md:p-12 shadow-lg overflow-hidden">
+            <div className="dot-bg pointer-events-none absolute inset-0 opacity-[0.35]" aria-hidden="true" />
+            <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
 
-            {/* LEFT */}
-            <div className="relative">
-              <Eyebrow data-testid="text-ai-models-eyebrow">AI Models</Eyebrow>
-              <h2
-                className="mt-5 font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-balance"
-                data-testid="text-ai-models-headline"
-              >
-                Powered by the world's most{" "}
-                <span className="text-accent-grad">advanced AI</span>
-              </h2>
-              <p
-                className="mt-4 text-muted-foreground text-base md:text-lg leading-relaxed text-pretty max-w-lg"
-                data-testid="text-ai-models-subhead"
-              >
-                Choose your model. Every plan includes access to GPT-5, Claude,
-                Gemini, and more — you pick what runs your agent.
-              </p>
+            <div className="relative grid md:grid-cols-2 gap-12 items-center">
+              {/* LEFT */}
+              <div>
+                <Eyebrow data-testid="text-ai-models-eyebrow">In-house AI</Eyebrow>
+                <h2
+                  className="mt-5 font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-balance"
+                  data-testid="text-ai-models-headline"
+                >
+                  Our own AI, running on <span className="text-accent-grad">wafer-scale silicon</span>
+                </h2>
+                <p
+                  className="mt-4 text-muted-foreground text-base md:text-lg leading-relaxed text-pretty max-w-lg"
+                  data-testid="text-ai-models-subhead"
+                >
+                  BlackSync Super Intelligence is our in-house model for live phone calls. It runs on
+                  dedicated wafer-scale chips that process thousands of tokens per second, so your
+                  agent thinks, answers and moves through long workflows without the lag.
+                </p>
 
-              <div className="flex flex-wrap gap-3 mt-7">
-                <Link href="/pricing">
-                  <Button size="lg" data-testid="button-ai-models-pricing">
-                    See Pricing
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-                <a href="#enterprise">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    data-testid="button-ai-models-enterprise"
-                  >
-                    Talk to Sales →
-                  </Button>
-                </a>
+                <div className="mt-8 grid grid-cols-3 gap-3">
+                  {stats.map((s) => (
+                    <div key={s.label} className="rounded-xl border border-border bg-background/70 p-3">
+                      <div className="font-display text-xl md:text-2xl font-semibold text-primary">{s.value}</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground leading-snug">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <SpeedBars />
+
+                <div className="flex flex-wrap gap-3 mt-8">
+                  <Link href="/pricing">
+                    <Button size="lg" data-testid="button-ai-models-pricing">
+                      See Pricing
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                  <a href="#enterprise">
+                    <Button variant="outline" size="lg" data-testid="button-ai-models-enterprise">
+                      Talk to Sales
+                    </Button>
+                  </a>
+                </div>
               </div>
 
-              <div className="mt-7 flex items-center gap-2 text-sm text-muted-foreground">
-                <Globe className="w-4 h-4 text-primary shrink-0" />
-                <p data-testid="text-languages-supported">
-                  40+ languages including English, Spanish, Arabic, Mandarin, French, Portuguese & Hindi.
-                </p>
+              {/* RIGHT */}
+              <div>
+                <Wafer />
+                <div className="mt-12 grid sm:grid-cols-2 gap-x-6 gap-y-5">
+                  {points.map((p) => (
+                    <div key={p.title} className="border-l-2 border-primary pl-3">
+                      <div className="font-display text-sm font-semibold">{p.title}</div>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{p.body}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* RIGHT */}
-            <div className="relative grid grid-cols-3 sm:grid-cols-5 gap-2.5">
-              {models.map((model, idx) => (
-                <motion.div
-                  key={model.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: idx * 0.03 }}
-                  className="group relative aspect-square p-2 bg-background border border-border flex flex-col items-center justify-center text-center shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 cursor-default"
-                  style={{
-                    clipPath:
-                      "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
-                  }}
-                  data-testid={`tile-model-${idx}`}
-                  title={`${model.name} · ${model.provider}`}
-                >
-                  <div
-                    className={`w-2 h-2 rounded-full ${model.color} mb-1 ring-2 ring-transparent group-hover:ring-primary/20 transition-all`}
-                  />
-                  <span className="font-display text-[10px] sm:text-[11px] font-semibold leading-tight text-foreground">
-                    {model.short}
-                  </span>
-                  {model.premium && (
-                    <Badge
-                      variant="secondary"
-                      className="mt-1 font-mono text-[8px] px-1.5 py-0 h-3.5 leading-none tracking-wider"
-                    >
-                      PRO
-                    </Badge>
-                  )}
-                </motion.div>
-              ))}
+            {/* ALSO AVAILABLE */}
+            <div className="relative mt-12 border-t border-border pt-8">
+              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                Also available on every plan
+              </div>
+              <div className="mt-4 space-y-3">
+                {otherModels.map((g) => (
+                  <div key={g.provider} className="flex flex-wrap items-center gap-2">
+                    <span className="w-20 shrink-0 text-xs font-semibold text-foreground">{g.provider}</span>
+                    {g.names.map((m) => (
+                      <span
+                        key={m}
+                        className="rounded-full border border-border bg-background px-2.5 py-1 text-xs text-muted-foreground"
+                      >
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+                <Globe className="w-4 h-4 text-primary shrink-0" />
+                <p data-testid="text-languages-supported">
+                  40+ languages including English, Spanish, Arabic, Mandarin, French, Portuguese and Hindi.
+                </p>
+              </div>
             </div>
           </div>
         </Reveal>
