@@ -229,50 +229,6 @@ export const CRMS = [
   "Cloze",
 ];
 
-/** true = included, false = not included, string = the value. Order: start, solo, growth, enterprise. */
-export type Cell = boolean | string;
-export const COMPARISON: { group: string; rows: { label: string; values: [Cell, Cell, Cell, Cell] }[] }[] = [
-  {
-    group: "Plan and usage",
-    rows: [
-      { label: "Monthly subscription", values: ["$0", "$98", "$197", "Custom"] },
-      { label: "Included credits", values: ["10 one-time", "150 / month", "400 / month", "Custom"] },
-      { label: "AI agents", values: ["1", "2", "5", "Custom"] },
-      { label: "Concurrent calls", values: ["2", "10", "25", "Custom"] },
-      { label: "Daily outbound call limit", values: ["75 attempts", "No fixed cap", "No fixed cap", "Custom"] },
-      { label: "Included phone numbers", values: ["Not included", "1", "3", "Custom"] },
-    ],
-  },
-  {
-    group: "Calling",
-    rows: [
-      { label: "AI agent builder", values: [true, true, true, true] },
-      { label: "Inbound and outbound calling", values: [true, true, true, true] },
-      { label: "Campaign scheduling", values: [false, true, true, true] },
-      { label: "Calendar booking", values: [false, true, true, true] },
-      { label: "Recordings and transcripts", values: [true, true, true, true] },
-    ],
-  },
-  {
-    group: "Integrations and automation",
-    rows: [
-      { label: "Webhooks and Zapier", values: [false, true, true, true] },
-      { label: "Native CRM integration", values: [false, false, true, "Custom"] },
-      { label: "CRM-triggered automation", values: [false, false, true, true] },
-      { label: "Advanced analytics", values: [false, false, true, true] },
-    ],
-  },
-  {
-    group: "Service",
-    rows: [
-      { label: "Onboarding", values: ["Self-serve", "Self-serve", "Guided", "Dedicated"] },
-      { label: "Support level", values: ["Self-serve help", "Standard", "Priority", "Dedicated manager"] },
-      { label: "Custom infrastructure", values: [false, false, false, "On request"] },
-      { label: "White-label support", values: [false, false, false, "On request"] },
-    ],
-  },
-];
-
 export const FAQS: { q: string; a: string }[] = [
   {
     q: "Can I try BlackSync AI for free?",
@@ -408,7 +364,6 @@ export function pricingCrawlableHtml(): string {
       p.note ? `<p>${esc(p.note)}</p>` : "",
       `</article>`,
     ].join("");
-  const cell = (v: Cell) => (v === true ? "Included" : v === false ? "Not included" : esc(v));
   return [
     `<h1>AI Calling Plans &amp; Pricing</h1>`,
     `<p>Start free, then scale with AI voice agents, outbound calling, CRM integrations and enterprise solutions. Plans from $98/month. Prices in USD.</p>`,
@@ -422,11 +377,6 @@ export function pricingCrawlableHtml(): string {
     ...CREDIT_PACKS.map((c) => `<li>${c.credits.toLocaleString("en-US")} credits: ${c.price}</li>`),
     `</ul><p><a href="${esc(BUY_CREDITS_URL)}">Buy credits</a></p>`,
     `<h2>CRM integrations</h2><p>Growth includes native integrations with ${esc(CRMS.join(", "))}. Features vary by CRM.</p>`,
-    `<h2>Compare plans</h2><table><thead><tr><th>Feature</th>${PLANS.map((p) => `<th>${esc(p.name)}</th>`).join("")}</tr></thead><tbody>`,
-    ...COMPARISON.flatMap((g) => g.rows).map(
-      (r) => `<tr><th>${esc(r.label)}</th>${r.values.map((v) => `<td>${cell(v)}</td>`).join("")}</tr>`,
-    ),
-    `</tbody></table>`,
     `<h2>Frequently asked questions</h2>`,
     ...FAQS.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`),
   ].join("\n");
@@ -434,7 +384,6 @@ export function pricingCrawlableHtml(): string {
 
 /** The pricing page as Markdown for agents (Accept: text/markdown). */
 export function pricingMarkdown(): string {
-  const cell = (v: Cell) => (v === true ? "Yes" : v === false ? "No" : v);
   return [
     "# AI Calling Plans & Pricing",
     "Start free, then scale with AI voice agents, outbound calling, CRM integrations and enterprise solutions. Prices in USD.",
@@ -446,11 +395,6 @@ export function pricingMarkdown(): string {
     "## Calling credit packs",
     "One-time purchases, separate from the subscription. Credit use varies with the AI model and call length. Additional phone numbers from $3.50/month.",
     CREDIT_PACKS.map((c) => `- ${c.credits.toLocaleString("en-US")} credits: ${c.price}`).join("\n"),
-    "## Compare plans",
-    `| Feature | ${PLANS.map((p) => p.name).join(" | ")} |\n|---|---|---|---|---|\n` +
-      COMPARISON.flatMap((g) => g.rows)
-        .map((r) => `| ${r.label} | ${r.values.map(cell).join(" | ")} |`)
-        .join("\n"),
     "## FAQ",
     ...FAQS.map((f) => `### ${f.q}\n\n${f.a}`),
   ].join("\n\n");
