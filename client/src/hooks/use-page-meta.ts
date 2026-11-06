@@ -3,7 +3,7 @@ import {
   DEFAULT_DESCRIPTION,
   ROUTE_META,
   SITE_URL,
-  fullTitle,
+  routeTitle,
   pageImage,
 } from "@shared/route-meta";
 
@@ -47,7 +47,7 @@ export function usePageMeta({ title, description, path, noindex }: PageMetaOptio
     const resolvedTitle = title ?? fromTable?.title;
     const resolvedNoindex = noindex ?? fromTable?.noindex ?? false;
 
-    const finalTitle = fullTitle(resolvedTitle);
+    const finalTitle = path ? routeTitle(path, title) : routeTitle("", resolvedTitle);
     const desc = description ?? fromTable?.description ?? DEFAULT_DESCRIPTION;
 
     document.title = finalTitle;

@@ -26,11 +26,12 @@ import {
   SITE_NAME,
   SITE_URL,
   DEFAULT_DESCRIPTION,
-  fullTitle,
+  routeTitle,
   pageH1,
   pageContent,
   pageImage,
 } from "../shared/route-meta";
+import { pricingCrawlableHtml, pricingJsonLd } from "../shared/pricing";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = join(root, "dist", "public");
@@ -56,7 +57,7 @@ function upsert(html: string, matcher: RegExp, tag: string): string {
 
 function renderRoute(shell: string, path: string): string {
   const meta = ROUTE_META[path] ?? {};
-  const title = fullTitle(meta.title);
+  const title = routeTitle(path);
   const description = meta.description ?? DEFAULT_DESCRIPTION;
   const url = `${SITE_URL}${path}`;
   const robots = meta.noindex ? "noindex, nofollow" : "index, follow";
@@ -106,9 +107,28 @@ function renderRoute(shell: string, path: string): string {
   );
   html = upsert(
     html,
+    /<meta\s+name="twitter:title"[^>]*>/i,
+    `<meta name="twitter:title" content="${escapeAttr(title)}" />`,
+  );
+  html = upsert(
+    html,
+    /<meta\s+name="twitter:description"[^>]*>/i,
+    `<meta name="twitter:description" content="${escapeAttr(description)}" />`,
+  );
+  html = upsert(
+    html,
     /<meta\s+name="twitter:image"[^>]*>/i,
     `<meta name="twitter:image" content="${escapeAttr(image)}" />`,
   );
+
+  if (path === "/pricing") {
+    // "<" escaped so the JSON can never close the script tag early.
+    const ld = JSON.stringify(pricingJsonLd()).replace(/</g, "\\u003c");
+    html = html.replace(
+      /<\/head>/i,
+      `    <script type="application/ld+json" id="pricing-schema">${ld}</script>\n  </head>`,
+    );
+  }
 
   html = html.replace(
     '<div id="root"></div>',
@@ -130,6 +150,10 @@ function renderRoute(shell: string, path: string): string {
  * the subtree, so a real visitor never sees it flash.
  */
 function crawlableContent(path: string): string {
+  if (path === "/pricing") {
+    // The full pricing page (plans, credit packs, comparison, FAQ), from the same data the React page renders.
+    return `      <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">\n${pricingCrawlableHtml()}\n      </div>`;
+  }
   const h1 = pageH1(path);
   const paragraphs = pageContent(path);
   const clip =

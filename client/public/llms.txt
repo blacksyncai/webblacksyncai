@@ -14,7 +14,7 @@ Not a fit for: text-only/chat-only support, use cases with no phone-calling comp
 
 ## How to call BlackSync
 
-- [Pricing](https://www.blacksync.ai/pricing): Solo Agent from $98/mo, Team $296/mo, custom Enterprise. Home-services plan from $49/mo at [/home-services](https://www.blacksync.ai/home-services).
+- [Pricing](https://www.blacksync.ai/pricing): free Start plan, Solo $98/mo, Growth $197/mo, and Custom Solutions for larger organizations. Calling credit packs from $29. Home-services plan from $49/mo at [/home-services](https://www.blacksync.ai/home-services).
 - [Book a call / demo](https://www.blacksync.ai/book-demo)
 - [Compare to Ylopo](https://www.blacksync.ai/compare/ylopo-alternative) (real estate)
 - [Enterprise / corporate sales](https://www.blacksync.ai/enterprise)
