@@ -8,7 +8,6 @@ import {
   Database,
   FileAudio,
   FileText,
-  Minus,
   Mic,
   PhoneCall,
   Server,
@@ -29,14 +28,12 @@ import { trackPricing } from "@/lib/pricing-analytics";
 import {
   BUY_CREDITS_URL,
   COMMON_FEATURES,
-  COMPARISON,
   CREDIT_PACKS,
   CRMS,
   EXTRA_NUMBER_PRICE,
   FAQS,
   PLANS,
   pricingJsonLd,
-  type Cell,
 } from "@shared/pricing";
 import { cn } from "@/lib/utils";
 
@@ -52,122 +49,6 @@ function SectionTitle({ eyebrow, title, lead, id }: { eyebrow: string; title: st
       </h2>
       {lead && <p className="mt-3 text-base text-muted-foreground text-pretty">{lead}</p>}
     </div>
-  );
-}
-
-function CellValue({ value, featured }: { value: Cell; featured?: boolean }) {
-  if (value === true)
-    return (
-      <>
-        <Check className={cn("mx-auto h-4 w-4", featured ? "text-primary" : "text-foreground/70")} aria-hidden="true" />
-        <span className="sr-only">Included</span>
-      </>
-    );
-  if (value === false)
-    return (
-      <>
-        <Minus className="mx-auto h-4 w-4 text-muted-foreground/50" aria-hidden="true" />
-        <span className="sr-only">Not included</span>
-      </>
-    );
-  return <span className={cn("text-sm", featured && "font-medium")}>{value}</span>;
-}
-
-/** Desktop: one table. Phones: each row as a small 2x2 grid of plan values (no wide table). */
-function Comparison() {
-  return (
-    <details className="group mx-auto mt-10 max-w-6xl rounded-2xl border bg-card shadow-sm" open>
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-5 py-4 font-display text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
-        Compare every plan feature
-        <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden="true" />
-      </summary>
-
-      <div className="hidden overflow-x-auto border-t md:block">
-        <table className="w-full text-left text-sm">
-          <caption className="sr-only">BlackSync AI plan comparison</caption>
-          <thead>
-            <tr className="border-b">
-              <th scope="col" className="w-[28%] px-5 py-4 font-medium text-muted-foreground">
-                Feature
-              </th>
-              {PLANS.map((p) => (
-                <th
-                  key={p.key}
-                  scope="col"
-                  className={cn("px-4 py-4 text-center font-display text-base font-semibold", p.popular && "bg-primary/[0.06] text-primary")}
-                >
-                  {p.name}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          {COMPARISON.map((g) => (
-            <tbody key={g.group}>
-              <tr>
-                <th colSpan={5} scope="colgroup" className="bg-muted/60 px-5 py-2 font-mono text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                  {g.group}
-                </th>
-              </tr>
-              {g.rows.map((r) => (
-                <tr key={r.label} className="border-t border-border/60">
-                  <th scope="row" className="px-5 py-3 font-normal text-foreground/90">
-                    {r.label}
-                  </th>
-                  {r.values.map((v, i) => (
-                    <td key={i} className={cn("px-4 py-3 text-center", PLANS[i].popular && "bg-primary/[0.06]")}>
-                      <CellValue value={v} featured={PLANS[i].popular} />
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          ))}
-        </table>
-      </div>
-
-      <div className="divide-y border-t md:hidden">
-        {COMPARISON.map((g) => (
-          <div key={g.group} className="px-4 py-4">
-            <h3 className="mb-3 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{g.group}</h3>
-            <dl className="space-y-4">
-              {g.rows.map((r) => (
-                <div key={r.label}>
-                  <dt className="mb-1.5 text-sm font-medium">{r.label}</dt>
-                  <dd className="grid grid-cols-2 gap-1.5">
-                    {r.values.map((v, i) => (
-                      <span
-                        key={i}
-                        className={cn(
-                          "flex items-center justify-between gap-2 rounded-lg border px-2.5 py-1.5 text-xs",
-                          PLANS[i].popular && "border-primary/40 bg-primary/[0.06]",
-                        )}
-                      >
-                        <span className="text-muted-foreground">{PLANS[i].name}</span>
-                        <span className="text-right">
-                          {v === true ? (
-                            <>
-                              <Check className="inline h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                              <span className="sr-only">Included</span>
-                            </>
-                          ) : v === false ? (
-                            <>
-                              <Minus className="inline h-3.5 w-3.5 text-muted-foreground/50" aria-hidden="true" />
-                              <span className="sr-only">Not included</span>
-                            </>
-                          ) : (
-                            v
-                          )}
-                        </span>
-                      </span>
-                    ))}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        ))}
-      </div>
-    </details>
   );
 }
 
@@ -323,42 +204,54 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Comparison */}
-        <section aria-labelledby="compare-title" className="py-16 md:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionTitle id="compare-title" eyebrow="Compare" title="Compare plans" lead="Every limit and feature, side by side." />
-            <Comparison />
-          </div>
-        </section>
-
         {/* Enterprise */}
-        <section aria-labelledby="enterprise-title" className="pb-16 md:pb-24">
+        <section aria-labelledby="enterprise-title" className="py-16 md:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-3xl border bg-foreground p-8 text-background shadow-lg md:p-12">
-              <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+            <div className="relative overflow-hidden rounded-[2rem] bg-foreground p-8 text-background shadow-2xl md:p-12">
+              {/* Warm glow + dot texture, matching the final-CTA band */}
+              <div
+                className="pointer-events-none absolute inset-0 opacity-90"
+                aria-hidden="true"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 60% 80% at 15% -10%, hsl(14 82% 55% / 0.5), transparent 60%), radial-gradient(ellipse 50% 60% at 100% 110%, hsl(32 80% 55% / 0.3), transparent 60%)",
+                }}
+              />
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.07]"
+                aria-hidden="true"
+                style={{ backgroundImage: "radial-gradient(currentColor 1px, transparent 1px)", backgroundSize: "22px 22px" }}
+              />
+
+              <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-wider text-background/60">Custom Solutions</span>
-                  <h2 id="enterprise-title" className="mt-3 font-display text-3xl font-semibold tracking-tight text-balance md:text-4xl">
-                    Enterprise AI calling, built around your operation
+                  <span className="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-background/80 backdrop-blur">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Custom Solutions
+                  </span>
+                  <h2 id="enterprise-title" className="mt-5 font-display text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+                    Enterprise AI calling, built{" "}
+                    <span className="bg-gradient-to-r from-orange-300 to-amber-200 bg-clip-text text-transparent">
+                      around your operation
+                    </span>
                   </h2>
                   <p className="mt-4 text-background/75 text-pretty">
                     Private infrastructure, deep integrations and a team that builds and deploys with you. Every Custom Solutions
                     engagement is scoped to your organization under a custom agreement.
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="mt-7 flex flex-wrap gap-3">
                     <BookCallDialog context="enterprise">
                       <Button
                         size="lg"
+                        className="bg-background text-foreground hover:bg-background/90"
                         onClick={() => trackPricing("pricing_enterprise_contact_click", { plan: "enterprise", location: "enterprise_band" })}
                       >
                         Talk to Sales
+                        <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                       </Button>
                     </BookCallDialog>
                     <Button asChild size="lg" variant="ghost" className="text-background hover:bg-background/10 hover:text-background">
-                      <a href="/enterprise">
-                        Explore Enterprise
-                        <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                      </a>
+                      <a href="/enterprise">Explore Enterprise</a>
                     </Button>
                   </div>
                 </div>
@@ -371,9 +264,14 @@ export default function PricingPage() {
                   ].map(([Icon, label]) => {
                     const I = Icon as typeof Server;
                     return (
-                      <li key={label as string} className="flex items-center gap-3 rounded-xl border border-background/15 bg-background/5 p-4 text-sm">
-                        <I className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                        {label as string}
+                      <li
+                        key={label as string}
+                        className="flex items-start gap-3 rounded-xl border border-background/15 bg-background/[0.07] p-4 text-sm backdrop-blur"
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20">
+                          <I className="h-4 w-4 text-primary" aria-hidden="true" />
+                        </span>
+                        <span className="pt-1.5">{label as string}</span>
                       </li>
                     );
                   })}
