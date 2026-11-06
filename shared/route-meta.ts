@@ -8,6 +8,8 @@
 // Adding a page? Add it here AND to client/public/sitemap.xml -- the build
 // fails if the two disagree.
 
+import { pricingMarkdown } from "./pricing";
+
 export const SITE_NAME = "BlackSync.ai";
 export const SITE_URL = "https://www.blacksync.ai";
 
@@ -38,11 +40,19 @@ export type RouteMeta = {
   content?: string[];
   /** Absolute URL for og:image / twitter:image on this page. */
   image?: string;
+  /** The complete <title>, used as-is instead of "title | BlackSync.ai". */
+  documentTitle?: string;
 };
 
 /** Full <title> for a page title, matching what usePageMeta produces. */
 export function fullTitle(title?: string): string {
   return title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
+}
+
+/** The <title> for a route: its documentTitle if it has one, else fullTitle(title). */
+export function routeTitle(path: string, title?: string): string {
+  const meta = ROUTE_META[path];
+  return title ? fullTitle(title) : meta?.documentTitle ?? fullTitle(meta?.title);
 }
 
 export const ROUTE_META: Record<string, RouteMeta> = {
@@ -103,9 +113,18 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "BlackSync Front Desk AI answers every call, qualifies the job, and books the estimate — then calls out to follow up on old quotes, reactivate past customers, and bring in new jobs. Built for landscaping, roofing, HVAC, and plumbing businesses. Plans from $49/month.",
   },
   "/pricing": {
-    title: "Pricing - AI Calling Plans from $98/mo",
+    title: "Pricing",
+    documentTitle: "AI Calling Pricing & Plans | BlackSync AI",
+    h1: "AI Calling Plans & Pricing",
     description:
-      "BlackSync AI calling plans: Solo Agent $98/mo, Team $296/mo, and custom Enterprise. Call credits from $139, add-on builds, and answers to the questions we get asked most. No hidden fees, cancel anytime.",
+      "Explore BlackSync AI pricing. Start free or scale with AI voice agents, outbound calling, CRM integrations, and enterprise solutions. Plans from $98/mo.",
+    content: [
+      "Start: $0/month. 10 complimentary credits, 1 AI voice agent, up to 75 outbound call attempts per day and 2 concurrent calls.",
+      "Solo: $98/month. 150 monthly calling credits, 2 AI agents, 10 concurrent calls, no fixed daily outbound cap and 1 local phone number.",
+      "Growth: $197/month, the most popular plan. 400 monthly credits, 5 AI agents, 25 concurrent calls, 3 local numbers, deep native CRM integration, guided onboarding and priority support.",
+      "Custom Solutions: custom pricing for larger organizations, with private cloud, VPC or on-premise deployment, custom integrations, white-label and dedicated support.",
+      "Calling credit packs: 75 credits for $29, 500 for $139 and 1,000 for $260. Additional phone numbers from $3.50/month. Prices in USD.",
+    ],
   },
   // Competitor comparisons
   "/compare/ylopo-alternative": {
@@ -385,6 +404,10 @@ export function pageImage(path: string): string {
 
 /** Full Markdown representation of a known, indexable page. */
 export function toMarkdown(path: string): string {
+  if (path === "/pricing") {
+    return [pricingMarkdown(), "---", `Canonical URL: ${SITE_URL}${path}`, `Sitemap: ${SITE_URL}/sitemap.xml`,
+      `Agent guide: ${SITE_URL}/llms.txt`].join("\n\n") + "\n";
+  }
   const h1 = pageH1(path);
   const paragraphs = pageContent(path);
   const url = `${SITE_URL}${path}`;

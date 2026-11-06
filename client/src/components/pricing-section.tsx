@@ -1,482 +1,163 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Check, Zap, CreditCard, Puzzle, ShieldCheck, ArrowRight } from "lucide-react";
-import { SectionHeading, Reveal } from "@/components/ui/section";
 import { Link } from "wouter";
-import { useState } from "react";
-import { CheckoutDialog, type CheckoutPlan } from "@/components/checkout-dialog";
+import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { SectionHeading } from "@/components/ui/section";
 import { BookCallDialog } from "@/components/book-call-dialog";
+import { PLANS, type Plan } from "@shared/pricing";
+import { trackPlanCta } from "@/lib/pricing-analytics";
+import { cn } from "@/lib/utils";
 
-const creditFairness = [
-  "No answer? 0 credits.",
-  "Busy line? 0 credits.",
-  "Voicemail? 0 credits.",
-  "Quick hang-up? We don't count it as a full conversation.",
-];
+/** The plan's call to action: a real link for self-serve plans, the sales booking dialog for Custom Solutions. */
+function PlanCta({ plan, location }: { plan: Plan; location: string }) {
+  const className = "w-full";
+  if (!plan.href) {
+    return (
+      <BookCallDialog context="enterprise">
+        <Button
+          size="lg"
+          variant="outline"
+          className={className}
+          onClick={() => trackPlanCta(plan.key, location)}
+          data-testid={`button-pricing-${plan.key}`}
+        >
+          {plan.cta}
+        </Button>
+      </BookCallDialog>
+    );
+  }
+  return (
+    <Button
+      asChild
+      size="lg"
+      variant={plan.popular ? "default" : "outline"}
+      className={cn(className, plan.popular && "shadow-md")}
+    >
+      <a href={plan.href} onClick={() => trackPlanCta(plan.key, location)} data-testid={`button-pricing-${plan.key}`}>
+        {plan.cta}
+        {plan.popular && <ArrowRight className="ml-1.5 h-4 w-4" aria-hidden="true" />}
+      </a>
+    </Button>
+  );
+}
 
-const plans = [
-  {
-    name: "Solo Agent",
-    planKey: "solo" as const,
-    price: "$98",
-    originalPrice: "$125",
-    discountNote: "Save $27/mo · Founding rate",
-    period: "/mo",
-    tag: "Self-Serve",
-    features: [
-      "1 AI voice agent",
-      "AI agent builder",
-      "Calendar booking",
-      "Up to 1,000 outbound calls/mo",
-      "Unlimited SMS & email",
-      "Call recordings + transcripts",
-      "Zapier/webhook",
-      "Email support",
-    ],
-    popular: false,
-    checkoutUrl: "https://subscriptions.helcim.com/subscribe/fcep4c7osijwujjlbky8dm0y3afep",
-    cta: "Get Started",
-  },
-  {
-    name: "Team",
-    planKey: "team" as const,
-    price: "$296",
-    originalPrice: "$399",
-    discountNote: "Save $103/mo · Founding rate",
-    period: "/mo",
-    tag: "Most Popular",
-    features: [
-      "Up to 5 AI voice agents",
-      "Everything in Solo",
-      "Emotion detection + tone mirroring",
-      "Native CRM sync",
-      "Custom objection handling",
-      "Round-robin",
-      "Advanced analytics",
-      "Priority support",
-    ],
-    popular: true,
-    checkoutUrl: "https://subscriptions.helcim.com/subscribe/fnlrxhne7f8mg9x1xi4kau80c7hv3",
-    cta: "Get Started",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    originalPrice: null,
-    discountNote: null,
-    period: "",
-    tag: "White Glove",
-    features: [
-      "Unlimited agents",
-      "Unlimited calls",
-      "Dedicated account manager",
-      "Custom AI voice persona",
-      "Full CRM + workflow",
-      "White-label",
-      "Custom AI training",
-      "Weekly reviews",
-      "API access & SLA",
-    ],
-    popular: false,
-    checkoutUrl: null,
-    cta: "Talk to Sales",
-  },
-];
+function PlanCard({ plan, location }: { plan: Plan; location: string }) {
+  const featured = !!plan.popular;
+  return (
+    <article
+      aria-labelledby={`plan-${plan.key}`}
+      className={cn(
+        "relative flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm transition-shadow hover:shadow-md",
+        featured && "card-glow border-primary/50 shadow-lg ring-1 ring-primary/30",
+      )}
+      data-testid={`card-pricing-${plan.key}`}
+    >
+      {featured && (
+        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+          <Badge className="px-3 py-1 font-mono text-[10px] uppercase tracking-wider shadow-md" data-testid="badge-most-popular">
+            Most Popular
+          </Badge>
+        </div>
+      )}
 
-const credits = [
-  {
-    amount: "500 Credits",
-    price: "$139",
-    detail: "",
-    highlight: false,
-  },
-  {
-    amount: "1,000 Credits",
-    price: "$260",
-    detail: "Best value",
-    highlight: true,
-  },
-  {
-    amount: "2,500 Credits",
-    price: "$599",
-    detail: "High-volume",
-    highlight: false,
-  },
-];
+      <h3 id={`plan-${plan.key}`} className="font-display text-xl font-semibold tracking-tight">
+        {plan.name}
+      </h3>
+      <p className="mt-1.5 min-h-[3.75rem] text-sm leading-snug text-muted-foreground">{plan.subtitle}</p>
 
-const addons = [
-  {
-    title: "Expert Dev Build",
-    description:
-      "Our team builds your entire AI agent from scratch — scripts, objection flows, CRM connections, calendar routing, and testing. You describe what you need, we deliver a production-ready agent.",
-    pricing: "One-time fee",
-    icon: Zap,
-  },
-  {
-    title: "Workflow Automation",
-    description:
-      "We design and build your full automation pipeline — lead routing, follow-up sequences, CRM updates, notifications, and multi-step workflows using Zapier, Make.com, or native integrations.",
-    pricing: "One-time fee",
-    icon: Puzzle,
-  },
-  {
-    title: "CRM Sync + Agentic AI",
-    description:
-      "Deep two-way CRM integration with agentic AI that autonomously updates records, triggers actions, and manages lead status across your entire pipeline without manual intervention.",
-    pricing: "Contact for pricing",
-    icon: CreditCard,
-  },
-];
+      <p className="mt-4 flex h-10 items-end gap-1.5">
+        <span className="font-display text-4xl font-semibold leading-none tracking-tight" data-testid={`text-plan-price-${plan.key}`}>
+          {plan.price}
+        </span>
+        {plan.period ? (
+          <span className="text-sm text-muted-foreground">{plan.period}</span>
+        ) : (
+          <span className="text-sm text-muted-foreground">pricing</span>
+        )}
+      </p>
+
+      <div className="mt-5">
+        <PlanCta plan={plan} location={location} />
+      </div>
+
+      {plan.keyBenefits && (
+        <ul className="mt-6 space-y-2.5 rounded-xl border border-primary/20 bg-primary/[0.06] p-3.5">
+          {plan.keyBenefits.map((b) => (
+            <li key={b.title} className="flex gap-2.5">
+              <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+              <span className="text-sm">
+                <span className="font-semibold text-foreground">{b.title}</span>
+                <span className="block text-xs text-muted-foreground">{b.detail}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mt-6 flex-1">
+        {plan.highlightsTitle && (
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{plan.highlightsTitle}</p>
+        )}
+        <ul className="space-y-2.5">
+          {plan.highlights.map((f) => (
+            <li key={f} className="flex items-start gap-2.5 text-sm">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                <Check className="h-3 w-3 text-primary" aria-hidden="true" />
+              </span>
+              <span className="text-foreground/90">{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {plan.note && <p className="mt-6 border-t pt-4 text-xs leading-relaxed text-muted-foreground">{plan.note}</p>}
+    </article>
+  );
+}
+
+/** The four plan cards. */
+export function PlanGrid({ location }: { location: string }) {
+  return (
+    <div className="mx-auto mt-14 grid max-w-7xl items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {PLANS.map((plan) => (
+        <PlanCard key={plan.key} plan={plan} location={location} />
+      ))}
+    </div>
+  );
+}
 
 type PricingSectionProps = {
   /**
-   * "full" is the real pricing page: plans, the credit-fairness callout, credit
-   * packs and add-ons. "summary" is the homepage teaser -- same plan cards, but
-   * the supporting detail is left to /pricing.
-   *
-   * Why: /pricing used to be a strict subset of the homepage (every component on
-   * /pricing also rendered on /), which is the textbook setup for Google
-   * consolidating the two and dropping /pricing as a duplicate. Keeping the
-   * detail on one URL only gives /pricing something of its own to rank for.
+   * "summary" is the homepage teaser: the same plan cards and a link to /pricing, which keeps the full detail
+   * (credits, comparison, FAQ) on one URL so Google doesn't treat /pricing as a duplicate of the homepage.
+   * The pricing page itself renders PlanGrid inside its own layout.
    */
-  variant?: "full" | "summary";
+  variant?: "summary";
 };
 
-export function PricingSection({ variant = "full" }: PricingSectionProps) {
-  const [checkoutPlan, setCheckoutPlan] = useState<CheckoutPlan | null>(null);
-  const isSummary = variant === "summary";
-
-  function handlePlanClick(plan: (typeof plans)[0]) {
-    // On-site checkout is parked until /api/helcim/* actually runs on Vercel
-    // (it currently 405s). Until then the dialog would just add an email step
-    // in front of the same hosted page, so go straight there. Re-enable by
-    // restoring the setCheckoutPlan branch -- CheckoutDialog is still wired up.
-    if (plan.checkoutUrl) {
-      window.location.href = plan.checkoutUrl;
-    }
-  }
-
+export function PricingSection(_props: PricingSectionProps) {
   return (
-    <section
-      id="pricing"
-      data-testid="section-pricing"
-      className="py-20 md:py-28 relative"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div data-testid="badge-pricing">
-          {isSummary ? (
-            <SectionHeading
-              eyebrow="Plans"
-              title={
-                <>
-                  Less Than a <span className="text-accent-grad">Part-Time ISA</span>
-                </>
-              }
-              lead="No hidden fees. Cancel anytime. Phone number from $3.50/mo."
-            />
-          ) : (
-            <SectionHeading
-              as="h1"
-              eyebrow="Pricing"
-              title={
-                <>
-                  AI Calling <span className="text-accent-grad">Plans &amp; Pricing</span>
-                </>
-              }
-              lead="Plans, call credits, and done-for-you builds — priced for less than a part-time ISA. No hidden fees, cancel anytime, phone number from $3.50/mo."
-            />
-          )}
+    <section id="pricing" data-testid="section-pricing" className="relative py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="Plans"
+          title={
+            <>
+              Start free. <span className="text-accent-grad">Scale when you&apos;re ready.</span>
+            </>
+          }
+          lead={`Plans from $98/month, or start free with no card. Phone numbers from $3.50/mo.`}
+        />
+        <PlanGrid location="home" />
+        <div className="mt-12 text-center">
+          <Button asChild variant="outline" size="lg" data-testid="button-see-full-pricing">
+            <Link href="/pricing">
+              Compare plans, credits and FAQ
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
         </div>
-
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16 items-stretch">
-          {plans.map((plan, index) => (
-            <Reveal
-              key={plan.name}
-              delay={index * 0.08}
-              className={`h-full ${plan.popular ? "md:scale-[1.03] md:z-10" : ""}`}
-            >
-              <Card
-                className={`relative h-full rounded-2xl border bg-card shadow-sm hover:shadow-md transition-shadow ${
-                  plan.popular ? "card-glow border-primary/40 shadow-lg" : ""
-                }`}
-                data-testid={`card-pricing-${index}`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                    <Badge
-                      className="shadow-md font-mono text-[10px] uppercase tracking-wider px-3 py-1"
-                      data-testid="badge-most-popular"
-                    >
-                      Most Popular
-                    </Badge>
-                  </div>
-                )}
-                <CardContent className="p-6 md:p-7 flex flex-col h-full">
-                  <div className="mb-6">
-                    <div className="flex items-center gap-2 flex-wrap mb-3">
-                      <h3
-                        className="font-display text-lg font-semibold tracking-tight"
-                        data-testid={`text-plan-name-${index}`}
-                      >
-                        {plan.name}
-                      </h3>
-                      <Badge
-                        variant="outline"
-                        className="font-mono text-[10px] uppercase tracking-wider"
-                        data-testid={`badge-plan-tag-${index}`}
-                      >
-                        {plan.tag}
-                      </Badge>
-                    </div>
-                    <div className="flex items-baseline gap-2 flex-wrap">
-                      <span
-                        className="font-display text-4xl md:text-5xl font-semibold tracking-tight"
-                        data-testid={`text-plan-price-${index}`}
-                      >
-                        {plan.price}
-                      </span>
-                      {plan.period && (
-                        <span className="text-muted-foreground text-sm">
-                          {plan.period}
-                        </span>
-                      )}
-                      {plan.originalPrice && (
-                        <span
-                          className="text-base text-muted-foreground line-through"
-                          data-testid={`text-plan-original-price-${index}`}
-                        >
-                          {plan.originalPrice}
-                        </span>
-                      )}
-                    </div>
-                    {plan.discountNote && (
-                      <p
-                        className="text-xs text-primary font-medium mt-2"
-                        data-testid={`text-plan-discount-${index}`}
-                      >
-                        {plan.discountNote}
-                      </p>
-                    )}
-                  </div>
-                  <ul className="flex-1 space-y-3 mb-7">
-                    {plan.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2.5 text-sm">
-                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                          <Check className="w-3 h-3 text-primary" />
-                        </span>
-                        <span className="text-foreground/90">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {plan.checkoutUrl ? (
-                    <Button
-                      className="w-full"
-                      size="lg"
-                      variant={plan.popular ? "default" : "outline"}
-                      onClick={() => handlePlanClick(plan)}
-                      data-testid={`button-pricing-${plan.name.toLowerCase().replace(/\s/g, "-")}`}
-                    >
-                      {plan.cta}
-                    </Button>
-                  ) : (
-                    <div className="space-y-2.5">
-                      <BookCallDialog context="enterprise">
-                        <Button
-                          className="w-full"
-                          size="lg"
-                          variant="outline"
-                          data-testid={`button-pricing-${plan.name.toLowerCase().replace(/\s/g, "-")}`}
-                        >
-                          {plan.cta}
-                        </Button>
-                      </BookCallDialog>
-                      <Link href="/ai-sdr" data-testid="link-pricing-corporate-sales">
-                        <Button className="w-full" size="lg" variant="ghost">
-                          Corporate Sales
-                          <ArrowRight className="w-4 h-4 ml-1.5" />
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-
-        {isSummary && (
-          <div className="mt-12 text-center">
-            <Reveal>
-              <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto text-pretty">
-                You only pay for real conversations — no answer, busy lines, and voicemails
-                cost 0 credits.
-              </p>
-              <Link href="/pricing">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="mt-6"
-                  data-testid="button-see-full-pricing"
-                >
-                  See full pricing, credits &amp; FAQ
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </Reveal>
-          </div>
-        )}
-
-        {!isSummary && (
-          <>
-        <div className="mt-12 max-w-3xl mx-auto">
-          <Reveal>
-            <div
-              className="relative overflow-hidden rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/[0.07] via-card to-card p-6 md:p-9 shadow-md"
-              data-testid="card-credit-fairness"
-            >
-              <div className="pointer-events-none absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
-              <div className="relative">
-                <div className="flex items-center justify-center gap-2 mb-6">
-                  <ShieldCheck className="w-5 h-5 text-primary" />
-                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-center">
-                    Only Pay for Real Conversations
-                  </h3>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-3 mb-6">
-                  {creditFairness.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-start gap-2.5 p-3.5 rounded-xl bg-background/70 border border-border/60"
-                      data-testid={`text-credit-fairness-${item.slice(0, 8).toLowerCase().replace(/\s/g, "-")}`}
-                    >
-                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-500/10 text-green-600 dark:text-green-500 shrink-0 mt-0.5">
-                        <Check className="w-3 h-3" strokeWidth={3} />
-                      </span>
-                      <span className="text-sm font-medium text-foreground/90">{item}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm md:text-base text-muted-foreground text-center max-w-xl mx-auto text-pretty">
-                  Scale to thousands of outbound calls with confidence — you only pay for real conversations,
-                  not unanswered calls, voicemails, or quick hang-ups.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="mt-24 max-w-5xl mx-auto">
-          <div data-testid="text-credits-title">
-            <SectionHeading
-              eyebrow="Call Credits"
-              title="Credits That Power Your Calls"
-              lead="Credits power your outbound calls. Buy once, use anytime. Unused credits roll over."
-            />
-          </div>
-
-          <div className="grid sm:grid-cols-3 gap-5 max-w-3xl mx-auto mt-12">
-            {credits.map((credit, index) => (
-              <Reveal key={credit.amount} delay={index * 0.08} className="h-full">
-                <Card
-                  className={`relative h-full rounded-2xl border bg-card shadow-sm hover:shadow-md transition-shadow ${
-                    credit.highlight ? "card-glow border-primary/40" : ""
-                  }`}
-                  data-testid={`card-credit-${index}`}
-                >
-                  {credit.highlight && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
-                      <Badge
-                        className="shadow-md font-mono text-[10px] uppercase tracking-wider px-3 py-1"
-                        data-testid="badge-best-value"
-                      >
-                        Best Value
-                      </Badge>
-                    </div>
-                  )}
-                  <CardContent className="p-6 text-center">
-                    <p
-                      className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-3"
-                      data-testid={`text-credit-amount-${index}`}
-                    >
-                      {credit.amount}
-                    </p>
-                    <p
-                      className="font-display text-3xl md:text-4xl font-semibold tracking-tight mb-2"
-                      data-testid={`text-credit-price-${index}`}
-                    >
-                      {credit.price}
-                    </p>
-                    {credit.detail && (
-                      <p className="text-sm text-muted-foreground">
-                        {credit.detail}
-                      </p>
-                    )}
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-24 max-w-5xl mx-auto">
-          <div data-testid="text-addons-title">
-            <SectionHeading
-              eyebrow="Add-Ons"
-              title="Done-For-You Builds"
-            />
-          </div>
-
-          <div className="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto mt-12">
-            {addons.map((addon, index) => (
-              <Reveal key={addon.title} delay={index * 0.08} className="h-full">
-                <Card
-                  className="h-full rounded-2xl border bg-card shadow-sm hover:shadow-md transition-shadow"
-                  data-testid={`card-addon-${index}`}
-                >
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="mb-4">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
-                        <addon.icon className="w-5 h-5 text-primary shrink-0" />
-                      </span>
-                    </div>
-                    <h4
-                      className="font-display text-base font-semibold tracking-tight mb-2"
-                      data-testid={`text-addon-title-${index}`}
-                    >
-                      {addon.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">
-                      {addon.description}
-                    </p>
-                    <Badge
-                      variant="outline"
-                      className="self-start font-mono text-[10px] uppercase tracking-wider"
-                      data-testid={`badge-addon-pricing-${index}`}
-                    >
-                      {addon.pricing}
-                    </Badge>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        <p className="text-xs text-muted-foreground text-center mt-12">
-          * Prices are in USD
-        </p>
-          </>
-        )}
       </div>
-
-      <CheckoutDialog
-        plan={checkoutPlan}
-        open={checkoutPlan !== null}
-        onOpenChange={(v) => {
-          if (!v) setCheckoutPlan(null);
-        }}
-      />
     </section>
   );
 }

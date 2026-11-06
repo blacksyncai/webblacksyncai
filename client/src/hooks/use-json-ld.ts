@@ -4,6 +4,8 @@ import { useEffect } from "react";
 export function useJsonLd(id: string, data: object | null | undefined) {
   useEffect(() => {
     if (!data) return;
+    // Already baked into the prerendered HTML: don't add a second copy.
+    if (document.getElementById(id)) return;
     const el = document.createElement("script");
     el.type = "application/ld+json";
     el.id = id;
