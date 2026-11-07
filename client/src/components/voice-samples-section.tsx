@@ -14,17 +14,24 @@ type Voice = {
   /** Overrides SAMPLE_BASE, e.g. for a sample not yet cached on the backend. */
   url?: string;
   comingSoon?: boolean;
+  /** Per-voice accent, echoing the orb's colorful "character" feel. */
+  color: string;
 };
 
 const voices: Voice[] = [
-  { key: "marissa", name: "Marissa", desc: "Warm and upbeat" },
+  { key: "marissa", name: "Marissa", desc: "Warm and upbeat", color: "#F97316" },
   // Not cached on the blacksync.si backend yet, so served from a local
   // copy instead of SAMPLE_BASE until it lands there too.
-  { key: "zain", name: "Zain", desc: "Smooth and persuasive", url: "/audio/zain-sample.wav" },
-  { key: "lauren", name: "Lauren", desc: "Friendly and professional" },
-  { key: "macco", name: "Macco", desc: "Deep and confident" },
-  { key: "kate", name: "Kate", desc: "Clear and easygoing" },
+  { key: "zain", name: "Zain", desc: "Smooth and persuasive", url: "/audio/zain-sample.wav", color: "#6366F1" },
+  { key: "lauren", name: "Lauren", desc: "Friendly and professional", color: "#EC4899" },
+  { key: "macco", name: "Macco", desc: "Deep and confident", color: "#10B981" },
+  { key: "kate", name: "Kate", desc: "Clear and easygoing", color: "#F59E0B" },
 ];
+
+function hexToRgba(hex: string, alpha: number): string {
+  const n = Number.parseInt(hex.replace("#", ""), 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
+}
 
 export function VoiceSamplesSection() {
   const audio = useRef<HTMLAudioElement | null>(null);
@@ -88,21 +95,24 @@ export function VoiceSamplesSection() {
                   aria-label={disabled ? `${v.name} — coming soon` : `${active ? "Pause" : "Play"} ${v.name}`}
                   data-testid={`voice-sample-${v.key}`}
                   className={`group w-full h-full text-left rounded-xl border bg-card p-4 shadow-sm transition ${
+                    disabled ? "opacity-60 cursor-not-allowed border-card-border" : "hover:shadow-md hover:-translate-y-0.5"
+                  }`}
+                  style={
                     disabled
-                      ? "opacity-60 cursor-not-allowed"
-                      : `hover:shadow-md hover:-translate-y-0.5 ${
-                          active ? "border-primary ring-2 ring-primary/20" : "border-card-border"
-                        }`
-                  } ${disabled ? "border-card-border" : ""}`}
+                      ? undefined
+                      : {
+                          borderColor: active ? v.color : hexToRgba(v.color, 0.22),
+                          boxShadow: active ? `0 0 0 2px ${hexToRgba(v.color, 0.18)}` : undefined,
+                        }
+                  }
                 >
                   <span
-                    className={`flex items-center justify-center w-9 h-9 rounded-full transition ${
+                    className={`flex items-center justify-center w-9 h-9 rounded-full transition ${disabled ? "bg-muted text-muted-foreground" : ""}`}
+                    style={
                       disabled
-                        ? "bg-muted text-muted-foreground"
-                        : active
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-primary/10 text-primary group-hover:bg-primary/15"
-                    }`}
+                        ? undefined
+                        : { backgroundColor: active ? v.color : hexToRgba(v.color, 0.14), color: active ? "#fff" : v.color }
+                    }
                   >
                     {loading === v.key ? (
                       <span className="w-3.5 h-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
@@ -120,8 +130,12 @@ export function VoiceSamplesSection() {
                     {[3, 6, 10, 7, 12, 5, 9, 4, 8, 6].map((h, j) => (
                       <span
                         key={j}
-                        className={`w-1 rounded-full ${active ? "bg-primary animate-pulse" : "bg-muted-foreground/25"}`}
-                        style={{ height: `${h + 2}px`, animationDelay: `${j * 80}ms` }}
+                        className={`w-1 rounded-full ${active ? "animate-pulse" : ""} ${disabled ? "bg-muted-foreground/25" : ""}`}
+                        style={{
+                          height: `${h + 2}px`,
+                          animationDelay: `${j * 80}ms`,
+                          backgroundColor: disabled ? undefined : active ? v.color : hexToRgba(v.color, 0.25),
+                        }}
                       />
                     ))}
                   </span>
