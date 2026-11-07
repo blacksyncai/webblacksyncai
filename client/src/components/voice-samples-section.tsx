@@ -147,7 +147,7 @@ export function VoiceSamplesSection() {
 
         <Reveal delay={0.2} className="mt-10 flex flex-col items-center gap-2 text-center">
           <p className="text-sm text-muted-foreground">
-            These are 5 of 50+ voices in our library.
+            These are 5 of 50+ voices in our library. Clone your own voice too.
           </p>
           <a
             href={REGISTER_URL}
