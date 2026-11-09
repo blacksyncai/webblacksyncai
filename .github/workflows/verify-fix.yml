@@ -1,0 +1,21 @@
+name: Verify SEO fix live
+on:
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/verify-fix.yml"]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "=== trailing-slash industry URLs (were 404) ==="
+          for u in /industry/real-estate/ /industry/mortgage/ /industry/law-firms/ /industry/funeral-homes/; do
+            curl -s -o /dev/null -w "%{http_code} -> %{redirect_url} $u\n" "https://www.blacksync.ai$u"
+          done
+          echo "=== old non-slash still 301 ==="
+          curl -s -o /dev/null -w "%{http_code} -> %{redirect_url} /industry/real-estate\n" "https://www.blacksync.ai/industry/real-estate"
+          echo "=== homepage JS bundle contains new links ==="
+          JS=$(curl -s https://www.blacksync.ai/ | grep -oE 'assets/index-[^"]*\.js' | head -1)
+          echo "bundle: $JS"
+          echo "expired-listing-ai count: $(curl -s https://www.blacksync.ai/$JS | grep -c expired-listing-ai)"
+          echo "fsbo-ai count: $(curl -s https://www.blacksync.ai/$JS | grep -c fsbo-ai)"
