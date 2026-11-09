@@ -1,0 +1,43 @@
+name: Redirect chain audit
+
+on:
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/redirect-audit.yml"]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trace every redirect chain
+        run: |
+          echo "=== A. old industry URLs (301 expected) ==="
+          for u in /industry/real-estate /industry/mortgage /industry/insurance /industry/healthcare /industry/auto-pc /industry/property-management /industry/funeral-homes /industry/law-firms /industry/home-services; do
+            echo "--- $u"
+            curl -s -o /dev/null -w "  %{http_code} -> %{redirect_url}\n" "https://www.blacksync.ai$u"
+          done
+          echo
+          echo "=== B. auth/register URLs (redirect errors?) ==="
+          for u in /login /signup /register /sign-up /dashboard; do
+            echo "--- $u"
+            curl -s -o /dev/null -w "  %{http_code} -> %{redirect_url}\n" "https://www.blacksync.ai$u"
+            curl -s -o /dev/null -w "  followed: %{http_code} final: %{url_effective}\n" -L --max-redirs 10 "https://www.blacksync.ai$u"
+          done
+          echo
+          echo "=== C. apex + non-www chains ==="
+          for u in "https://blacksync.ai/" "https://blacksync.ai/ai-sdr" "https://www.blacksync.ai/ai-sdr/"; do
+            echo "--- $u"
+            curl -s -o /dev/null -w "  %{http_code} -> %{redirect_url}\n" "$u"
+          done
+          echo
+          echo "=== D. full chain trace on suspicious ones ==="
+          for u in /login /register /industry/real-estate; do
+            echo "--- $u (verbose chain)"
+            curl -s -o /dev/null -L -w "  step: %{http_code} at %{url_effective}\n" --max-redirs 10 "https://www.blacksync.ai$u" 
+            curl -sI "https://www.blacksync.ai$u" | grep -iE "HTTP/|location" | head -4
+          done
+          echo
+          echo "=== E. the pages user says lost indexing ==="
+          for u in /ai-sdr /fsbo-ai /expired-listing-ai /ai-cold-caller /insurance-ai /ai-lead-qualification-software /private-schools; do
+            curl -s -o /dev/null -w "%{http_code} $u\n" "https://www.blacksync.ai$u"
+          done
