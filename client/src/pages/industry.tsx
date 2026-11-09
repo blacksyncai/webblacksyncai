@@ -852,7 +852,32 @@ export default function IndustryPage({ slug, path }: { slug: string; path: strin
                 >
                   real estate lead generation
                 </Link>{" "}
-                plan around your market.
+                plan around your market. Work every lead type with purpose-built
+                callers:{" "}
+                <Link
+                  href="/expired-listing-ai"
+                  className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                  data-testid="link-industry-expired-listing"
+                >
+                  expired listing AI
+                </Link>
+                ,{" "}
+                <Link
+                  href="/fsbo-ai"
+                  className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                  data-testid="link-industry-fsbo"
+                >
+                  FSBO AI
+                </Link>
+                , and{" "}
+                <Link
+                  href="/ai-cold-caller"
+                  className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+                  data-testid="link-industry-cold-caller"
+                >
+                  batch cold calling
+                </Link>
+                .
               </p>
             </Reveal>
           )}

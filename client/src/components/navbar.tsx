@@ -45,6 +45,7 @@ import {
   Baby,
   HardHat,
   School,
+  PhoneOutgoing,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookCallDialog } from "@/components/book-call-dialog";
@@ -239,6 +240,9 @@ const industries: IndustryDetail[] = [
 
 const resourceItems = [
   { icon: Briefcase, label: "AI SDR", href: "/ai-sdr" },
+  { icon: PhoneOutgoing, label: "AI Cold Caller", href: "/ai-cold-caller" },
+  { icon: PhoneOutgoing, label: "Expired Listing AI", href: "/expired-listing-ai" },
+  { icon: PhoneOutgoing, label: "FSBO AI", href: "/fsbo-ai" },
   { icon: Info, label: "Why BlackSync", href: "/why-blacksync" },
   { icon: BookOpen, label: "Blog", href: "#" },
   { icon: FileText, label: "Documentation / API Docs", href: "#" },

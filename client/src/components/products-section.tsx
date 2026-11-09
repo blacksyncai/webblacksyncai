@@ -79,6 +79,36 @@ export function ProductsSection() {
           ))}
         </div>
 
+        <Reveal delay={0.08}>
+          <p className="mt-10 text-center text-sm text-muted-foreground">
+            Working real estate? Call every lead type with{" "}
+            <a
+              href="/expired-listing-ai"
+              className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+              data-testid="link-products-expired-listing"
+            >
+              expired listing AI
+            </a>
+            ,{" "}
+            <a
+              href="/fsbo-ai"
+              className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+              data-testid="link-products-fsbo"
+            >
+              FSBO AI
+            </a>
+            , and{" "}
+            <a
+              href="/ai-cold-caller"
+              className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
+              data-testid="link-products-cold-caller"
+            >
+              AI batch cold calling
+            </a>
+            .
+          </p>
+        </Reveal>
+
         <Reveal delay={0.1}>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-12">
             <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">

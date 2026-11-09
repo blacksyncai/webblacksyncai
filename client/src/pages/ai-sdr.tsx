@@ -271,6 +271,8 @@ const INTERNAL_LINKS = [
   { label: "Real Estate AI Sales Agent", href: "/real-estate" },
   { label: "Mortgage & Lending AI Sales Agent", href: "/mortgage" },
   { label: "AI Cold Caller for Batch Calling", href: "/ai-cold-caller" },
+  { label: "Expired Listing AI", href: "/expired-listing-ai" },
+  { label: "FSBO AI", href: "/fsbo-ai" },
   { label: "How It Works", href: "/#how-it-works" },
 ];
 
