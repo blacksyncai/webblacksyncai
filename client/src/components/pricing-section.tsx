@@ -8,7 +8,7 @@ import { PLANS, type Plan } from "@shared/pricing";
 import { trackPlanCta } from "@/lib/pricing-analytics";
 import { cn } from "@/lib/utils";
 
-/** The plan's call to action: a real link for self-serve plans, the sales booking dialog for Custom Solutions. */
+/** The plan's call to action: a real link for self-serve plans, the sales booking dialog for Enterprise. */
 function PlanCta({ plan, location }: { plan: Plan; location: string }) {
   const className = "w-full";
   if (!plan.href) {

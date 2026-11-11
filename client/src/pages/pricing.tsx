@@ -227,7 +227,7 @@ export default function PricingPage() {
                 <div>
                   <span className="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-background/80 backdrop-blur">
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    Custom Solutions
+                    Enterprise
                   </span>
                   <h2 id="enterprise-title" className="mt-5 font-display text-3xl font-semibold tracking-tight text-balance md:text-4xl">
                     Enterprise AI calling, built{" "}
@@ -236,7 +236,7 @@ export default function PricingPage() {
                     </span>
                   </h2>
                   <p className="mt-4 text-background/75 text-pretty">
-                    Private infrastructure, deep integrations and a team that builds and deploys with you. Every Custom Solutions
+                    Private infrastructure, deep integrations and a team that builds and deploys with you. Every Enterprise
                     engagement is scoped to your organization under a custom agreement.
                   </p>
                   <div className="mt-7 flex flex-wrap gap-3">
