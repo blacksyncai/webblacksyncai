@@ -46,6 +46,7 @@ import {
   HardHat,
   School,
   PhoneOutgoing,
+  Truck,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookCallDialog } from "@/components/book-call-dialog";
@@ -185,6 +186,16 @@ const industries: IndustryDetail[] = [
     stat: "11 second average response time",
     link: "/funeral-homes",
     linkLabel: "See Funeral Homes use case",
+  },
+  {
+    icon: Truck,
+    label: "Freight & Trucking",
+    title: "Built for Small Freight Brokers",
+    description:
+      "BlackSync Track Desk calls or texts every driver on your load board, logs location and ETA, and alerts you only when a load is late or unresponsive — before your shipper calls to ask.",
+    stat: "Check calls, done for you",
+    link: "/track-desk-ai",
+    linkLabel: "See Freight & Trucking use case",
   },
   {
     icon: Scale,

@@ -112,6 +112,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "BlackSync Front Desk AI answers every call, qualifies the job, and books the estimate — then calls out to follow up on old quotes, reactivate past customers, and bring in new jobs. Built for landscaping, roofing, HVAC, and plumbing businesses. Plans from $49/month.",
   },
+  "/track-desk-ai": {
+    title: "AI Check Calls for Small Freight Brokers",
+    description:
+      "BlackSync Track Desk calls or texts every driver on your load board, logs location, loaded status, and ETA, and alerts you only when a load is late or unresponsive — before your shipper calls to ask.",
+  },
   "/pricing": {
     title: "Pricing",
     documentTitle: "AI Calling Pricing & Plans | BlackSync AI",
