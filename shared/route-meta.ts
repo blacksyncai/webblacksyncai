@@ -87,7 +87,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
   "/why-blacksync": {
     title: "Why BlackSync",
     description:
-      "BlackSync builds custom AI voice agents around your workflows, CRM, and business processes — for outbound sales, inbound calls, lead follow-up, and appointment booking.",
+      "BlackSync builds custom AI voice agents around your workflows, CRM, and business processes, running on dedicated wafer-scale hardware for low-latency calls — for outbound sales, inbound calls, lead follow-up, and appointment booking.",
   },
 
   "/ai-sdr": {
