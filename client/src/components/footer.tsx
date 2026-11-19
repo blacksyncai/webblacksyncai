@@ -46,7 +46,7 @@ const footerLinks = {
   Company: [
     { label: "About", href: "/about" },
     { label: "Why BlackSync", href: "/why-blacksync" },
-    { label: "Blog", href: "#" },
+    { label: "Blog", href: "/updates" },
     { label: "Careers", href: "/careers" },
     { label: "Enterprise", href: "/enterprise" },
     { label: "Contact", href: "/contact" },
@@ -74,7 +74,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-10">
           <div className="col-span-2 sm:col-span-1">
-            <a href="#" className="flex items-center gap-2.5 mb-4" data-testid="link-footer-home">
+            <a href="/" className="flex items-center gap-2.5 mb-4" data-testid="link-footer-home">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary via-orange-500 to-amber-500 flex items-center justify-center shadow-sm ring-1 ring-black/5">
                 <span className="text-white font-display font-bold text-sm">B</span>
               </div>

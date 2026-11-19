@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { BookCallDialog } from "@/components/book-call-dialog";
 import { Eyebrow, Reveal } from "@/components/ui/section";
+import { WaferHardwareVideo } from "@/components/wafer-hardware";
 import { ArrowRight } from "lucide-react";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useJsonLd } from "@/hooks/use-json-ld";
@@ -91,6 +92,35 @@ export default function WhyBlackSyncPage() {
       </header>
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 md:pb-28 space-y-16">
+        {/* ============ LATENCY ============ */}
+        <section aria-labelledby="latency-heading">
+          <h2 id="latency-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+            Latency You Can Actually Talk Over
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed text-pretty mb-6">
+            A half-second pause before every response is the fastest way for a caller to
+            realize they're talking to a bot — no script fixes that. BlackSync's calls run on
+            dedicated wafer-scale AI hardware instead of shared GPU clouds, so replies land
+            fast enough to handle real interruptions, objections, and back-and-forth instead
+            of stalling the conversation.
+          </p>
+          <WaferHardwareVideo />
+          <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="font-display text-xl sm:text-2xl font-semibold">1,000s</div>
+              <div className="mt-1 text-xs text-muted-foreground">tokens per second</div>
+            </div>
+            <div>
+              <div className="font-display text-xl sm:text-2xl font-semibold">Low</div>
+              <div className="mt-1 text-xs text-muted-foreground">latency, every turn</div>
+            </div>
+            <div>
+              <div className="font-display text-xl sm:text-2xl font-semibold">Long</div>
+              <div className="mt-1 text-xs text-muted-foreground">multi-step workflows</div>
+            </div>
+          </div>
+        </section>
+
         {/* ============ WHAT IS BLACKSYNC ============ */}
         <section aria-labelledby="what-is-heading">
           <h2 id="what-is-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
@@ -130,6 +160,19 @@ export default function WhyBlackSyncPage() {
           </ul>
         </section>
 
+        {/* ============ TRAINED ON REAL CALLS ============ */}
+        <section aria-labelledby="trained-heading">
+          <h2 id="trained-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+            Built and Refined From Real Calls
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed text-pretty">
+            Every call is recorded and transcribed, so what actually happened on the phone —
+            not a guess at what might happen — is what shapes your agent's script, objection
+            handling, and qualifying questions over time. It gets reviewed against real
+            conversations, not tuned against a demo.
+          </p>
+        </section>
+
         {/* ============ MORE THAN A COLD CALLING TOOL ============ */}
         <section aria-labelledby="more-than-heading">
           <h2 id="more-than-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
@@ -161,6 +204,41 @@ export default function WhyBlackSyncPage() {
             integrate with the tools your team already uses instead of asking you to switch
             systems. The goal is an agent that can represent your business in a call, not one that
             sounds like a generic AI bot reading from a script.
+          </p>
+        </section>
+
+        {/* ============ PLUGS INTO CHATGPT AND CLAUDE ============ */}
+        <section aria-labelledby="integrations-heading">
+          <h2 id="integrations-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+            Plugs Into ChatGPT and Claude
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed text-pretty mb-4">
+            Manage your agents, campaigns, calls, contacts, and analytics without opening
+            another dashboard. BlackSync plugs into ChatGPT and Claude, so you can run the
+            parts of your account you already think about in plain language, from an app you
+            already have open.
+          </p>
+          <Link
+            href="/updates/chatgpt-integration"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
+            data-testid="link-why-blacksync-chatgpt"
+          >
+            See BlackSync AI for ChatGPT
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </section>
+
+        {/* ============ NUMBERS AND CALENDARS INCLUDED ============ */}
+        <section aria-labelledby="numbers-heading">
+          <h2 id="numbers-heading" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+            Numbers and Calendars Included — Nothing Else to Plug In
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed text-pretty">
+            Sign up and your agent already has a local phone number to call and text from —
+            no separate telephony account, SIP trunk, or outside calling software to set up.
+            Connect Google Calendar, Outlook, or Calendly and bookings land straight on it.
+            Paid plans add guided onboarding and priority support, so getting set up isn't
+            something you figure out alone.
           </p>
         </section>
 

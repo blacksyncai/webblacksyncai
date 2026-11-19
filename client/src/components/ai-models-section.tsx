@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe } from "lucide-react";
 import { Link } from "wouter";
 import { Eyebrow, Reveal } from "@/components/ui/section";
+import { WaferHardwareVideo } from "@/components/wafer-hardware";
 
 const otherModels = [
   { provider: "OpenAI", names: ["GPT-5", "GPT-5.1", "GPT-5.2", "GPT-5 Mini", "GPT-5 Nano", "GPT-4.1", "GPT-4.1 Mini", "GPT-4.1 Nano", "GPT-4o Realtime", "GPT-4o Mini Realtime"] },
@@ -23,71 +23,6 @@ const points = [
   { title: "Holds long workflows", body: "Keeps context across long calls, transfers, follow-ups and CRM updates without losing the thread." },
   { title: "Private by default", body: "Your call data is never used to train public models." },
 ];
-
-/**
- * Hardware clip, used with permission, looped. Its first and last frames are
- * different camera angles (one continuous assembly -> factory -> exploded-
- * view shot, not loopable B-roll), so a native loop jump-cuts every repeat.
- * A still of the first frame fades in over the last ~0.35s and fades back
- * out over the first ~0.35s after each restart, turning that cut into a
- * soft dissolve instead of a visible pop.
- */
-function Wafer() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const overlayRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    const overlay = overlayRef.current;
-    if (!video || !overlay) return;
-    const FADE_WINDOW = 0.35;
-    let raf = 0;
-
-    const tick = () => {
-      const { currentTime, duration } = video;
-      if (Number.isFinite(duration) && duration > 0) {
-        const timeToEnd = duration - currentTime;
-        let opacity = 0;
-        if (timeToEnd < FADE_WINDOW) opacity = 1 - timeToEnd / FADE_WINDOW;
-        else if (currentTime < FADE_WINDOW) opacity = 1 - currentTime / FADE_WINDOW;
-        overlay.style.opacity = String(Math.min(1, Math.max(0, opacity)));
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  return (
-    <div className="relative w-full">
-      <div className="absolute inset-0 rounded-[1.75rem] bg-primary/15 blur-3xl" aria-hidden="true" />
-      <div className="relative overflow-hidden rounded-[1.75rem] border border-border bg-[#F4F2EF] shadow-2xl">
-        <video
-          ref={videoRef}
-          className="block aspect-video w-full object-cover"
-          poster="/media/wafer-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label="Wafer-scale AI hardware"
-          data-testid="video-ai-hardware"
-        >
-          <source src="/media/wafer.webm" type="video/webm" />
-          <source src="/media/wafer.mp4" type="video/mp4" />
-        </video>
-        <img
-          ref={overlayRef}
-          src="/media/wafer-first-frame.jpg"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 block aspect-video w-full object-cover opacity-0"
-        />
-      </div>
-    </div>
-  );
-}
 
 /** Relative speed bars. Kept qualitative on the GPU side. */
 function SpeedBars() {
@@ -174,7 +109,7 @@ export function AIModelsSection() {
 
               {/* RIGHT */}
               <div>
-                <Wafer />
+                <WaferHardwareVideo />
                 <div className="mt-12 grid sm:grid-cols-2 gap-x-6 gap-y-5">
                   {points.map((p) => (
                     <div key={p.title} className="border-l-2 border-primary pl-3">

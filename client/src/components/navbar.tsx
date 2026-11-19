@@ -35,7 +35,6 @@ import {
   Stethoscope,
   ArrowRight,
   FileText,
-  Clock,
   Search,
   Flower2,
   Scale,
@@ -255,11 +254,10 @@ const resourceItems = [
   { icon: PhoneOutgoing, label: "Expired Listing AI", href: "/expired-listing-ai" },
   { icon: PhoneOutgoing, label: "FSBO AI", href: "/fsbo-ai" },
   { icon: Info, label: "Why BlackSync", href: "/why-blacksync" },
-  { icon: BookOpen, label: "Blog", href: "#" },
-  { icon: FileText, label: "Documentation / API Docs", href: "#" },
-  { icon: Clock, label: "Changelog", href: "#" },
+  { icon: BookOpen, label: "Blog", href: "/updates" },
+  { icon: FileText, label: "Documentation / API Docs", href: "/developers" },
   { icon: Scale, label: "Compare BlackSync and Ylopo", href: "/compare/ylopo-alternative" },
-  { icon: HelpCircle, label: "Help Center", href: "#" },
+  { icon: HelpCircle, label: "Help Center", href: "/contact" },
 ];
 
 const pricingLink = { label: "Pricing", href: "/pricing" };
@@ -347,7 +345,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-6 h-16">
-          <a href="#" className="flex items-center gap-2.5 shrink-0 group" data-testid="link-home">
+          <a href="/" className="flex items-center gap-2.5 shrink-0 group" data-testid="link-home">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-orange-500 to-amber-500 flex items-center justify-center shadow-sm ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105">
               <span className="text-white font-display font-bold text-base">B</span>
             </div>
