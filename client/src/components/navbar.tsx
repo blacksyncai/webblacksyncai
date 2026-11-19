@@ -273,6 +273,7 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMobileSections, setOpenMobileSections] = useState<Set<string>>(new Set());
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [activeIndustry, setActiveIndustry] = useState(0);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -293,6 +294,21 @@ export function Navbar() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  // Collapse all mobile accordion sections whenever the mobile menu closes,
+  // so it always reopens to the simple, collapsed default state.
+  useEffect(() => {
+    if (!mobileOpen) setOpenMobileSections(new Set());
+  }, [mobileOpen]);
+
+  function toggleMobileSection(key: string) {
+    setOpenMobileSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }
 
   useEffect(() => {
     if (openMenu === "Industries") {
@@ -597,91 +613,183 @@ export function Navbar() {
             className="lg:hidden bg-card border-b border-border"
           >
             <div className="px-4 py-4 max-h-[80vh] overflow-y-auto">
-              <div className="mb-5">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("Industries")}
+                  aria-expanded={openMobileSections.has("Industries")}
+                  data-testid="button-mobile-section-industries"
+                  className="flex w-full items-center justify-between px-2 py-2.5 text-sm font-semibold rounded-md hover-elevate"
+                >
                   Industries
-                </p>
-                <div className="space-y-0.5">
-                  {industries.map((industry) => (
-                    <a
-                      key={industry.label}
-                      href={industry.link}
-                      onClick={() => setMobileOpen(false)}
-                      data-testid={`link-mobile-${industry.label.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                  <ChevronDown
+                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                      openMobileSections.has("Industries") ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {openMobileSections.has("Industries") && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
                     >
-                      <industry.icon className="w-3.5 h-3.5 shrink-0" />
-                      <span>{industry.label}</span>
-                    </a>
-                  ))}
-                </div>
+                      <div className="space-y-0.5 pb-3 pt-1">
+                        {industries.map((industry) => (
+                          <a
+                            key={industry.label}
+                            href={industry.link}
+                            onClick={() => setMobileOpen(false)}
+                            data-testid={`link-mobile-${industry.label.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                          >
+                            <industry.icon className="w-3.5 h-3.5 shrink-0" />
+                            <span>{industry.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              <div className="mb-5">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
-                  Enterprise / Corporate Sales
-                </p>
-                <a
-                  href="/ai-sdr"
-                  onClick={() => setMobileOpen(false)}
-                  data-testid="link-mobile-enterprise-corporate-sales"
-                  className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("Enterprise")}
+                  aria-expanded={openMobileSections.has("Enterprise")}
+                  data-testid="button-mobile-section-enterprise"
+                  className="flex w-full items-center justify-between px-2 py-2.5 text-sm font-semibold rounded-md hover-elevate"
                 >
-                  <Briefcase className="w-3.5 h-3.5 shrink-0" />
-                  <span>AI SDR for Sales Teams</span>
-                </a>
+                  Enterprise / Corporate Sales
+                  <ChevronDown
+                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                      openMobileSections.has("Enterprise") ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {openMobileSections.has("Enterprise") && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-3 pt-1">
+                        <a
+                          href="/ai-sdr"
+                          onClick={() => setMobileOpen(false)}
+                          data-testid="link-mobile-enterprise-corporate-sales"
+                          className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                        >
+                          <Briefcase className="w-3.5 h-3.5 shrink-0" />
+                          <span>AI SDR for Sales Teams</span>
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <a
                 href={pricingLink.href}
                 onClick={() => setMobileOpen(false)}
                 data-testid="link-mobile-pricing"
-                className="block px-2 py-2 mb-5 text-sm font-semibold rounded-md hover-elevate"
+                className="block px-2 py-2.5 mb-1 text-sm font-semibold rounded-md hover-elevate"
               >
                 {pricingLink.label}
               </a>
 
-              <div className="mb-5">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("Product")}
+                  aria-expanded={openMobileSections.has("Product")}
+                  data-testid="button-mobile-section-product"
+                  className="flex w-full items-center justify-between px-2 py-2.5 text-sm font-semibold rounded-md hover-elevate"
+                >
                   Product
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {productColumns.map((col) => (
-                    <div key={col.heading}>
-                      <p className="text-[11px] text-muted-foreground px-2 mb-1.5">{col.heading}</p>
-                      {col.items.map((item) => (
-                        <a
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => setMobileOpen(false)}
-                          data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                          className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
-                        >
-                          <item.icon className="w-3.5 h-3.5 shrink-0" />
-                          <span>{item.label}</span>
-                        </a>
-                      ))}
-                    </div>
-                  ))}
-                </div>
+                  <ChevronDown
+                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                      openMobileSections.has("Product") ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {openMobileSections.has("Product") && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-2 gap-4 pb-3 pt-1">
+                        {productColumns.map((col) => (
+                          <div key={col.heading}>
+                            <p className="text-[11px] text-muted-foreground px-2 mb-1.5">{col.heading}</p>
+                            {col.items.map((item) => (
+                              <a
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setMobileOpen(false)}
+                                data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
+                                className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                              >
+                                <item.icon className="w-3.5 h-3.5 shrink-0" />
+                                <span>{item.label}</span>
+                              </a>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div className="mb-4">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("Resources")}
+                  aria-expanded={openMobileSections.has("Resources")}
+                  data-testid="button-mobile-section-resources"
+                  className="flex w-full items-center justify-between px-2 py-2.5 text-sm font-semibold rounded-md hover-elevate"
+                >
                   Resources
-                </p>
-                {resourceItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
-                  >
-                    <item.icon className="w-3.5 h-3.5 shrink-0" />
-                    <span>{item.label}</span>
-                  </a>
-                ))}
+                  <ChevronDown
+                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                      openMobileSections.has("Resources") ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {openMobileSections.has("Resources") && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-3 pt-1">
+                        {resourceItems.map((item) => (
+                          <a
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setMobileOpen(false)}
+                            data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                          >
+                            <item.icon className="w-3.5 h-3.5 shrink-0" />
+                            <span>{item.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {simpleLinks.map((link) => (
