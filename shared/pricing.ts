@@ -158,7 +158,7 @@ export const PLANS: Plan[] = [
   },
   {
     key: "enterprise",
-    name: "Custom Solutions",
+    name: "Enterprise",
     price: "Custom",
     priceUsd: null,
     period: "",
@@ -252,7 +252,7 @@ export const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Are local phone numbers included?",
-    a: "Solo includes 1 local number and Growth includes 3. Additional numbers start at $3.50 per month on any plan. Custom Solutions can include custom number configurations.",
+    a: "Solo includes 1 local number and Growth includes 3. Additional numbers start at $3.50 per month on any plan. Enterprise can include custom number configurations.",
   },
   {
     q: "Which CRMs does BlackSync integrate with?",
@@ -264,11 +264,11 @@ export const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Does BlackSync offer on-premise or private cloud deployment?",
-    a: "Yes, through Custom Solutions. Dedicated infrastructure, private cloud or VPC, and on-premise deployments are available under a custom agreement scoped to your organization. Talk to sales to discuss your requirements.",
+    a: "Yes, through Enterprise. Dedicated infrastructure, private cloud or VPC, and on-premise deployments are available under a custom agreement scoped to your organization. Talk to sales to discuss your requirements.",
   },
   {
     q: "Can I upgrade or change my plan?",
-    a: "Yes. You can upgrade, downgrade or cancel from Billing in your BlackSync account at any time, and nothing you've built is deleted when you change plans. For Custom Solutions, talk to our sales team.",
+    a: "Yes. You can upgrade, downgrade or cancel from Billing in your BlackSync account at any time, and nothing you've built is deleted when you change plans. For Enterprise, talk to our sales team.",
   },
 ];
 
@@ -311,7 +311,7 @@ export function pricingJsonLd(): object {
         url: PRICING_URL,
         name: "AI Calling Pricing & Plans | BlackSync AI",
         description:
-          "BlackSync AI pricing: a free Start plan, Solo at $98/month, Growth at $197/month and Custom Solutions for larger organizations.",
+          "BlackSync AI pricing: a free Start plan, Solo at $98/month, Growth at $197/month and Enterprise for larger organizations.",
         isPartOf: { "@type": "WebSite", url: `${SITE_URL}/`, name: "BlackSync" },
         publisher: org,
         breadcrumb: { "@id": `${PRICING_URL}#breadcrumb` },

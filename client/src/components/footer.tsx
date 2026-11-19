@@ -37,6 +37,7 @@ const footerLinks = {
     { label: "AI Calling for Auto & P&C", href: "/auto-pc" },
     { label: "AI Calling for Funeral Homes", href: "/funeral-homes" },
     { label: "AI Calling for Law Firms", href: "/law-firms" },
+    { label: "AI Check Calls for Freight Brokers", href: "/track-desk-ai" },
     { label: "AI Calling for Charter Schools", href: "/charter-schools" },
     { label: "AI Calling for Private & Independent Schools", href: "/private-schools" },
     { label: "AI Calling for Daycare & Preschool", href: "/daycare-preschool" },

@@ -24,6 +24,7 @@ import ContactPage from "@/pages/contact";
 import UnsubscribePage from "@/pages/unsubscribe";
 import HomeServicesPage from "@/pages/home-services";
 import FrontDeskAiPage from "@/pages/front-desk-ai";
+import TrackDeskAiPage from "@/pages/track-desk-ai";
 import ComparePage from "@/pages/compare";
 import RealEstateLeadGenerationPage from "@/pages/real-estate-lead-generation";
 import AiSdrPage from "@/pages/ai-sdr";
@@ -87,6 +88,7 @@ function Router() {
       <Route path="/unsubscribe" component={UnsubscribePage} />
       <Route path="/home-services" component={HomeServicesPage} />
       <Route path="/front-desk-ai" component={FrontDeskAiPage} />
+      <Route path="/track-desk-ai" component={TrackDeskAiPage} />
       <Route path="/compare/ylopo-alternative" component={ComparePage} />
       <Route path="/real-estate-lead-generation" component={RealEstateLeadGenerationPage} />
       <Route path="/ai-sdr" component={AiSdrPage} />

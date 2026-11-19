@@ -31,6 +31,7 @@ Not a fit for: text-only/chat-only support, use cases with no phone-calling comp
 - [Property management](https://www.blacksync.ai/property-management)
 - [Funeral homes](https://www.blacksync.ai/funeral-homes)
 - [Law firms](https://www.blacksync.ai/law-firms)
+- [Freight brokers — AI check calls (BlackSync Track Desk)](https://www.blacksync.ai/track-desk-ai)
 
 ## Education & enrollment (consultation-only, no self-serve signup)
 

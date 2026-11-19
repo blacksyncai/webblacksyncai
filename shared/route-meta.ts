@@ -112,6 +112,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "BlackSync Front Desk AI answers every call, qualifies the job, and books the estimate — then calls out to follow up on old quotes, reactivate past customers, and bring in new jobs. Built for landscaping, roofing, HVAC, and plumbing businesses. Plans from $49/month.",
   },
+  "/track-desk-ai": {
+    title: "AI Check Calls for Small Freight Brokers",
+    description:
+      "BlackSync Track Desk calls or texts every driver on your load board, logs location, loaded status, and ETA, and alerts you only when a load is late or unresponsive — before your shipper calls to ask.",
+  },
   "/pricing": {
     title: "Pricing",
     documentTitle: "AI Calling Pricing & Plans | BlackSync AI",
@@ -122,7 +127,7 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "Start: $0/month. 10 complimentary credits, 1 AI voice agent, up to 75 outbound call attempts per day and 2 concurrent calls.",
       "Solo: $98/month. 150 monthly calling credits, 2 AI agents, 10 concurrent calls, no fixed daily outbound cap and 1 local phone number.",
       "Growth: $197/month, the most popular plan. 400 monthly credits, 5 AI agents, 25 concurrent calls, 3 local numbers, deep native CRM integration, guided onboarding and priority support.",
-      "Custom Solutions: custom pricing for larger organizations, with private cloud, VPC or on-premise deployment, custom integrations, white-label and dedicated support.",
+      "Enterprise: custom pricing for larger organizations, with private cloud, VPC or on-premise deployment, custom integrations, white-label and dedicated support.",
       "Calling credit packs: 75 credits for $29, 500 for $139 and 1,000 for $260. Additional phone numbers from $3.50/month. Prices in USD.",
     ],
   },
