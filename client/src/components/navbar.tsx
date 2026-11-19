@@ -610,9 +610,10 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-card border-b border-border"
+            className="lg:hidden overflow-hidden"
           >
-            <div className="px-4 py-4 max-h-[80vh] overflow-y-auto">
+            <div className="mx-3 mt-2 mb-3 rounded-2xl bg-primary text-primary-foreground shadow-xl">
+            <div className="px-4 py-4 max-h-[75vh] overflow-y-auto">
               <div className="mb-1">
                 <button
                   type="button"
@@ -623,7 +624,7 @@ export function Navbar() {
                 >
                   Industries
                   <ChevronDown
-                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                    className={`w-4 h-4 text-primary-foreground/70 transition-transform ${
                       openMobileSections.has("Industries") ? "rotate-180" : ""
                     }`}
                   />
@@ -643,7 +644,7 @@ export function Navbar() {
                             href={industry.link}
                             onClick={() => setMobileOpen(false)}
                             data-testid={`link-mobile-${industry.label.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                            className="flex items-center gap-2 px-2 py-1.5 text-sm text-primary-foreground/85 rounded-md hover-elevate"
                           >
                             <industry.icon className="w-3.5 h-3.5 shrink-0" />
                             <span>{industry.label}</span>
@@ -665,7 +666,7 @@ export function Navbar() {
                 >
                   Enterprise / Corporate Sales
                   <ChevronDown
-                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                    className={`w-4 h-4 text-primary-foreground/70 transition-transform ${
                       openMobileSections.has("Enterprise") ? "rotate-180" : ""
                     }`}
                   />
@@ -683,7 +684,7 @@ export function Navbar() {
                           href="/ai-sdr"
                           onClick={() => setMobileOpen(false)}
                           data-testid="link-mobile-enterprise-corporate-sales"
-                          className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                          className="flex items-center gap-2 px-2 py-1.5 text-sm text-primary-foreground/85 rounded-md hover-elevate"
                         >
                           <Briefcase className="w-3.5 h-3.5 shrink-0" />
                           <span>AI SDR for Sales Teams</span>
@@ -713,7 +714,7 @@ export function Navbar() {
                 >
                   Product
                   <ChevronDown
-                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                    className={`w-4 h-4 text-primary-foreground/70 transition-transform ${
                       openMobileSections.has("Product") ? "rotate-180" : ""
                     }`}
                   />
@@ -729,14 +730,14 @@ export function Navbar() {
                       <div className="grid grid-cols-2 gap-4 pb-3 pt-1">
                         {productColumns.map((col) => (
                           <div key={col.heading}>
-                            <p className="text-[11px] text-muted-foreground px-2 mb-1.5">{col.heading}</p>
+                            <p className="text-[11px] text-primary-foreground/60 px-2 mb-1.5">{col.heading}</p>
                             {col.items.map((item) => (
                               <a
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
                                 data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                                className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                                className="flex items-center gap-2 px-2 py-1.5 text-sm text-primary-foreground/85 rounded-md hover-elevate"
                               >
                                 <item.icon className="w-3.5 h-3.5 shrink-0" />
                                 <span>{item.label}</span>
@@ -760,7 +761,7 @@ export function Navbar() {
                 >
                   Resources
                   <ChevronDown
-                    className={`w-4 h-4 text-muted-foreground transition-transform ${
+                    className={`w-4 h-4 text-primary-foreground/70 transition-transform ${
                       openMobileSections.has("Resources") ? "rotate-180" : ""
                     }`}
                   />
@@ -780,7 +781,7 @@ export function Navbar() {
                             href={item.href}
                             onClick={() => setMobileOpen(false)}
                             data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground rounded-md hover-elevate"
+                            className="flex items-center gap-2 px-2 py-1.5 text-sm text-primary-foreground/85 rounded-md hover-elevate"
                           >
                             <item.icon className="w-3.5 h-3.5 shrink-0" />
                             <span>{item.label}</span>
@@ -798,7 +799,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s/g, "-")}`}
-                  className="block px-2 py-2 text-sm text-muted-foreground rounded-md hover-elevate"
+                  className="block px-2 py-2 text-sm text-primary-foreground/85 rounded-md hover-elevate"
                 >
                   {link.label}
                 </a>
@@ -812,7 +813,7 @@ export function Navbar() {
                 className="block mt-4 px-2"
                 data-testid="link-mobile-login"
               >
-                <Button variant="ghost" className="w-full justify-start" size="sm">
+                <Button variant="ghost" className="w-full justify-start text-primary-foreground" size="sm">
                   Log in
                 </Button>
               </a>
@@ -824,7 +825,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="block"
                 >
-                  <Button variant="outline" className="w-full" size="sm" data-testid="button-try-free-mobile">
+                  <Button variant="outline" className="w-full text-primary" size="sm" data-testid="button-try-free-mobile">
                     Try It Free
                   </Button>
                 </a>
@@ -832,19 +833,20 @@ export function Navbar() {
               <div className="flex gap-2 mt-2 px-2">
                 <div className="flex-1">
                   <BookCallDialog onOpen={() => setMobileOpen(false)}>
-                    <Button variant="outline" className="w-full" size="sm">
+                    <Button variant="outline" className="w-full text-primary" size="sm">
                       Book a Call
                     </Button>
                   </BookCallDialog>
                 </div>
                 <div className="flex-1">
                   <BookCallDialog onOpen={() => setMobileOpen(false)}>
-                    <Button className="w-full" size="sm">
+                    <Button className="w-full bg-background text-primary border-0 hover:bg-background/90" size="sm">
                       Request a Pilot
                     </Button>
                   </BookCallDialog>
                 </div>
               </div>
+            </div>
             </div>
           </motion.div>
         )}
