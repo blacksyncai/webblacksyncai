@@ -262,7 +262,7 @@ const resourceItems = [
 
 const pricingLink = { label: "Pricing", href: "/pricing" };
 
-const simpleLinks = [{ label: "Why Us", href: "#why" }];
+const simpleLinks = [{ label: "Why Us", href: "/why-blacksync" }];
 
 type DropdownKey = "Product" | "Industries" | "Resources";
 const dropdownKeys: DropdownKey[] = ["Industries", "Product", "Resources"];
